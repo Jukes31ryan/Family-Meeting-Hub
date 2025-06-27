@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Meeting Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #2d3748;
+            transition: background 0.5s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #2d3748;
+        }
+
+        .card-content {
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .highlight-box {
+            background: rgba(255, 255, 255, 0.4);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 15px 0;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .participant-input {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .participant-input input {
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.3);
+            width: 80px;
+            text-align: center;
+        }
+
+        .speaking-order {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+
+        .card-btn {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+        }
+
+        .card-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .stats-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .stats-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Theme variations */
+        .ocean-theme {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .sunset-theme {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .forest-theme {
+            background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+        }
+
+        .golden-theme {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Family Meeting Hub</h1>
+            <p>Bringing families together through meaningful conversations and fun activities</p>
+        </div>
+
+        <div class="controls">
+            <button class="btn" onclick="changeTheme()">🎨 Change Theme</button>
+            <button class="btn" onclick="showStats()">📊 View Stats</button>
+        </div>
+
+        <div class="grid">
+            <!-- Ice Breakers Card -->
+            <div class="card">
+                <h3>🧊 Ice Breakers</h3>
+                <div class="card-content">
+                    <div class="highlight-box" id="icebreaker-content">
+                        Click the button below to get a conversation starter!
+                    </div>
+                    <button class="card-btn" onclick="generateIcebreaker()">Get Ice Breaker</button>
+                </div>
+            </div>
+
+            <!-- Life Updates Card -->
+            <div class="card">
+                <h3>🌱 Life Updates</h3>
+                <div class="card-content">
+                    <p><strong>Rose/Thorn/Bud Format:</strong></p>
+                    <div class="participant-input">
+                        <label>Participants:</label>
+                        <input type="number" id="participant-count" min="2" max="10" value="4">
+                        <button class="card-btn" onclick="generateSpeakingOrder()">Generate Order</button>
+                    </div>
+                    <div id="speaking-order"></div>
+                </div>
+            </div>
+
+            <!-- Amazing Facts Card -->
+            <div class="card">
+                <h3>🤯 Amazing Facts</h3>
+                <div class="card-content">
+                    <div class="highlight-box" id="fact-content">
+                        Discover something incredible!
+                    </div>
+                    <button class="card-btn" onclick="generateFact()">Get Amazing Fact</button>
+                </div>
+            </div>
+
+            <!-- Quotes Card -->
+            <div class="card">
+                <h3>💭 Inspirational Quotes</h3>
+                <div class="card-content">
+                    <div class="highlight-box" id="quote-content">
+                        Find inspiration for your family!
+                    </div>
+                    <button class="card-btn" onclick="generateQuote()">Get Quote</button>
+                </div>
+            </div>
+
+            <!-- Stories Card -->
+            <div class="card">
+                <h3>📚 Story Prompts</h3>
+                <div class="card-content">
+                    <div class="highlight-box" id="story-content">
+                        Create memories through storytelling!
+                    </div>
+                    <button class="card-btn" onclick="generateStory()">Get Story Prompt</button>
+                </div>
+            </div>
+
+            <!-- Life Skills Card -->
+            <div class="card">
+                <h3>🛠️ Life Skills</h3>
+                <div class="card-content">
+                    <div class="highlight-box" id="skill-content">
+                        Learn something practical together!
+                    </div>
+                    <button class="card-btn" onclick="generateSkill()">Get Life Skill</button>
+                </div>
+            </div>
+
+            <!-- Jokes Card -->
+            <div class="card">
+                <h3>😂 Family Jokes</h3>
+                <div class="card-content">
+                    <div class="highlight-box" id="joke-content">
+                        Time for some family-friendly laughs!
+                    </div>
+                    <button class="card-btn" onclick="generateJoke()">Get Joke</button>
+                </div>
+            </div>
+
+            <!-- Shout Outs Card -->
+            <div class="card">
+                <h3>📢 Shout Outs</h3>
+                <div class="card-content">
+                    <div class="highlight-box" id="shoutout-content">
+                        Celebrate each other's achievements!
+                    </div>
+                    <button class="card-btn" onclick="generateShoutout()">Get Shout Out Prompt</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Modal -->
+    <div class="stats-modal" id="stats-modal">
+        <div class="stats-content">
+            <button class="close-btn" onclick="closeStats()">&times;</button>
+            <h2>📊 Family Meeting Stats</h2>
+            <div id="stats-content">
+                <p><strong>Sessions completed:</strong> <span id="session-count">0</span></p>
+                <p><strong>Ice breakers used:</strong> <span id="icebreaker-count">0</span></p>
+                <p><strong>Facts discovered:</strong> <span id="fact-count">0</span></p>
+                <p><strong>Jokes shared:</strong> <span id="joke-count">0</span></p>
+                <p><strong>Stories told:</strong> <span id="story-count">0</span></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Content data
+        const content = {
+            icebreakers: [
+                "What's your favorite color and why?",
+                "If you could have any pet, what would it be?",
+                "What's the best gift you've ever received?",
+                "If you could fly anywhere in the world, where would you go?",
+                "What's your favorite family tradition?",
+                "If you could meet any famous person, who would it be?",
+                "What's your favorite season and why?",
+                "What makes you laugh the most?",
+                "If you could have a superpower, what would it be?",
+                "What's your favorite thing to do on weekends?"
+            ],
+            facts: [
+                "Octopuses have three hearts and blue blood!",
+                "A group of flamingos is called a 'flamboyance'.",
+                "Honey never spoils - it can last thousands of years!",
+                "Butterflies taste with their feet.",
+                "A bolt of lightning is five times hotter than the sun.",
+                "Dolphins have names for each other.",
+                "Bananas are berries, but strawberries aren't!",
+                "Your heart beats about 100,000 times per day.",
+                "There are more possible games of chess than atoms in the universe.",
+                "Wombat poop is cube-shaped!"
+            ],
+            quotes: [
+                "Family is not an important thing, it's everything. - Michael J. Fox",
+                "The love of family is life's greatest blessing.",
+                "Family means nobody gets left behind or forgotten. - Lilo & Stitch",
+                "Home is where your story begins.",
+                "Family: where life begins and love never ends.",
+                "The memories we make with our family are everything.",
+                "Family is the heart of a home.",
+                "Together is a wonderful place to be.",
+                "Family time is the best time.",
+                "In family life, love is the oil that eases friction."
+            ],
+            stories: [
+                "Tell about a time when you helped someone and how it made you feel.",
+                "Share your funniest childhood memory.",
+                "Describe your dream vacation with the family.",
+                "Tell about a challenge you overcame and what you learned.",
+                "Share a story about your favorite family photo.",
+                "Describe a time when you were really proud of a family member.",
+                "Tell about your most embarrassing moment (family-friendly!).",
+                "Share a story about a family tradition and why it's special.",
+                "Describe your ideal day with the family.",
+                "Tell about a time when someone in the family surprised you."
+            ],
+            skills: [
+                "How to tie different types of knots",
+                "Basic first aid techniques",
+                "How to read a map and use a compass",
+                "Simple cooking techniques everyone should know",
+                "How to manage money and create a budget",
+                "Basic car maintenance tips",
+                "How to grow plants from seeds",
+                "Time management and organization skills",
+                "How to write a thank you note",
+                "Basic home repair skills"
+            ],
+            jokes: [
+                "Why don't scientists trust atoms? Because they make up everything!",
+                "What do you call a sleeping bull? A bulldozer!",
+                "Why don't eggs tell jokes? They'd crack each other up!",
+                "What do you call a bear with no teeth? A gummy bear!",
+                "Why did the math book look so sad? Because it had too many problems!",
+                "What do you call a dinosaur that crashes his car? Tyrannosaurus Wrecks!",
+                "Why don't elephants use computers? They're afraid of the mouse!",
+                "What do you call a fish with no eyes? Fsh!",
+                "Why did the cookie go to the doctor? Because it felt crumbly!",
+                "What do you call a group of disorganized cats? A cat-astrophe!"
+            ],
+            shoutouts: [
+                "Give a shout out to someone who made you smile this week.",
+                "Recognize someone who helped you with something difficult.",
+                "Appreciate someone who showed kindness to others.",
+                "Acknowledge someone who worked really hard on something.",
+                "Thank someone who listened when you needed to talk.",
+                "Celebrate someone who tried something new or brave.",
+                "Recognize someone who made a positive difference.",
+                "Appreciate someone who shared something with others.",
+                "Acknowledge someone who showed patience or understanding.",
+                "Thank someone who made your day better just by being themselves."
+            ]
+        };
+
+        // Theme system
+        const themes = [
+            { name: 'ocean', class: 'ocean-theme' },
+            { name: 'sunset', class: 'sunset-theme' },
+            { name: 'forest', class: 'forest-theme' },
+            { name: 'golden', class: 'golden-theme' }
+        ];
+
+        let currentTheme = 0;
+        let stats = {
+            sessions: 0,
+            icebreakers: 0,
+            facts: 0,
+            jokes: 0,
+            stories: 0
+        };
+
+        // Load stats from memory
+        function loadStats() {
+            const saved = JSON.parse(sessionStorage.getItem('familyMeetingStats') || '{}');
+            stats = { ...stats, ...saved };
+        }
+
+        // Save stats to memory
+        function saveStats() {
+            sessionStorage.setItem('familyMeetingStats', JSON.stringify(stats));
+        }
+
+        // Generate random content
+        function getRandomItem(array) {
+            return array[Math.floor(Math.random() * array.length)];
+        }
+
+        function generateIcebreaker() {
+            const icebreaker = getRandomItem(content.icebreakers);
+            document.getElementById('icebreaker-content').innerHTML = `<strong>💬 ${icebreaker}</strong>`;
+            stats.icebreakers++;
+            saveStats();
+        }
+
+        function generateSpeakingOrder() {
+            const count = parseInt(document.getElementById('participant-count').value);
+            if (count < 2 || count > 10) {
+                alert('Please enter a number between 2 and 10');
+                return;
+            }
+            
+            const participants = Array.from({length: count}, (_, i) => `Person ${i + 1}`);
+            const shuffled = participants.sort(() => Math.random() - 0.5);
+            
+            const orderHtml = `
+                <div class="speaking-order">
+                    <strong>🗣️ Speaking Order:</strong><br>
+                    ${shuffled.map((p, i) => `${i + 1}. ${p}`).join('<br>')}
+                </div>
+                <p><em>Share your Rose (good thing), Thorn (challenge), and Bud (something you're looking forward to)!</em></p>
+            `;
+            
+            document.getElementById('speaking-order').innerHTML = orderHtml;
+        }
+
+        function generateFact() {
+            const fact = getRandomItem(content.facts);
+            document.getElementById('fact-content').innerHTML = `<strong>🤯 ${fact}</strong>`;
+            stats.facts++;
+            saveStats();
+        }
+
+        function generateQuote() {
+            const quote = getRandomItem(content.quotes);
+            document.getElementById('quote-content').innerHTML = `<strong>💭 "${quote}"</strong>`;
+        }
+
+        function generateStory() {
+            const story = getRandomItem(content.stories);
+            document.getElementById('story-content').innerHTML = `<strong>📚 ${story}</strong>`;
+            stats.stories++;
+            saveStats();
+        }
+
+        function generateSkill() {
+            const skill = getRandomItem(content.skills);
+            document.getElementById('skill-content').innerHTML = `<strong>🛠️ ${skill}</strong>`;
+        }
+
+        function generateJoke() {
+            const joke = getRandomItem(content.jokes);
+            document.getElementById('joke-content').innerHTML = `<strong>😂 ${joke}</strong>`;
+            stats.jokes++;
+            saveStats();
+        }
+
+        function generateShoutout() {
+            const shoutout = getRandomItem(content.shoutouts);
+            document.getElementById('shoutout-content').innerHTML = `<strong>📢 ${shoutout}</strong>`;
+        }
+
+        function changeTheme() {
+            currentTheme = (currentTheme + 1) % themes.length;
+            document.body.className = themes[currentTheme].class;
+        }
+
+        function showStats() {
+            document.getElementById('session-count').textContent = stats.sessions;
+            document.getElementById('icebreaker-count').textContent = stats.icebreakers;
+            document.getElementById('fact-count').textContent = stats.facts;
+            document.getElementById('joke-count').textContent = stats.jokes;
+            document.getElementById('story-count').textContent = stats.stories;
+            document.getElementById('stats-modal').style.display = 'block';
+        }
+
+        function closeStats() {
+            document.getElementById('stats-modal').style.display = 'none';
+        }
+
+        // Initialize
+        loadStats();
+        
+        // Close modal when clicking outside
+        document.getElementById('stats-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeStats();
+            }
+        });
+    </script>
+</body>
+</html>
