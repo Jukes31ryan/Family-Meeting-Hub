@@ -8,83 +8,83 @@
 </head>
 <body>
 
-    <header>
+    <header class="site-header">
         <h1>🏡 Family Meeting Hub</h1>
         <p id="header-subtitle">A time to connect and grow together.</p>
-        <button id="new-meeting-btn">New Meeting</button>
+        <button id="new-meeting-btn" class="header-btn">Start New Meeting</button>
     </header>
 
-    <main id="meeting-cards">
-        <div class="card" id="ice-breaker-card">
-            <h2>1. Ice Breaker</h2>
-            <p id="ice-breaker-content" class="content-area">Click the button to get started!</p>
+    <main class="card-grid">
+        <section class="card" id="ice-breaker-card" aria-labelledby="ice-breaker-title">
+            <h2 id="ice-breaker-title">1. Ice Breaker</h2>
+            <p id="ice-breaker-content" class="content-area" aria-live="polite">Click the button to get started!</p>
             <div class="button-container">
-                <button id="ice-breaker-btn">Get Ice Breaker</button>
+                <button data-action="ice-breaker">Get Ice Breaker</button>
             </div>
-        </div>
+        </section>
 
-        <div class="card" id="quote-card">
-            <h2>2. Inspiring Quote</h2>
-            <p id="quote-content" class="content-area">...</p>
+        <section class="card" id="quote-card" aria-labelledby="quote-title">
+            <h2 id="quote-title">2. Inspiring Quote</h2>
+            <p id="quote-content" class="content-area" aria-live="polite">...</p>
             <div class="button-container">
-                <button id="quote-btn">Get Quote</button>
+                <button data-action="quote">Get Quote</button>
             </div>
-        </div>
+        </section>
 
-        <div class="card" id="check-in-card">
-            <h2>3. Check-In: Rose, Bud, Thorn</h2>
+        <section class="card" id="check-in-card" aria-labelledby="check-in-title">
+            <h2 id="check-in-title">3. Check-In: Rose, Bud, Thorn</h2>
             <p class="description">
                 <b>Rose:</b> A success or happy moment.<br>
                 <b>Bud:</b> Something you're looking forward to.<br>
                 <b>Thorn:</b> A challenge you faced.
             </p>
             <div class="participant-controls">
-                <label for="participants">How many people?</label>
-                <input type="number" id="participants" value="4" min="1">
-                <button id="randomize-order-btn">Randomize Order</button>
+                <label for="participants-input">How many people?</label>
+                <input type="number" id="participants-input" value="4" min="1">
+                <button data-action="randomize-order">Randomize Order</button>
             </div>
-            <h4 id="speaking-order-display" class="content-area">Click "Randomize Order" to see who goes first!</h4>
-        </div>
+            <h4 id="speaking-order-display" class="content-area" aria-live="polite">Click "Randomize Order" to begin.</h4>
+        </section>
 
-        <div class="card" id="story-card">
-            <h2>4. Story Time</h2>
-            <p id="story-content" class="content-area">...</p>
+        <section class="card" id="story-card" aria-labelledby="story-title">
+            <h2 id="story-title">4. Story Time</h2>
+            <p id="story-content" class="content-area" aria-live="polite">...</p>
             <div class="button-container">
-                <button id="story-btn">Get Story Prompt</button>
+                <button data-action="story">Get Story Prompt</button>
             </div>
-        </div>
+        </section>
 
-        <div class="card" id="fact-card">
-            <h2>5. Fun Fact</h2>
-            <p id="fact-content" class="content-area">...</p>
+        <section class="card" id="fact-card" aria-labelledby="fact-title">
+            <h2 id="fact-title">5. Fun Fact</h2>
+            <p id="fact-content" class="content-area" aria-live="polite">...</p>
             <div class="button-container">
-                <button id="fact-btn">Get Fun Fact</button>
+                <button data-action="fact">Get Fun Fact</button>
             </div>
-        </div>
+        </section>
         
-        <div class="card" id="skill-card">
-            <h2>6. Life Skill Topic</h2>
-            <p id="skill-content" class="content-area">...</p>
+        <section class="card" id="skill-card" aria-labelledby="skill-title">
+            <h2 id="skill-title">6. Life Skill Topic</h2>
+            <p id="skill-content" class="content-area" aria-live="polite">...</p>
             <div class="button-container">
-                <button id="skill-btn">Get Topic</button>
+                <button data-action="skill">Get Topic</button>
             </div>
-        </div>
+        </section>
 
-        <div class="card" id="joke-card">
-            <h2>7. Joke of the Day</h2>
-            <p id="joke-content" class="content-area">...</p>
+        <section class="card" id="joke-card" aria-labelledby="joke-title">
+            <h2 id="joke-title">7. Joke of the Day</h2>
+            <p id="joke-content" class="content-area" aria-live="polite">...</p>
             <div class="button-container">
-                <button id="joke-btn">Get Joke</button>
+                <button data-action="joke">Get Joke</button>
             </div>
-        </div>
+        </section>
 
-        <div class="card" id="notes-card">
-            <h2>8. Meeting Notes</h2>
+        <section class="card" id="notes-card" aria-labelledby="notes-title">
+            <h2 id="notes-title">8. Meeting Notes</h2>
             <textarea id="notes-area" placeholder="Jot down goals, ideas, or funny moments here..."></textarea>
             <div class="button-container">
-                <button id="export-notes-btn">Export to Text File</button>
+                <button data-action="export-notes">Export to Text File</button>
             </div>
-        </div>
+        </section>
     </main>
 
     <script src="script.js"></script>
