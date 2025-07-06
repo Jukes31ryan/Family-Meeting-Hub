@@ -315,7 +315,10 @@
         }
 
         async function generateFact(button) { document.getElementById('interestingFact').innerHTML = await fetchApiContent(API_URLS.fact, button, 'Discover Fact', data => `<p>${data.text}</p>`); }
-        async function generateQuote(button) { document.getElementById('famousQuote').innerHTML = await fetchApiContent(API_URLS.quote, button, 'Get Quote', data => `<blockquote>"${data.content}"<br><em>- ${data.author}</em></blockquote>`); }
+        
+        // UPDATED LINE BELOW
+        async function generateQuote(button) { document.getElementById('famousQuote').innerHTML = await fetchApiContent(API_URLS.quote, button, 'Get Quote', data => `<blockquote>${data.content}<br><em>- ${data.author}</em></blockquote>`); }
+        
         async function generateJoke(button) { document.getElementById('jokeContent').innerHTML = await fetchApiContent(API_URLS.joke, button, 'Tell Joke', data => `<p><strong>${data.setup}</strong><br><em>${data.punchline}</em></p>`); }
 
         function getRandomItem(itemType, itemsArray) {
