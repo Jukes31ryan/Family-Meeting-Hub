@@ -46,6 +46,16 @@
         body.forest-theme {
             background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
         }
+        /* --- NEW THEMES --- */
+        body.sunrise-theme {
+            background: linear-gradient(135deg, #F3904F 0%, #3B4371 100%);
+        }
+        body.mint-theme {
+            background: linear-gradient(135deg, #76b852 0%, #8DC26F 100%);
+        }
+        body.royal-theme {
+            background: linear-gradient(135deg, #4743ff 0%, #c33a9f 100%);
+        }
 
 
         .container {
@@ -126,8 +136,13 @@
             gap: 10px;
         }
 
-        .content { flex-grow: 1; margin-bottom: 1rem; line-height: 1.6; }
-        .content ul { list-style-position: inside; padding-left: 10px; }
+        .content { 
+            flex-grow: 1; 
+            margin-bottom: 1rem; 
+            line-height: 1.6; 
+            font-weight: bold;
+        }
+        .content ul { list-style-position: inside; padding-left: 10px; font-weight: normal; }
         .content p, .content ul { margin-bottom: 10px; }
         .content h3 { margin-bottom: 10px; font-size: 1.2rem; color: var(--text-primary); }
         .content blockquote { font-style: italic; padding-left: 15px; border-left: 3px solid var(--text-secondary); margin-left: 0; opacity: 0.9; }
@@ -143,11 +158,12 @@
             align-self: flex-start;
             transition: all 0.3s ease;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-weight: bold;
         }
         
         .random-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
         .random-btn:disabled { background: var(--button-disabled-bg); cursor: not-allowed; opacity: 0.7; }
-        .notes-area { width: 100%; min-height: 100px; padding: 10px; border-radius: 10px; border: 1px solid var(--glass-border); background-color: var(--glass-bg); color: var(--text-primary); font-family: inherit; }
+        .notes-area { width: 100%; min-height: 100px; padding: 10px; border-radius: 10px; border: 1px solid var(--glass-border); background-color: var(--glass-bg); color: var(--text-primary); font-family: inherit; font-weight: normal; }
 
         /* MODAL STYLES */
         .modal {
@@ -174,7 +190,13 @@
             position: relative;
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
         }
-        .dark-theme .modal-content { background: rgba(30, 41, 59, 0.95); color: #f7fafc; }
+        .dark-theme .modal-content,
+        .forest-theme .modal-content,
+        .royal-theme .modal-content,
+        .sunrise-theme .modal-content { 
+            background: rgba(30, 41, 59, 0.95); 
+            color: #f7fafc; 
+        }
         .modal-close { position: absolute; top: 15px; right: 25px; font-size: 2rem; font-weight: bold; cursor: pointer; transition: transform 0.2s ease; }
         .modal-close:hover { transform: scale(1.2); }
         .modal-content h2 { margin-bottom: 1rem; }
@@ -215,10 +237,9 @@
     <div id="rulesModal" class="modal"><div class="modal-content"><span class="modal-close" onclick="closeRulesModal()">&times;</span><h2>Suggested Meeting Rules</h2><ul><li><strong>Be Present:</strong> Put away phones and other distractions. Let's give each other our full attention.</li><li><strong>One Speaker at a Time:</strong> Everyone gets a chance to speak without being interrupted.</li><li><strong>Listen to Understand:</strong> Don't just wait for your turn to talk. Truly listen to what others are saying and feeling.</li><li><strong>Be Respectful:</strong> It's okay to disagree, but we must be kind and respectful in how we express ourselves. No name-calling or yelling.</li><li><strong>Everyone Participates:</strong> Every voice matters! Let's make sure everyone, from the oldest to the youngest, has a chance to share.</li><li><strong>Focus on Solutions:</strong> When discussing challenges, let's work together to find solutions, not just dwell on problems.</li></ul></div></div>
 
     <script>
-        // --- CONTENT ARRAYS & CONFIG ---
         const API_URLS = { fact: 'https://uselessfacts.jsph.pl/random.json?language=en', quote: 'https://api.quotable.io/random', joke: 'https://official-joke-api.appspot.com/random_joke' };
         const subtitles = [ "Time to connect and share.", "Let's make today's meeting great.", "Your weekly huddle starts now.", "A moment to grow together.", "Discover something new about your family." ];
-        const themes = ['', 'dark-theme', 'ocean-theme', 'sunset-theme', 'forest-theme'];
+        const themes = ['', 'dark-theme', 'ocean-theme', 'sunset-theme', 'forest-theme', 'sunrise-theme', 'mint-theme', 'royal-theme'];
         let currentThemeIndex = 0;
         
         const allIceBreakers = ["If you could have any superpower, what would it be and why?", "What's one thing you're grateful for today?", "If you could talk to animals, which animal would you ask for advice?", "What's the best thing that happened to you this week?", "If you could invent a new holiday, what would it be and how would we celebrate?", "What's a small thing that always makes you smile?", "If you could have any fictional character as a best friend, who would you choose?", "What's your favorite smell and what memory does it bring up?", "If you could only eat one food for the rest of your life, what would it be?", "What's a skill you'd like to learn?", "If you were a flavor of ice cream, what would you be?", "What book, movie, or TV show have you seen recently that you'd recommend?", "What's one place you'd love to travel to?", "If you could ask your future self one question, what would it be?", "What's a simple act of kindness you witnessed or did this week?", "If you could be famous for one thing, what would it be?", "What's your favorite thing about our family?", "If you could solve one world problem, what would it be?", "What's a song that always puts you in a good mood?", "What's something you're looking forward to?", "If you had to describe your day with a movie title, what would it be?", "What's the weirdest dream you've ever had?", "If you could bring one extinct animal back to life, which would it be?", "What's something you've accomplished that you're proud of?", "If you could have dinner with any three people, living or dead, who would they be?", "What's a word that you think is really fun to say?", "What's your favorite season and why?", "If you had to create a new rule for our family for a day, what would it be?", "What's the best advice you've ever received?", "If you could instantly become an expert in something, what would it be?", "What's a tradition you'd like to start as a family?", "If you could have a personal robot, what would you have it do?", "What's something that you find beautiful in nature?", "What's a challenge you've overcome?", "If you could visit any time period, past or future, when would you go?", "What's the funniest joke you know?", "What's something you did this week to help someone else?", "If you could design a new toy, what would it be?", "What makes a good friend?", "What's your favorite family memory?", "If you had to give up either music or movies for a year, which would you choose?", "What's a food you used to dislike but now you love?", "What's something you want to get better at?", "If you could have any wild animal as a pet, what would it be?", "What's a goal you have for yourself for this month?", "If you were a superhero, what would your name be?", "What's the most interesting thing you've learned recently?", "If you could trade places with a family member for a day, who would it be?", "What's your favorite way to relax?", "If you could create a new flavor of potato chip, what would it be?", "What's a simple pleasure you enjoyed this week?", "If our family was a band, what instrument would each person play?", "What's something you're curious about right now?", "What's a food that you think is underrated?"];
