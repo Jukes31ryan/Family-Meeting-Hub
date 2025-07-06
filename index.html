@@ -101,6 +101,23 @@
             font-size: 1.5rem;
             margin-bottom: 20px;
             color: #2d3748;
+            display: flex;
+            align-items: center;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: white;
+            border-radius: 50%;
+            min-width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
         }
 
         .card-content {
@@ -229,13 +246,11 @@
     <div class="container">
         <div class="header">
             <h1>Family Meeting Hub</h1>
-           <p style="font-size: 1.2rem; line-height: 1.6;">
-    This is your guide for a positive and productive family meeting.
-    <br>
-    <strong>Work your way through the numbered cards below to begin.</strong>
-</p>
-
-
+            <p style="font-size: 1.2rem; line-height: 1.6;">
+                This is your guide for a positive and productive family meeting.
+                <br>
+                <strong>Work your way through the numbered cards below to begin.</strong>
+            </p>
         </div>
 
         <div class="controls">
@@ -245,17 +260,27 @@
 
         <div class="grid">
             <div class="card">
-                <h3>🧊 Ice Breakers</h3>
+                <h3><span class="step-number">1</span> 🧊 Ice Breakers</h3>
                 <div class="card-content">
                     <div class="highlight-box" id="icebreaker-content">
-                        Click the button below to get a conversation starter!
+                        Start with a fun question to get everyone talking!
                     </div>
                     <button class="card-btn" onclick="generateIcebreaker()">Get Ice Breaker</button>
                 </div>
             </div>
 
             <div class="card">
-                <h3>🌱 Life Updates</h3>
+                <h3><span class="step-number">2</span> 📢 Shout Outs</h3>
+                <div class="card-content">
+                    <div class="highlight-box" id="shoutout-content">
+                        Let's start with positivity. Celebrate each other!
+                    </div>
+                    <button class="card-btn" onclick="generateShoutout()">Get Shout Out Prompt</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><span class="step-number">3</span> 🌱 Life Updates</h3>
                 <div class="card-content">
                     <p><strong>Rose/Thorn/Bud Format:</strong></p>
                     <div class="participant-input">
@@ -268,27 +293,7 @@
             </div>
 
             <div class="card">
-                <h3>🤯 Amazing Facts</h3>
-                <div class="card-content">
-                    <div class="highlight-box" id="fact-content">
-                        Discover something incredible!
-                    </div>
-                    <button class="card-btn" onclick="generateFact()">Get Amazing Fact</button>
-                </div>
-            </div>
-
-            <div class="card">
-                <h3>💭 Inspirational Quotes</h3>
-                <div class="card-content">
-                    <div class="highlight-box" id="quote-content">
-                        Find inspiration for your family!
-                    </div>
-                    <button class="card-btn" onclick="generateQuote()">Get Quote</button>
-                </div>
-            </div>
-
-            <div class="card">
-                <h3>📚 Story Prompts</h3>
+                <h3><span class="step-number">4</span> 📚 Story Time</h3>
                 <div class="card-content">
                     <div class="highlight-box" id="story-content">
                         Create memories through storytelling!
@@ -298,7 +303,7 @@
             </div>
 
             <div class="card">
-                <h3>🛠️ Life Skills</h3>
+                <h3><span class="step-number">5</span> 🛠️ Life Skills</h3>
                 <div class="card-content">
                     <div class="highlight-box" id="skill-content">
                         Learn something practical together!
@@ -308,22 +313,32 @@
             </div>
 
             <div class="card">
-                <h3>😂 Family Jokes</h3>
+                <h3><span class="step-number">6</span> 💭 Quotes</h3>
                 <div class="card-content">
-                    <div class="highlight-box" id="joke-content">
-                        Time for some family-friendly laughs!
+                    <div class="highlight-box" id="quote-content">
+                        Find inspiration for your family!
                     </div>
-                    <button class="card-btn" onclick="generateJoke()">Get Joke</button>
+                    <button class="card-btn" onclick="generateQuote()">Get Quote</button>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3><span class="step-number">7</span> 🤯 Amazing Facts</h3>
+                <div class="card-content">
+                    <div class="highlight-box" id="fact-content">
+                        Discover something incredible!
+                    </div>
+                    <button class="card-btn" onclick="generateFact()">Get Amazing Fact</button>
                 </div>
             </div>
 
             <div class="card">
-                <h3>📢 Shout Outs</h3>
+                <h3><span class="step-number">8</span> 😂 Family Jokes</h3>
                 <div class="card-content">
-                    <div class="highlight-box" id="shoutout-content">
-                        Celebrate each other's achievements!
+                    <div class="highlight-box" id="joke-content">
+                        End the meeting with a laugh!
                     </div>
-                    <button class="card-btn" onclick="generateShoutout()">Get Shout Out Prompt</button>
+                    <button class="card-btn" onclick="generateJoke()">Get Joke</button>
                 </div>
             </div>
         </div>
