@@ -4,474 +4,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Family Meeting Hub</title>
-    <style>
-        :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --glass-bg: rgba(255, 255, 255, 0.25);
-            --glass-border: rgba(255, 255, 255, 0.18);
-            --text-primary: #2d3748;
-            --text-secondary: #4a5568;
-            --shadow-light: 0 8px 32px rgba(31, 38, 135, 0.37);
-            --button-disabled-bg: #ccc;
-            --progress-glow-color: #38bdf8;
-        }
-
-        [data-theme="dark"] {
-            --glass-bg: rgba(0, 0, 0, 0.25);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --text-primary: #f7fafc;
-            --text-secondary: #e2e8f0;
-            --button-disabled-bg: #555;
-            --progress-glow-color: #f59e0b;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--primary-gradient);
-            min-height: 100vh;
-            color: var(--text-primary);
-            transition: background 0.3s ease, color 0.3s ease;
-            overflow-x: hidden;
-        }
-
-        [data-theme="dark"] body {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-        }
-        
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .header {
-            text-align: center;
-            padding: 2rem 1rem;
-            margin-bottom: 2rem;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            box-shadow: var(--shadow-light);
-            backdrop-filter: blur(10px);
-        }
-
-        .header h1 { 
-            font-size: 2.5rem; 
-            margin-bottom: 0.5rem; 
-        }
-        .header p { 
-            font-size: 1.2rem; 
-            opacity: 0.9;
-            min-height: 1.5rem;
-        }
-
-        .controls {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .control-btn {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            color: var(--text-primary);
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .control-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        .meeting-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 28px;
-        }
-
-        .meeting-box {
-            background: var(--glass-bg);
-            border: 2px solid transparent; /* Changed for progress indicator */
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: var(--shadow-light);
-            backdrop-filter: blur(10px);
-            display: flex;
-            flex-direction: column;
-            transition: border-color 0.4s ease, box-shadow 0.4s ease; /* Added transition */
-        }
-        
-        /* --- VISUAL PROGRESS INDICATOR --- */
-        .card-used {
-            border-color: var(--progress-glow-color);
-            box-shadow: 0 0 15px var(--progress-glow-color);
-        }
-
-        .meeting-box h2 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .content {
-            flex-grow: 1;
-            margin-bottom: 1rem;
-            line-height: 1.6;
-        }
-
-        .content ul { list-style-position: inside; padding-left: 10px; }
-        .content ol { list-style-position: inside; padding-left: 20px; }
-        .content p, .content ul, .content ol { margin-bottom: 10px; }
-        .content h3 { margin-bottom: 10px; font-size: 1.1rem; }
-        .content blockquote {
-            font-style: italic;
-            padding-left: 15px;
-            border-left: 3px solid var(--text-secondary);
-            margin-left: 0;
-            opacity: 0.9;
-        }
-        
-        .random-btn {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 0.95rem;
-            align-self: flex-start;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .random-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-        .random-btn:disabled {
-            background: var(--button-disabled-bg);
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-        .notes-area {
-            width: 100%;
-            min-height: 100px;
-            padding: 10px;
-            border-radius: 10px;
-            border: 1px solid var(--glass-border);
-            background-color: var(--glass-bg);
-            color: var(--text-primary);
-            font-family: inherit;
-        }
-
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="container">
-        <header class="header">
-            <h1 id="main-title">✨ Family Meeting Hub</h1>
-            <p id="subtitle"></p>
-        </header>
+    <header>
+        <h1>🏡 Family Meeting Hub</h1>
+        <p id="header-subtitle">A time to connect and grow together.</p>
+        <button id="new-meeting-btn">New Meeting</button>
+    </header>
 
-        <div class="controls">
-            <button class="control-btn" id="startBtn" onclick="startMeeting()">🚀 New Meeting</button>
-            <button class="control-btn" onclick="toggleTheme()"><span id="themeIcon">🌙</span> Toggle Theme</button>
-        </div>
-
-        <div class="meeting-grid">
-            <div class="meeting-box" id="card-iceBreaker">
-                <h2>🎯 Ice Breaker</h2>
-                <div class="content" id="iceBreaker"><p>Let's get the conversation flowing!</p></div>
-                <button class="random-btn" id="btnIceBreaker" onclick="generateIceBreaker(this)">Get Question</button>
-            </div>
-            
-            <div class="meeting-box" id="card-famousQuote">
-                <h2>💬 Inspiring Quote</h2>
-                <div class="content" id="famousQuote"><blockquote>An inspiring quote will appear here...</blockquote></div>
-                <button class="random-btn" id="btnQuote" onclick="generateQuote(this)">Get Quote</button>
-            </div>
-
-            <div class="meeting-box" id="card-checkIn">
-                <h2>💖 Check-In</h2>
-                <div class="content">
-                    <p>Go around and share using the **Rose, Bud, Thorn** format:</p>
-                    <ul>
-                        <li><strong>🌹 Rose:</strong> A highlight or positive moment from the week.</li>
-                        <li><strong>🌱 Bud:</strong> Something you're looking forward to or a new idea.</li>
-                        <li><strong>🌵 Thorn:</strong> A challenge you faced or something you need support with.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="meeting-box" id="card-interestingFact">
-                <h2>💡 Amazing Fact</h2>
-                <div class="content" id="interestingFact"><p>Ready to discover something incredible?</p></div>
-                <button class="random-btn" id="btnFact" onclick="generateFact(this)">Discover Fact</button>
-            </div>
-
-            <div class="meeting-box" id="card-moralStory">
-                <h2>📖 Story Time</h2>
-                <div class="content" id="moralStory"><p>A meaningful story to share together...</p></div>
-                <button class="random-btn" id="btnStory" onclick="generateStory(this)">Tell Story</button>
-            </div>
-
-            <div class="meeting-box" id="card-lifeSkill">
-                <h2>🛠️ Life Skill</h2>
-                <div class="content" id="lifeSkill"><p>Learn a valuable skill!</p></div>
-                <button class="random-btn" id="btnSkill" onclick="generateSkill(this)">Learn Skill</button>
-            </div>
-            
-            <div class="meeting-box" id="card-jokeContent">
-                <h2>😂 Joke Time</h2>
-                <div class="content" id="jokeContent"><p>Ready for a laugh?</p></div>
-                <button class="random-btn" id="btnJoke" onclick="generateJoke(this)">Tell Joke</button>
-            </div>
-
-            <div class="meeting-box" id="card-upcoming">
-                <h2>🗓️ Upcoming Events</h2>
-                <div class="content">
-                    <p>Let's look at the week ahead:</p>
-                    <ul>
-                        <li>School events or projects?</li>
-                        <li>Appointments or practices?</li>
-                        <li>Family outings or special plans?</li>
-                        <li>Chores or responsibilities?</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="meeting-box" id="card-notes">
-                <h2>📝 Meeting Notes</h2>
-                <div class="content">
-                    <p>Capture important moments and decisions:</p>
-                    <textarea class="notes-area" id="meetingNotes" placeholder="Write down key points..."></textarea>
-                    <div style="margin-top: 16px; display: flex; gap: 12px; flex-wrap: wrap;">
-                        <button class="random-btn" onclick="exportNotes()">📄 Export Notes</button>
-                    </div>
-                </div>
+    <main id="meeting-cards">
+        <div class="card" id="ice-breaker-card">
+            <h2>1. Ice Breaker</h2>
+            <p id="ice-breaker-content" class="content-area">Click the button to get started!</p>
+            <div class="button-container">
+                <button id="ice-breaker-btn">Get Ice Breaker</button>
             </div>
         </div>
-    </div>
 
-    <script>
-        // --- CONTENT ARRAYS & CONFIG ---
-        const API_URLS = {
-            fact: 'https://uselessfacts.jsph.pl/random.json?language=en',
-            quote: 'https://api.quotable.io/random',
-            joke: 'https://official-joke-api.appspot.com/random_joke'
-        };
+        <div class="card" id="quote-card">
+            <h2>2. Inspiring Quote</h2>
+            <p id="quote-content" class="content-area">...</p>
+            <div class="button-container">
+                <button id="quote-btn">Get Quote</button>
+            </div>
+        </div>
 
-        const subtitles = [
-            "Time to connect and share.",
-            "Let's make today's meeting great.",
-            "Your weekly huddle starts now.",
-            "A moment to grow together.",
-            "Discover something new about your family."
-        ];
+        <div class="card" id="check-in-card">
+            <h2>3. Check-In: Rose, Bud, Thorn</h2>
+            <p class="description">
+                <b>Rose:</b> A success or happy moment.<br>
+                <b>Bud:</b> Something you're looking forward to.<br>
+                <b>Thorn:</b> A challenge you faced.
+            </p>
+            <div class="participant-controls">
+                <label for="participants">How many people?</label>
+                <input type="number" id="participants" value="4" min="1">
+                <button id="randomize-order-btn">Randomize Order</button>
+            </div>
+            <h4 id="speaking-order-display" class="content-area">Click "Randomize Order" to see who goes first!</h4>
+        </div>
 
-        const allIceBreakers = [
-            "If you could have any superpower, what would it be and why?", "What's one thing you're grateful for today?", "If you could talk to animals, which animal would you ask for advice?", "What's the best thing that happened to you this week?", "If you could invent a new holiday, what would it be and how would we celebrate?", "What's a small thing that always makes you smile?", "If you could have any fictional character as a best friend, who would you choose?", "What's your favorite smell and what memory does it bring up?", "If you could only eat one food for the rest of your life, what would it be?", "What's a skill you'd like to learn?", "If you were a flavor of ice cream, what would you be?", "What book, movie, or TV show have you seen recently that you'd recommend?", "What's one place you'd love to travel to?", "If you could ask your future self one question, what would it be?", "What's a simple act of kindness you witnessed or did this week?", "If you could be famous for one thing, what would it be?", "What's your favorite thing about our family?", "If you could solve one world problem, what would it be?", "What's a song that always puts you in a good mood?", "What's something you're looking forward to?", "If you had to describe your day with a movie title, what would it be?", "What's the weirdest dream you've ever had?", "If you could bring one extinct animal back to life, which would it be?", "What's something you've accomplished that you're proud of?", "If you could have dinner with any three people, living or dead, who would they be?", "What's a word that you think is really fun to say?", "What's your favorite season and why?", "If you had to create a new rule for our family for a day, what would it be?", "What's the best advice you've ever received?", "If you could instantly become an expert in something, what would it be?", "What's a tradition you'd like to start as a family?", "If you could have a personal robot, what would you have it do?", "What's something that you find beautiful in nature?", "What's a challenge you've overcome?", "If you could visit any time period, past or future, when would you go?", "What's the funniest joke you know?", "What's something you did this week to help someone else?", "If you could design a new toy, what would it be?", "What makes a good friend?", "What's your favorite family memory?", "If you had to give up either music or movies for a year, which would you choose?", "What's a food you used to dislike but now you love?", "What's something you want to get better at?", "If you could have any wild animal as a pet, what would it be?", "What's a goal you have for yourself for this month?", "If you were a superhero, what would your name be?", "What's the most interesting thing you've learned recently?", "If you could trade places with someone for a day, who would it be?", "What's your favorite way to relax?", "If you could create a new flavor of potato chip, what would it be?"
-        ];
+        <div class="card" id="story-card">
+            <h2>4. Story Time</h2>
+            <p id="story-content" class="content-area">...</p>
+            <div class="button-container">
+                <button id="story-btn">Get Story Prompt</button>
+            </div>
+        </div>
 
-        const allStories = [
-            { title: "The Lion and the Mouse", story: "A lion was about to eat a mouse, who pleaded for his life. The lion let him go. Later, the lion was trapped in a net. The mouse gnawed the ropes, freeing him. Moral: An act of kindness, no matter how small, is never wasted." },
-            { title: "The Tortoise and the Hare", story: "A hare boasted about his speed and challenged a tortoise to a race. The hare, far ahead, took a nap. The tortoise kept moving slowly but steadily and crossed the finish line first. Moral: Slow and steady wins the race." },
-            { title: "The Boy Who Cried Wolf", story: "A shepherd boy repeatedly tricked villagers into thinking a wolf was attacking his flock. When a real wolf appeared, no one believed his cries for help, and the sheep were scattered. Moral: Liars are not believed even when they speak the truth." },
-            { title: "The Ant and the Grasshopper", story: "All summer, an ant worked hard to store food for winter. A grasshopper sang and played. When winter came, the ant was prepared, but the grasshopper was hungry. Moral: It is wise to prepare for the days of necessity." },
-            { title: "King Midas and the Golden Touch", story: "A king wished that everything he touched would turn to gold. He soon discovered he couldn't eat or drink. When he hugged his daughter, she turned to gold, and he was heartbroken. Moral: Greed can lead to your downfall; the best things in life are not material." },
-            { title: "The Three Little Pigs", story: "Three pigs built houses of straw, sticks, and bricks. A wolf blew down the first two houses, but the brick house was strong and safe. The pigs learned the value of hard work and planning. Moral: Hard work and dedication pay off." },
-            { title: "The Goose with the Golden Eggs", story: "A farmer had a goose that laid a golden egg every day. Impatient to get all the gold at once, he cut the goose open, only to find it was just a normal goose inside. He lost his daily treasure. Moral: Greed can destroy the source of your good fortune." },
-            { title: "The Fox and the Grapes", story: "A fox saw a bunch of grapes hanging high on a vine and tried to reach them. After failing, he walked away scornfully, saying, 'I'm sure they were sour anyway.' Moral: It's easy to despise what you cannot have." },
-            { title: "The Bundle of Sticks", story: "A father asked his sons, who were always arguing, to break a bundle of sticks. They couldn't. Then he gave them one stick each, which they broke easily. Moral: There is strength in unity." },
-            { title: "The Wind and the Sun", story: "The Wind and the Sun argued about who was stronger. They decided to see who could make a traveler take off his cloak. The Wind blew fiercely, but the traveler only held his cloak tighter. The Sun shone gently, and the traveler, feeling the warmth, took off his cloak. Moral: Persuasion is better than force." },
-            { title: "The Ugly Duckling", story: "A little bird was hatched in a duck's nest and was mocked for being ugly. He grew up sad and alone, until one day he saw his reflection and realized he had grown into a beautiful swan. Moral: Your true value is not always visible at first; believe in your potential." },
-            { title: "The Honest Woodcutter", story: "A woodcutter dropped his axe in a river. The god Mercury appeared and offered him a golden axe, then a silver one. The man was honest and said they weren't his. Pleased, Mercury gave him all three axes. Moral: Honesty is the best policy." },
-            { title: "The Crow and the Pitcher", story: "A thirsty crow found a pitcher with water at the bottom, but he couldn't reach it. He dropped pebbles into the pitcher one by one until the water level rose high enough for him to drink. Moral: Little by little does the trick; persistence and cleverness can solve difficult problems." },
-            { title: "The City Mouse and the Country Mouse", story: "A city mouse visited his country cousin and mocked his simple food. He invited him to the city for a feast, but their meal was interrupted by dogs, and they had to run for their lives. Moral: Peace and safety with a little is better than luxury with fear." },
-            { title: "The Dog and Its Reflection", story: "A dog with a piece of meat in his mouth saw his reflection in the water. Thinking it was another dog with a bigger piece, he barked to snatch it, dropping his own meat into the water and losing it. Moral: Be content with what you have; greed can lead to loss." },
-            { title: "The Two Goats", story: "Two goats met in the middle of a narrow bridge over a river. Neither would give way. They locked horns and fought until both fell into the river below. Moral: It is better to yield than to come to ruin through stubbornness." },
-        ]; // Added more stories... to be expanded to 50
+        <div class="card" id="fact-card">
+            <h2>5. Fun Fact</h2>
+            <p id="fact-content" class="content-area">...</p>
+            <div class="button-container">
+                <button id="fact-btn">Get Fun Fact</button>
+            </div>
+        </div>
         
-        const allSkills = [
-            { title: "How to Write a Simple 'Thank You' Note", steps: ["Start with a warm greeting (e.g., 'Dear [Name]').", "Clearly state what you are thanking them for.", "Mention why you appreciate the gift or act of kindness.", "Add a personal, warm closing (e.g., 'Sincerely,')."] },
-            { title: "How to Make Your Bed Properly", steps: ["Clear everything off the bed except the fitted sheet.", "Pull the top sheet even on both sides.", "Lay your blanket or comforter on top, also even.", "Fold the top sheet and blanket down from the top.", "Fluff your pillows and place them at the head of the bed."] },
-            { title: "How to Give a Sincere Apology", steps: ["Say 'I'm sorry' clearly.", "State exactly what you are sorry for.", "Explain how you understand it made the other person feel.", "Say what you will do differently in the future.", "Ask for forgiveness."] },
-            { title: "How to Listen Actively", steps: ["Put away distractions like phones.", "Make eye contact with the person speaking.", "Nod or make small affirmations (like 'uh-huh') to show you're listening.", "Wait for them to finish before you speak.", "Ask clarifying questions to show you understood."] },
-            { title: "How to Sort Laundry", steps: ["Create separate piles for 'Whites', 'Lights' (pastels, grays), and 'Darks' (black, navy, red).", "Keep towels and bedding in a separate pile.", "Check the tags on clothes for special washing instructions."] },
-            { title: "How to Safely Use a Kitchen Knife", steps: ["Always cut on a stable cutting board, not in your hand.", "Curl your fingers on the hand holding the food, keeping your fingertips tucked away.", "Use the right knife for the job (e.g., a bread knife for bread).", "Always cut away from your body."] },
-            { title: "How to Set a Simple Dinner Table", steps: ["Place the plate in the center.", "Put the fork to the left of the plate.", "Place the knife to the right of the plate, with the blade facing in.", "Put the spoon to the right of the knife.", "The water glass goes above the knife."] },
-            { title: "How to Tie a Square Knot", steps: ["Take two ends of a rope.", "Cross the right end over the left and then under.", "Now cross the left end (which is now on the right) over the right and then under.", "Pull tight. Right over left, left over right."] },
-            { title: "How to Handle a Minor Cut", steps: ["Wash your hands with soap and water.", "Apply gentle pressure with a clean cloth to stop the bleeding.", "Rinse the cut with clean water.", "Apply an antibiotic ointment.", "Cover the cut with a clean bandage."] },
-            { title: "How to Be a Good Guest", steps: ["RSVP to invitations promptly.", "Arrive on time.", "Bring a small gift for the host if appropriate.", "Offer to help clean up.", "Send a thank you message after."] },
-            { title: "How to Write a Basic Email", steps: ["Write a clear, concise subject line.", "Start with a polite greeting.", "Write your message clearly and to the point.", "End with a polite closing, like 'Best regards' or 'Thank you'.", "Proofread for typos before sending."] },
-            { title:a: "How to Plan Your Day", steps: ["In the morning, list the top 3 most important things you need to do.", "Estimate how long each task will take.", "Schedule those tasks into your day.", "Include time for breaks and meals.", "Review your list at the end of the day."] },
-        ]; // Added more skills... to be expanded to 50
-        
-        let usedContent = {};
+        <div class="card" id="skill-card">
+            <h2>6. Life Skill Topic</h2>
+            <p id="skill-content" class="content-area">...</p>
+            <div class="button-container">
+                <button id="skill-btn">Get Topic</button>
+            </div>
+        </div>
 
-        // --- CORE FUNCTIONS ---
-        function initializeApp() {
-            // Set a random subtitle
-            const subtitleElement = document.getElementById('subtitle');
-            subtitleElement.textContent = subtitles[Math.floor(Math.random() * subtitles.length)];
-            
-            // Reset content trackers
-            initializeUsedContent();
-        }
+        <div class="card" id="joke-card">
+            <h2>7. Joke of the Day</h2>
+            <p id="joke-content" class="content-area">...</p>
+            <div class="button-container">
+                <button id="joke-btn">Get Joke</button>
+            </div>
+        </div>
 
-        function initializeUsedContent() {
-            usedContent = { iceBreakers: [], stories: [], skills: [] };
-        }
-        
-        function startMeeting() {
-            // Reset content displays to their initial state
-            document.getElementById('iceBreaker').innerHTML = "<p>Let's get the conversation flowing!</p>";
-            document.getElementById('famousQuote').innerHTML = "<blockquote>An inspiring quote will appear here...</blockquote>";
-            document.getElementById('interestingFact').innerHTML = "<p>Ready to discover something incredible?</p>";
-            document.getElementById('moralStory').innerHTML = "<p>A meaningful story to share together...</p>";
-            document.getElementById('lifeSkill').innerHTML = "<p>Learn a valuable skill!</p>";
-            document.getElementById('jokeContent').innerHTML = "<p>Ready for a laugh?</p>";
-            
-            // Remove progress indicators from all cards
-            const cards = document.querySelectorAll('.meeting-box');
-            cards.forEach(card => card.classList.remove('card-used'));
+        <div class="card" id="notes-card">
+            <h2>8. Meeting Notes</h2>
+            <textarea id="notes-area" placeholder="Jot down goals, ideas, or funny moments here..."></textarea>
+            <div class="button-container">
+                <button id="export-notes-btn">Export to Text File</button>
+            </div>
+        </div>
+    </main>
 
-            // Reset trackers and set a new subtitle
-            initializeApp(); 
-            alert("New meeting started! Content and progress is refreshed.");
-        }
-
-        function setButtonLoadingState(button, isLoading, originalText) {
-            if (isLoading) {
-                button.disabled = true;
-                button.textContent = 'Loading...';
-            } else {
-                button.disabled = false;
-                button.textContent = originalText;
-            }
-        }
-        
-        function markCardUsed(button) {
-            button.closest('.meeting-box').classList.add('card-used');
-        }
-
-        // --- API-BASED GENERATORS ---
-        async function fetchApiContent(url, button, originalText, formatter) {
-            setButtonLoadingState(button, true, originalText);
-            markCardUsed(button); // Mark card used on click
-            try {
-                const response = await fetch(url);
-                if (!response.ok) throw new Error(`Network response was not ok`);
-                const data = await response.json();
-                return formatter(data);
-            } catch (error) {
-                console.error(`Failed to fetch from ${url}:`, error);
-                return `<p>Oops! Couldn't fetch content. Please check your connection and try again.</p>`;
-            } finally {
-                setButtonLoadingState(button, false, originalText);
-            }
-        }
-
-        async function generateFact(button) {
-            const html = await fetchApiContent(API_URLS.fact, button, 'Discover Fact', data => `<p>${data.text}</p>`);
-            document.getElementById('interestingFact').innerHTML = html;
-        }
-
-        async function generateQuote(button) {
-            const html = await fetchApiContent(API_URLS.quote, button, 'Get Quote', data => `<blockquote>"${data.content}"<br><em>- ${data.author}</em></blockquote>`);
-            document.getElementById('famousQuote').innerHTML = html;
-        }
-        
-        async function generateJoke(button) {
-            const html = await fetchApiContent(API_URLS.joke, button, 'Tell Joke', data => `<p><strong>${data.setup}</strong><br><em>${data.punchline}</em></p>`);
-            document.getElementById('jokeContent').innerHTML = html;
-        }
-
-        // --- STATIC CONTENT GENERATORS ---
-        function getRandomItem(itemType, itemsArray) {
-            if (!itemsArray || itemsArray.length === 0) return null;
-            let available = itemsArray.filter((_, i) => !usedContent[itemType].includes(i));
-            if (available.length === 0) {
-                usedContent[itemType] = [];
-                available = itemsArray;
-            }
-            const randomIndex = Math.floor(Math.random() * available.length);
-            const item = available[randomIndex];
-            const originalIndex = itemsArray.indexOf(item);
-            usedContent[itemType].push(originalIndex);
-            return item;
-        }
-
-        function generateStaticContent(button, originalText, itemType, array, elementId, formatter) {
-            setButtonLoadingState(button, true, originalText);
-            markCardUsed(button); // Mark card used on click
-            setTimeout(() => {
-                const item = getRandomItem(itemType, array);
-                const element = document.getElementById(elementId);
-                element.innerHTML = item ? formatter(item) : `<p>Add more content to the list!</p>`;
-                setButtonLoadingState(button, false, originalText);
-            }, 200);
-        }
-        
-        function generateIceBreaker(button) {
-            generateStaticContent(button, 'Get Question', 'iceBreakers', allIceBreakers, 'iceBreaker', item => `<p>${item}</p>`);
-        }
-
-        function generateStory(button) {
-            generateStaticContent(button, 'Tell Story', 'stories', allStories, 'moralStory', item => `<h3>${item.title}</h3><p>${item.story}</p>`);
-        }
-        
-        function generateSkill(button) {
-            generateStaticContent(button, 'Learn Skill', 'skills', allSkills, 'lifeSkill', item => {
-                let stepsHtml = item.steps.map(step => `<li>${step}</li>`).join('');
-                return `<h3>${item.title}</h3><ol>${stepsHtml}</ol>`;
-            });
-        }
-        
-        // --- THEME & NOTES FUNCTIONS ---
-        function toggleTheme() {
-            const body = document.documentElement;
-            const currentTheme = body.getAttribute('data-theme');
-            if (currentTheme === 'dark') {
-                body.removeAttribute('data-theme');
-                document.getElementById('themeIcon').textContent = '🌙';
-            } else {
-                body.setAttribute('data-theme', 'dark');
-                document.getElementById('themeIcon').textContent = '☀️';
-            }
-        }
-        
-        function exportNotes() {
-            const notes = document.getElementById('meetingNotes').value;
-            const blob = new Blob([notes], { type: 'text/plain;charset=utf-8' });
-            const link = document.createElement('a');
-            const date = new Date().toISOString().slice(0, 10);
-            link.download = `Meeting-Notes-${date}.txt`;
-            link.href = URL.createObjectURL(blob);
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(link.href);
-            markCardUsed(document.querySelector('#card-notes .random-btn'));
-        }
-        
-        // --- INITIALIZE APP ON PAGE LOAD ---
-        document.addEventListener('DOMContentLoaded', initializeApp);
-
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
