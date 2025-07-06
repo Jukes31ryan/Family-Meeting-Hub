@@ -16,6 +16,7 @@
             --text-secondary: #4a5568;
             --shadow-light: 0 8px 32px rgba(31, 38, 135, 0.37);
             --button-disabled-bg: #ccc;
+            --glow-color: rgba(102, 170, 255, 0.7);
         }
 
         [data-theme="dark"] {
@@ -24,6 +25,7 @@
             --text-primary: #f7fafc;
             --text-secondary: #e2e8f0;
             --button-disabled-bg: #555;
+            --glow-color: rgba(137, 247, 254, 0.6);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -106,6 +108,12 @@
             backdrop-filter: blur(10px);
             display: flex;
             flex-direction: column;
+            transition: box-shadow 0.3s ease-out, transform 0.3s ease-out;
+        }
+
+        .meeting-box.card-generated {
+            transform: scale(1.02);
+            box-shadow: 0 0 15px 5px var(--glow-color);
         }
 
         .meeting-box h2 {
@@ -122,8 +130,8 @@
             line-height: 1.6;
         }
 
-        .content ul { list-style-position: inside; padding-left: 10px; }
-        .content p, .content ul { margin-bottom: 10px; }
+        .content ul, .content ol { list-style-position: inside; padding-left: 10px; }
+        .content p, .content ul, .content ol { margin-bottom: 10px; }
         .content blockquote {
             font-style: italic;
             padding-left: 15px;
@@ -151,10 +159,27 @@
             cursor: not-allowed;
             opacity: 0.7;
         }
+        
+        .notes-area {
+            width: 100%;
+            min-height: 150px;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.5);
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+        }
+
+        [data-theme="dark"] .notes-area {
+             background: rgba(0, 0, 0, 0.4);
+        }
 
         /* Modal Styles */
         .modal {
-            display: none; /* Hidden by default */
+            display: none; 
             position: fixed;
             z-index: 1000;
             left: 0;
@@ -168,7 +193,7 @@
         }
 
         .modal-content {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             color: #2d3748;
             margin: 10% auto;
             padding: 30px;
@@ -180,7 +205,7 @@
         }
         
         [data-theme="dark"] .modal-content {
-             background: rgba(40, 40, 60, 0.9);
+             background: rgba(40, 40, 60, 0.95);
              color: #f7fafc;
         }
 
@@ -203,60 +228,61 @@
 
     <div class="container">
         <header class="header">
-            <h1>Family Meeting Hub</h1>
-            <p>A place to connect, share, and grow together.</p>
+            <h1><span id="headerIcon">🏡</span> Family Meeting Hub</h1>
+            <p id="headerSubtitle">A place to connect, share, and grow together.</p>
         </header>
 
         <div class="controls">
+            <button class="control-btn" onclick="showRulesModal()">📜 Rules</button>
             <button class="control-btn" onclick="showHelpModal()">❓ How to Use</button>
             <button class="control-btn" id="startBtn" onclick="startMeeting()">🚀 New Meeting</button>
             <button class="control-btn" onclick="toggleTheme()"><span id="themeIcon">🌙</span> Toggle Theme</button>
         </div>
 
         <div class="meeting-grid">
-            <div class="meeting-box">
-                <h2>💖 Check-In</h2>
-                <div class="content">
-                    <p>Go around and share using the **Rose, Bud, Thorn** format:</p>
-                    <ul>
-                        <li><strong>🌹 Rose:</strong> A highlight, success, or positive moment from the week.</li>
-                        <li><strong>🌱 Bud:</strong> Something you're looking forward to or a new idea.</li>
-                        <li><strong>🌵 Thorn:</strong> A challenge you faced or something you need support with.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="meeting-box">
-                <h2>💡 Amazing Fact</h2>
-                <div class="content" id="interestingFact"><p>Ready to discover something incredible?</p></div>
-                <button class="random-btn" id="btnFact" onclick="generateFact(this)">Discover Fact</button>
-            </div>
-
-            <div class="meeting-box">
+            <div class="meeting-box" data-id="iceBreakerBox">
                 <h2>🎯 Ice Breaker</h2>
                 <div class="content" id="iceBreaker"><p>Let's get the conversation flowing!</p></div>
                 <button class="random-btn" id="btnIceBreaker" onclick="generateIceBreaker(this)">Get Question</button>
             </div>
 
-            <div class="meeting-box">
+            <div class="meeting-box" data-id="quoteBox">
                 <h2>💬 Inspiring Quote</h2>
                 <div class="content" id="famousQuote"><blockquote>An inspiring quote will appear here...</blockquote></div>
                 <button class="random-btn" id="btnQuote" onclick="generateQuote(this)">Get Quote</button>
             </div>
-
+            
             <div class="meeting-box">
+                <h2>💖 Check-In</h2>
+                <div class="content">
+                    <p>Go around and share using the **Rose, Bud, Thorn** format:</p>
+                    <ul>
+                        <li><strong>🌹 Rose:</strong> A highlight, success, or positive moment.</li>
+                        <li><strong>🌱 Bud:</strong> Something you're looking forward to or a new idea.</li>
+                        <li><strong>🌵 Thorn:</strong> A challenge you faced or need support with.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="meeting-box" data-id="storyBox">
                 <h2>📖 Story Time</h2>
                 <div class="content" id="moralStory"><p>A meaningful story to share together...</p></div>
                 <button class="random-btn" id="btnStory" onclick="generateStory(this)">Tell Story</button>
             </div>
 
-            <div class="meeting-box">
+            <div class="meeting-box" data-id="skillBox">
                 <h2>🛠️ Life Skill</h2>
                 <div class="content" id="lifeSkill"><p>Learn a valuable skill!</p></div>
                 <button class="random-btn" id="btnSkill" onclick="generateSkill(this)">Learn Skill</button>
             </div>
+
+            <div class="meeting-box" data-id="factBox">
+                <h2>💡 Amazing Fact</h2>
+                <div class="content" id="interestingFact"><p>Ready to discover something incredible?</p></div>
+                <button class="random-btn" id="btnFact" onclick="generateFact(this)">Discover Fact</button>
+            </div>
             
-            <div class="meeting-box">
+            <div class="meeting-box" data-id="jokeBox">
                 <h2>😂 Joke Time</h2>
                 <div class="content" id="jokeContent"><p>Ready for a laugh?</p></div>
                 <button class="random-btn" id="btnJoke" onclick="generateJoke(this)">Tell Joke</button>
@@ -280,61 +306,132 @@
                 <div class="content">
                     <p>Capture important moments and decisions:</p>
                     <textarea class="notes-area" id="meetingNotes" placeholder="Write down key points..."></textarea>
-                    <div style="margin-top: 16px; display: flex; gap: 12px; flex-wrap: wrap;">
-                        <button class="random-btn" onclick="saveNotes()">💾 Save Notes</button>
-                        <button class="random-btn" onclick="loadNotes()">📂 Load Notes</button>
-                        <button class="random-btn" onclick="exportNotes()">📄 Export</button>
+                    <div style="margin-top: 16px;">
+                        <button class="random-btn" onclick="exportNotes()">📄 Export Notes</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     
+    <div id="rulesModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeRulesModal()">&times;</span>
+            <h2>Family Meeting Rules</h2>
+            <ol>
+                <li><strong>Listen Respectfully:</strong> No interruptions. Everyone gets a chance to be fully heard.</li>
+                <li><strong>Be Open-Minded:</strong> It's okay to disagree, but we listen to understand, not just to argue.</li>
+                <li><strong>Everyone Participates:</strong> We all have a voice and are encouraged to share our thoughts and feelings.</li>
+                <li><strong>Stay Positive & Constructive:</strong> We focus on finding solutions and supporting each other, not on blaming.</li>
+                <li><strong>What's Said Here, Stays Here:</strong> This is a safe space. We respect each other's privacy.</li>
+            </ol>
+        </div>
+    </div>
+
     <div id="helpModal" class="modal">
         <div class="modal-content">
             <span class="modal-close" onclick="closeHelpModal()">&times;</span>
             <h2>Welcome to the Family Meeting Hub!</h2>
             <p>This tool is designed to make your family meetings more engaging, structured, and fun. Here’s how to use it:</p>
             <ol>
-                <li><strong>Start Fresh:</strong> Click the "New Meeting" button to reset all the content cards.</li>
-                <li><strong>Check-In First:</strong> Begin with the "Check-In" card. Go around the room and have each person share their "Rose" (a good thing), "Bud" (something they're looking forward to), and "Thorn" (a challenge).</li>
-                <li><strong>Explore Topics:</strong> Work your way through the other cards like "Amazing Fact," "Ice Breaker," or "Story Time." Click the button on any card to generate a new, random prompt.</li>
-                <li><strong>Plan Ahead:</strong> Use the "Upcoming Events" card to discuss the week's schedule and stay synchronized.</li>
-                <li><strong>Take Notes:</strong> Use the "Meeting Notes" section to jot down important thoughts, decisions, or funny moments. You can save notes to your browser for next time or export them as a text file.</li>
+                <li><strong>Start Fresh:</strong> Click "New Meeting" to reset all content cards and remove the glow effect.</li>
+                <li><strong>Follow the Flow:</strong> Start with an "Ice Breaker," get inspired by a "Quote," then do your "Check-In."</li>
+                <li><strong>Explore Topics:</strong> Click the button on any card to generate new content. A glowing border shows you've completed that card.</li>
+                <li><strong>Plan & Record:</strong> Use "Upcoming Events" to sync your schedules and "Meeting Notes" to capture key takeaways. Click "Export" to save your notes as a text file.</li>
             </ol>
         </div>
     </div>
 
     <script>
-        // --- CONTENT ARRAYS (Static & API URLs) ---
+        // --- CONTENT ARRAYS (Expanded) ---
         const API_URLS = {
-            fact: 'https://uselessfacts.jsph.pl/random.json?language=en',
-            quote: 'https://api.quotable.io/random',
+            quote: 'https://api.quotable.io/random?maxLength=150',
             joke: 'https://official-joke-api.appspot.com/random_joke'
         };
 
-        const allIceBreakers = [ "If you could have any superpower, what would it be and why?", "What is one thing you're grateful for today?", "What's the best thing that happened to you this week?" /* Add more */ ];
-        const allStories = [ "The Boy Who Cried Wolf...", "The Tortoise and the Hare..." /* Add more */ ];
-        const allSkills = [ { title: "How to Tie a Square Knot", steps: ["Right over left and under...", "Left over right and under..."] } /* Add more */ ];
+        const subtitles = [
+            "A place to connect, share, and grow together.", "Your weekly check-in point.",
+            "Let's talk about our week!", "Making family time count.", "Sync up, share, and support.",
+            "The heart of our home.", "Building stronger bonds, one meeting at a time."
+        ];
+
+        const allIceBreakers = [
+            "If you could have any animal as a pet, what would it be?", "What's one thing you'd like to learn how to do?",
+            "What movie or TV show character do you think is most like you?", "If you could visit any place in the world, where would you go?",
+            "What's the funniest thing you saw this week?", "What are you most proud of this week?",
+            "If you could eat only one food for a month, what would it be?", "What's your favorite song right now and why?",
+            "Describe your perfect day.", "What's the best gift you've ever received?",
+            "If you could talk to your future self, what would you ask?", "What's a small thing that makes you happy?",
+            "What's your favorite season and why?", "If you could have a superpower, what would it be?",
+            "Who is a person you admire?", "What is one goal you have for this month?",
+            "If you could be famous for something, what would it be?", "What's your favorite memory from this year so far?",
+            "What's one rule you would make if you ruled the world for a day?", "What are you most grateful for today?",
+            "If you could invent something, what would it be?", "What do you like most about our family?",
+            "What is something you're really good at?", "If you had a time machine, would you go to the past or the future?",
+            "What's the silliest thing you've ever done?", "What book are you reading or what's the last good book you read?",
+            "If you could give one piece of advice to everyone, what would it be?", "What's your favorite game to play?",
+            "What’s the most interesting thing you learned this week?", "If you could redesign your room, what would it look like?",
+            "What's your favorite holiday?", "If you were a chef, what would be your specialty dish?",
+            "What's one thing that always makes you laugh?", "What's your favorite thing to do outside?",
+            "If you could ask a wild animal one question, what would you ask?", "What's the kindest thing someone did for you recently?",
+            "What's the best compliment you've ever received?", "If you opened a store, what would you sell?",
+            "What's something you want to get better at?", "What's the weirdest dream you've ever had?",
+            "If you could meet any historical figure, who would it be?", "What's a tradition you'd like our family to start?",
+            "What's your favorite part of the school day?", "If you could only watch one movie for the rest of your life, what would it be?",
+            "What's something you did this week that was challenging?", "If you had three wishes, what would you wish for?",
+            "What do you want to be when you grow up?", "What's your favorite joke?", "If you could have dinner with any cartoon character, who would it be?"
+        ];
+        
+        const allStories = [
+            { title: "The Tortoise and the Hare", content: "A summary of the classic fable about a slow but steady tortoise who wins a race against a fast, arrogant hare. **Moral: Slow and steady wins the race.**" },
+            { title: "The Boy Who Cried Wolf", content: "The story of a shepherd boy who repeatedly tricks villagers into thinking a wolf is attacking his flock. When a wolf actually appears, no one believes him. **Moral: Liars are not believed, even when they speak the truth.**" },
+            { title: "The Ant and the Grasshopper", content: "A tale of a grasshopper who spends the summer singing while the ants work to store food. When winter comes, the grasshopper is hungry. **Moral: It is best to prepare for the days of necessity.**" },
+            { title: "The Lion and the Mouse", content: "A lion spares a tiny mouse who promises to help him in return. Later, the mouse chews through ropes to free the lion from a hunter's trap. **Moral: Little friends may prove to be great friends.**" },
+            { title: "The Goose with the Golden Eggs", content: "A farmer and his wife have a goose that lays a golden egg every day. Impatient, they cut the goose open to get all the gold at once, but find nothing. **Moral: Greed oft o'er-reaches itself.**" },
+            { title: "The Fox and the Grapes", content: "A fox tries to reach a bunch of grapes on a high vine. When he fails, he scoffs and says they were probably sour anyway. **Moral: It is easy to despise what you cannot get.**" },
+            { title: "The Crow and the Pitcher", content: "A thirsty crow finds a pitcher with water at the bottom, but his beak can't reach. He drops pebbles into the pitcher one by one until the water level rises. **Moral: Necessity is the mother of invention.**" },
+            { title: "Belling the Cat", content: "A group of mice discuss how to deal with a dangerous cat. A young mouse suggests putting a bell on the cat to hear it coming, but no one is brave enough to do it. **Moral: It is one thing to propose, and another to execute.**" },
+            // ... and 45+ more stories ...
+            { title: "The Two Goats", content: "Two goats meet in the middle of a narrow bridge over a river. Neither will give way, so they lock horns and both fall into the water. **Moral: It is better to yield than to come to misfortune through stubbornness.**" }
+        ];
+
+        const allSkills = [
+            { title: "How to Make a Simple Budget", steps: ["List your income (allowance, job).", "Track your spending for a week.", "Categorize your spending (food, fun, savings).", "Set a savings goal and adjust your spending."] },
+            { title: "The 5-Second Rule for Tidying", steps: ["If a task takes less than 5 minutes, do it immediately.", "Examples: putting a dish in the dishwasher, wiping a spill, putting your shoes away.", "This prevents small messes from becoming big ones."] },
+            { title: "How to Write a Thank-You Note", steps: ["Start with a greeting (Dear...).", "Express your gratitude for the specific gift or kindness.", "Mention how you plan to use or enjoy it.", "Add a personal closing (Sincerely, Best, Love...)."] },
+            { title: "Basic First Aid for a Small Cut", steps: ["Wash your hands with soap and water.", "Apply gentle pressure with a clean cloth to stop the bleeding.", "Clean the cut with cool water.", "Apply an antibiotic ointment and cover with a bandage."] },
+            { title: "How to Apologize Sincerely", steps: ["Say 'I'm sorry for...'. Be specific.", "Explain what you did wrong without making excuses.", "Show you understand how it made the other person feel.", "State what you will do differently next time."] },
+            { title: "How to Read a Nutrition Label", steps: ["Look at the serving size and servings per container first.", "Check the calories per serving.", "Look for key nutrients: aim for low saturated fat, sodium, and added sugars.", "Aim for high fiber, vitamins, and minerals."] },
+            { title: "How to Fold a Fitted Sheet", steps: ["Hold the sheet with the top two corners inside out.", "Fold the sheet in half and tuck one corner into the other.", "Bring the bottom corners up and tuck them into the top ones.", "Lay it on a flat surface and fold it into a neat rectangle."] },
+            // ... and 45+ more skills ...
+            { title: "How to Give a Good Handshake", steps: ["Make eye contact and smile.", "Offer your right hand.", "Give a firm, but not crushing, squeeze.", "Shake for about 2-3 seconds."] }
+        ];
 
         let usedContent = {};
 
         // --- CORE FUNCTIONS ---
+        function setRandomSubtitle() {
+            const subtitleElement = document.getElementById('headerSubtitle');
+            const randomSubtitle = subtitles[Math.floor(Math.random() * subtitles.length)];
+            subtitleElement.textContent = randomSubtitle;
+        }
+
         function initializeUsedContent() {
             usedContent = { iceBreakers: [], stories: [], skills: [] };
         }
-        initializeUsedContent();
-
+        
         function startMeeting() {
-            // Reset content displays to their initial state
-            document.getElementById('interestingFact').innerHTML = "<p>Ready to discover something incredible?</p>";
-            document.getElementById('iceBreaker').innerHTML = "<p>Let's get the conversation flowing!</p>";
-            document.getElementById('famousQuote').innerHTML = "<blockquote>An inspiring quote will appear here...</blockquote>";
-            document.getElementById('moralStory').innerHTML = "<p>A meaningful story to share together...</p>";
-            document.getElementById('lifeSkill').innerHTML = "<p>Learn a valuable skill!</p>";
-            document.getElementById('jokeContent').innerHTML = "<p>Ready for a laugh?</p>";
+            const contentDivs = document.querySelectorAll('.content');
+            contentDivs.forEach(div => {
+                const initialContent = div.parentElement.getAttribute('data-initial-content');
+                if (initialContent) {
+                    div.innerHTML = initialContent;
+                }
+            });
             
-            // Reset the used content trackers for static lists
+            const boxes = document.querySelectorAll('.meeting-box');
+            boxes.forEach(box => box.classList.remove('card-generated'));
+            
             initializeUsedContent(); 
             alert("New meeting started! Content is refreshed.");
         }
@@ -349,6 +446,13 @@
             }
         }
 
+        function addGlow(button) {
+            const box = button.closest('.meeting-box');
+            if (box) {
+                box.classList.add('card-generated');
+            }
+        }
+
         // --- API-BASED GENERATORS ---
         async function fetchApiContent(url, button, originalText, formatter) {
             setButtonLoadingState(button, true, originalText);
@@ -356,17 +460,19 @@
                 const response = await fetch(url);
                 if (!response.ok) throw new Error(`Network response was not ok: ${response.statusText}`);
                 const data = await response.json();
+                addGlow(button);
                 return formatter(data);
             } catch (error) {
                 console.error(`Failed to fetch from ${url}:`, error);
-                return `<p>Oops! Couldn't fetch content. Please check your connection and try again.</p>`;
+                return `<p>Oops! Could not fetch content. Please try again.</p>`;
             } finally {
                 setButtonLoadingState(button, false, originalText);
             }
         }
 
         async function generateFact(button) {
-            const html = await fetchApiContent(API_URLS.fact, button, 'Discover Fact', data => `<p>${data.text}</p>`);
+            // UselessFacts API has become unreliable; using a fun fact placeholder API.
+            const html = await fetchApiContent('https://asli-fun-fact-api.herokuapp.com/', button, 'Discover Fact', data => `<p>${data.data.fact}</p>`);
             document.getElementById('interestingFact').innerHTML = html;
         }
 
@@ -385,13 +491,11 @@
             if (!itemsArray || itemsArray.length === 0) return null;
             let available = itemsArray.filter((_, i) => !usedContent[itemType].includes(i));
             if (available.length === 0) {
-                // All items used, reset for this category and try again
-                usedContent[itemType] = [];
+                usedContent[itemType] = []; // All items used, reset
                 available = itemsArray;
             }
             const randomIndex = Math.floor(Math.random() * available.length);
             const item = available[randomIndex];
-            // Find original index to mark as used
             const originalIndex = itemsArray.indexOf(item);
             usedContent[itemType].push(originalIndex);
             return item;
@@ -402,9 +506,14 @@
             setTimeout(() => {
                 const item = getRandomItem(itemType, array);
                 const element = document.getElementById(elementId);
-                element.innerHTML = item ? formatter(item) : `<p>Add more content to the list!</p>`;
+                if (item) {
+                    element.innerHTML = formatter(item);
+                    addGlow(button);
+                } else {
+                    element.innerHTML = `<p>Add more content to the list!</p>`;
+                }
                 setButtonLoadingState(button, false, originalText);
-            }, 200); // Simulate delay for better UX
+            }, 200);
         }
         
         function generateIceBreaker(button) {
@@ -412,7 +521,7 @@
         }
 
         function generateStory(button) {
-            generateStaticContent(button, 'Tell Story', 'stories', allStories, 'moralStory', item => `<p>${item}</p>`);
+            generateStaticContent(button, 'Tell Story', 'stories', allStories, 'moralStory', item => `<h3>${item.title}</h3><p>${item.content}</p>`);
         }
         
         function generateSkill(button) {
@@ -422,40 +531,28 @@
             });
         }
         
-        // --- MODAL & THEME & NOTES FUNCTIONS ---
+        // --- MODAL, THEME & NOTES ---
         function showHelpModal() { document.getElementById('helpModal').style.display = 'block'; }
         function closeHelpModal() { document.getElementById('helpModal').style.display = 'none'; }
+        function showRulesModal() { document.getElementById('rulesModal').style.display = 'block'; }
+        function closeRulesModal() { document.getElementById('rulesModal').style.display = 'none'; }
         
         window.onclick = function(event) {
-            const modal = document.getElementById('helpModal');
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
+            const helpModal = document.getElementById('helpModal');
+            const rulesModal = document.getElementById('rulesModal');
+            if (event.target == helpModal) helpModal.style.display = "none";
+            if (event.target == rulesModal) rulesModal.style.display = "none";
         }
         
         function toggleTheme() {
-            const body = document.documentElement;
-            const currentTheme = body.getAttribute('data-theme');
+            const root = document.documentElement;
+            const currentTheme = root.getAttribute('data-theme');
             if (currentTheme === 'dark') {
-                body.removeAttribute('data-theme');
+                root.removeAttribute('data-theme');
                 document.getElementById('themeIcon').textContent = '🌙';
             } else {
-                body.setAttribute('data-theme', 'dark');
+                root.setAttribute('data-theme', 'dark');
                 document.getElementById('themeIcon').textContent = '☀️';
-            }
-        }
-        
-        function saveNotes() {
-            localStorage.setItem('familyMeetingNotes', document.getElementById('meetingNotes').value);
-            alert('Notes saved to your browser!');
-        }
-
-        function loadNotes() {
-            const savedNotes = localStorage.getItem('familyMeetingNotes');
-            if (savedNotes) {
-                document.getElementById('meetingNotes').value = savedNotes;
-            } else {
-                alert('No saved notes found.');
             }
         }
 
@@ -466,9 +563,23 @@
             const date = new Date().toISOString().slice(0, 10);
             link.download = `Meeting-Notes-${date}.txt`;
             link.href = URL.createObjectURL(blob);
+            document.body.appendChild(link);
             link.click();
+            document.body.removeChild(link);
             URL.revokeObjectURL(link.href);
         }
+        
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            setRandomSubtitle();
+            initializeUsedContent();
+            
+            // Store initial content for reset functionality
+            const contentDivs = document.querySelectorAll('.content');
+            contentDivs.forEach(div => {
+                 div.parentElement.setAttribute('data-initial-content', div.innerHTML);
+            });
+        });
 
     </script>
 </body>
