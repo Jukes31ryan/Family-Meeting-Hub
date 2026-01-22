@@ -1,30 +1,336 @@
-/* Peter's Practical Additions */
-.toast {
-    visibility: hidden;
-    min-width: 250px;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    border-radius: 8px;
-    padding: 16px;
-    position: fixed;
-    z-index: 1000;
-    left: 50%;
-    bottom: 30px;
-    transform: translateX(-50%);
-    font-size: 1rem;
-    opacity: 0;
-    transition: opacity 0.5s, bottom 0.5s;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>The Meeting Deck</title>
+    <meta name="description" content="A fun space for productive conversations.">
 
-.toast.show {
-    visibility: visible;
-    opacity: 1;
-    bottom: 50px;
-}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-/* Fix for Mobile: When typing, don't let the header eat the screen */
-@media (max-width: 600px) {
-    .navbar { position: relative; } /* Unstick the header on mobile */
-    .hero { padding: 1.5rem 1rem; }
-}
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --text-color: #ffffff;
+            --primary: #FFD700; /* Gold */
+            --accent: #FF6B6B;
+        }
+
+        /* DYNAMIC THEMES */
+        body[data-theme="family"] { --bg-color: #4C1D95; --primary: #A78BFA; --accent: #F472B6; } /* Purple/Pink */
+        body[data-theme="social"] { --bg-color: #064E3B; --primary: #34D399; --accent: #FBBF24; } /* Green/Gold */
+        body[data-theme="work"]   { --bg-color: #1E3A8A; --primary: #60A5FA; --accent: #38BDF8; } /* Blue/Cyan */
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Space Grotesk', sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: background-color 0.5s ease;
+        }
+
+        /* --- THE STAGE (Centerpiece) --- */
+        .stage {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            perspective: 1000px; /* 3D effect */
+        }
+
+        .card-container {
+            width: 100%;
+            max-width: 500px;
+            aspect-ratio: 4/5;
+            position: relative;
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s;
+            position: absolute;
+            top: 0; left: 0;
+        }
+
+        .card.active {
+            z-index: 2;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .card.exit {
+            transform: translateX(-150%) rotate(-20deg);
+            opacity: 0;
+        }
+
+        .card.enter {
+            transform: scale(0.9) translateY(20px);
+            opacity: 0.8;
+            z-index: 1;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        .card-icon { font-size: 3rem; margin-bottom: 20px; color: var(--primary); }
+        .card-category { text-transform: uppercase; letter-spacing: 3px; font-size: 0.9rem; opacity: 0.7; margin-bottom: 20px; }
+        .card-text { font-size: 2rem; line-height: 1.3; font-weight: 700; color: #fff; }
+
+        @media (max-width: 600px) {
+            .card-text { font-size: 1.5rem; }
+        }
+
+        /* --- CONTROLS --- */
+        .controls {
+            padding: 30px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .btn-circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-circle:hover { background: var(--primary); color: #000; transform: scale(1.1); }
+        .btn-circle:active { transform: scale(0.95); }
+
+        .btn-main {
+            width: 90px;
+            height: 90px;
+            background: var(--primary);
+            color: #000;
+            font-size: 2rem;
+            box-shadow: 0 0 20px var(--primary);
+        }
+
+        /* --- MENU OVERLAY (Hidden by default) --- */
+        .menu-btn {
+            position: absolute; top: 20px; right: 20px;
+            background: none; border: none; color: rgba(255,255,255,0.5);
+            font-size: 1.5rem; cursor: pointer; z-index: 100;
+        }
+
+        .settings-panel {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 90;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        .settings-panel.open { opacity: 1; pointer-events: auto; }
+
+        .mode-btn {
+            background: transparent; border: 2px solid rgba(255,255,255,0.3);
+            color: white; padding: 15px 30px; font-size: 1.2rem;
+            margin: 10px; border-radius: 10px; cursor: pointer; width: 200px;
+        }
+        .mode-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+        /* --- PROGRESS BAR --- */
+        .progress-container {
+            position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: rgba(255,255,255,0.1);
+        }
+        .progress-bar { height: 100%; background: var(--primary); width: 0%; transition: width 0.3s; }
+
+    </style>
+</head>
+<body data-theme="family">
+
+    <div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
+
+    <button class="menu-btn" onclick="toggleSettings()"><i class="ri-settings-4-line"></i></button>
+    
+    <div class="settings-panel" id="settingsPanel">
+        <h2 style="margin-bottom: 30px;">Choose Your Vibe</h2>
+        <button class="mode-btn" onclick="setMode('family')">🏠 Family Night</button>
+        <button class="mode-btn" onclick="setMode('social')">🍻 Friends & Fun</button>
+        <button class="mode-btn" onclick="setMode('work')">💼 Team Sync</button>
+        <br>
+        <button class="btn-circle" onclick="toggleSettings()"><i class="ri-close-line"></i></button>
+        <p style="margin-top: 30px; opacity: 0.5; font-size: 0.8rem;">MeetingDeck v2.0</p>
+    </div>
+
+    <main class="stage">
+        <div class="card-container">
+            
+            <div class="card enter" id="nextCard">
+                <i class="ri-question-line card-icon"></i>
+                <div class="card-category">Next Up</div>
+                <div class="card-text">...</div>
+            </div>
+
+            <div class="card active" id="currentCard">
+                <i class="ri-flag-fill card-icon"></i>
+                <div class="card-category">Welcome</div>
+                <div class="card-text">Ready to start the conversation?</div>
+            </div>
+
+        </div>
+    </main>
+
+    <div class="controls">
+        <button class="btn-circle" onclick="prevCard()"><i class="ri-arrow-left-line"></i></button>
+        <button class="btn-circle btn-main" onclick="advanceCard()"><i class="ri-check-line"></i></button>
+        <button class="btn-circle" onclick="triggerConfetti()"><i class="ri-magic-line"></i></button>
+    </div>
+
+    <script>
+        // --- DATA STORE ---
+        const decks = {
+            family: [
+                { icon: "ri-home-heart-fill", cat: "Ice Breaker", text: "What is your favorite room in our house and why?" },
+                { icon: "ri-user-smile-fill", cat: "Connection", text: "Who made you laugh the hardest this week?" },
+                { icon: "ri-plant-fill", cat: "Rose & Thorn", text: "Share one win (Rose) and one challenge (Thorn)." },
+                { icon: "ri-lightbulb-flash-fill", cat: "Idea", text: "If we could plan a dream family trip, where would we go?" },
+                { icon: "ri-shield-star-fill", cat: "Appreciation", text: "Turn to the left: Give that person a genuine compliment." },
+                { icon: "ri-shopping-cart-fill", cat: "Ad", text: "Fun Tip: Grab the physical 'TableTopics' deck on Amazon for no-screen nights!" }
+            ],
+            social: [
+                { icon: "ri-fire-fill", cat: "Hot Take", text: "What is a popular movie that you actually hate?" },
+                { icon: "ri-music-fill", cat: "Vibe", text: "If you could only listen to one album forever, what is it?" },
+                { icon: "ri-spy-fill", cat: "Deep Dive", text: "What is a secret talent you have that nobody knows about?" },
+                { icon: "ri-emotion-laugh-fill", cat: "Story", text: "Tell us about your most embarrassing moment." },
+                { icon: "ri-trophy-fill", cat: "Challenge", text: "Who here would survive a zombie apocalypse the longest?" }
+            ],
+            work: [
+                { icon: "ri-rocket-fill", cat: "Kickoff", text: "What is one thing you are excited to ship this week?" },
+                { icon: "ri-bar-chart-fill", cat: "Retro", text: "What is one thing we should STOP doing immediately?" },
+                { icon: "ri-team-fill", cat: "Kudos", text: "Who helped you out this week?" },
+                { icon: "ri-battery-charge-fill", cat: "Energy", text: "On a scale of 1-10, how is your bandwidth right now?" },
+                { icon: "ri-book-open-fill", cat: "Learning", text: "What is a mistake you made recently and what did you learn?" }
+            ]
+        };
+
+        // --- STATE ---
+        let currentMode = 'family';
+        let currentIndex = 0;
+        
+        // --- FUNCTIONS ---
+
+        function setMode(mode) {
+            currentMode = mode;
+            document.body.setAttribute('data-theme', mode);
+            currentIndex = 0;
+            toggleSettings();
+            render();
+            triggerConfetti(); // Celebration for switching modes
+        }
+
+        function toggleSettings() {
+            document.getElementById('settingsPanel').classList.toggle('open');
+        }
+
+        function advanceCard() {
+            const deck = decks[currentMode];
+            const currentEl = document.getElementById('currentCard');
+            
+            // Animation: Throw current card away
+            currentEl.classList.add('exit');
+            currentEl.classList.remove('active');
+
+            setTimeout(() => {
+                // Logic: Move index forward
+                currentIndex = (currentIndex + 1) % deck.length;
+                
+                // Reset classes for the new state
+                currentEl.classList.remove('exit');
+                currentEl.classList.add('enter'); // Put it back in the stack visually
+                
+                // Force Reflow/Render
+                render();
+                
+                // Animation: Bring it forward
+                requestAnimationFrame(() => {
+                    currentEl.classList.remove('enter');
+                    currentEl.classList.add('active');
+                });
+            }, 300);
+        }
+
+        function prevCard() {
+            const deck = decks[currentMode];
+            if (currentIndex > 0) currentIndex--;
+            else currentIndex = deck.length - 1;
+            render();
+        }
+
+        function render() {
+            const deck = decks[currentMode];
+            const cardData = deck[currentIndex];
+            const nextData = deck[(currentIndex + 1) % deck.length];
+
+            // Update Current Card
+            const currentEl = document.getElementById('currentCard');
+            currentEl.querySelector('.card-icon').className = `${cardData.icon} card-icon`;
+            currentEl.querySelector('.card-category').innerText = cardData.cat;
+            currentEl.querySelector('.card-text').innerText = cardData.text;
+
+            // Update Background "Next" Card (for visual depth)
+            const nextEl = document.getElementById('nextCard');
+            nextEl.querySelector('.card-icon').className = `${nextData.icon} card-icon`;
+            nextEl.querySelector('.card-category').innerText = nextData.cat;
+            nextEl.querySelector('.card-text').innerText = "...";
+
+            // Update Progress Bar
+            const progress = ((currentIndex + 1) / deck.length) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+        }
+
+        function triggerConfetti() {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#FFD700', '#FF6B6B', '#4C1D95']
+            });
+        }
+
+        // Init
+        render();
+
+    </script>
+</body>
+</html>
