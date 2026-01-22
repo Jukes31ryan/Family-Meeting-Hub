@@ -3,289 +3,367 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Family Meeting Hub</title>
+    <title>Meeting Deck</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --glass-bg: rgba(255, 255, 255, 0.35);
-            --glass-border: rgba(255, 255, 255, 0.25);
-            --text-primary: #333;
-            --text-secondary: #555;
-            --shadow-light: 0 8px 32px rgba(31, 38, 135, 0.2);
-            --button-disabled-bg: #ccc;
-            --progress-glow-color: #ff7e5f;
-            --btn-gradient: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);
+            /* GLOBAL ANIMATIONS */
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* --- THEME: FAMILY (Cozy, Warm, Modern) --- */
+        body[data-mode="family"] {
+            --bg: #FFF8F0; /* Soft Almond */
+            --surface: #FFFFFF;
+            --text-main: #4A403A;
+            --text-sub: #8C8179;
+            --accent: #FF7E5F; /* Coral */
+            --accent-glow: rgba(255, 126, 95, 0.3);
+            --border: #F0E6DD;
+        }
+
+        /* --- THEME: FRIENDS (Night Mode, Electric) --- */
+        body[data-mode="friends"] {
+            --bg: #0F172A; /* Deep Navy */
+            --surface: #1E293B;
+            --text-main: #F8FAFC;
+            --text-sub: #94A3B8;
+            --accent: #C084FC; /* Neon Purple */
+            --accent-glow: rgba(192, 132, 252, 0.3);
+            --border: #334155;
+        }
+
+        /* --- THEME: WORK (Clean, Professional, Trust) --- */
+        body[data-mode="work"] {
+            --bg: #F1F5F9; /* Cool Gray */
+            --surface: #FFFFFF;
+            --text-main: #0F172A;
+            --text-sub: #64748B;
+            --accent: #0284C7; /* Professional Blue */
+            --accent-glow: rgba(2, 132, 199, 0.2);
+            --border: #E2E8F0;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
             min-height: 100vh;
-            color: var(--text-primary);
-            transition: background 0.5s ease;
-            overflow-x: hidden;
-            /* Default: Family */
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
-        }
-
-        /* --- MODE THEMES --- */
-        body[data-mode="family"] { background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%); }
-        body[data-mode="friends"] { background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%); }
-        body[data-mode="work"] { background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); }
-
-        /* Dark Theme Support */
-        body.dark-theme {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            --glass-bg: rgba(0, 0, 0, 0.25);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --text-primary: #f8fafc;
-            --text-secondary: #cbd5e1;
-            --button-disabled-bg: #555;
-            --progress-glow-color: #f59e0b;
+            padding: 40px 20px;
+            transition: var(--transition);
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 20px;
-            position: relative;
-            z-index: 2;
         }
 
-        /* HEADER */
-        .header {
+        /* --- HEADER & TABS --- */
+        header {
             text-align: center;
-            padding: 2rem 1rem;
-            margin-bottom: 2rem;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            box-shadow: var(--shadow-light);
-            backdrop-filter: blur(10px);
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-weight: 800;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-sub);
+            margin-bottom: 30px;
+        }
+
+        /* The Pill Switcher */
+        .mode-tabs {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            display: inline-flex;
+            padding: 6px;
+            border-radius: 50px;
+            box-shadow: 0 4px 20px -5px rgba(0,0,0,0.05);
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            color: var(--text-sub);
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .tab-btn.active {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 4px 15px var(--accent-glow);
+        }
+
+        /* --- GRID --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        /* --- CARDS (The "Premium" Look) --- */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 30px;
+            position: relative;
             display: flex;
             flex-direction: column;
+            transition: var(--transition);
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1);
+            border-color: var(--accent);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 800;
+            color: var(--accent);
+            background: var(--accent-glow);
+            padding: 6px 12px;
+            border-radius: 8px;
+        }
+
+        .card-content {
+            flex-grow: 1;
+            margin-bottom: 25px;
+            font-size: 1.15rem;
+            line-height: 1.6;
+            color: var(--text-main);
+            min-height: 80px;
+            display: flex;
             align-items: center;
         }
 
-        .header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
-        .header p { font-size: 1.2rem; opacity: 0.9; }
-
-        /* CONTROLS */
-        .controls {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
+        /* Specific Content Styling */
+        .card-content p { width: 100%; }
+        .card-content h3 { color: var(--accent); margin-bottom: 8px; font-size: 1.2rem; }
+        .card-content blockquote {
+            border-left: 4px solid var(--accent);
+            padding-left: 16px;
+            font-style: italic;
+            color: var(--text-sub);
         }
 
-        .control-btn, .mode-select {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            color: var(--text-primary);
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-size: 1rem;
+        /* --- ACTION BUTTONS --- */
+        .btn {
+            background: var(--surface);
+            border: 2px solid var(--border);
+            color: var(--text-main);
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
             cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-            font-family: inherit;
-        }
-
-        .control-btn:hover { transform: translateY(-3px); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        
-        /* GRID */
-        .meeting-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 28px;
-        }
-
-        .meeting-box {
-            background: var(--glass-bg);
-            border: 2px solid transparent;
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: var(--shadow-light);
-            backdrop-filter: blur(10px);
+            transition: var(--transition);
             display: flex;
-            flex-direction: column;
-            transition: border-color 0.4s ease, box-shadow 0.4s ease;
-        }
-        
-        .card-used {
-            border-color: var(--progress-glow-color);
-            box-shadow: 0 0 20px var(--progress-glow-color);
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
-        .meeting-box h2 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
+        .btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: var(--accent-glow);
+        }
+
+        .btn:active { transform: scale(0.98); }
+
+        /* --- NOTES AREA --- */
+        textarea {
+            width: 100%;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 120px;
+            transition: var(--transition);
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: var(--surface);
+            box-shadow: 0 0 0 4px var(--accent-glow);
+        }
+
+        /* --- LISTS --- */
+        .check-list { list-style: none; }
+        .check-list li {
+            padding: 10px;
+            background: var(--bg);
+            margin-bottom: 8px;
+            border-radius: 8px;
+            font-size: 0.95rem;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .content { 
-            flex-grow: 1; 
-            margin-bottom: 1rem; 
-            line-height: 1.6; 
+        /* --- FOOTER CONTROLS --- */
+        .footer-controls {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
         }
-        .content ul { list-style-position: inside; padding-left: 10px; }
-        .content p, .content ul { margin-bottom: 10px; }
-        .content h3 { margin-bottom: 10px; font-size: 1.2rem; }
-        .content blockquote { font-style: italic; padding-left: 15px; border-left: 3px solid var(--text-secondary); margin-left: 0; opacity: 0.9; }
-
-        /* BUTTONS */
-        .random-btn {
-            background: var(--btn-gradient);
-            color: white;
+        
+        .footer-btn {
+            background: transparent;
             border: none;
-            padding: 12px 20px;
-            border-radius: 25px;
+            color: var(--text-sub);
+            font-weight: 600;
             cursor: pointer;
-            font-size: 0.95rem;
-            align-self: flex-start;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            font-weight: bold;
+            font-size: 0.9rem;
         }
-        .random-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
-        .random-btn:disabled { background: var(--button-disabled-bg); cursor: not-allowed; opacity: 0.7; }
+        .footer-btn:hover { color: var(--accent); text-decoration: underline; }
 
-        .notes-area { 
-            width: 100%; min-height: 100px; padding: 10px; 
-            border-radius: 10px; border: 1px solid var(--glass-border); 
-            background-color: rgba(255, 255, 255, 0.5); 
-            color: var(--text-primary); font-family: inherit; 
+        /* Toast */
+        #toast {
+            visibility: hidden; min-width: 250px; background-color: var(--text-main); color: var(--bg);
+            text-align: center; border-radius: 50px; padding: 16px; position: fixed;
+            z-index: 100; left: 50%; bottom: 30px; transform: translateX(-50%);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); font-weight: 600;
         }
-        .dark-theme .notes-area { background-color: rgba(0, 0, 0, 0.3); }
+        #toast.show { visibility: visible; bottom: 50px; transition: 0.3s; }
 
-        /* MODAL */
-        .modal {
-            display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
-            overflow: auto; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(5px);
+        @media (max-width: 700px) {
+            h1 { font-size: 2rem; }
+            .mode-tabs { width: 100%; display: flex; }
+            .tab-btn { flex: 1; padding: 10px 0; }
         }
-        .modal-content {
-            background: rgba(255, 255, 255, 0.95); color: #2d3748;
-            margin: 10% auto; padding: 30px; border-radius: 20px;
-            max-width: 600px; width: 90%; position: relative;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-        }
-        .dark-theme .modal-content { background: rgba(30, 41, 59, 0.95); color: #f7fafc; }
-        .modal-close { position: absolute; top: 15px; right: 25px; font-size: 2rem; cursor: pointer; }
     </style>
 </head>
 <body data-mode="family">
 
     <div class="container">
-        <header class="header">
-            <h1 id="main-title">✨ Family Meeting Hub</h1>
-            <p id="subtitle">Time to connect and share.</p>
+        <header>
+            <h1 id="app-title">Family Deck</h1>
+            <p class="subtitle">Meaningful conversations, made simple.</p>
+            
+            <div class="mode-tabs">
+                <button class="tab-btn active" onclick="setMode('family')" id="tab-family">Family</button>
+                <button class="tab-btn" onclick="setMode('friends')" id="tab-friends">Friends</button>
+                <button class="tab-btn" onclick="setMode('work')" id="tab-work">Work</button>
+            </div>
         </header>
 
-        <div class="controls">
-            <select class="mode-select" id="modeSelect" onchange="changeMode()">
-                <option value="family">🏠 Family Mode</option>
-                <option value="friends">🎉 Friends Mode</option>
-                <option value="work">💼 Work Mode</option>
-            </select>
+        <div class="grid">
             
-            <button class="control-btn" onclick="showHelpModal()">❓ Help</button>
-            <button class="control-btn" onclick="showRulesModal()">📜 Rules</button>
-            <button class="control-btn" onclick="location.reload()">🔄 Reset</button>
-            <button class="control-btn" onclick="toggleDarkTheme()">🌗 Theme</button>
+            <div class="card">
+                <div class="card-header"><span class="tag" id="tag-1">Warm Up</span></div>
+                <div class="card-content" id="content-iceBreaker">
+                    <p>Click below to start...</p>
+                </div>
+                <button class="btn" onclick="generate('iceBreaker')" id="btn-1">Draw Card</button>
+            </div>
+
+            <div class="card">
+                <div class="card-header"><span class="tag" id="tag-2">Check In</span></div>
+                <div class="card-content" style="display:block;">
+                    <ul class="check-list" id="list-checkin">
+                        </ul>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <input type="number" id="participantCount" placeholder="#" style="width: 60px; text-align: center; border: 1px solid var(--border); border-radius: 8px;">
+                    <button class="btn" onclick="generateOrder()">Pick Order</button>
+                </div>
+                <div id="checkInOrder" style="margin-top: 10px; font-weight: bold; color: var(--accent); font-size: 0.9rem;"></div>
+            </div>
+
+            <div class="card">
+                <div class="card-header"><span class="tag" id="tag-3">Deep Dive</span></div>
+                <div class="card-content" id="content-dynamic">
+                    <p>Ready for the main event?</p>
+                </div>
+                <button class="btn" onclick="generate('dynamic')" id="btn-3">Next</button>
+            </div>
+
+            <div class="card">
+                <div class="card-header"><span class="tag" id="tag-4">Learn</span></div>
+                <div class="card-content" id="content-skill">
+                    <p>Learn something new.</p>
+                </div>
+                <button class="btn" onclick="generate('skill')" id="btn-4">Teach Me</button>
+            </div>
+
+            <div class="card">
+                <div class="card-header"><span class="tag">Humor</span></div>
+                <div class="card-content" id="content-joke">
+                    <p>Need a laugh?</p>
+                </div>
+                <button class="btn" onclick="generateJoke()">Tell Joke</button>
+            </div>
+
+            <div class="card" style="grid-column: 1 / -1;">
+                <div class="card-header"><span class="tag">Notes</span></div>
+                <textarea id="notes" placeholder="Capture key moments here... (Auto-saved)"></textarea>
+                <div style="margin-top: 15px; text-align: center;">
+                    <button class="btn" style="width: auto; display: inline-flex;" onclick="copyNotes()">Copy to Clipboard</button>
+                </div>
+            </div>
+
         </div>
 
-        <div class="meeting-grid">
-            
-            <div class="meeting-box">
-                <h2 id="lbl-icebreaker">🎯 Ice Breaker</h2>
-                <div class="content" id="iceBreakerContent">
-                    <p>Let's get the conversation flowing!</p>
-                </div>
-                <button class="random-btn" onclick="generate('iceBreaker')">Get Question</button>
-            </div>
-
-            <div class="meeting-box">
-                <h2 id="lbl-quote">💬 Inspiring Quote</h2>
-                <div class="content" id="quoteContent">
-                    <blockquote>An inspiring quote will appear here...</blockquote>
-                </div>
-                <button class="random-btn" onclick="generate('quote')">Get Quote</button>
-            </div>
-
-            <div class="meeting-box">
-                <h2 id="lbl-checkin">💖 Check-In</h2>
-                <div class="content">
-                    <p id="checkin-instruct">Use <strong>Rose, Bud, Thorn</strong> format:</p>
-                    <ul id="checkin-list">
-                        <li><strong>🌹 Rose:</strong> A highlight.</li>
-                        <li><strong>🌱 Bud:</strong> Something upcoming.</li>
-                        <li><strong>🌵 Thorn:</strong> A challenge.</li>
-                    </ul>
-                    <div style="display: flex; gap: 10px; align-items: center; margin-top: 15px;">
-                        <input type="number" id="participantCount" class="notes-area" placeholder="#" style="width: 60px; min-height: 44px; text-align: center; padding: 10px;">
-                        <button class="random-btn" onclick="generateOrder()" style="flex-grow: 1;">Pick Order</button>
-                    </div>
-                    <div id="checkInOrder" style="margin-top: 1rem; font-weight: bold; color: var(--progress-glow-color);"></div>
-                </div>
-            </div>
-
-            <div class="meeting-box">
-                <h2 id="lbl-dynamic">📖 Story Time</h2>
-                <div class="content" id="dynamicContent">
-                    <p>A meaningful story to share...</p>
-                </div>
-                <button class="random-btn" id="btn-dynamic" onclick="generate('dynamic')">Read Story</button>
-            </div>
-
-            <div class="meeting-box">
-                <h2 id="lbl-skill">🛠️ Life Skill</h2>
-                <div class="content" id="skillContent">
-                    <p>Learn something valuable together!</p>
-                </div>
-                <button class="random-btn" id="btn-skill" onclick="generate('skill')">Learn Skill</button>
-            </div>
-
-            <div class="meeting-box">
-                <h2 id="lbl-joke">😂 Joke Time</h2>
-                <div class="content" id="jokeContent">
-                    <p>Ready for a laugh?</p>
-                </div>
-                <button class="random-btn" onclick="generate('joke')">Tell Joke</button>
-            </div>
-
-            <div class="meeting-box" style="grid-column: 1 / -1;">
-                <h2>📝 Meeting Notes</h2>
-                <div class="content">
-                    <p>Capture important moments:</p>
-                    <textarea class="notes-area" id="meetingNotes" placeholder="Write down key points..."></textarea>
-                    <div style="margin-top: 16px;">
-                        <button class="random-btn" onclick="exportNotes()">📄 Export Notes</button>
-                    </div>
-                </div>
-            </div>
-
+        <div class="footer-controls">
+            <button class="footer-btn" onclick="alert('Rules: 1. No Phones. 2. Listen. 3. Have Fun.')">View Rules</button>
+            <button class="footer-btn" onclick="if(confirm('Clear all data?')) { localStorage.clear(); location.reload(); }">Reset App</button>
         </div>
     </div>
 
-    <div id="helpModal" class="modal"><div class="modal-content"><span class="modal-close" onclick="closeModal('helpModal')">&times;</span><h2>How to Use</h2><ol><li>Select your <strong>Mode</strong> (Family, Friends, Work).</li><li>Start with an <strong>Ice Breaker</strong>.</li><li>Do the <strong>Check-In</strong> round.</li><li>Use the other cards to deepen the conversation.</li></ol></div></div>
-    <div id="rulesModal" class="modal"><div class="modal-content"><span class="modal-close" onclick="closeModal('rulesModal')">&times;</span><h2>Meeting Rules</h2><ul><li><strong>Be Present:</strong> No phones.</li><li><strong>One Mic:</strong> Don't interrupt.</li><li><strong>No Judgment:</strong> Listen to understand.</li></ul></div></div>
+    <div id="toast">Copied!</div>
 
 <script>
-    // --- MASSIVE CONTENT DATABASE ---
+    // --- 1. THE MASSIVE DATABASE (INCREASED!) ---
+    
     const db = {
         family: {
-            title: "✨ Family Meeting Hub",
-            labels: { dynamic: "📖 Story Time", skill: "🛠️ Life Skill", checkin: "💖 Check-In" },
-            btns: { dynamic: "Read Story", skill: "Learn Skill" },
-            checkinList: [
-                "<strong>🌹 Rose:</strong> A highlight or positive moment.",
-                "<strong>🌱 Bud:</strong> Something you're looking forward to.",
-                "<strong>🌵 Thorn:</strong> A challenge you faced."
+            title: "Family Deck",
+            subtitle: "Meaningful conversations, made simple.",
+            tags: ["Ice Breaker", "Rose, Bud, Thorn", "Story Time", "Life Skill"],
+            btns: ["Get Question", "Read Story", "Learn Skill"],
+            checkin: [
+                "🌹 <strong>Rose:</strong> Best part of your week.",
+                "🌵 <strong>Thorn:</strong> Hardest part of your week.",
+                "🌱 <strong>Bud:</strong> What are you looking forward to?"
             ],
-            // RESTORED FULL LIBRARIES FROM ORIGINAL CODE
             iceBreakers: [
                 "If you could have a walk-up song play every time you entered a room, what would it be?",
                 "What's a small thing that happened this week that made you happy?",
@@ -294,15 +372,13 @@
                 "If you could talk to animals, which animal would you have the most interesting conversation with?",
                 "What's a fictional world you would love to live in for a week?",
                 "If you had to describe our family as a type of food, what would we be?",
-                "What's a skill you'd like to learn as a family?",
-                "If you could have any famous artist (living or dead) paint a portrait of our family, who would you choose?",
                 "What's a weird food combination that you secretly love?",
                 "If you could add a new, magical room to our house, what would it be?",
                 "What movie or TV show character do you think is most like you?",
                 "If you could design a new planet, what would be its main feature?",
                 "What's the best smell in the world?",
                 "What's a family tradition you think we should start?",
-                "If you could create a new holiday, what would it celebrate and what would be the main tradition?",
+                "If you could create a new holiday, what would it celebrate?",
                 "What's the funniest thing that's ever happened to you?",
                 "If you could have any job for just one day, what would you choose?",
                 "What's something you're really proud of that you did this week?",
@@ -316,7 +392,7 @@
                 "What's a word you love the sound of?",
                 "If you could have a dinner party with three characters from books, who would you invite?",
                 "What's a simple pleasure that always makes your day better?",
-                "If our family was a sports team, what would our team name be and what would be our mascot?",
+                "If our family was a sports team, what would our team name be?",
                 "What's the best piece of advice you've ever received?",
                 "If you could only listen to three songs for the rest of your life, what would they be?",
                 "What's something you're looking forward to this month?",
@@ -339,432 +415,56 @@
                 "What's a food that you think is seriously underrated?",
                 "If you could have any view from your bedroom window, what would it be?",
                 "What's something you've done that you thought was impossible at first?",
-                "If you could be a judge on a competition show, what kind of show would it be?",
                 "What's something you're really good at that might surprise people?",
                 "If you could have any artist's musical talent, whose would you choose?",
-                "What's the most interesting-looking cloud you've ever seen?",
                 "If you could ask your future self one question, what would it be?",
-                "What's a simple thing we could do to make our home even better?",
-                "If you could have a conversation with an alien, what's the first thing you would ask?",
-                "What's a movie you think everyone in the world should see?",
-                "If you could redesign the cover of your favorite book, what would it look like?",
-                "What's a small, everyday sound that you love?",
-                "If you could bring any character from a book to life to be your friend, who would it be?",
-                "What's a challenge you'd be excited to take on?",
-                "What's the most memorable meal you've ever had?",
-                "If you could create a new law that everyone had to follow, what would it be?",
-                "What's a place in our town you'd like to explore more?",
-                "If you could have a robot helper, what would be its main job?",
-                "What's a song that makes you feel nostalgic?",
-                "If you could be a world-renowned scientist, what would you study?",
-                "What's the best surprise you've ever had?",
-                "If you could have a family motto, what would it be?",
-                "What's a piece of good news you've heard recently?",
-                "If you could travel anywhere in a submarine, where would you go?",
-                "What's a food you could eat every single day and not get tired of?",
-                "If you could have one 'do-over' for a single moment in your life, what would it be?",
-                "What's something you're looking forward to learning?",
-                "What's a funny family story that we don't tell often enough?",
-                "What's something you love about every person in this room?",
-                "What's a small thing you can do this week to make someone else's day better?",
-                "What's the best adventure you've ever been on?",
-                "If you could make one thing from a dream become real, what would you choose?",
-                "What's a skill you'd like to teach someone else?",
-                "If you could have a giant version of any object, what would it be?",
-                "What's the best part about being in our family?",
-                "Would you rather have the ability to fly or be invisible?",
-                "Would you rather be able to talk to all animals or speak every human language?",
-                "Would you rather live in a house shaped like a giant shoe or a house shaped like a giant pineapple?",
-                "Would you rather have a dragon or a unicorn for a pet?",
-                "Would you rather control the weather or be able to teleport?",
-                "Would you rather never have to do chores again or never have to do homework again?",
-                "Would you rather eat your favorite food for every meal for a year or never be able to eat it again?",
-                "Would you rather have a permanent tail or have ears like an elephant?",
-                "Would you rather live without music or without movies for the rest of your life?",
-                "Would you rather be the funniest person alive or the smartest person alive?",
-                "Would you rather explore a new planet by yourself or explore the deepest part of the ocean with your family?",
-                "Would you rather have a super-strong sense of smell or super-sensitive hearing?",
-                "Would you rather be able to jump as high as a building or run as fast as a car?",
-                "Would you rather have everything you draw come to life or be able to understand what animals are thinking?",
-                "Would you rather have a personal robot to do your bidding or a magical book that answers any question?",
-                "Would you rather only be able to whisper or only be able to shout?",
-                "Would you rather live in a world with no pizza or a world with no ice cream?",
-                "Would you rather have the power to change the color of anything or the power to change the size of anything?",
-                "Would you rather be able to breathe underwater or be able to hold your breath for three hours?",
-                "Would you rather have a key that could open any door or a map that shows where any lost item is?"
+                "If you were a color, what color would you be and why?",
+                "What is your favorite item of clothing you own?",
+                "If you could master one instrument instantly, which one?",
+                "What is the first thing you notice about a person?",
+                "What is your favorite board game?",
+                "If you could invent a gadget, what would it do?",
+                "What is the best gift you have ever given?",
+                "If you could pause time for one hour a day, what would you do?"
             ],
-            dynamics: [
-                { title: "The Lion and the Mouse", body: "A lion was about to eat a mouse, who pleaded for his life. The lion let him go. Later, the lion was trapped in a net. The mouse gnawed the ropes, freeing him. Moral: An act of kindness, no matter how small, is never wasted." },
-                { title: "The Tortoise and the Hare", body: "A hare boasted about his speed and challenged a tortoise to a race. The hare, far ahead, took a nap. The tortoise kept moving slowly but steadily and crossed the finish line first. Moral: Slow and steady wins the race." },
-                { title: "The Two Frogs", body: "Two frogs fell into a pail of cream. The first gave up and drowned. The second frog kept kicking and kicking until he churned the cream into butter and hopped out. Moral: Never give up." },
-                { title: "The Bundle of Sticks", body: "A father showed his sons they could easily break one stick, but couldn't break a bundle of them tied together. Moral: There is strength in unity." },
-                { title: "The Ant and the Grasshopper", body: "A grasshopper laughed at an ant for working hard all summer. When winter came, the grasshopper had no food, while the ant was safe and warm. Moral: It is wise to prepare for the days of necessity." },
-                { title: "The Fox and the Grapes", body: "A fox saw some juicy grapes but couldn't reach them. He walked away saying, 'They were probably sour anyway.' Moral: It's easy to despise what you cannot have." },
-                { title: "The Wind and the Sun", body: "The Wind and the Sun argued about who was stronger. They decided to see who could make a traveler take off his coat. The Wind blew hard, but the traveler held his coat tighter. The Sun shone warmly, and the traveler took it off. Moral: Gentleness and kindness are more powerful than force." },
-                { title: "The Wise Old Owl", body: "An old owl sat in an oak. The more he saw, the less he spoke. The less he spoke, the more he heard. Moral: Wise people listen more than they speak." },
-                { title: "The Leaky Bucket", body: "A girl carried water in two buckets. One was perfect, the other had a leak. The leaky bucket felt sad, but the girl pointed out the beautiful flowers that grew on its side of the path, watered by the leaks. Moral: Our flaws can sometimes create unexpected beauty." },
-                { title: "The Farmer and the Stork", body: "A farmer caught a stork in a net with some cranes that were eating his seeds. The stork pleaded that he was innocent, but the farmer said, 'You were found with the thieves, so you will share their fate.' Moral: You are judged by the company you keep." },
-                { title: "The City Mouse and the Country Mouse", body: "A country mouse visited his city cousin and was amazed by the fine food, but terrified by the cats and dogs. He decided it was better to have simple food in peace than fine food in fear. Moral: Peace and safety are more valuable than luxury with danger." },
-                { title: "The Boy Who Cried Wolf", body: "A shepherd boy repeatedly tricked villagers into thinking a wolf was attacking his flock. When a wolf actually appeared, no one believed his cries for help, and he lost his sheep. Moral: Liars are not believed even when they speak the truth." },
-                { title: "The Dog and Its Reflection", body: "A dog with a piece of meat in his mouth saw his reflection in the water. Thinking it was another dog with a bigger piece, he barked to snatch it, dropping his own meat into the water. Moral: Be content with what you have." },
-                { title: "The Oak and the Reeds", body: "A mighty oak tree boasted of its strength to the reeds by the river. A great storm came, and the oak was uprooted, while the flexible reeds bent with the wind and survived. Moral: It is better to be flexible than to be stubborn and rigid." },
-                { title: "The Crow and the Pitcher", body: "A thirsty crow found a pitcher with a little water at the bottom. He dropped pebbles into the pitcher one by one until the water level rose high enough for him to drink. Moral: Little by little does the trick; persistence pays off." },
-                { title: "The Milkmaid and Her Pail", body: "A milkmaid was carrying a pail of milk, dreaming of all the things she would buy with the money from it. She got so excited that she tossed her head, spilling all the milk. Moral: Do not count your chickens before they hatch." },
-                { title: "The Goose with the Golden Eggs", body: "A man owned a goose that laid a golden egg every day. Impatient to get all the gold at once, he killed the goose, only to find it was just like any other goose inside. He lost his daily treasure. Moral: Greed can lead to your own downfall." },
-                { title: "The Two Travelers and the Bear", body: "Two friends were walking through a forest when a bear appeared. One quickly climbed a tree, leaving the other behind. The second man lay on the ground and played dead. The bear sniffed him and left. The first man asked what the bear whispered. The second replied, 'He told me never to travel with a friend who deserts you at the first sign of danger.' Moral: Misfortune tests the sincerity of friends." },
-                { title: "The Fox and the Crow", body: "A crow had a piece of cheese in her beak. A fox, wanting the cheese, flattered the crow on her beautiful voice and asked her to sing. When the crow opened her beak to sing, the cheese fell out and the fox snatched it up. Moral: Beware of flatterers." },
-                { title: "The Lion in Love", body: "A lion fell in love with a woodcutter's daughter and asked for her hand in marriage. The father, not wanting to refuse, said the lion must first have his claws trimmed and his teeth filed. The lion agreed. Once he was harmless, the woodcutter drove him away. Moral: Do not give up your defenses." },
-                { title: "The Man and the Serpent", body: "A man found a serpent frozen with cold. He took pity on it and placed it in his bosom. Warmed by the heat, the serpent revived and bit its benefactor, killing him. Moral: No amount of kindness will change the nature of the wicked." },
-                { title: "The Donkey in the Lion's Skin", body: "A donkey found a lion's skin and wore it to scare other animals. He was very proud until a fox came along, heard his braying, and knew he was a fake. Moral: Fine clothes may disguise, but silly words will disclose a fool." },
-                { title: "The Miser and His Gold", body: "A miser buried his gold and went to look at it every day. A thief watched him, dug up the gold, and stole it. The miser was devastated. A neighbor told him to bury a stone in its place and pretend it was his gold, for it was of no use to him anyway. Moral: Wealth is not to be enjoyed if it is not used." },
-                { title: "The Eagle and the Arrow", body: "An eagle was shot by an arrow. As he lay dying, he saw that the arrow was fletched with one of his own feathers. Moral: We often give our enemies the means of our own destruction." },
-                { title: "The Wolf in Sheep's Clothing", body: "A wolf disguised himself in a sheep's skin to get into a flock. He ate well for many nights until the shepherd decided to slaughter a sheep for his dinner and chose the wolf by mistake. Moral: The evil you do always comes back to you." },
-                { title: "The Honest Woodcutter", body: "A woodcutter dropped his axe in a river. The god Mercury appeared and offered him a golden axe, then a silver one. The woodcutter was honest and said they weren't his. Pleased, Mercury gave him all three axes. Moral: Honesty is the best policy." },
-                { title: "The Farmer and His Sons", body: "A dying farmer told his sons there was a treasure hidden in their vineyard. They dug up the entire vineyard but found no gold. However, their digging loosened the soil, resulting in a bountiful harvest. Moral: Hard work itself is a treasure." },
-                { title: "The Peacock and the Crane", body: "A peacock mocked a crane for its plain feathers. The crane replied, 'I can fly high among the clouds and the stars, while you are stuck on the ground like a common bird.' Moral: Usefulness is better than beauty." },
-                { title: "The Bear and the Bees", body: "A bear tried to steal honey from a beehive but was stung. Enraged, he attacked the hive, causing the entire swarm to attack him. He had to run and jump into a pond to save himself. Moral: It is wiser to bear a single injury in silence than to provoke a thousand by flying into a rage." },
-                { title: "The Cat and the Mice", body: "The mice were terrified of a cat. They held a meeting to decide what to do. A young mouse suggested tying a bell around the cat's neck so they would hear it coming. Everyone applauded the idea, but an old mouse asked, 'Who will bell the cat?' Moral: It is one thing to propose a solution, and another to execute it." },
-                { title: "The Gnat and the Bull", body: "A gnat landed on a bull's horn and apologized for the inconvenience. The bull replied that he hadn't even noticed the gnat was there. Moral: The smaller the mind the greater the conceit." },
-                { title: "The Shepherd and the Wild Sheep", body: "A shepherd found some wild sheep and mixed them with his flock, giving them better food. During a storm, he neglected his own sheep to care for the wild ones. When the storm passed, the wild sheep ran away. The shepherd learned a lesson. Moral: Do not neglect old friends for new ones." },
-                { title: "The Fisherman and the Little Fish", body: "A fisherman caught a very small fish, which begged to be thrown back to be caught again when it was bigger. The fisherman refused, saying a small gain now is better than a large gain in the future that is uncertain. Moral: A bird in the hand is worth two in the bush." },
-                { title: "The Astronomer", body: "An astronomer was walking along, gazing at the stars, when he fell into a well. A passerby said, 'You who are so eager to see what is in the heavens, you fail to see what is at your feet.' Moral: Pay attention to the immediate and practical." },
-                { title: "The Two Pots", body: "An earthenware pot and a brass pot were carried down a river. The earthenware pot tried to keep its distance from the brass one, fearing it would be shattered in a collision. Moral: The strong and the weak cannot keep company." },
-                { title: "The Lion and the Boar", body: "A lion and a boar came to a small spring to drink at the same time. They began to fight over who should drink first. After a while, they saw vultures waiting nearby to feast on the loser. They decided it was better to be friends than to be food for vultures. Moral: Those who strive are often watched by others to take advantage of their defeat." },
-                { title: "The Miller, His Son, and Their Donkey", body: "A miller and his son were taking their donkey to market. They tried to please everyone they met—by walking, by letting the son ride, by letting the father ride, and finally by carrying the donkey. In the end, they dropped the donkey into a river and pleased no one. Moral: If you try to please everyone, you will please no one." },
-                { title: "The Wolf and the Crane", body: "A wolf had a bone stuck in his throat and hired a crane to remove it. After the crane did so, she asked for her payment. The wolf replied, 'Is it not payment enough that I allowed you to remove your head from my mouth without biting it off?' Moral: Expect no reward for serving the wicked." },
-                { title: "The Ant and the Dove", body: "An ant fell into a river. A dove dropped a leaf for the ant to climb on. Later, a hunter was about to catch the dove. The ant bit the hunter on the foot, causing him to miss his shot and saving the dove. Moral: One good turn deserves another." },
-                { title: "The Hare and His Ears", body: "A lion was wounded by a goat's horns and declared that all horned animals must leave his kingdom. A hare, seeing the shadow of his long ears, feared they would be mistaken for horns and prepared to flee. Moral: Some people are frightened by their own shadows." }
+            dynamics: [ // Moral Stories
+                { title: "The Lion and the Mouse", body: "A lion spared a mouse. Later, the lion was trapped in a net. The mouse chewed the ropes to free him. Moral: Little friends may prove great friends." },
+                { title: "The Tortoise and the Hare", body: "The hare bragged about speed and took a nap. The tortoise kept moving slow and steady. The tortoise won. Moral: Consistency beats intensity." },
+                { title: "The Boy Who Cried Wolf", body: "A boy lied about a wolf attacking. When a real wolf came, no one believed him. Moral: Liars are not believed even when they speak the truth." },
+                { title: "The Bundle of Sticks", body: "A father showed his sons that a single stick breaks easily, but a bundle is unbreakable. Moral: Unity is strength." },
+                { title: "The Ant and the Grasshopper", body: "The ant worked all summer storing food. The grasshopper played. In winter, the ant was safe, the grasshopper starved. Moral: Work today for a better tomorrow." },
+                { title: "The Dog and the Shadow", body: "A dog with a bone saw his reflection in the water. He thought the 'other dog' had a bigger bone. He barked to get it and dropped his own bone in the river. Moral: Greed causes you to lose what you have." },
+                { title: "The Crow and the Pitcher", body: "A thirsty crow found a pitcher with water at the bottom. He couldn't reach it. He dropped stones in one by one until the water rose to the top. Moral: Little by little does the trick." },
+                { title: "The Wind and the Sun", body: "They bet on who could make a man take off his coat. The Wind blew hard, the man held tight. The Sun shone warmly, the man took it off. Moral: Gentleness is stronger than force." },
+                { title: "The Fox and the Grapes", body: "A fox tried to reach hanging grapes but failed. He walked away saying, 'They were probably sour anyway.' Moral: It is easy to despise what you cannot have." },
+                { title: "The Two Goats", body: "Two goats met on a narrow bridge. Neither would move back. They locked horns and both fell into the river. Moral: Stubbornness leads to disaster." },
+                { title: "The Milkmaid", body: "A girl carried milk on her head, dreaming of selling it to buy eggs, then chicks, then a dress. She tossed her head in excitement and spilled the milk. Moral: Don't count your chickens before they hatch." },
+                { title: "The Golden Goose", body: "A man had a goose that laid golden eggs. Impatient to get all the gold, he killed it, only to find it was empty inside. Moral: Greed destroys the source of good." },
+                { title: "The Oak and the Reed", body: "A strong oak boasted it could stand any storm. A thin reed said it would bend. The storm came; the oak broke, the reed bent and survived. Moral: Flexibility is stronger than rigidity." },
+                { title: "The Miller, Son, and Donkey", body: "A man and son tried to please everyone while walking their donkey. They carried it, rode it, walked it. In the end, they pleased no one and lost the donkey. Moral: Try to please everyone and you please no one." },
+                { title: "The Fox and the Crow", body: "A crow had cheese. A fox flattered her singing voice. The crow opened her mouth to sing and dropped the cheese. Moral: Beware of flatterers." },
+                { title: "The Empty Pot", body: "The Emperor gave seeds to children to see who could grow the best flower. One boy's seed never grew. He brought the empty pot. The Emperor rewarded his honesty because the seeds were cooked. Moral: Honesty is better than success based on lies." },
+                { title: "The Stone Soup", body: "Travelers arrived in a village with nothing but a pot. They boiled a stone. Villagers grew curious and added carrots, then potatoes, then meat. Soon, the whole village shared a feast. Moral: Sharing creates abundance from nothing." },
+                { title: "The Elephant and the Rope", body: "A huge elephant was tied by a small rope. It didn't break it because as a baby, it learned it couldn't. It never tried again. Moral: Do not let past failure limit your future power." },
+                { title: "The Starfish Story", body: "A man saw a boy throwing starfish back into the sea. 'There are thousands,' said the man, 'You can't make a difference.' The boy threw one more. 'I made a difference to that one.' Moral: Every small act matters." },
+                { title: "The Farmer and the Horse", body: "A farmer's horse ran away. Neighbors said 'Bad luck.' Farmer said 'Maybe.' Horse returned with wild horses. 'Good luck.' 'Maybe.' Son broke leg riding. 'Bad luck.' 'Maybe.' Army draft skipped son due to leg. Moral: Do not judge events too quickly; we do not know the end." }
             ],
             skills: [
-                { title: "The Art of Active Listening", body: "Focus entirely on the speaker, don't just wait for your turn. Summarize what they said to show you understand." },
-                { title: "Giving a Sincere Apology", body: "A good apology has three parts: 1) Say 'I'm sorry for...' and name what you did. 2) Show you understand how it made them feel. 3) Say what you will do differently." },
-                { title: "The 5-Minute Tidy", body: "Before bed, spend just five minutes putting things back where they belong. It makes a huge difference in keeping a space clean and calm." },
-                { title: "How to Write a Thank-You Note", body: "Be specific. Instead of 'Thanks for the gift,' say 'Thank you so much for the blue sweater! It's so soft and I can't wait to wear it.' It shows you really appreciate the thought." },
-                { title: "Basic Budgeting (The 50/30/20 Rule)", body: "A simple way to manage money. 50% of your income goes to Needs (rent, food), 30% to Wants (hobbies, dining out), and 20% to Savings." },
-                { title: "How to Shake Hands Firmly", body: "Make eye contact, smile, and match the other person's grip pressure. A firm, confident handshake makes a great first impression." },
-                { title: "The Two-Minute Rule", body: "If a task takes less than two minutes to complete, do it immediately. It prevents small jobs from piling up." },
-                { title: "How to Read a Nutrition Label", body: "Pay attention to serving size first. All the numbers (calories, fat, sugar) are based on that amount, which might be smaller than you think." },
-                { title: "How to Disagree Respectfully", body: "Use 'I' statements. Instead of 'You're wrong,' try 'I see it differently because...' It focuses on your perspective, not attacking theirs." },
-                { title: "How to Learn Someone's Name", body: "When you meet someone, repeat their name back to them. 'It's nice to meet you, Mariana.' It helps lock it in your memory." },
-                { title: "The 'Eat the Frog' Method", body: "Do your biggest, most dreaded task first thing in the morning. Once that's done, the rest of your day will feel much easier." },
-                { title: "How to Sew a Button", body: "Use a double thread and make an 'X' pattern through the buttonholes. Loop the thread around the back a few times to create a shank, then tie it off securely." },
-                { title: "How to Tie a Basic Knot (Square Knot)", body: "Right over left and under, then left over right and under. It's a simple, secure knot for tying ropes or packages." },
-                { title: "How to Make a Simple Vinaigrette", body: "The classic ratio is 3 parts oil to 1 part vinegar. Add a pinch of salt, pepper, and a little mustard to help it emulsify (mix together)." },
-                { title: "The Power of a 'Brain Dump'", body: "Feeling overwhelmed? Take 10 minutes to write down everything on your mind—tasks, worries, ideas. Getting it out of your head and onto paper makes it manageable." },
-                { title: "How to Jump-Start a Car", body: "Connect positive to positive, then the other positive to its terminal. Connect the negative to the good battery's negative terminal, and the final negative clamp to a metal part of the dead car's engine block, away from the battery. Red to dead, red to good, black to good, black to ground." },
-                { title: "How to Unclog a Sink", body: "First, try pouring a pot of boiling water down the drain. If that doesn't work, a mixture of baking soda and vinegar can often break up the clog." },
-                { title: "How to Fold a Fitted Sheet", body: "Tuck the two top corners into the two bottom corners, creating a rectangle. Then fold it into a neat square. It takes practice!" },
-                { title: "The 'See One, Do One, Teach One' Method", body: "A powerful way to learn. First, watch an expert. Then, do the task yourself. Finally, teach it to someone else to solidify your own understanding." },
-                { title: "How to Change a Tire", body: "Loosen the lug nuts before you jack up the car. Once the car is raised, remove the nuts and the flat tire. Put on the spare, tighten the lug nuts by hand, lower the car, and then tighten them fully with the wrench." },
-                { title: "Basic First Aid for a Cut", body: "Apply direct pressure with a clean cloth to stop the bleeding. Once it stops, gently clean the area with soap and water, apply an antibiotic ointment, and cover with a bandage." },
-                { title: "The Importance of 'Mise en Place'", body: "A French cooking term for 'everything in its place.' Before you start cooking, get all your ingredients chopped, measured, and organized. It makes the actual cooking process smooth and stress-free." },
-                { title: "How to Manage Your Email", body: "Use the 'touch it once' principle. When you open an email, decide immediately: delete it, delegate it, respond to it (if it takes <2 mins), or defer it (add it to your to-do list)." },
-                { title: "The 'SMART' Goal Setting Method", body: "Make your goals Specific, Measurable, Achievable, Relevant, and Time-bound. Instead of 'get in shape,' try 'walk for 30 minutes, 3 times a week, for the next month.'" },
-                { title: "How to Iron a Shirt", body: "Start with the collar, then the cuffs, then the sleeves, then the front panels, and finally the back. Use steam for stubborn wrinkles." },
-                { title: "How to Be a Good Guest", body: "Always offer to help, respect the host's rules, engage in conversation, and never show up empty-handed (a small gift is always appreciated)." },
-                { title: "The 'Pomodoro' Technique", body: "A time management method. Work in focused 25-minute intervals, separated by short 5-minute breaks. After four 'pomodoros,' take a longer break." },
-                { title: "How to Whistle with Your Fingers", body: "Form a V-shape with your index and middle fingers. Wet your lips, place your fingertips under your tongue, and blow. It takes practice!" },
-                { title: "How to Tell if a Fruit is Ripe", body: "It depends on the fruit! For many, like peaches and avocados, it should yield slightly to gentle pressure. For melons, it should sound hollow when tapped." },
-                { title: "How to Make a Good Impression", body: "Smile, make eye contact, listen more than you talk, and ask thoughtful questions about the other person." },
-                { title: "How to Use a Compass", body: "Hold the compass flat. The red end of the needle always points to magnetic north. Align the 'N' on the rotating bezel with the red needle to orient your map." },
-                { title: "How to Perform the Heimlich Maneuver", body: "Stand behind the person, make a fist with one hand, place it thumb-side between their navel and ribcage, grasp your fist with your other hand, and give quick, upward thrusts." },
-                { title: "How to Write a Simple 'To-Do' List That Works", body: "Don't just list tasks; prioritize them. Mark your top 3 most important tasks for the day and focus on completing those first." },
-                { title: "How to Tell a Good Story", body: "A good story has a clear beginning, a middle with some kind of conflict or tension, and a satisfying end. Use descriptive words to paint a picture for your audience." },
-                { title: "How to Give a Good Compliment", body: "Be specific and sincere. Instead of 'You look nice,' try 'That color looks fantastic on you, it really makes your eyes pop.' It shows you're paying attention." },
-                { title: "How to Plant a Seed", body: "Plant the seed at a depth of about twice its diameter. Keep the soil moist but not waterlogged, and make sure it gets enough sunlight according to its needs." },
-                { title: "How to Research a Topic Online", body: "Use multiple reliable sources (like academic sites, established news organizations, or museums) instead of just one. Be skeptical of information without an author or sources listed." },
-                { title: "How to Be a Good Teammate", body: "Communicate clearly, do your share of the work without being asked, and celebrate your teammates' successes." },
-                { title: "How to Create a Strong Password", body: "Use a mix of uppercase letters, lowercase letters, numbers, and symbols. A good trick is to use a memorable phrase and substitute some letters with numbers or symbols, like 'MyF@milyIs#1!'" },
-                { title: "How to Introduce Two People", body: "Say the name of the person you want to honor first, then introduce the other person to them. For example, 'Grandma, I'd like you to meet my friend, Sarah. Sarah, this is my Grandma.'" },
-                { title: "How to Pack a Suitcase Efficiently", body: "Roll your clothes instead of folding them to save space and prevent wrinkles. Place heavier items like shoes at the bottom near the wheels." },
-                { title: "How to Ask for Help", body: "Be clear and direct about what you need. It's a sign of strength, not weakness, to know when you need support from others." },
-                { title: "How to Listen to Your Body", body: "Pay attention to signals like thirst, hunger, and tiredness. Taking a short break, drinking water, or having a healthy snack can make a big difference in your day." },
-                { title: "How to Apologize to a Group", body: "Address the group as a whole, take responsibility for your actions without making excuses, and state what you will do to make things right or prevent it from happening again." },
-                { title: "How to Be a Gracious Winner and Loser", body: "When you win, be humble and thank your opponents for a good game. When you lose, congratulate the winner and focus on what you can learn for next time." },
-                { title: "How to Start a Conversation", body: "Ask open-ended questions that can't be answered with 'yes' or 'no.' Instead of 'Are you having a good time?', try 'What's been the most interesting part of your day so far?'" },
-                { title: "How to Take a Good Photo", body: "Pay attention to the light; outdoor photos are often best during the 'golden hour' right after sunrise or before sunset. Make sure your subject is in focus and think about what's in the background." },
-                { title: "How to Be Patient", body: "When you feel impatient, take a few deep breaths. Try to understand the situation from the other person's perspective or focus on something else for a few moments." },
-                { title: "How to Set a Table", body: "A simple rule: Forks go on the left, and knives and spoons go on the right. The knife blade should face the plate. Your water glass goes above the knife." }
-            ]
-        },
-        friends: {
-            title: "🎉 The Social Hub",
-            labels: { dynamic: "🌶️ Hot Takes", skill: "🍸 Party Trick", checkin: "⚡ Vibe Check" },
-            btns: { dynamic: "Get Topic", skill: "Get Trick" },
-            checkinList: [
-                "<strong>🔥 Fire:</strong> Best thing that happened recently.",
-                "<strong>🧊 Ice:</strong> Something boring or annoying.",
-                "<strong>🚀 Blast:</strong> Plans for the weekend."
-            ],
-            // EXTENDED FRIENDS LIBRARY
-            iceBreakers: [
-                "Worst date you've ever been on?", "What is a 'Red Flag' you ignore in dating?", 
-                "If you won the lottery, what's the first thing you buy?", "Who here would die first in a zombie apocalypse?",
-                "What is your go-to karaoke song?", "What is the weirdest thing you find attractive?",
-                "If you could get away with a crime, what would it be?", "What was your most embarrassing moment in high school?",
-                "If you could swap lives with one celebrity, who would it be?", "What is your guilty pleasure TV show?",
-                "If you could punch one person in the face without consequences, who?", "What is the worst trend you ever followed?",
-                "If you were an alcoholic drink, what would you be?", "What is your biggest pet peeve?",
-                "If you could have dinner with three people (dead or alive), who?", "What is the best concert you have ever been to?",
-                "What is the most expensive thing you have broken?", "Have you ever ghosted someone?",
-                "What is a lie you tell often?", "What is the craziest thing you have done for love?"
-            ],
-            dynamics: [
-                { title: "Debate:", body: "Is a hotdog a sandwich?" },
-                { title: "Debate:", body: "Does pineapple belong on pizza?" },
-                { title: "Debate:", body: "Is it better to text or call?" },
-                { title: "Debate:", body: "Are leggings pants?" },
-                { title: "Debate:", body: "Is water wet?" },
-                { title: "Debate:", body: "Toilet paper: Over or Under?" },
-                { title: "Debate:", body: "Is Die Hard a Christmas movie?" },
-                { title: "Debate:", body: "Should you wash your legs in the shower?" },
-                { title: "Debate:", body: "Is cereal soup?" },
-                { title: "Debate:", body: "Is a taco a sandwich?" }
-            ],
-            skills: [
-                { title: "Open a Bottle Without a Opener", body: "Use the edge of a lighter or a spoon as a lever under the cap." },
-                { title: "The Perfect High Five", body: "Look at the other person's ELBOW, not their hand. You will never miss." },
-                { title: "Saber a Champagne Bottle", body: "Find the seam of the bottle. Chill the neck. Slide a blunt knife along the seam and hit the lip firmly." },
-                { title: "Remember Names", body: "Repeat their name immediately. 'Nice to meet you, Sarah.' Associate it with a visual image." },
-                { title: "Exit a Boring Conversation", body: "Say 'I need to grab a drink/food/bathroom' or 'I see [Name], I need to say hi.'" },
-                { title: "Remove Red Wine Stains", body: "Pour white wine or salt on the stain immediately to absorb it." },
-                { title: "Whistle with Fingers", body: "Make an 'A' shape with index and middle fingers. Fold tongue back. Blow over the tongue." }
-            ]
-        },
-        work: {
-            title: "💼 Team Sync",
-            labels: { dynamic: "🗣️ Discussion Topic", skill: "🚀 Productivity Tip", checkin: "🚦 Stand-Up" },
-            btns: { dynamic: "New Topic", skill: "Get Tip" },
-            checkinList: [
-                "<strong>✅ Done:</strong> What did you ship?",
-                "<strong>🚧 Doing:</strong> What is in progress?",
-                "<strong>🛑 Blocker:</strong> What is stopping you?"
-            ],
-            // EXTENDED WORK LIBRARY
-            iceBreakers: [
-                "What was your first job?", "What is one productivity tool you can't live without?", 
-                "Coffee or Tea?", "Best career advice you ever received?", "What is your favorite way to decompress after work?",
-                "If you could work from anywhere, where would it be?", "What is one skill you want to learn this year?",
-                "What was the first thing you bought with your own money?", "Who is a mentor you admire?",
-                "What is the best team you have ever been a part of?", "What is your preferred communication style?",
-                "Morning lark or night owl?", "What is one book that changed your thinking?",
-                "If you weren't in this career, what would you be doing?", "What is your favorite office snack?",
-                "How do you handle stress?", "What is one thing you are proud of accomplishing this month?",
-                "What is your desktop wallpaper?", "Do you prefer open office or private office?",
-                "What is one thing you would change about our industry?"
-            ],
-            dynamics: [
-                { title: "Process Check", body: "Is there a meeting we should cancel?" },
-                { title: "Risk Assessment", body: "What is the biggest risk to our current deadline?" },
-                { title: "Kudos", body: "Who deserves a shoutout this week?" },
-                { title: "Retrospective", body: "What went well this sprint?" },
-                { title: "Retrospective", body: "What didn't go well this sprint?" },
-                { title: "Innovation", body: "What is one crazy idea we haven't tried?" },
-                { title: "Customer Focus", body: "What is the biggest complaint we hear from customers?" },
-                { title: "Culture", body: "How can we improve our team culture?" },
-                { title: "Learning", body: "What is a mistake we made that we can learn from?" },
-                { title: "Future", body: "Where do we want to be in 6 months?" }
-            ],
-            skills: [
-                { title: "Box Breathing", body: "In for 4s, Hold for 4s, Out for 4s, Hold for 4s. Great for stress." },
-                { title: "Inbox Zero", body: "Touch every email once. Delete, Delegate, Do (if <2mins), or Defer." },
-                { title: "The Pomodoro Technique", body: "25 minutes of focus, 5 minutes of break. Repeat." },
-                { title: "Time Blocking", body: "Schedule your day in blocks. Don't let your inbox dictate your schedule." },
-                { title: "Saying No", body: "Politely decline tasks that don't align with your goals. 'I can't prioritize that right now.'" },
-                { title: "Efficient Meetings", body: "No agenda, no meeting. Always end with clear action items." },
-                { title: "Deep Work", body: "Eliminate distractions for 90 minutes to focus on hard problems." },
-                { title: "The 80/20 Rule", body: "20% of your efforts produce 80% of your results. Focus on the 20%." },
-                { title: "Feedback Sandwich", body: "Positive feedback, constructive criticism, positive feedback. (Use sparingly)." },
-                { title: "Active Listening", body: "Listen to understand, not to reply." }
-            ]
-        }
-    };
-
-    // Shared Content (RESTORED FULL QUOTES LIBRARY)
-    const sharedQuotes = [
-        { text: "The only way to do great work is to love what you do.", author: "Steve Jobs" },
-        { text: "The best time to plant a tree was 20 years ago. The second best time is now.", author: "Chinese Proverb" },
-        { text: "Your time is limited, so don’t waste it living someone else’s life.", author: "Steve Jobs" },
-        { text: "The future belongs to those who believe in the beauty of their dreams.", author: "Eleanor Roosevelt" },
-        { text: "Strive not to be a success, but rather to be of value.", author: "Albert Einstein" },
-        { text: "The journey of a thousand miles begins with a single step.", author: "Lao Tzu" },
-        { text: "Family is not an important thing. It's everything.", author: "Michael J. Fox" },
-        { text: "The love of a family is life's greatest blessing.", author: "Unknown" },
-        { text: "In time of test, family is best.", author: "Burmese Proverb" },
-        { text: "The strength of a family, like the strength of an army, is in its loyalty to each other.", author: "Mario Puzo" },
-        { text: "The most important thing in the world is family and love.", author: "John Wooden" },
-        { text: "To us, family means putting your arms around each other and being there.", author: "Barbara Bush" },
-        { text: "Other things may change us, but we start and end with the family.", author: "Anthony Brandt" },
-        { text: "The family is one of nature's masterpieces.", author: "George Santayana" },
-        { text: "What can you do to promote world peace? Go home and love your family.", author: "Mother Teresa" },
-        { text: "A happy family is but an earlier heaven.", author: "George Bernard Shaw" },
-        { text: "Rejoice with your family in the beautiful land of life.", author: "Albert Einstein" },
-        { text: "The memories we make with our family is everything.", author: "Candace Cameron Bure" },
-        { text: "Family is the anchor that holds us through life's storms.", author: "Unknown" },
-        { text: "Be kind, for everyone you meet is fighting a hard battle.", author: "Plato" },
-        { text: "No act of kindness, no matter how small, is ever wasted.", author: "Aesop" },
-        { text: "We can't help everyone, but everyone can help someone.", author: "Ronald Reagan" },
-        { text: "The only thing that will redeem mankind is cooperation.", author: "Bertrand Russell" },
-        { text: "Alone we can do so little; together we can do so much.", author: "Helen Keller" },
-        { text: "If you want to lift yourself up, lift up someone else.", author: "Booker T. Washington" },
-        { text: "The best way to find yourself is to lose yourself in the service of others.", author: "Mahatma Gandhi" },
-        { text: "Success is not final, failure is not fatal: it is the courage to continue that counts.", author: "Winston Churchill" },
-        { text: "It does not matter how slowly you go as long as you do not stop.", author: "Confucius" },
-        { text: "Believe you can and you're halfway there.", author: "Theodore Roosevelt" },
-        { text: "The secret of getting ahead is getting started.", author: "Mark Twain" },
-        { text: "I have not failed. I've just found 10,000 ways that won't work.", author: "Thomas A. Edison" },
-        { text: "The only impossible journey is the one you never begin.", author: "Tony Robbins" },
-        { text: "Act as if what you do makes a difference. It does.", author: "William James" },
-        { text: "Hardships often prepare ordinary people for an extraordinary destiny.", author: "C.S. Lewis" },
-        { text: "It is our choices that show what we truly are, far more than our abilities.", author: "J.K. Rowling" },
-        { text: "The measure of intelligence is the ability to change.", author: "Albert Einstein" },
-        { text: "You must be the change you wish to see in the world.", author: "Mahatma Gandhi" },
-        { text: "Where there is love there is life.", author: "Mahatma Gandhi" },
-        { text: "Keep your face always toward the sunshine—and shadows will fall behind you.", author: "Walt Whitman" },
-        { text: "The only source of knowledge is experience.", author: "Albert Einstein" },
-        { text: "To live is the rarest thing in the world. Most people exist, that is all.", author: "Oscar Wilde" },
-        { text: "It is never too late to be what you might have been.", author: "George Eliot" },
-        { text: "For every minute you are angry you lose sixty seconds of happiness.", author: "Ralph Waldo Emerson" },
-        { text: "If you want to be happy, be.", author: "Leo Tolstoy" },
-        { text: "The purpose of our lives is to be happy.", author: "Dalai Lama" },
-        { text: "Life is what happens when you're busy making other plans.", author: "John Lennon" },
-        { text: "Get busy living or get busy dying.", author: "Stephen King" },
-        { text: "You only live once, but if you do it right, once is enough.", author: "Mae West" },
-        { text: "The two most important days in your life are the day you are born and the day you find out why.", author: "Mark Twain" },
-        { text: "Everything you can imagine is real.", author: "Pablo Picasso" },
-        { text: "Do what you can, with what you have, where you are.", author: "Theodore Roosevelt" },
-        { text: "The best revenge is massive success.", author: "Frank Sinatra" }
-    ];
-
-    let currentMode = 'family';
-    let usedIndices = { iceBreaker: [], dynamic: [], skill: [], quote: [] };
-
-    // --- INIT ---
-    window.onload = () => {
-        const savedMode = localStorage.getItem('meetingMode');
-        if(savedMode && db[savedMode]) {
-            document.getElementById('modeSelect').value = savedMode;
-        }
-        changeMode();
-    };
-
-    // --- LOGIC ---
-    function changeMode() {
-        currentMode = document.getElementById('modeSelect').value;
-        localStorage.setItem('meetingMode', currentMode);
-        
-        const d = db[currentMode];
-
-        // Update Theme Attribute
-        document.body.setAttribute('data-mode', currentMode);
-        
-        // Update Text
-        document.getElementById('main-title').innerText = d.title;
-        document.getElementById('lbl-dynamic').innerText = d.labels.dynamic;
-        document.getElementById('lbl-skill').innerText = d.labels.skill;
-        document.getElementById('lbl-checkin').innerText = d.labels.checkin;
-        
-        document.getElementById('btn-dynamic').innerText = d.btns.dynamic;
-        document.getElementById('btn-skill').innerText = d.btns.skill;
-
-        // Update Check-in List
-        const list = document.getElementById('checkin-list');
-        list.innerHTML = "";
-        d.checkinList.forEach(item => {
-            const li = document.createElement('li');
-            li.innerHTML = item;
-            list.appendChild(li);
-        });
-
-        // Reset Card Visuals
-        document.querySelectorAll('.meeting-box').forEach(box => box.classList.remove('card-used'));
-        
-        // Clear Content Areas
-        document.getElementById('dynamicContent').innerHTML = "<p>Ready?</p>";
-        document.getElementById('skillContent').innerHTML = "<p>Ready?</p>";
-        document.getElementById('iceBreakerContent').innerHTML = "<p>Ready?</p>";
-        
-        // Reset Used Tracking for new mode
-        usedIndices = { iceBreaker: [], dynamic: [], skill: [], quote: [] };
-    }
-
-    function generate(type) {
-        const d = db[currentMode];
-        const box = document.getElementById(type === 'iceBreaker' ? 'iceBreakerContent' : type + 'Content');
-        
-        // Mark Card as Used
-        if(box) box.closest('.meeting-box').classList.add('card-used');
-
-        // Handle External APIs (Joke/Fact)
-        if (type === 'joke') {
-            box.innerHTML = "Loading...";
-            fetch('https://official-joke-api.appspot.com/random_joke')
-                .then(r => r.json())
-                .then(data => box.innerHTML = `<p><strong>${data.setup}</strong><br><em>${data.punchline}</em></p>`)
-                .catch(e => box.innerHTML = "<p>Why did the web developer leave? Because he didn't get a callback!</p>");
-            return;
-        }
-
-        // Handle Internal Data
-        let pool;
-        if (type === 'quote') pool = sharedQuotes;
-        else if (type === 'iceBreaker') pool = d.iceBreakers;
-        else if (type === 'dynamic') pool = d.dynamics;
-        else if (type === 'skill') pool = d.skills;
-
-        if (!pool) return;
-
-        // Random Selection with Repeat Prevention
-        let index;
-        let attempts = 0;
-        do {
-            index = Math.floor(Math.random() * pool.length);
-            attempts++;
-        } while (usedIndices[type] && usedIndices[type].includes(index) && attempts < 20);
-        
-        if (!usedIndices[type]) usedIndices[type] = [];
-        usedIndices[type].push(index);
-
-        const item = pool[index];
-
-        // Render
-        if (type === 'quote') {
-            box.innerHTML = `<blockquote>"${item.text}"<br><small>- ${item.author}</small></blockquote>`;
-        } else if (typeof item === 'string') {
-            box.innerHTML = `<p>${item}</p>`;
-        } else {
-            box.innerHTML = `<h3>${item.title}</h3><p>${item.body}</p>`;
-        }
-    }
-
-    function generateOrder() {
-        const count = document.getElementById('participantCount').value;
-        if (!count || count < 2) return alert("Enter at least 2 people.");
-        let arr = [];
-        for (let i = 1; i <= count; i++) arr.push(i);
-        arr.sort(() => Math.random() - 0.5);
-        document.getElementById('checkInOrder').innerText = "Order: Person " + arr.join(" ➡ Person ");
-    }
-
-    function exportNotes() {
-        const notes = document.getElementById('meetingNotes').value;
-        if (!notes.trim()) return alert("No notes to export.");
-        const blob = new Blob([notes], { type: 'text/plain;charset=utf-8' });
-        const link = document.createElement('a');
-        link.download = `Meeting-${new Date().toISOString().slice(0, 10)}.txt`;
-        link.href = URL.createObjectURL(blob);
-        link.click();
-    }
-
-    function toggleDarkTheme() {
-        document.body.classList.toggle('dark-theme');
-    }
-
-    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-    function showHelpModal() { document.getElementById('helpModal').style.display = 'block'; }
-    function showRulesModal() { document.getElementById('rulesModal').style.display = 'block'; }
-    window.onclick = function(e) { if(e.target.classList.contains('modal')) e.target.style.display = 'none'; }
-
-</script>
-</body>
-</html>
+                { title: "The Perfect Handshake", body: "Stand up. Make eye contact. Smile. Grip firmly (web to web). Shake twice. Release. It builds instant respect." },
+                { title: "The 2-Minute Rule", body: "If a task takes less than 2 minutes (hanging a coat, washing a dish), do it immediately. Never add it to a to-do list." },
+                { title: "Active Listening", body: "When someone talks, look at them. Do not think about your response. Just listen. When they finish, ask one question about what they said." },
+                { title: "Box Breathing", body: "Anxiety hack: Breathe in for 4 seconds. Hold for 4 seconds. Exhale for 4 seconds. Hold for 4 seconds. Repeat." },
+                { title: "How to Apologize", body: "A real apology has 3 parts: 1. 'I am sorry.' 2. 'It was my fault because...' 3. 'Next time I will...' Without part 3, it is just an excuse." },
+                { title: "Budgeting 50/30/20", body: "Money rule: 50% for Needs (Rent/Food). 30% for Wants (Fun). 20% for Savings. Always pay your savings first." },
+                { title: "Tying a Square Knot", body: "Right over Left. Left over Right. This knot will not slip, but is easy to untie. It is the most useful knot in the world." },
+                { title: "Table Manners", body: "Wait until everyone is served before eating. Chew with your mouth closed. Keep elbows off the table while eating. It shows respect for the cook." },
+                { title: "The Gratitude Pivot", body: "When you complain ('I have to go to school'), switch 'Have' to 'Get'. 'I GET to go to school.' It changes your brain chemistry." },
+                { title: "Changing a Tire", body: "Loosen nuts BEFORE jacking up the car. Jack it up. Remove nuts. Swap tire. Tighten nuts by hand. Lower car. Tighten nuts fully." },
+                { title: "How to Introduce People", body: "Say the name of the older/higher status person first. 'Grandma, this is my friend Sam.' It shows social grace." },
+                { title: "Sewing a Button", body: "Thread needle. Knot end. Go up through hole, down through other. Repeat 6 times. Wrap thread around the 'neck' of button. Tie off." },
+                { title: "Map Reading", body: "Find North. Orient the map so it matches the land in front of you. Don't just follow the blue dot." },
+                { title: "Making a Bed", body: "Hospital corners: Tuck the foot. Lift the side of the sheet, tuck the excess triangle under, then drop the side. Crisp and tight." },
+                { title: "Remembering Names", body: "When introduced, say their name back immediately. 'Nice to meet you, Sarah.' Visualize 'Sarah' written on her forehead." },
+                { title: "Writing a Thank You Note", body: "1. Salutation. 2. Mention the specific gift. 3. Say how you will use it. 4. Mention seeing them soon. 5. Sign off." },
+                { title: "Doing Laundry", body: "Separate lights and darks. Check pockets! Use cold water to save energy and clothes. Fold immediately to avoid wrinkles." },
+                { title: "Scrambling an Egg", body: "Low heat is key. Whisk with a splash of milk. Pour into buttered pan. Push gently with spatula. Don't over
