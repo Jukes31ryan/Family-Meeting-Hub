@@ -9,61 +9,161 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
     
     <style>
-        :root { --transition: all 0.2s ease-in-out; }
+        :root { --transition: all 0.3s ease; }
 
-        /* --- THEME: HOUSEHOLD (Cozy & Warm) --- */
-        body[data-mode="family"] { --bg: #FFF8F0; --surface: #FFFFFF; --text-main: #4A403A; --text-sub: #8C8179; --accent: #FF7E5F; --accent-glow: rgba(255, 126, 95, 0.15); --border: #F0E6DD; }
-        /* --- THEME: SOCIAL (Night & Neon) --- */
-        body[data-mode="friends"] { --bg: #0F172A; --surface: #1E293B; --text-main: #F8FAFC; --text-sub: #94A3B8; --accent: #C084FC; --accent-glow: rgba(192, 132, 252, 0.15); --border: #334155; }
-        /* --- THEME: TEAM (Clean & Professional) --- */
-        body[data-mode="work"] { --bg: #F1F5F9; --surface: #FFFFFF; --text-main: #0F172A; --text-sub: #64748B; --accent: #0284C7; --accent-glow: rgba(2, 132, 199, 0.1); --border: #E2E8F0; }
+        /* --- THEMES --- */
+        body[data-mode="family"] { 
+            --bg-gradient: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            --bg-gradient-accent: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+            --glass-bg: #ffffff;
+            --text-main: #2d3436;
+            --text-sub: #636e72;
+            --accent: #e17055;
+            --border: #dfe6e9;
+            --card-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        body[data-mode="friends"] { 
+            --bg-gradient: linear-gradient(to top, #1e3c72 0%, #2a5298 100%);
+            --bg-gradient-accent: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+            --glass-bg: #0f172a;
+            --text-main: #f1f2f6;
+            --text-sub: #a4b0be;
+            --accent: #00d2d3;
+            --border: #2f3542;
+            --card-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        body[data-mode="work"] { 
+            --bg-gradient: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
+            --bg-gradient-accent: linear-gradient(to right, #434343 0%, #000000 100%);
+            --glass-bg: #ffffff;
+            --text-main: #2c3e50;
+            --text-sub: #7f8c8d;
+            --accent: #2980b9;
+            --border: #bdc3c7;
+            --card-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Outfit', sans-serif; background-color: var(--bg); color: var(--text-main); min-height: 100vh; padding: 40px 20px; transition: var(--transition); display: flex; flex-direction: column; }
         
-        /* Adjusted width for a perfect 3x3 layout on desktop */
-        .container { max-width: 1250px; margin: 0 auto; flex-grow: 1; width: 100%; }
+        body { 
+            font-family: 'Outfit', sans-serif; 
+            background: var(--bg-gradient);
+            color: var(--text-main); 
+            min-height: 100vh; 
+            padding: 30px; 
+            transition: var(--transition); 
+            display: flex; 
+            flex-direction: column;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; flex-grow: 1; width: 100%; }
 
         header { text-align: center; margin-bottom: 40px; }
-        h1 { font-weight: 800; font-size: 3rem; margin-bottom: 10px; letter-spacing: -1px; transition: var(--transition); }
-        .subtitle { font-size: 1.1rem; color: var(--text-sub); margin-bottom: 30px; transition: var(--transition); }
+        
+        h1 { 
+            font-weight: 800; 
+            font-size: 3.5rem; 
+            margin-bottom: 5px; 
+            letter-spacing: -1px; 
+            background: var(--bg-gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+        
+        .subtitle { font-size: 1.1rem; color: var(--text-sub); margin-bottom: 25px; font-weight: 600; }
 
-        .mode-tabs { background: var(--surface); border: 1px solid var(--border); display: inline-flex; padding: 6px; border-radius: 50px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: var(--transition); }
-        .tab-btn { background: transparent; border: none; padding: 10px 30px; border-radius: 30px; cursor: pointer; font-family: 'Outfit', sans-serif; font-weight: 600; color: var(--text-sub); transition: var(--transition); font-size: 1rem; }
-        .tab-btn.active { background: var(--accent); color: white; box-shadow: 0 4px 10px var(--accent-glow); }
+        /* TABS */
+        .mode-tabs { background: var(--glass-bg); padding: 5px; border-radius: 50px; display: inline-flex; border: 1px solid var(--border); box-shadow: var(--card-shadow); }
+        .tab-btn { background: transparent; border: none; padding: 10px 30px; border-radius: 30px; cursor: pointer; font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--text-sub); transition: var(--transition); font-size: 0.95rem; }
+        .tab-btn.active { background: var(--accent); color: white; box-shadow: 0 2px 10px rgba(0,0,0,0.15); }
 
-        /* THE 3x3 GRID */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 24px; }
-        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 25px; display: flex; flex-direction: column; transition: var(--transition); box-shadow: 0 4px 10px rgba(0,0,0,0.03); height: 100%; }
-        .card:hover { transform: translateY(-4px); box-shadow: 0 10px 25px rgba(0,0,0,0.08); border-color: var(--accent); }
+        /* GRID LAYOUT */
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 20px; 
+        }
+
+        /* CARD STYLES */
+        .card { 
+            background: var(--glass-bg); 
+            border: 1px solid var(--border); 
+            border-radius: 20px; 
+            padding: 25px; 
+            display: flex; 
+            flex-direction: column; 
+            transition: var(--transition); 
+            box-shadow: var(--card-shadow); 
+            height: 100%; 
+            position: relative;
+            overflow: hidden;
+        }
+        .card:hover { transform: translateY(-4px); border-color: var(--accent); }
+
+        /* FEATURE CARD (Full Width) */
+        .card-feature {
+            grid-column: 1 / -1;
+            background: var(--glass-bg);
+            border: 2px solid var(--accent);
+            padding: 40px;
+        }
+        .card-feature h3 { font-size: 1.5rem !important; }
+        .card-feature p { font-size: 1.2rem !important; line-height: 1.7 !important; }
+
+        /* FOOTER CARD (Full Width) */
+        .card-footer {
+            grid-column: 1 / -1;
+            text-align: center;
+            opacity: 0.9;
+        }
 
         .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-        .tag { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; color: var(--accent); background: var(--accent-glow); padding: 6px 12px; border-radius: 8px; transition: var(--transition); }
+        .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 800; color: var(--accent); opacity: 0.8; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-        .card-content { flex-grow: 1; margin-bottom: 25px; font-size: 1.1rem; line-height: 1.6; color: var(--text-main); min-height: 80px; display: flex; align-items: center; animation: fadeIn 0.3s ease-out; }
+        .card-content { flex-grow: 1; margin-bottom: 25px; font-size: 1.05rem; line-height: 1.5; color: var(--text-main); min-height: 60px; display: flex; align-items: center; animation: fadeIn 0.4s ease-out; }
         .card-content p { width: 100%; }
-        .card-content h3 { color: var(--accent); margin-bottom: 6px; font-size: 1.2rem; transition: var(--transition); }
-        .quote-style { border-left: 4px solid var(--accent); padding-left: 15px; font-style: italic; font-weight: 600; transition: var(--transition); }
+        .card-content h3 { color: var(--accent); margin-bottom: 10px; font-size: 1.2rem; font-weight: 800; }
+        
+        /* CHEAT CODE BOX STYLE */
+        .cheat-code-box {
+            background: rgba(0,0,0,0.03);
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 0 8px 8px 0;
+            font-weight: 600;
+        }
 
         .check-list { list-style: none; width: 100%; }
-        .check-list li { padding: 8px 12px; background: var(--bg); margin-bottom: 8px; border-radius: 8px; font-size: 0.95rem; color: var(--text-main); transition: var(--transition); }
+        .check-list li { padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 0.95rem; color: var(--text-main); display: flex; gap: 10px; }
+        .check-list li:last-child { border-bottom: none; }
 
-        .btn { background: var(--surface); border: 2px solid var(--border); color: var(--text-main); width: 100%; padding: 14px; border-radius: 12px; font-weight: 700; font-family: 'Outfit', sans-serif; cursor: pointer; transition: var(--transition); }
-        .btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
+        /* BUTTONS */
+        .btn { background: var(--text-main); color: var(--glass-bg); border: none; width: 100%; padding: 12px; border-radius: 10px; font-weight: 700; font-family: 'Outfit', sans-serif; cursor: pointer; transition: var(--transition); }
+        .btn:hover { background: var(--accent); color: white; }
         .btn:active { transform: scale(0.98); }
 
-        .counter-group { display: flex; align-items: center; gap: 10px; width: 100%; }
-        .counter-btn { width: 45px; height: 45px; border-radius: 12px; background: var(--bg); border: 1px solid var(--border); font-size: 1.5rem; font-weight: bold; color: var(--text-main); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition); }
-        .counter-btn:hover { background: var(--accent-glow); color: var(--accent); border-color: var(--accent); }
-        .counter-val { flex-grow: 1; text-align: center; font-size: 1.2rem; font-weight: 800; }
+        .counter-group { display: flex; align-items: center; gap: 10px; width: 100%; margin-top: auto;}
+        .counter-btn { width: 40px; height: 40px; border-radius: 10px; background: transparent; border: 2px solid var(--border); font-size: 1.2rem; font-weight: bold; color: var(--text-main); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition); }
+        .counter-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .counter-val { flex-grow: 1; text-align: center; font-size: 1.1rem; font-weight: 800; }
 
-        .revenue-banner { margin-top: 50px; text-align: center; padding: 20px; border-top: 1px solid var(--border); font-size: 0.95rem; color: var(--text-sub); transition: var(--transition); }
-        .revenue-banner a { color: var(--accent); font-weight: 700; text-decoration: none; padding: 5px 10px; background: var(--accent-glow); border-radius: 6px; margin-left: 5px; transition: var(--transition); }
-        .revenue-banner a:hover { opacity: 0.8; }
+        /* SPONSOR */
+        .sponsor-area { margin-top: 40px; text-align: center; padding-bottom: 20px; }
+        .sponsor-link { color: var(--accent); font-weight: 700; text-decoration: none; margin-left: 5px; opacity: 0.8; }
+        .sponsor-link:hover { text-decoration: underline; opacity: 1; }
 
-        @media (max-width: 600px) { h1 { font-size: 2.2rem; } .mode-tabs { width: 100%; display: flex; } .tab-btn { flex: 1; padding: 10px 0; } }
+        @media (max-width: 768px) { 
+            h1 { font-size: 2.5rem; } 
+            .mode-tabs { width: 100%; display: flex; } 
+            .tab-btn { flex: 1; padding: 10px 0; } 
+            .card-feature { padding: 25px; }
+        }
     </style>
 </head>
 <body data-mode="family">
@@ -97,21 +197,21 @@
                     <button class="counter-btn" onclick="adjustCount(-1)">-</button>
                     <span class="counter-val" id="count-display">4 People</span>
                     <button class="counter-btn" onclick="adjustCount(1)">+</button>
-                    <button class="btn" style="width: auto; padding: 0 20px; height: 45px;" onclick="generateOrder()">Order</button>
+                    <button class="btn" style="width: auto;" onclick="generateOrder()">Order</button>
                 </div>
-                <div id="checkInOrder" style="margin-top: 10px; font-weight: bold; color: var(--accent); font-size: 0.95rem; text-align: center;"></div>
+                <div id="checkInOrder" style="margin-top: 10px; font-weight: bold; color: var(--accent); font-size: 0.9rem; text-align: center;"></div>
             </div>
 
             <div class="card">
                 <div class="card-header"><span class="tag" id="tag-3">Wisdom</span></div>
-                <div class="card-content" id="content-quote"><p class="quote-style">Loading...</p></div>
+                <div class="card-content" id="content-quote"><p>Loading...</p></div>
                 <button class="btn" onclick="generate('quote')" id="btn-3">Next Quote</button>
             </div>
 
-            <div class="card">
+            <div class="card card-feature">
                 <div class="card-header"><span class="tag" id="tag-4">Lesson</span></div>
-                <div class="card-content" id="content-dynamic"><p>Loading...</p></div>
-                <button class="btn" onclick="generate('dynamic')" id="btn-4">Next Lesson</button>
+                <div class="card-content" id="content-dynamic" style="display: block;"><p>Loading...</p></div>
+                <button class="btn" onclick="generate('dynamic')" id="btn-4" style="width: auto; margin: 0 auto; display: block; padding: 15px 40px;">Read Next Lesson</button>
             </div>
 
             <div class="card">
@@ -126,90 +226,55 @@
                 <button class="btn" onclick="generate('skill')" id="btn-6">Next Skill</button>
             </div>
 
-            <div class="card">
-                <div class="card-header"><span class="tag" id="tag-7">Connection</span></div>
-                <div class="card-content" id="content-praise"><p>Loading...</p></div>
-                <button class="btn" onclick="generate('praise')" id="btn-7">Next Prompt</button>
-            </div>
-
-            <div class="card">
-                <div class="card-header"><span class="tag" id="tag-8">Focus</span></div>
-                <div class="card-content" id="content-goal"><p>Loading...</p></div>
-                <button class="btn" onclick="generate('goal')" id="btn-8">Next Goal</button>
-            </div>
-
-            <div class="card">
-                <div class="card-header"><span class="tag" id="tag-9">Wonder</span></div>
+            <div class="card card-footer">
+                <div class="card-header"><span class="tag">Wonder</span></div>
                 <div class="card-content" id="content-fact"><p>Loading...</p></div>
-                <button class="btn" onclick="generateFact()">Get Fact</button>
+                <button class="btn" style="width: auto; margin: 0 auto; display: block;" onclick="generateFact()">Get Fact</button>
             </div>
 
         </div>
 
-        <div class="revenue-banner">
+        <div class="sponsor-area">
             <span id="ad-text">Put the screens away.</span> 
-            <a href="https://amazon.com" target="_blank" id="ad-link">Get the Physical Deck on Amazon &rarr;</a>
+            <a href="https://amazon.com" target="_blank" class="sponsor-link" id="ad-link">Get the Physical Deck &rarr;</a>
         </div>
     </div>
 
 <script>
-    // ==========================================
-    // THE 3x3 MASTER DATABASE 
-    // ==========================================
     const db = {
         family: {
             title: "Home Deck",
             subtitle: "Meaningful conversations, no screens required.",
-            tags: ["Ice Breaker", "Rose, Bud, Thorn", "Wisdom", "Cheat Code", "Humor", "Life Skill", "Gratitude", "Look Ahead", "Cool Fact"],
-            btns: ["Next Question", "Pick Order", "Next Quote", "Read Lesson", "Next Joke", "Next Skill", "Show Appreciation", "Set Goal"],
+            tags: ["Ice Breaker", "Rose, Bud, Thorn", "Wisdom", "Life Cheat Code", "Humor", "Life Skill"],
+            btns: ["Next Question", "Pick Order", "Next Quote", "Read Lesson", "Next Joke", "Next Skill"],
             checkin: ["🌹 <strong>Rose:</strong> Best part of your week.", "🌵 <strong>Thorn:</strong> Hardest part of your week.", "🌱 <strong>Bud:</strong> What are you looking forward to?"],
-            
-            // NEW CATEGORY: CONNECTION / GRATITUDE
-            praise: [
-                "Give a compliment to the person sitting to your left.",
-                "Who in this family helped you the most this week?",
-                "What is one thing you appreciate about Mom/Dad?",
-                "Share one thing that made you proud of your sibling/child this week.",
-                "Thank someone at this table for a specific thing they did.",
-                "What is your favorite memory made with the person across from you?"
-            ],
-            // NEW CATEGORY: GOALS / FOCUS
-            goal: [
-                "What is one bad habit we should try to stop this week?",
-                "What is a fun activity we should plan for the upcoming weekend?",
-                "What is one chore that has been ignored that we need to tackle?",
-                "What is a personal goal you have for this week at school/work?",
-                "What's for dinner tomorrow? Let's vote.",
-                "Is there anything on the calendar this week that we need to prepare for?"
-            ],
-
             iceBreakers: [
-                "If you could have a walk-up song play every time you entered a room, what would it be?", "What's a small thing that happened this week that made you happy?", "If you could instantly become an expert in one thing, what would it be?", "What's the most interesting thing you've learned recently?", "If you could talk to animals, which animal would you have the most interesting conversation with?", "What's a fictional world you would love to live in for a week?", "If you had to describe our family as a type of food, what would we be?", "What's a weird food combination that you secretly love?", "If you could add a new, magical room to our house, what would it be?", "What movie or TV show character do you think is most like you?", "If you could design a new planet, what would be its main feature?", "What's the best smell in the world?", "What's a family tradition you think we should start?", "If you could create a new holiday, what would it celebrate?", "What's the funniest thing that's ever happened to you?", "If you could have any job for just one day, what would you choose?", "What's something you're really proud of that you did this week?", "If you could have any mythical creature as a pet, what would it be?", "What's the most beautiful place you've ever seen?", "If you could solve one of the world's mysteries, which one would you pick?", "What's one thing you hope to accomplish in the next year?", "If you could have a super-power that was only useful for doing chores, what would it be?", "What's your favorite thing about the person sitting to your left?", "If you could be a movie director, what kind of movie would you make?", "What's a word you love the sound of?", "If you could have a dinner party with three characters from books, who would you invite?", "What's a simple pleasure that always makes your day better?", "If our family was a sports team, what would our team name be?", "What's the best piece of advice you've ever received?", "If you could only listen to three songs for the rest of your life, what would they be?", "What's something you're looking forward to this month?", "If you could have a conversation with any historical figure, who would it be?", "What's the most interesting dream you've had recently?", "If you had to eat one color of food for a whole day, which color would you choose?", "What's something that always makes you laugh without fail?", "If you could be a world-famous expert on any topic, what would it be?", "What's your favorite memory of just our family?", "If you could design a new ride for an amusement park, what would it do?", "What's a small act of kindness you saw or did this week?", "If you could instantly learn any musical instrument, which one would you pick?", "What's the best part about being your current age?", "If you could have a magical portal in your room, where would it lead?", "What's a question you wish people would ask you more often?", "If you could create a new flavor of chips or ice cream, what would it be?", "What's a skill you think everyone in our family should learn?", "If you could be the main character in any video game, which one would it be?", "If you could combine two animals to make one new super-animal, what would you combine?", "What's a food that you think is seriously underrated?", "If you could have any view from your bedroom window, what would it be?", "What's something you've done that you thought was impossible at first?", "What's something you're really good at that might surprise people?", "If you could have any artist's musical talent, whose would you choose?", "If you could ask your future self one question, what would it be?"
+                "Would you rather have the ability to fly or be invisible?", "What is the worst haircut you've ever had?", "If you could swap lives with a dog for a day, would you?", "What is one rule you would make everyone in the world follow?", "If you had $1000 to spend only on fun, what would you do?", "What is the best board game we own?", "If you could eat dessert for breakfast every day, what would it be?", "What is your favorite holiday and why?", "If you could visit any time in history, when would it be?", "What is the best gift you have ever given someone?", "What is your favorite spot in our house?", "If you could invent a robot, what would it do?", "What is the bravest thing you have ever done?", "If you had to be a vegetable, which one would you be?", "What is your favorite sound in the morning?", "What is one thing that makes you feel really safe?", "If you could repaint your bedroom any color, what would it be?", "What is the best joke you've ever heard?", "Who is your role model?", "If you could be famous for a talent, what would it be?", "What is the grossest food you've ever tasted?", "If you could stay up all night, what would you do?", "What is your favorite thing to do on a rainy day?", "What is the hardest thing about being your age?", "If you were stranded on a desert island, what 3 things would you bring?", "What is one chore you actually don't mind doing?", "If you could change your name, what would it be?", "What is your favorite family vacation memory?", "What is the best thing about the weekend?", "If you could talk to any inanimate object, what would it be?", "What is the most helpful thing someone has done for you?", "What is your favorite season?", "If you could have a lifetime supply of one drink, what would it be?", "What is the best movie you've seen this year?", "What is one thing you are looking forward to about growing up/getting older?", "If you could live in any video game, which one would it be?", "What is your favorite subject to learn about?", "If you could have a third arm, where would you put it?", "What is the silliest fear you have?", "If you could be any age for a week, what age would you choose?", "What is your favorite thing about your sibling/parent?", "If you could make one thing disappear from the world, what would it be?", "What is the best dream you've ever had?", "If you could only eat pizza or tacos for the rest of your life, which one?", "What is one thing that always puts you to sleep?", "If you could have a secret treehouse, what would be inside?", "What is your favorite animal at the zoo?", "If you could control the weather, what would you make it do today?", "What is one thing that makes our family unique?", "If our house was a TV show, what would it be called?", "What is the most embarrassing thing your parents do?", "What's the best smell in the world?", "If you could have a walk-up song play every time you entered a room, what would it be?", "If you could add a new, magical room to our house, what would it be?", "What movie or TV show character do you think is most like you?", "What's the funniest thing that's ever happened to you?"
             ],
             quotes: [
                 { text: "Family is not an important thing. It's everything.", author: "Michael J. Fox" }, { text: "The love of a family is life's greatest blessing.", author: "Unknown" }, { text: "In time of test, family is best.", author: "Burmese Proverb" }, { text: "The strength of a family, like the strength of an army, is in its loyalty to each other.", author: "Mario Puzo" }, { text: "What can you do to promote world peace? Go home and love your family.", author: "Mother Teresa" }, { text: "A happy family is but an earlier heaven.", author: "George Bernard Shaw" }, { text: "No act of kindness, no matter how small, is ever wasted.", author: "Aesop" }, { text: "Alone we can do so little; together we can do so much.", author: "Helen Keller" }, { text: "If you want to lift yourself up, lift up someone else.", author: "Booker T. Washington" }, { text: "Do what you can, with what you have, where you are.", author: "Theodore Roosevelt" }, { text: "Family means no one gets left behind or forgotten.", author: "David Ogden Stiers" }, { text: "Home is where you are loved the most and act the worst.", author: "Marjorie Pay Hinckley" }, { text: "The memories we make with our family is everything.", author: "Candace Cameron Bure" }, { text: "Family is a life jacket in the stormy sea of life.", author: "J.K. Rowling" }, { text: "It does not matter how slowly you go as long as you do not stop.", author: "Confucius" }
             ],
             dynamics: [ 
-                { title: "The Level 99 Boss", body: "Alex played video games all week instead of working on his big school project. By Sunday night, he was exhausted and his project looked terrible.<br><br><strong>🔑 Cheat Code:</strong> Defeat the big monster (your homework) <i>before</i> you play the game." },
-                { title: "The Broken Controller", body: "Sam accidentally broke his brother's controller and blamed the dog. His brother used his allowance to buy a new one. Sam felt so guilty he couldn't enjoy playing anymore.<br><br><strong>🔑 Cheat Code:</strong> The truth hurts for a minute. A lie hurts for a week." },
-                { title: "The Sideline Superstar", body: "Mia didn't pass the ball during the soccer game because she wanted to score the winning goal herself. She missed. Her team lost.<br><br><strong>🔑 Cheat Code:</strong> You can only win the championship if you trust your teammates." },
-                { title: "The Missing Hoodie", body: "Jake lost his favorite hoodie because he threw it on the floor instead of hanging it up. He was freezing at the bus stop the next morning.<br><br><strong>🔑 Cheat Code:</strong> Take care of your things, and your things will take care of you." },
-                { title: "The Interrupter", body: "Leo was so excited to tell his story that he kept interrupting his dad. Dad got frustrated and walked away. Leo never got to tell his story.<br><br><strong>🔑 Cheat Code:</strong> If you want to be heard, you have to let other people finish talking first." },
-                { title: "The Boring Dinner", body: "Maya complained about having chicken for dinner again. Instead of getting mad, her mom just took the plate away. Maya went to bed hungry.<br><br><strong>🔑 Cheat Code:</strong> Complain about what you have, and you might just lose it." },
-                { title: "The 1% Rule", body: "Liam wanted to do 50 pushups. He tried to do them all at once on day one and pulled a muscle. His friend did 5 a day for 10 days and got way stronger.<br><br><strong>🔑 Cheat Code:</strong> Slow and steady always beats fast and reckless." },
-                { title: "The Rumor Mill", body: "Chloe repeated a rumor about the new kid at school to fit in with the popular group. The new kid found out and cried. Chloe didn't look cool; she just looked mean.<br><br><strong>🔑 Cheat Code:</strong> Be a shield for others, not a sword." },
-                { title: "The Half-Done Chore", body: "Max rushed through sweeping the floor so he could go outside. His dad made him come back in and do it again. Max missed the whole afternoon.<br><br><strong>🔑 Cheat Code:</strong> Do it right the first time, or you'll be doing it twice." },
-                { title: "The Forgotten Password", body: "Ava used the same easy password for everything. A hacker got into her account and deleted her game save files. Years of work were gone.<br><br><strong>🔑 Cheat Code:</strong> Shortcuts today often lead to disasters tomorrow." },
-                { title: "The Angry Text", body: "Eli got mad at his friend and sent a mean text message. Once he hit 'send', he couldn't take it back. His friend didn't speak to him for a month.<br><br><strong>🔑 Cheat Code:</strong> Anger is temporary. Written words are permanent. Cool down before you type." },
-                { title: "The Heavy Backpack", body: "Zoe carried all her textbooks home every day just in case she needed them. Her back hurt so much she couldn't play outside.<br><br><strong>🔑 Cheat Code:</strong> Don't carry burdens you don't need to. Plan ahead." },
-                { title: "The 'I'm Bored' Trap", body: "When Owen said 'I'm bored', his parents gave him a sponge and told him to clean the baseboards. He suddenly found something fun to do.<br><br><strong>🔑 Cheat Code:</strong> Only boring people get bored. Use your imagination." },
-                { title: "The Silent Helper", body: "Lily picked up the trash in the hallway even though she didn't drop it. A teacher saw her and gave her a 'Good Citizen' award the next day.<br><br><strong>🔑 Cheat Code:</strong> Character is what you do when you think no one is looking." },
-                { title: "The Phone Zombie", body: "Caleb stared at his phone during the entire family movie night. The next day, he realized he didn't remember any of the jokes everyone was laughing about.<br><br><strong>🔑 Cheat Code:</strong> The best memories happen in the real world, not on a screen." },
-                { title: "The Blame Game", body: "When the lamp broke, the brothers blamed each other. Because neither would admit it, they both got grounded. <br><br><strong>🔑 Cheat Code:</strong> Taking responsibility is hard, but it earns you respect." },
-                { title: "The Unpacked Bag", body: "Emma left her lunchbox in her backpack all weekend. On Monday, it smelled like rotten milk and she had to use a brown paper bag.<br><br><strong>🔑 Cheat Code:</strong> Deal with small messes immediately before they become big, smelly problems." },
-                { title: "The Bad Mood", body: "Jackson had a bad day at school and took it out on his little brother at home. Now two people were having a bad day.<br><br><strong>🔑 Cheat Code:</strong> Emotions are contagious. Spread the good ones, contain the bad ones." },
-                { title: "The Missed Alarm", body: "Noah stayed up until 2 AM watching videos. He slept through his alarm, missed the bus, and had to walk to school in the rain.<br><br><strong>🔑 Cheat Code:</strong> Sleep is a weapon. If you don't charge your battery, you can't win the day." },
-                { title: "The Easy Path", body: "Mia copied her friend's math homework to save time. When the test came, she didn't know how to solve any of the problems and failed.<br><br><strong>🔑 Cheat Code:</strong> The hard way is the only way that actually makes you smarter." }
+                { title: "The Level 99 Paladin", body: "Alex grinded for 14 hours straight to get the 'Golden Armor' in his favorite video game. He finally got it, but he realized he had failed his math test and his room smelled like old cheese. The next day, the game server reset and he lost the armor anyway. <div class='cheat-code-box'>🔑 <strong>Cheat Code:</strong> Real life progress (grades, skills, health) is saved forever. Video game progress can be deleted in a second. Prioritize your main character (You).</div>" },
+                { title: "The Million Dollar Dust", body: "A wealthy man bought a Ferrari but never changed the oil because it was 'too expensive.' One day, the engine exploded. He had to sell the broken car for scrap metal. His neighbor drove a cheap Honda Civic for 20 years because he took care of it. <div class='cheat-code-box'>🔑 <strong>Cheat Code:</strong> Taking care of your things is the ultimate money hack. Maintenance is cheaper than replacement.</div>" },
+                { title: "The Green Cloud", body: "Sam refused to shower because 'he didn't smell that bad.' He didn't notice the smell because he was used to it. But when he sat next to his crush on the bus, she moved three seats away without saying a word. <div class='cheat-code-box'>🔑 <strong>Cheat Code:</strong> You are 'nose blind' to your own scent. Trust your parents when they say you need soap. Hygiene is social survival.</div>" },
+                { title: "The Silent Assassin", body: "During the basketball game, Mia yelled at her teammate for missing a shot. Her teammate felt so bad that she played worse. They lost by one point. If Mia had high-fived her instead, they might have won. <div class='cheat-code-box'>🔑 <strong>Cheat Code:</strong> Your attitude is a teammate. If you are negative, you are playing for the other team.</div>" },
+                { title: "The Two Wolves", body: "An old grandfather told his grandson: 'Inside of me there are two wolves fighting. One is anger, jealousy, and ego. The other is kindness, peace, and love.' The boy asked, 'Which one wins?' The grandfather smiled. <div class='cheat-code-box'>🔑 <strong>Cheat Code:</strong> The wolf that wins is the one you feed. Be careful what thoughts you focus on.</div>" },
+                { title: "The Magic Word", body: "Ben demanded a ride to the mall. His dad said no. Ten minutes later, Ben asked again, but said 'Please' and offered to take out the trash first. His dad grabbed the keys. <div class='cheat-code-box'>🔑 <strong>Cheat Code:</strong> Negotiation works better than demanding. Offer value to get value.</div>" },
+                { title: "The Screen Zombie", body: "The family went to the beach, but Tyler spent the whole time looking at TikToks of *other* people at the beach. Years later, he looked at photos of the trip and didn't remember the waves, only his screen. <div class='cheat-code-box'>🔑 <strong>Cheat Code:</strong> Be where your feet are. Don't trade a real memory for a digital one.</div>" },
+                { title: "The Broken Lamp", body: "Zack broke a lamp and blamed the cat. His parents found out and grounded him for a week—not for the lamp, but for the lie. If he had told the truth, they would have just asked him to clean it up. <div class='cheat-code-box'>🔑 <strong>Cheat Code:</strong> The truth stings for a minute. A lie rots forever. Dealing with consequences is easier than maintaining a lie.</div>" },
+                { title: "The Empty Plate", body: "Sarah complained that dinner was 'gross' and refused to eat. Her mom didn't argue; she just put the food in the fridge. At 9 PM, Sarah was starving, but the kitchen was closed. Breakfast tasted amazing the next day. <div class='cheat-code-box'>🔑 <strong>Cheat Code:</strong> Gratitude turns what we have into enough. Complaining turns what we have into nothing.</div>" },
+                { title: "The Copycat", body: "Leo copied his friend's homework to save time for gaming. But on the test, there was no friend to copy from. He stared at the paper, sweating, realizing he had cheated himself out of learning. <div class='cheat-code-box'>🔑 <strong>Cheat Code:</strong> Shortcuts are actually longcuts. Doing the work is the only way to own the skill.</div>" },
+                { title: "The Angry Text", body: "In a moment of rage, text-messaged his best friend something cruel. He deleted it immediately, but his friend had already screenshotted it. He couldn't 'undo' the hurt feelings. <div class='cheat-code-box'>🔑 <strong>Cheat Code:</strong> Anger makes you stupid. Never send a message when your heart is beating fast.</div>" },
+                { title: "The Heavy Backpack", body: "Every time someone was mean to Chloe, she held onto it like a rock in her backpack. Soon, she was so weighed down by grudges she couldn't enjoy her walk. She decided to dump the rocks and forgive them. She felt light as a feather. <div class='cheat-code-box'>🔑 <strong>Cheat Code:</strong> Forgiveness isn't for *them*. It's to lighten *your* load.</div>" },
+                { title: "The Snooze Button", body: " Noah hit snooze 4 times. He missed the bus, forgot his lunch, and arrived at school sweating and stressed. His whole day was ruined before 8:00 AM. <div class='cheat-code-box'>🔑 <strong>Cheat Code:</strong> You win the morning, you win the day. Get up when the alarm rings.</div>" },
+                { title: "The Rich Man's Trash", body: "A billionaire was asked what he would pay to be 15 years old again, but poor. He said 'Everything I have.' You have something money can't buy: Time. <div class='cheat-code-box'>🔑 <strong>Cheat Code:</strong> You are already rich in time. Don't waste your fortune on boredom.</div>" },
+                { title: "The Comparison Trap", body: "Emma felt ugly because she didn't look like the influencers on Instagram. She didn't realize they took 500 photos, used 3 filters, and have professional lighting. She was comparing her 'behind the scenes' to their 'highlight reel.' <div class='cheat-code-box'>🔑 <strong>Cheat Code:</strong> Comparison is the thief of joy. The internet is not real life.</div>" },
+                { title: "The Compound Effect", body: "If you get 1% better at something every day, you will be 37 times better by the end of the year. If you get 1% worse, you drop to almost zero. <div class='cheat-code-box'>🔑 <strong>Cheat Code:</strong> Small habits, done consistently, create massive superpowers.</div>" },
+                { title: "The Echo Canyon", body: "A boy shouted 'I hate you!' into a canyon. The canyon shouted back 'I hate you!' He got scared. His dad told him to shout 'I believe in you!' The canyon shouted back 'I believe in you!' <div class='cheat-code-box'>🔑 <strong>Cheat Code:</strong> The world gives you back exactly what you put out. Radiate positivity.</div>" },
+                { title: "The Two Gardeners", body: "One gardener watered his plants when he felt like it. The other watered them every single morning, even when he was tired. The first garden died. The second garden fed the whole neighborhood. <div class='cheat-code-box'>🔑 <strong>Cheat Code:</strong> Motivation is fickle. Discipline is reliable. Do it even when you don't want to.</div>" },
+                { title: "The Bored Genius", body: "Isaac Newton was sent home from school during a plague. He was bored sitting under a tree. An apple fell. He used that boredom to discover Gravity and change physics forever. <div class='cheat-code-box'>🔑 <strong>Cheat Code:</strong> Boredom is not a problem; it's an opportunity for your brain to create.</div>" },
+                { title: "The Broken Fence", body: "A boy had a bad temper. His father told him to hammer a nail into the fence every time he got angry. Eventually, he stopped getting angry. His father said 'pull the nails out.' The holes remained. <div class='cheat-code-box'>🔑 <strong>Cheat Code:</strong> You can say sorry, but words leave scars. Be careful with your temper.</div>" }
             ],
             skills: [
                 { title: "The Perfect Handshake", body: "Stand up. Make eye contact. Smile. Grip firmly (web to web). Shake twice. Release. It builds instant respect." }, { title: "The 2-Minute Rule", body: "If a task takes less than 2 minutes (hanging a coat, washing a dish), do it immediately. Never add it to a to-do list." }, { title: "Active Listening", body: "When someone talks, look at them. Do not think about your response. Just listen. When they finish, ask one question about what they said." }, { title: "Box Breathing", body: "Anxiety hack: Breathe in for 4 seconds. Hold for 4 seconds. Exhale for 4 seconds. Hold for 4 seconds. Repeat." }, { title: "How to Apologize", body: "A real apology has 3 parts: 1. 'I am sorry.' 2. 'It was my fault because...' 3. 'Next time I will...' Without part 3, it is just an excuse." }, { title: "Budgeting 50/30/20", body: "Money rule: 50% for Needs (Rent/Food). 30% for Wants (Fun). 20% for Savings. Always pay your savings first." }, { title: "Table Manners", body: "Wait until everyone is served before eating. Chew with your mouth closed. Keep elbows off the table while eating. It shows respect for the cook." }, { title: "The Gratitude Pivot", body: "When you complain ('I have to go to school'), switch 'Have' to 'Get'. 'I GET to go to school.' It changes your brain chemistry." }, { title: "Changing a Tire", body: "Loosen nuts BEFORE jacking up the car. Jack it up. Remove nuts. Swap tire. Tighten nuts by hand. Lower car. Tighten nuts fully." }, { title: "How to Introduce People", body: "Say the name of the older/higher status person first. 'Grandma, this is my friend Sam.' It shows social grace." }, { title: "Making a Bed", body: "Hospital corners: Tuck the foot. Lift the side of the sheet, tuck the excess triangle under, then drop the side. Crisp and tight." }, { title: "Remembering Names", body: "When introduced, say their name back immediately. 'Nice to meet you, Sarah.' Visualize 'Sarah' written on her forehead." }, { title: "Writing a Thank You Note", body: "1. Salutation. 2. Mention the specific gift. 3. Say how you will use it. 4. Mention seeing them soon. 5. Sign off." }, { title: "Doing Laundry", body: "Separate lights and darks. Check pockets! Use cold water to save energy and clothes. Fold immediately to avoid wrinkles." }, { title: "Unclogging a Sink", body: "Pour boiling water first. Then 1/2 cup baking soda, followed by 1/2 cup vinegar. Cover for 10 mins. Flush with boiling water." }, { title: "Treating a Burn", body: "Run cool (not freezing) water over it for 10 minutes. Do not pop blisters. Cover loosely with sterile gauze." }, { title: "Checking Oil", body: "Park on flat ground. Pull dipstick, wipe clean. Re-insert fully. Pull out and check if oil is between min/max lines." }, { title: "Turning off Water Valve", body: "If a pipe bursts, find the main valve (usually in basement/garage). Turn clockwise until tight. Open faucets to drain." }
@@ -220,28 +285,11 @@
         friends: {
             title: "The Hangout",
             subtitle: "Less scrolling, more talking.",
-            tags: ["Vibe Check", "Highs & Lows", "Wisdom", "Hot Takes", "Humor", "Party Trick", "Roast/Toast", "Next Up", "Cool Fact"],
-            btns: ["Next Question", "Pick Order", "Next Quote", "Next Debate", "Next Joke", "Next Trick", "Show Love", "What's Next"],
+            tags: ["Vibe Check", "Highs & Lows", "Wisdom", "Hot Takes", "Humor", "Party Trick"],
+            btns: ["Next Question", "Pick Order", "Next Quote", "Next Debate", "Next Joke", "Next Trick"],
             checkin: ["🔥 <strong>Fire:</strong> Best thing recently.", "🧊 <strong>Ice:</strong> Something annoying.", "🍺 <strong>Drink:</strong> What are we drinking?"],
-            
-            praise: [
-                "Toast to someone at this table who accomplished something big recently.",
-                "Roast: Who is the most likely to get arrested, and why?",
-                "Give a shoutout to the person who makes the group chat the funniest.",
-                "Who has the best fashion sense in the room right now?",
-                "Compliment the host on something specific.",
-                "Name one thing you admire about the person across from you."
-            ],
-            goal: [
-                "What is one place we need to travel to together?",
-                "When is the next hangout, and who is hosting?",
-                "What movie or TV show should we all watch before we meet up next?",
-                "What is one hobby or activity we should try as a group?",
-                "Who is ordering the Uber eats tonight?"
-            ],
-
             iceBreakers: [
-                "Worst date you've ever been on?", "What is a 'Red Flag' you ignore in dating?", "If you won the lottery, what's the first thing you buy?", "Who here would die first in a zombie apocalypse?", "What is your go-to karaoke song?", "What is the weirdest thing you find attractive?", "If you could get away with a crime, what would it be?", "What was your most embarrassing moment in high school?", "If you could swap lives with one celebrity, who would it be?", "What is your guilty pleasure TV show?", "What is the worst trend you ever followed?", "If you were an alcoholic drink, what would you be?", "What is your biggest pet peeve?", "If you could have dinner with three people (dead or alive), who?", "What is the best concert you have ever been to?", "Have you ever ghosted someone?", "What is a lie you tell often?", "What is the craziest thing you have done for love?", "What is your unpopular food opinion?", "Who is your celebrity crush?", "What's the worst advice you've ever taken?", "Have you ever been caught doing something you shouldn't?", "What is your signature dance move?", "What is the most illegal thing you have done?", "Who was your first crush?", "What conspiracy theory do you secretly believe?", "Who in this room is the best liar?", "What is your most toxic trait?", "What is the worst text you've ever accidentally sent?", "If you had a warning label, what would it say?", "What is the longest you've gone without showering?", "What is your favorite curse word?", "What is a song that instantly makes you cry?", "What is your biggest irrational fear?", "If you could read one person's mind, whose?", "If you had to delete all apps but three, which three stay?", "What is your strategy in a horror movie?", "If you could be instantly fluent in any language, which one?", "Who is the last person you stalked on social media?", "What is your go-to order at a dive bar?", "If we were in a bank heist, what would your role be?"
+                "Worst date you've ever been on?", "What is a 'Red Flag' you ignore in dating?", "If you won the lottery, what's the first thing you buy?", "Who here would die first in a zombie apocalypse?", "What is your go-to karaoke song?", "What is the weirdest thing you find attractive?", "If you could get away with a crime, what would it be?", "What was your most embarrassing moment in high school?", "If you could swap lives with one celebrity, who would it be?", "What is your guilty pleasure TV show?", "What is the worst trend you ever followed?", "If you were an alcoholic drink, what would you be?", "What is your biggest pet peeve?", "If you could have dinner with three people (dead or alive), who?", "What is the best concert you have ever been to?", "Have you ever ghosted someone?", "What is a lie you tell often?", "What is the craziest thing you have done for love?", "What is your unpopular food opinion?", "Who is your celebrity crush?", "What's the worst advice you've ever taken?", "Have you ever been caught doing something you shouldn't?", "What is the strangest rumor you've heard about yourself?", "What is your signature dance move?", "If you had to marry one person in this room, who?", "What is the most illegal thing you have done?", "What is a secret talent you have?", "Who was your first crush?", "What is your worst travel story?", "If you were arrested, what would we assume you did?", "What is the most impulsive thing you've ever bought?", "What conspiracy theory do you secretly believe?", "Who in this room is the best liar?", "What is your most toxic trait?", "What is the worst text you've ever accidentally sent?", "If you had a warning label, what would it say?", "What is the longest you've gone without showering?", "What is your favorite curse word?", "What is a song that instantly makes you cry?", "What is your biggest irrational fear?", "If you could read one person's mind, whose?", "If you had to delete all apps but three, which three stay?", "What is your strategy in a horror movie?", "If you could be instantly fluent in any language, which one?", "Who is the last person you stalked on social media?", "What is your go-to order at a dive bar?", "If we were in a bank heist, what would your role be?"
             ],
             quotes: [
                 { text: "Friendship is born at that moment when one person says to another, 'What! You too?'", author: "C.S. Lewis" }, { text: "Good times and crazy friends make the best memories.", author: "Unknown" }, { text: "A true friend is someone who thinks that you are a good egg even though he knows that you are slightly cracked.", author: "Bernard Meltzer" }, { text: "There is nothing better than a friend, unless it is a friend with chocolate.", author: "Linda Grayson" }, { text: "It is the privilege of friendship to talk nonsense, and to have her nonsense respected.", author: "Charles Lamb" }, { text: "Friends are the family you choose.", author: "Jess C. Scott" }, { text: "A good friend will help you move. But a best friend will help you move a dead body.", author: "Jim Hayes" }
@@ -258,25 +306,9 @@
         work: {
             title: "Team Sync",
             subtitle: "Align the crew, solve problems, win the day.",
-            tags: ["Warm Up", "Check-In", "Mindset", "Discussion", "Humor", "Growth", "Kudos", "Focus", "Trivia"],
-            btns: ["Next Question", "Pick Order", "Inspire Me", "Next Topic", "Break Tension", "Next Tip", "Give Props", "Set Goal"],
+            tags: ["Warm Up", "Check-In", "Mindset", "Discussion", "Humor", "Growth"],
+            btns: ["Next Question", "Pick Order", "Inspire Me", "Next Topic", "Break Tension", "Next Tip"],
             checkin: ["✅ <strong>Done:</strong> A win or completed task from yesterday.", "🎯 <strong>Focus:</strong> Your #1 priority for today.", "🚧 <strong>Roadblock:</strong> Anything slowing you down or in your way?"],
-            
-            praise: [
-                "Who deserves a shoutout today for going above and beyond?",
-                "Name a teammate who helped you out when you were overwhelmed this week.",
-                "What is one quiet contribution someone made recently that we missed?",
-                "Give props to someone who brought a great attitude to work today.",
-                "Who on the team solved a difficult problem recently?"
-            ],
-            goal: [
-                "What is the ONE thing we must accomplish before Friday?",
-                "If we can only fix one roadblock this week, which should it be?",
-                "What metric or goal are we focusing on improving today?",
-                "What does a 'winning day' look like for the team today?",
-                "Is everyone clear on their top priority for the week?"
-            ],
-
             iceBreakers: [ 
                 "What was the very first job you ever had?", "What is one tool or item you absolutely need to do your job well?", "Best career/life advice you ever received?", "What is your favorite way to decompress after a long shift?", "What is one skill you want to learn this year?", "What was the first thing you bought with your own money?", "Who is a leader or mentor you admire?", "What is the best team you have ever been a part of?", "What is your favorite work snack?", "How do you handle a highly stressful moment?", "What is one thing you are proud of accomplishing this month?", "What is one thing you would change about our industry as a whole?", "What is the most valuable lesson you've learned from a mistake?", "If you could have a 3-day weekend or higher pay, which would you pick?", "What music or podcast keeps you going during the day?", "What is a hill you are willing to die on professionally?", "What is the best professional compliment you've received?", "What is your biggest pet peeve in the workplace?", "If you could automate one part of your job, what would it be?", "What is the most useful app on your phone for work?", "What is the best team outing you've ever been on?", "What is your 'weird' productivity hack?", "What is the most difficult challenge you overcame at work?", "What is your favorite way to celebrate a big win?", "Who on the team makes you laugh the most?", "If you could work from any city in the world, where?", "What is one non-work hobby you are passionate about?", "What is the most important quality in a good manager?"
             ],
@@ -284,7 +316,7 @@
                 { text: "Individual commitment to a group effort—that is what makes a team work.", author: "Vince Lombardi" }, { text: "Alone we can do so little; together we can do so much.", author: "Helen Keller" }, { text: "It is not the strongest of the species that survives, but the most adaptable.", author: "Charles Darwin" }, { text: "Amateurs sit and wait for inspiration, the rest of us just get up and go to work.", author: "Stephen King" }, { text: "Coming together is a beginning. Keeping together is progress. Working together is success.", author: "Henry Ford" }, { text: "Success is not final, failure is not fatal: it is the courage to continue that counts.", author: "Winston Churchill" }, { text: "The secret of change is to focus all of your energy, not on fighting the old, but on building the new.", author: "Socrates" }, { text: "You don't have to be great to start, but you have to start to be great.", author: "Zig Ziglar" }, { text: "The only way to do great work is to love what you do.", author: "Steve Jobs" }, { text: "In the middle of difficulty lies opportunity.", author: "Albert Einstein" }
             ],
             dynamics: [ 
-                { title: "Safety & Wellbeing", body: "Is everyone feeling 100% today? Are there any hazards or burnout risks we need to address?" }, { title: "The Roadblock", body: "Is there a process, rule, or lack of resources that is making our jobs harder than they need to be?" }, { title: "Retrospective", body: "What went really well yesterday/last week?" }, { title: "Retrospective", body: "What is one thing that didn't go well recently, and what did we learn from it?" }, { title: "Client / Customer Focus", body: "What is the biggest complaint or request we hear from the people we serve?" }, { title: "Culture", body: "How can we make it more fun to work here?" }, { title: "Future", body: "Where do we want this team to be in 6 months?" }, { title: "Communication", body: "Are we communicating too much, too little, or just right?" }, { title: "Onboarding", body: "If someone started working here tomorrow, what is the first thing they need to know?" }, { title: "Priorities", body: "Are we focused on the right things right now, or are we getting distracted by the small stuff?" }, { title: "The Wishlist", body: "If we had budget for one new piece of equipment, tool, or software, what should it be?" }, { title: "Feedback", body: "What is one thing leadership can do better to support you?" }, { title: "Knowledge Sharing", body: "What is a shortcut or trick you learned recently that everyone should know?" }, { title: "Bottleneck", body: "Where do our tasks or projects usually get stuck?" }, { title: "Success Metrics", body: "How do we know if we had a 'good day'?" }, { title: "Morale", body: "On a scale of 1-5, what is the stress level of the team today?" }, { title: "Open Floor", body: "Does anyone have anything on their mind they need to get off their chest?" }
+                { title: "Safety & Wellbeing", body: "Is everyone feeling 100% today? Are there any hazards or burnout risks we need to address?" }, { title: "The Roadblock", body: "Is there a process, rule, or lack of resources that is making our jobs harder than they need to be?" }, { title: "Kudos", body: "Who deserves a shoutout today for going above and beyond?" }, { title: "Retrospective", body: "What went really well yesterday/last week?" }, { title: "Retrospective", body: "What is one thing that didn't go well recently, and what did we learn from it?" }, { title: "Innovation", body: "What is one crazy idea we haven't tried yet?" }, { title: "Client / Customer Focus", body: "What is the biggest complaint or request we hear from the people we serve?" }, { title: "Culture", body: "How can we make it more fun to work here?" }, { title: "Future", body: "Where do we want this team to be in 6 months?" }, { title: "Communication", body: "Are we communicating too much, too little, or just right?" }, { title: "Onboarding", body: "If someone started working here tomorrow, what is the first thing they need to know?" }, { title: "Priorities", body: "Are we focused on the right things right now, or are we getting distracted by the small stuff?" }, { title: "The Wishlist", body: "If we had budget for one new piece of equipment, tool, or software, what should it be?" }, { title: "Feedback", body: "What is one thing leadership can do better to support you?" }, { title: "Knowledge Sharing", body: "What is a shortcut or trick you learned recently that everyone should know?" }, { title: "Bottleneck", body: "Where do our tasks or projects usually get stuck?" }, { title: "Success Metrics", body: "How do we know if we had a 'good day'?" }, { title: "Morale", body: "On a scale of 1-5, what is the stress level of the team today?" }, { title: "Open Floor", body: "Does anyone have anything on their mind they need to get off their chest?" }
             ],
             skills: [ 
                 { title: "Box Breathing", body: "In for 4s, Hold for 4s, Out for 4s, Hold for 4s. Instantly lowers heart rate in stressful situations." }, { title: "The 2-Minute Rule", body: "If a quick task takes less than 2 minutes (taking out trash, sending a text), do it instantly. Don't let small things pile up." }, { title: "De-escalation", body: "When someone is angry, lower your voice, validate their frustration ('I hear you'), and focus on the solution, not the blame." }, { title: "Saying 'No' Politely", body: "Say: 'I can't prioritize that right now without dropping other balls. Which would you like me to do first?'" }, { title: "Efficient Huddles", body: "No agenda, no meeting. Always end a huddle with clear action items: Who is doing what by when?" }, { title: "Task Batching", body: "Group similar tasks together. Do all your prep work, or all your phone calls, in one block of time to save mental energy." }, { title: "Praise Publicly, Correct Privately", body: "Never discipline or correct a teammate in front of others. Always save it for a private, respectful conversation." }, { title: "Active Listening", body: "Listen to understand, not to reply. Wait 2 seconds after someone finishes speaking before you talk." }, { title: "The Eisenhower Matrix", body: "Sort tasks: Urgent/Important (Do now), Not Urgent/Important (Schedule for later), Urgent/Not Important (Delegate), Neither (Delete)." }, { title: "Lift with Your Legs", body: "Keep your back straight, bend at the hips and knees, and keep the load close to your body. Protect your spine." }, { title: "The 5 Why's", body: "When a problem happens, ask 'Why?' 5 times to get to the root cause, not just the symptom." }, { title: "Eat the Frog", body: "Do your hardest, most dreaded task first thing in the morning. The rest of the day is easy." }, { title: "Clear Communication", body: "BLUF: Bottom Line Up Front. Put the main point in the first sentence, then give details." }, { title: "The Check-Back", body: "When receiving complex instructions, repeat them back in your own words to ensure understanding." }, { title: "Boundary Setting", body: "Protect your time off. Do not check work channels when you are not being paid to work." }, { title: "Keyboard Shortcuts", body: "Learn Ctrl+C, Ctrl+V, Alt+Tab, and Ctrl+Z. It saves hours of mouse-clicking over a year." }, { title: "Clean Workspace", body: "A cluttered physical space creates a cluttered mental state. Reset your space at the end of every shift." }, { title: "The 80/20 Rule", body: "20% of your efforts yield 80% of your results. Focus on the high-impact tasks." }, { title: "Handling Mistakes", body: "Own it immediately. Do not make excuses. Say: 'I made a mistake, here is how I am fixing it.'" }
@@ -294,12 +326,9 @@
         }
     };
 
-    // ==========================================
-    // LOGIC & FUNCTIONALITY
-    // ==========================================
     let currentMode = 'family';
     let participants = 4;
-    let usedIndices = { iceBreaker: [], quote: [], dynamic: [], skill: [], praise: [], goal: [] };
+    let usedIndices = { iceBreaker: [], quote: [], dynamic: [], skill: [] };
 
     window.onload = () => {
         const savedMode = localStorage.getItem('meetingMode');
@@ -322,23 +351,16 @@
         document.getElementById('app-title').innerText = d.title;
         document.getElementById('app-subtitle').innerText = d.subtitle;
         
-        // 9 Cards = 9 Tags
         document.getElementById('tag-1').innerText = d.tags[0];
         document.getElementById('tag-2').innerText = d.tags[1];
         document.getElementById('tag-3').innerText = d.tags[2];
         document.getElementById('tag-4').innerText = d.tags[3];
         document.getElementById('tag-6').innerText = d.tags[5];
-        document.getElementById('tag-7').innerText = d.tags[6]; // Connection
-        document.getElementById('tag-8').innerText = d.tags[7]; // Goals
-        document.getElementById('tag-9').innerText = d.tags[8]; // Fact
         
-        // Buttons
         document.getElementById('btn-1').innerText = d.btns[0];
         document.getElementById('btn-3').innerText = d.btns[2];
         document.getElementById('btn-4').innerText = d.btns[3];
         document.getElementById('btn-6').innerText = d.btns[5];
-        document.getElementById('btn-7').innerText = d.btns[6];
-        document.getElementById('btn-8').innerText = d.btns[7];
 
         const list = document.getElementById('list-checkin');
         list.innerHTML = '';
@@ -352,15 +374,12 @@
         document.getElementById('ad-text').innerText = d.ad_text;
         document.getElementById('ad-link').innerText = d.ad_link;
 
-        usedIndices = { iceBreaker: [], quote: [], dynamic: [], skill: [], praise: [], goal: [] };
+        usedIndices = { iceBreaker: [], quote: [], dynamic: [], skill: [] };
 
-        // INITIAL LOAD: 9 Cards Auto-Populate
         generate('iceBreaker');
         generate('quote');
         generate('dynamic');
         generate('skill');
-        generate('praise');
-        generate('goal');
         generateJoke();
         generateFact();
     }
@@ -373,8 +392,6 @@
         else if (type === 'quote') pool = d.quotes;
         else if (type === 'dynamic') pool = d.dynamics;
         else if (type === 'skill') pool = d.skills;
-        else if (type === 'praise') pool = d.praise;
-        else if (type === 'goal') pool = d.goal;
 
         if (!pool || pool.length === 0) return;
 
@@ -415,7 +432,6 @@
             .catch(() => { newContainer.innerHTML = "<p>Why did the developer go broke? He used up all his cache.</p>"; });
     }
 
-    // THE RESTORED FACT API
     function generateFact() {
         const container = document.getElementById('content-fact');
         const newContainer = container.cloneNode(false);
@@ -425,7 +441,7 @@
         fetch('https://uselessfacts.jsph.pl/random.json?language=en')
             .then(r => r.json())
             .then(data => { newContainer.innerHTML = `<p>${data.text}</p>`; })
-            .catch(() => { newContainer.innerHTML = "<p>Did you know honey never spoils? Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old and still edible.</p>"; });
+            .catch(() => { newContainer.innerHTML = "<p>Honey never spoils. Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old and still edible.</p>"; });
     }
 
     function adjustCount(change) {
