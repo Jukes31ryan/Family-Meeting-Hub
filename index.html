@@ -2,335 +2,531 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>The Meeting Deck</title>
-    <meta name="description" content="A fun space for productive conversations.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Meeting Hub</title>
+    <meta name="description" content="A fun space for productive family conversations.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-    
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <style>
         :root {
-            --bg-color: #121212;
-            --card-bg: #1e1e1e;
-            --text-color: #ffffff;
-            --primary: #FFD700; /* Gold */
-            --accent: #FF6B6B;
+            /* Default Theme: Warm Sunrise */
+            --bg-gradient: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            --glass-bg: rgba(255, 255, 255, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.4);
+            --text-primary: #2d3748;
+            --text-secondary: #4a5568;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --btn-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --btn-text: white;
+            --highlight: #ffd700; /* Gold for Guided Mode */
         }
 
-        /* DYNAMIC THEMES */
-        body[data-theme="family"] { --bg-color: #4C1D95; --primary: #A78BFA; --accent: #F472B6; } /* Purple/Pink */
-        body[data-theme="social"] { --bg-color: #064E3B; --primary: #34D399; --accent: #FBBF24; } /* Green/Gold */
-        body[data-theme="work"]   { --bg-color: #1E3A8A; --primary: #60A5FA; --accent: #38BDF8; } /* Blue/Cyan */
+        /* Dark Theme */
+        body.dark-theme {
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            --glass-bg: rgba(30, 41, 59, 0.8);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --btn-bg: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        /* Nature Theme */
+        body.nature-theme {
+            --bg-gradient: linear-gradient(135deg, #134E5E 0%, #71B280 100%);
+            --glass-bg: rgba(255, 255, 255, 0.8);
+            --text-primary: #1a202c;
+            --btn-bg: #059669;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Space Grotesk', sans-serif;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            transition: background-color 0.5s ease;
-        }
-
-        /* --- THE STAGE (Centerpiece) --- */
-        .stage {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            font-family: 'Nunito', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-primary);
+            min-height: 100vh;
             padding: 20px;
-            perspective: 1000px; /* 3D effect */
+            transition: background 0.5s ease;
         }
 
-        .card-container {
-            width: 100%;
-            max-width: 500px;
-            aspect-ratio: 4/5;
-            position: relative;
-        }
-
-        .card {
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 30px;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s;
-            position: absolute;
-            top: 0; left: 0;
-        }
-
-        .card.active {
-            z-index: 2;
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .card.exit {
-            transform: translateX(-150%) rotate(-20deg);
-            opacity: 0;
-        }
-
-        .card.enter {
-            transform: scale(0.9) translateY(20px);
-            opacity: 0.8;
-            z-index: 1;
-        }
-
-        /* --- TYPOGRAPHY --- */
-        .card-icon { font-size: 3rem; margin-bottom: 20px; color: var(--primary); }
-        .card-category { text-transform: uppercase; letter-spacing: 3px; font-size: 0.9rem; opacity: 0.7; margin-bottom: 20px; }
-        .card-text { font-size: 2rem; line-height: 1.3; font-weight: 700; color: #fff; }
-
-        @media (max-width: 600px) {
-            .card-text { font-size: 1.5rem; }
-        }
-
-        /* --- CONTROLS --- */
-        .controls {
-            padding: 30px;
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            max-width: 500px;
+        .container {
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        .btn-circle {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            border: none;
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: all 0.2s;
+        /* --- HEADER --- */
+        header {
+            text-align: center;
+            padding: 2rem;
+            background: var(--glass-bg);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        h1 { font-family: 'Poppins', sans-serif; font-size: 2.5rem; margin-bottom: 0.5rem; letter-spacing: -1px; }
+        .subtitle { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 1.5rem; }
+
+        .controls {
             display: flex;
-            align-items: center;
             justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
-        .btn-circle:hover { background: var(--primary); color: #000; transform: scale(1.1); }
-        .btn-circle:active { transform: scale(0.95); }
+        .btn-control {
+            background: transparent;
+            border: 2px solid var(--text-primary);
+            color: var(--text-primary);
+            padding: 8px 16px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.2s;
+        }
+        .btn-control:hover { background: var(--text-primary); color: white; }
 
-        .btn-main {
-            width: 90px;
-            height: 90px;
-            background: var(--primary);
-            color: #000;
-            font-size: 2rem;
-            box-shadow: 0 0 20px var(--primary);
+        /* --- GRID --- */
+        .meeting-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
         }
 
-        /* --- MENU OVERLAY (Hidden by default) --- */
-        .menu-btn {
-            position: absolute; top: 20px; right: 20px;
-            background: none; border: none; color: rgba(255,255,255,0.5);
-            font-size: 1.5rem; cursor: pointer; z-index: 100;
-        }
-
-        .settings-panel {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9);
-            z-index: 90;
+        /* --- CARDS --- */
+        .card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
             display: flex;
             flex-direction: column;
+            transition: transform 0.3s, border 0.3s;
+        }
+
+        .card:hover { transform: translateY(-5px); }
+
+        .card h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-primary);
+        }
+
+        .content {
+            flex-grow: 1;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+        }
+        
+        blockquote { border-left: 4px solid var(--text-primary); padding-left: 15px; font-style: italic; margin: 0; }
+
+        /* --- INTERACTIVE ELEMENTS --- */
+        .btn-action {
+            background: var(--btn-bg);
+            color: var(--btn-text);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            width: 100%;
+            transition: opacity 0.2s;
+            display: flex;
             align-items: center;
             justify-content: center;
-            opacity: 0; pointer-events: none;
-            transition: opacity 0.3s;
+            gap: 8px;
         }
-        .settings-panel.open { opacity: 1; pointer-events: auto; }
+        .btn-action:hover { opacity: 0.9; }
 
-        .mode-btn {
-            background: transparent; border: 2px solid rgba(255,255,255,0.3);
-            color: white; padding: 15px 30px; font-size: 1.2rem;
-            margin: 10px; border-radius: 10px; cursor: pointer; width: 200px;
+        .notes-area {
+            width: 100%;
+            min-height: 120px;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            background: rgba(255,255,255,0.5);
+            font-family: inherit;
+            resize: vertical;
+            margin-bottom: 10px;
         }
-        .mode-btn:hover { border-color: var(--primary); color: var(--primary); }
-
-        /* --- PROGRESS BAR --- */
-        .progress-container {
-            position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: rgba(255,255,255,0.1);
+        
+        /* --- REVENUE SLOT (Subtle) --- */
+        .revenue-link {
+            font-size: 0.8rem;
+            text-align: center;
+            margin-top: 10px;
+            color: var(--text-secondary);
+            opacity: 0.7;
         }
-        .progress-bar { height: 100%; background: var(--primary); width: 0%; transition: width 0.3s; }
+        .revenue-link a { color: var(--text-primary); font-weight: bold; }
 
+        /* --- MODAL --- */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 100; backdrop-filter: blur(5px); }
+        .modal-content { background: white; margin: 10% auto; padding: 2rem; width: 90%; max-width: 500px; border-radius: 20px; position: relative; color: #333; }
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; }
+        
+        /* Toast Notification */
+        #toast {
+            visibility: hidden; min-width: 250px; background-color: #333; color: #fff;
+            text-align: center; border-radius: 50px; padding: 16px; position: fixed;
+            z-index: 101; left: 50%; bottom: 30px; transform: translateX(-50%);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        #toast.show { visibility: visible; bottom: 50px; transition: bottom 0.5s, visibility 0.5s; }
     </style>
 </head>
-<body data-theme="family">
+<body>
 
-    <div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
-
-    <button class="menu-btn" onclick="toggleSettings()"><i class="ri-settings-4-line"></i></button>
-    
-    <div class="settings-panel" id="settingsPanel">
-        <h2 style="margin-bottom: 30px;">Choose Your Vibe</h2>
-        <button class="mode-btn" onclick="setMode('family')">🏠 Family Night</button>
-        <button class="mode-btn" onclick="setMode('social')">🍻 Friends & Fun</button>
-        <button class="mode-btn" onclick="setMode('work')">💼 Team Sync</button>
-        <br>
-        <button class="btn-circle" onclick="toggleSettings()"><i class="ri-close-line"></i></button>
-        <p style="margin-top: 30px; opacity: 0.5; font-size: 0.8rem;">MeetingDeck v2.0</p>
-    </div>
-
-    <main class="stage">
-        <div class="card-container">
-            
-            <div class="card enter" id="nextCard">
-                <i class="ri-question-line card-icon"></i>
-                <div class="card-category">Next Up</div>
-                <div class="card-text">...</div>
-            </div>
-
-            <div class="card active" id="currentCard">
-                <i class="ri-flag-fill card-icon"></i>
-                <div class="card-category">Welcome</div>
-                <div class="card-text">Ready to start the conversation?</div>
-            </div>
-
-        </div>
-    </main>
-
-    <div class="controls">
-        <button class="btn-circle" onclick="prevCard()"><i class="ri-arrow-left-line"></i></button>
-        <button class="btn-circle btn-main" onclick="advanceCard()"><i class="ri-check-line"></i></button>
-        <button class="btn-circle" onclick="triggerConfetti()"><i class="ri-magic-line"></i></button>
-    </div>
-
-    <script>
-        // --- DATA STORE ---
-        const decks = {
-            family: [
-                { icon: "ri-home-heart-fill", cat: "Ice Breaker", text: "What is your favorite room in our house and why?" },
-                { icon: "ri-user-smile-fill", cat: "Connection", text: "Who made you laugh the hardest this week?" },
-                { icon: "ri-plant-fill", cat: "Rose & Thorn", text: "Share one win (Rose) and one challenge (Thorn)." },
-                { icon: "ri-lightbulb-flash-fill", cat: "Idea", text: "If we could plan a dream family trip, where would we go?" },
-                { icon: "ri-shield-star-fill", cat: "Appreciation", text: "Turn to the left: Give that person a genuine compliment." },
-                { icon: "ri-shopping-cart-fill", cat: "Ad", text: "Fun Tip: Grab the physical 'TableTopics' deck on Amazon for no-screen nights!" }
-            ],
-            social: [
-                { icon: "ri-fire-fill", cat: "Hot Take", text: "What is a popular movie that you actually hate?" },
-                { icon: "ri-music-fill", cat: "Vibe", text: "If you could only listen to one album forever, what is it?" },
-                { icon: "ri-spy-fill", cat: "Deep Dive", text: "What is a secret talent you have that nobody knows about?" },
-                { icon: "ri-emotion-laugh-fill", cat: "Story", text: "Tell us about your most embarrassing moment." },
-                { icon: "ri-trophy-fill", cat: "Challenge", text: "Who here would survive a zombie apocalypse the longest?" }
-            ],
-            work: [
-                { icon: "ri-rocket-fill", cat: "Kickoff", text: "What is one thing you are excited to ship this week?" },
-                { icon: "ri-bar-chart-fill", cat: "Retro", text: "What is one thing we should STOP doing immediately?" },
-                { icon: "ri-team-fill", cat: "Kudos", text: "Who helped you out this week?" },
-                { icon: "ri-battery-charge-fill", cat: "Energy", text: "On a scale of 1-10, how is your bandwidth right now?" },
-                { icon: "ri-book-open-fill", cat: "Learning", text: "What is a mistake you made recently and what did you learn?" }
-            ]
-        };
-
-        // --- STATE ---
-        let currentMode = 'family';
-        let currentIndex = 0;
+<div class="container">
+    <header>
+        <h1 id="main-title">✨ Family Meeting Hub</h1>
+        <p class="subtitle" id="subtitle">Connect, share, and grow together.</p>
         
-        // --- FUNCTIONS ---
+        <div class="controls">
+            <button class="btn-control" onclick="toggleTheme()">🎨 Theme</button>
+            <button class="btn-control" onclick="openModal('rulesModal')">📜 Rules</button>
+            <button class="btn-control" onclick="if(confirm('Start new meeting? Notes will remain saved.')) location.reload()">🔄 Reset</button>
+        </div>
+    </header>
 
-        function setMode(mode) {
-            currentMode = mode;
-            document.body.setAttribute('data-theme', mode);
-            currentIndex = 0;
-            toggleSettings();
-            render();
-            triggerConfetti(); // Celebration for switching modes
-        }
+    <div class="meeting-grid">
+        
+        <div class="card" id="card-iceBreaker">
+            <h2>🎯 Ice Breaker</h2>
+            <div class="content" id="iceBreakerContent">
+                <p>Start the meeting with a fun question!</p>
+            </div>
+            <button class="btn-action" onclick="generateContent('iceBreaker')"><i class="ri-shuffle-fill"></i> Get Question</button>
+        </div>
 
-        function toggleSettings() {
-            document.getElementById('settingsPanel').classList.toggle('open');
-        }
+        <div class="card" id="card-quote">
+            <h2>💬 Inspiring Quote</h2>
+            <div class="content" id="quoteContent">
+                <blockquote>"Family is not an important thing. It's everything."</blockquote>
+            </div>
+            <button class="btn-action" onclick="generateContent('quote')"><i class="ri-double-quotes-l"></i> Get Quote</button>
+        </div>
 
-        function advanceCard() {
-            const deck = decks[currentMode];
-            const currentEl = document.getElementById('currentCard');
+        <div class="card" id="card-checkIn">
+            <h2>💖 Check-In</h2>
+            <div class="content" id="checkInContent">
+                <ul style="list-style: none; padding: 0; margin-bottom: 1rem;">
+                    <li>🌹 <strong>Rose:</strong> A highlight or win.</li>
+                    <li>🌱 <strong>Bud:</strong> Something upcoming.</li>
+                    <li>🌵 <strong>Thorn:</strong> A challenge.</li>
+                </ul>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <input type="number" id="participantCount" placeholder="#" style="width: 60px; padding: 10px; border-radius: 8px; border: 1px solid #ccc; text-align: center;">
+                    <button class="btn-action" style="width: auto; flex: 1;" onclick="generateOrder()">Pick Order</button>
+                </div>
+                <div id="checkInOrder" style="margin-top: 15px; font-weight: bold; color: var(--text-primary);"></div>
+            </div>
+        </div>
+
+        <div class="card" id="card-story">
+            <h2>📖 Story Time</h2>
+            <div class="content" id="storyContent">
+                <p>Read a short story with a moral.</p>
+            </div>
+            <button class="btn-action" onclick="generateContent('story')"><i class="ri-book-open-line"></i> Read Story</button>
+        </div>
+
+        <div class="card" id="card-skill">
+            <h2>🛠️ Life Skill</h2>
+            <div class="content" id="skillContent">
+                <p>Learn something useful together.</p>
+            </div>
+            <button class="btn-action" onclick="generateContent('skill')"><i class="ri-tools-line"></i> Learn Skill</button>
+        </div>
+
+        <div class="card" id="card-joke">
+            <h2>😂 Joke Break</h2>
+            <div class="content" id="jokeContent">
+                <p>Need a laugh?</p>
+            </div>
+            <button class="btn-action" onclick="generateContent('joke')"><i class="ri-emotion-laugh-line"></i> Tell Joke</button>
+        </div>
+
+        <div class="card" id="card-notes" style="grid-column: 1 / -1;">
+            <h2>📝 Meeting Notes</h2>
+            <div class="content" id="notesContent">
+                <p>Capture decisions and action items (Auto-saves to this device).</p>
+                <textarea class="notes-area" id="meetingNotes" placeholder="Type here..."></textarea>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn-action" onclick="copyNotes()">📋 Copy to Clipboard</button>
+                    <button class="btn-action" style="background: transparent; border: 2px solid var(--text-primary); color: var(--text-primary);" onclick="exportNotes()">💾 Download .txt</button>
+                </div>
+                <div class="revenue-link">
+                    Enjoying the meeting? <a href="#" onclick="alert('This is where your Amazon Affiliate link goes!')">Get the physical card deck on Amazon.</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="rulesModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('rulesModal')">&times;</span>
+        <h2>📜 Ground Rules</h2>
+        <ul style="margin-left: 20px; line-height: 1.8;">
+            <li><strong>No Phones:</strong> Be present.</li>
+            <li><strong>One Mic:</strong> Don't interrupt.</li>
+            <li><strong>No Judgment:</strong> Listen to understand.</li>
+            <li><strong>Have Fun:</strong> Use the joke button!</li>
+        </ul>
+    </div>
+</div>
+
+<div id="toast">Copied to clipboard!</div>
+
+<script>
+    // --- PRACTICAL PETER'S PRODUCTION DATABASE (v1.0) ---
+    // Runway: ~25-30 Meetings (6 Months) before repeats become noticeable.
+    
+    const data = {
+        iceBreakers: [
+            // --- FUN / SILLY ---
+            "If animals could talk, which would be the rudest?",
+            "What is the weirdest food you have ever eaten?",
+            "If you had to wear one color for the rest of your life, what would it be?",
+            "Which Disney character would be the best roommate?",
+            "If you were a potato, how would you like to be cooked?",
+            "What is the funniest face you can make right now?",
+            "If you could have an unlimited supply of one thing, what would it be?",
+            "What would your superhero name be?",
+            "If you could trade lives with a cartoon character, who would it be?",
+            "What is the worst haircut you ever had?",
+            // --- DEEP / CONNECTION ---
+            "What is one rule you would add to our house?",
+            "When did you feel the most proud of yourself this year?",
+            "What is the hardest thing about being your age?",
+            "If you could ask your future self one question, what would it be?",
+            "What is one thing you want to learn how to do?",
+            "Who is the kindest person you know and why?",
+            "What is your favorite memory of us as a family?",
+            "If you could change one thing about the world, what would it be?",
+            "What makes you feel loved?",
+            "What is a fear you would like to overcome?",
+            // --- RANDOM ---
+            "What is your favorite smell?",
+            "If you found $100 on the ground, what would you do?",
+            "What is the best gift you have ever received?",
+            "If you could invent a holiday, what would we celebrate?",
+            "What is your favorite word?",
+            "If you could meet any historical figure, who would it be?",
+            "What is the best book you've ever read?",
+            "If you could go to space, would you?",
+            "What is your favorite sound?",
+            "If you were a teacher, what subject would you teach?"
+        ],
+        quotes: [
+            { text: "Family is not an important thing. It's everything.", author: "Michael J. Fox" },
+            { text: "In time of test, family is best.", author: "Burmese Proverb" },
+            { text: "Do what you can, with what you have, where you are.", author: "Theodore Roosevelt" },
+            { text: "Happiness depends upon ourselves.", author: "Aristotle" },
+            { text: "It always seems impossible until it's done.", author: "Nelson Mandela" },
+            { text: "You miss 100% of the shots you don't take.", author: "Wayne Gretzky" },
+            { text: "Kindness is a language which the deaf can hear and the blind can see.", author: "Mark Twain" },
+            { text: "The time is always right to do what is right.", author: "Martin Luther King Jr." },
+            { text: "Honesty is the first chapter in the book of wisdom.", author: "Thomas Jefferson" },
+            { text: "Believe you can and you're halfway there.", author: "Theodore Roosevelt" },
+            { text: "A person who never made a mistake never tried anything new.", author: "Albert Einstein" },
+            { text: "Turn your wounds into wisdom.", author: "Oprah Winfrey" },
+            { text: "Be the change that you wish to see in the world.", author: "Mahatma Gandhi" },
+            { text: "Life is what happens when you're busy making other plans.", author: "John Lennon" },
+            { text: "The power of imagination makes us infinite.", author: "John Muir" }
+        ],
+        stories: [
+            { title: "The Lion and the Mouse", body: "A lion spared a mouse. Later, the lion was trapped in a net. The mouse chewed the ropes to free him. Moral: Little friends may prove great friends." },
+            { title: "The Tortoise and the Hare", body: "The hare bragged about speed and took a nap. The tortoise kept moving slow and steady. The tortoise won. Moral: Consistency beats intensity." },
+            { title: "The Boy Who Cried Wolf", body: "A boy lied about a wolf attacking. When a real wolf came, no one believed him. Moral: Liars are not believed even when they speak the truth." },
+            { title: "The Bundle of Sticks", body: "A father showed his sons that a single stick breaks easily, but a bundle is unbreakable. Moral: Unity is strength." },
+            { title: "The Ant and the Grasshopper", body: "The ant worked all summer storing food. The grasshopper played. In winter, the ant was safe, the grasshopper starved. Moral: Work today for a better tomorrow." },
+            { title: "The Dog and the Shadow", body: "A dog with a bone saw his reflection in the water. He thought the 'other dog' had a bigger bone. He barked to get it and dropped his own bone in the river. Moral: Greed causes you to lose what you have." },
+            { title: "The Crow and the Pitcher", body: "A thirsty crow found a pitcher with water at the bottom. He couldn't reach it. He dropped stones in one by one until the water rose to the top. Moral: Little by little does the trick." },
+            { title: "The Wind and the Sun", body: "They bet on who could make a man take off his coat. The Wind blew hard, the man held tight. The Sun shone warmly, the man took it off. Moral: Gentleness is stronger than force." },
+            { title: "The Fox and the Grapes", body: "A fox tried to reach hanging grapes but failed. He walked away saying, 'They were probably sour anyway.' Moral: It is easy to despise what you cannot have." },
+            { title: "The Two Goats", body: "Two goats met on a narrow bridge. Neither would move back. They locked horns and both fell into the river. Moral: Stubbornness leads to disaster." }
+        ],
+        skills: [
+            { title: "The Perfect Handshake", body: "Stand up. Make eye contact. Smile. Grip firmly (web to web). Shake twice. Release. It builds instant respect." },
+            { title: "The 2-Minute Rule", body: "If a task takes less than 2 minutes (hanging a coat, washing a dish), do it immediately. Never add it to a to-do list." },
+            { title: "Active Listening", body: "When someone talks, look at them. Do not think about your response. Just listen. When they finish, ask one question about what they said." },
+            { title: "Box Breathing", body: "Anxiety hack: Breathe in for 4 seconds. Hold for 4 seconds. Exhale for 4 seconds. Hold for 4 seconds. Repeat." },
+            { title: "How to Apologize", body: "A real apology has 3 parts: 1. 'I am sorry.' 2. 'It was my fault because...' 3. 'Next time I will...' Without part 3, it is just an excuse." },
+            { title: "Budgeting 50/30/20", body: "Money rule: 50% for Needs (Rent/Food). 30% for Wants (Fun). 20% for Savings. Always pay your savings first." },
+            { title: "Tying a Square Knot", body: "Right over Left. Left over Right. This knot will not slip, but is easy to untie. It is the most useful knot in the world." },
+            { title: "Table Manners", body: "Wait until everyone is served before eating. Chew with your mouth closed. Keep elbows off the table while eating. It shows respect for the cook." },
+            { title: "The Gratitude Pivot", body: "When you complain ('I have to go to school'), switch 'Have' to 'Get'. 'I GET to go to school.' It changes your brain chemistry." },
+            { title: "Changing a Tire", body: "Loosen nuts BEFORE jacking up the car. Jack it up. Remove nuts. Swap tire. Tighten nuts by hand. Lower car. Tighten nuts fully." }
+        ]
+    };
+
+    // --- STATE MANAGEMENT ---
+    const themes = ['', 'dark-theme', 'nature-theme'];
+    let themeIndex = 0;
+    let guidedStep = 0;
+    const flow = ['card-iceBreaker', 'card-quote', 'card-checkIn', 'card-story', 'card-notes']; 
+
+    // --- SESSION HISTORY (Prevents Repeats) ---
+    let sessionHistory = { iceBreakers: [], quotes: [], stories: [], skills: [] };
+
+    // --- INIT ---
+    window.onload = function() {
+        // 1. Load Auto-Saved Notes
+        const savedNotes = localStorage.getItem('familyMeetingNotes');
+        if(savedNotes) document.getElementById('meetingNotes').value = savedNotes;
+
+        // 2. Inject "Guide Me" Button
+        const controls = document.querySelector('.controls');
+        const startBtn = document.createElement('button');
+        startBtn.className = 'btn-control';
+        startBtn.style.background = 'var(--text-primary)';
+        startBtn.style.color = 'var(--glass-bg)'; // Contrast
+        startBtn.style.borderColor = 'var(--text-primary)';
+        startBtn.innerHTML = '🚀 Guide Me';
+        startBtn.onclick = startGuidedMeeting;
+        controls.prepend(startBtn);
+    };
+
+    // --- AUTO-SAVE NOTES ---
+    document.getElementById('meetingNotes').addEventListener('input', function() {
+        localStorage.setItem('familyMeetingNotes', this.value);
+    });
+
+    // --- FUNCTIONS ---
+
+    function startGuidedMeeting() {
+        alert("Meeting Started! Follow the gold highlighted cards.");
+        highlightCard(flow[0]);
+    }
+
+    function highlightCard(cardId) {
+        // Reset styles
+        document.querySelectorAll('.card').forEach(c => {
+            c.style.border = '1px solid var(--glass-border)';
+            c.style.transform = 'none';
+        });
+        
+        const card = document.getElementById(cardId);
+        if(card) {
+            card.scrollIntoView({behavior: "smooth", block: "center"});
+            card.style.border = "3px solid var(--highlight)";
+            card.style.transform = "scale(1.02)";
             
-            // Animation: Throw current card away
-            currentEl.classList.add('exit');
-            currentEl.classList.remove('active');
+            // Auto-advance logic could go here, but manual is better for families
+            // We just highlight the first one to get them started.
+        }
+    }
 
-            setTimeout(() => {
-                // Logic: Move index forward
-                currentIndex = (currentIndex + 1) % deck.length;
-                
-                // Reset classes for the new state
-                currentEl.classList.remove('exit');
-                currentEl.classList.add('enter'); // Put it back in the stack visually
-                
-                // Force Reflow/Render
-                render();
-                
-                // Animation: Bring it forward
-                requestAnimationFrame(() => {
-                    currentEl.classList.remove('enter');
-                    currentEl.classList.add('active');
-                });
-            }, 300);
+    function generateContent(type) {
+        const container = document.getElementById(type + 'Content');
+        
+        // JOKES (External API)
+        if (type === 'joke') {
+            container.innerHTML = "Thinking...";
+            fetch('https://official-joke-api.appspot.com/random_joke')
+                .then(res => res.json())
+                .then(data => {
+                    container.innerHTML = `<p><strong>${data.setup}</strong><br><em>${data.punchline}</em></p>`;
+                })
+                .catch(() => container.innerHTML = "<p>Why did the chicken cross the road? To get to the meeting!</p>");
+            return;
         }
 
-        function prevCard() {
-            const deck = decks[currentMode];
-            if (currentIndex > 0) currentIndex--;
-            else currentIndex = deck.length - 1;
-            render();
+        // INTERNAL CONTENT (with Repeat Protection)
+        const items = data[type === 'iceBreaker' ? 'iceBreakers' : type + 's'];
+        const historyKey = type === 'iceBreaker' ? 'iceBreakers' : type + 's';
+        
+        let item;
+        let attempts = 0;
+        
+        // Try to find an item not used this session
+        do {
+            item = items[Math.floor(Math.random() * items.length)];
+            attempts++;
+        } while (sessionHistory[historyKey].includes(item) && attempts < 20);
+        
+        sessionHistory[historyKey].push(item);
+
+        // Render
+        if (type === 'iceBreaker') {
+            container.innerHTML = `<p><strong>Question:</strong> ${item}</p>`;
+        } else if (type === 'quote') {
+            container.innerHTML = `<blockquote>"${item.text}"<br><small>- ${item.author}</small></blockquote>`;
+        } else if (type === 'story' || type === 'skill') {
+            container.innerHTML = `<h3>${item.title}</h3><p>${item.body}</p>`;
         }
+        
+        // If guided mode, maybe highlight next card? (Optional complexity omitted for stability)
+    }
 
-        function render() {
-            const deck = decks[currentMode];
-            const cardData = deck[currentIndex];
-            const nextData = deck[(currentIndex + 1) % deck.length];
-
-            // Update Current Card
-            const currentEl = document.getElementById('currentCard');
-            currentEl.querySelector('.card-icon').className = `${cardData.icon} card-icon`;
-            currentEl.querySelector('.card-category').innerText = cardData.cat;
-            currentEl.querySelector('.card-text').innerText = cardData.text;
-
-            // Update Background "Next" Card (for visual depth)
-            const nextEl = document.getElementById('nextCard');
-            nextEl.querySelector('.card-icon').className = `${nextData.icon} card-icon`;
-            nextEl.querySelector('.card-category').innerText = nextData.cat;
-            nextEl.querySelector('.card-text').innerText = "...";
-
-            // Update Progress Bar
-            const progress = ((currentIndex + 1) / deck.length) * 100;
-            document.getElementById('progressBar').style.width = `${progress}%`;
+    function generateOrder() {
+        const count = document.getElementById('participantCount').value;
+        if (!count || count < 2) return alert("Enter at least 2 people.");
+        
+        let arr = [];
+        for (let i = 1; i <= count; i++) arr.push(i);
+        // Fisher-Yates Shuffle
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
         }
+        
+        document.getElementById('checkInOrder').innerText = "Order: Person " + arr.join(" ➡ Person ");
+    }
 
-        function triggerConfetti() {
-            confetti({
-                particleCount: 100,
-                spread: 70,
-                origin: { y: 0.6 },
-                colors: ['#FFD700', '#FF6B6B', '#4C1D95']
-            });
-        }
+    function toggleTheme() {
+        themeIndex = (themeIndex + 1) % themes.length;
+        document.body.className = themes[themeIndex];
+    }
 
-        // Init
-        render();
+    function openModal(id) { document.getElementById(id).style.display = 'block'; }
+    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
-    </script>
+    window.onclick = function(event) {
+        if (event.target.classList.contains('modal')) event.target.style.display = "none";
+    }
+
+    function copyNotes() {
+        const notes = document.getElementById('meetingNotes').value;
+        const textToCopy = `FAMILY MEETING NOTES\nDate: ${new Date().toLocaleDateString()}\n\n${notes}\n\n--\nRan with Family Meeting Hub`;
+        
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            const toast = document.getElementById("toast");
+            toast.className = "show";
+            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+        });
+    }
+
+    function exportNotes() {
+        const notes = document.getElementById('meetingNotes').value;
+        const textToSave = `FAMILY MEETING NOTES\nDate: ${new Date().toLocaleDateString()}\n\n${notes}\n\n--\nRan with Family Meeting Hub`;
+        
+        const blob = new Blob([textToSave], { type: "text/plain" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = `Meeting-${new Date().toISOString().slice(0,10)}.txt`;
+        a.click();
+    }
+</script>
+
 </body>
 </html>
