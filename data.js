@@ -5,7 +5,7 @@ const db = {
         tags: ["Ice Breaker", "The Menu", "Wisdom", "Cheat Code", "Humor", "Life Skill"],
         btns: ["Next Question", "Pick Order", "Next Quote", "Next Cheat Code", "Next Joke", "Next Skill"],
         
-        // FAMILY CHECK IN: Compact Version
+        // FAMILY CHECK IN: Compact "Meat & Potatoes" Version
         checkin: [
             "🥦 <strong>Veggies:</strong> What challenge is making you stronger?", 
             "🥩 <strong>Meat & Potatoes:</strong> What are you most grateful for?", 

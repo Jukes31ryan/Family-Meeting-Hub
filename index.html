@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gather</title>
+    <title>Meeting Deck</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;800&display=swap" rel="stylesheet">
@@ -11,7 +11,7 @@
     <style>
         :root { --transition: all 0.3s ease; }
 
-        /* --- THEME 1: FAMILY (The Harvest) --- */
+        /* --- THEME 1: FAMILY (The Harvest - Thanksgiving Vibe) --- */
         body[data-mode="family"] { 
             /* Warm Cream to Soft Wheat Gradient */
             --bg-gradient: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
@@ -24,6 +24,7 @@
             --accent: #d84315; /* Pumpkin / Rust */
             --border: #ffe0b2;
             --card-shadow: 0 4px 12px rgba(216, 67, 21, 0.1);
+            --btn-text: #ffffff;
         }
 
         /* --- THEME 2: FRIENDS (The Campfire) --- */
@@ -38,7 +39,8 @@
             --text-sub: #a4b0be;
             --accent: #ff9f43; /* Fire Orange */
             --border: rgba(255, 159, 67, 0.2);
-            --card-shadow: 0 4px 15px rgba(255, 159, 67, 0.1);
+            --card-shadow: 0 4px 15px rgba(255, 159, 67, 0.15);
+            --btn-text: #1a1a1a;
         }
 
         /* --- THEME 3: WORK (The Varsity) --- */
@@ -54,6 +56,7 @@
             --accent: #0984e3; /* Strong Team Blue */
             --border: #dcdde1;
             --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            --btn-text: #ffffff;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -73,7 +76,6 @@
 
         header { text-align: center; margin-bottom: 25px; }
         
-        /* STATIC APP TITLE - NEVER CHANGES */
         h1 { 
             font-weight: 800; 
             font-size: 3rem; 
@@ -88,28 +90,54 @@
         
         .tagline { font-size: 1.1rem; color: var(--text-sub); margin-bottom: 10px; font-weight: 600; opacity: 0.8; letter-spacing: 0.5px; }
         
-        /* DYNAMIC VIBE INDICATOR */
-        .vibe-indicator {
-            font-size: 0.9rem;
-            font-weight: 500;
+        .vibe-indicator { font-size: 0.9rem; font-weight: 500; color: var(--accent); margin-bottom: 20px; opacity: 0.9; display: block; }
+
+        /* --- NEW COOL GUIDE BUTTON --- */
+        .guide-btn {
+            background: var(--glass-bg);
+            border: 1px solid var(--border);
             color: var(--accent);
-            margin-bottom: 20px;
-            opacity: 0.9;
-            display: block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 15px;
+            transition: var(--transition);
+            box-shadow: var(--card-shadow);
+        }
+        .guide-btn:hover { transform: translateY(-2px); opacity: 0.9; }
+        .guide-icon {
+            display: flex; justify-content: center; align-items: center;
+            width: 18px; height: 18px; border-radius: 50%;
+            background: var(--accent); color: var(--bg-gradient); 
+            font-size: 12px;
         }
 
-        /* GUIDE */
-        .guide-wrapper { margin-bottom: 20px; }
-        .guide-btn { background: transparent; border: none; font-size: 0.85rem; font-weight: 700; color: var(--text-sub); cursor: pointer; text-decoration: underline; opacity: 0.6; transition: opacity 0.2s; }
-        .guide-btn:hover { opacity: 1; }
-        .guide-content { display: none; background: var(--glass-bg); padding: 15px; border-radius: 8px; margin-top: 10px; border: 1px solid var(--border); font-size: 0.9rem; line-height: 1.6; text-align: left; }
-        .guide-content ol { padding-left: 20px; margin: 0; }
+        .guide-content { 
+            display: none; 
+            background: var(--glass-bg); 
+            padding: 20px; 
+            border-radius: 16px; 
+            margin: 10px auto 20px auto; 
+            border: 1px solid var(--accent); 
+            font-size: 0.95rem; 
+            line-height: 1.6; 
+            text-align: left; 
+            max-width: 500px;
+            animation: fadeIn 0.3s ease;
+        }
+        .guide-step { display: flex; gap: 12px; margin-bottom: 10px; align-items: flex-start; }
+        .step-num { color: var(--accent); font-weight: 800; min-width: 20px; }
 
-        /* TABS */
+        /* --- TABS --- */
         .mode-tabs { background: var(--glass-bg); padding: 4px; border-radius: 50px; display: inline-flex; border: 1px solid var(--border); box-shadow: var(--card-shadow); backdrop-filter: blur(10px); margin-bottom: 10px; }
         .tab-btn { background: transparent; border: none; padding: 10px 25px; border-radius: 30px; cursor: pointer; font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--text-sub); transition: var(--transition); font-size: 0.9rem; }
-        .tab-btn.active { background: var(--accent); color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-        body[data-mode="friends"] .tab-btn.active { color: #1e272e; } 
+        .tab-btn.active { background: var(--accent); color: var(--btn-text); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        body[data-mode="friends"] .tab-btn.active { color: #1a1a1a; } 
 
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; align-items: start; }
 
@@ -141,25 +169,13 @@
         .card-content p { width: 100%; }
         .card-content h3 { color: var(--accent); margin-bottom: 8px; font-size: 1.1rem; font-weight: 800; }
         
-        .cheat-code-box {
-            background: rgba(125,125,125,0.1); 
-            border-left: 4px solid var(--accent);
-            padding: 15px;
-            margin-top: 15px;
-            border-radius: 0 8px 8px 0;
-            font-weight: 500;
-            font-size: 0.95rem;
-        }
-
         .check-list { list-style: none; width: 100%; }
-        .check-list li { padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; color: var(--text-main); display: flex; gap: 8px; }
+        .check-list li { padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; color: var(--text-main); display: flex; gap: 8px; }
         .check-list li:last-child { border-bottom: none; }
 
         .btn { background: var(--text-main); color: var(--glass-bg); border: none; width: 100%; padding: 12px; border-radius: 10px; font-weight: 700; font-family: 'Outfit', sans-serif; cursor: pointer; transition: var(--transition); font-size: 0.95rem; }
-        .btn:hover { background: var(--accent); color: white; transform: translateY(-2px); }
-        body[data-mode="friends"] .btn { color: #1a1a1a; }
+        .btn:hover { background: var(--accent); color: var(--btn-text); transform: translateY(-2px); }
         body[data-mode="friends"] .btn:hover { color: #1a1a1a; }
-        body[data-mode="work"] .btn:hover { color: #ffffff; }
         .btn:active { transform: scale(0.98); }
 
         .counter-group { display: flex; align-items: center; gap: 8px; width: 100%; margin-top: auto;}
@@ -186,18 +202,15 @@
             <h1>GATHER</h1>
             <div class="tagline">Meaningful conversations, made easy.</div>
             
-            <span id="current-vibe" class="vibe-indicator">Current Vibe: Dinner Table</span>
-
-            <div class="guide-wrapper">
-                <button class="guide-btn" onclick="toggleGuide()">ℹ️ How to use</button>
-                <div id="guide-box" class="guide-content">
-                    <ol>
-                        <li><strong>Pick a Vibe:</strong> Select Family, Friends, or Work below.</li>
-                        <li><strong>Place it Center:</strong> Put the phone in the middle of the table.</li>
-                        <li><strong>Pass the Potatoes:</strong> Take turns reading a card or answering a prompt.</li>
-                        <li><strong>No Scrolling:</strong> This screen is the only one allowed during the meeting.</li>
-                    </ol>
-                </div>
+            <button class="guide-btn" onclick="toggleGuide()">
+                <div class="guide-icon">?</div> How it works
+            </button>
+            
+            <div id="guide-box" class="guide-content">
+                <div class="guide-step"><div class="step-num">1.</div><div><strong>Select a Mode:</strong> Tap Family, Friends, or Work below.</div></div>
+                <div class="guide-step"><div class="step-num">2.</div><div><strong>Set the Stage:</strong> Put the phone in the center of the table.</div></div>
+                <div class="guide-step"><div class="step-num">3.</div><div><strong>Pass it Around:</strong> Read a card, answer, then pass the phone.</div></div>
+                <div class="guide-step"><div class="step-num">4.</div><div><strong>No Scrolling:</strong> This is the only screen allowed right now.</div></div>
             </div>
 
             <div class="mode-tabs">
@@ -205,6 +218,8 @@
                 <button class="tab-btn" onclick="setMode('friends')" id="tab-friends">Friends</button>
                 <button class="tab-btn" onclick="setMode('work')" id="tab-work">Work</button>
             </div>
+            
+            <span id="current-vibe" class="vibe-indicator">Current Vibe: Dinner Table</span>
         </header>
 
         <div class="grid">
@@ -298,7 +313,6 @@
 
             const d = db[mode];
             
-            // DYNAMIC VIBE INDICATOR UPDATE
             let vibeName = "Dinner Table";
             if(mode === 'friends') vibeName = "The Campfire";
             if(mode === 'work') vibeName = "The Huddle";
@@ -340,7 +354,6 @@
         function generate(type) {
             const d = db[currentMode];
             let pool = [];
-            
             if (type === 'iceBreaker') pool = d.iceBreakers;
             else if (type === 'quote') pool = d.quotes;
             else if (type === 'dynamic') pool = d.dynamics;
@@ -359,7 +372,6 @@
             usedIndices[type].push(index);
             const item = pool[index];
             const container = document.getElementById('content-' + type);
-
             const newContainer = container.cloneNode(false);
 
             if (type === 'quote') {
@@ -369,7 +381,6 @@
             } else {
                 newContainer.innerHTML = `<h3>${item.title}</h3><p>${item.body}</p>`;
             }
-
             container.parentNode.replaceChild(newContainer, container);
         }
 
@@ -378,7 +389,6 @@
             const newContainer = container.cloneNode(false);
             newContainer.innerHTML = "Thinking...";
             container.parentNode.replaceChild(newContainer, container);
-
             fetch('https://official-joke-api.appspot.com/random_joke')
                 .then(r => r.json())
                 .then(data => { newContainer.innerHTML = `<p><strong>${data.setup}</strong><br><em>${data.punchline}</em></p>`; })
@@ -390,7 +400,6 @@
             const newContainer = container.cloneNode(false);
             newContainer.innerHTML = "Thinking...";
             container.parentNode.replaceChild(newContainer, container);
-
             fetch('https://uselessfacts.jsph.pl/random.json?language=en')
                 .then(r => r.json())
                 .then(data => { newContainer.innerHTML = `<p>${data.text}</p>`; })
