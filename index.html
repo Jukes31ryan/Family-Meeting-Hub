@@ -11,47 +11,49 @@
     <style>
         :root { --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
 
-        /* --- THEME 1: HOME (Nature: Forest & Clay) --- */
+        /* --- THEME 1: DINNER TABLE (Warm, Cozy, Inviting) --- */
         body[data-mode="family"] { 
-            /* Soft Sage & Mist Gradient */
-            --bg-gradient: linear-gradient(135deg, #d9e4f5 0%, #e1eec3 100%);
-            /* Deep Forest Green Text Header */
-            --bg-gradient-accent: linear-gradient(to right, #134e5e, #71b280);
+            /* Warm Linen / Cream Background */
+            --bg-gradient: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            /* Terracotta & Bread Header */
+            --bg-gradient-accent: linear-gradient(to right, #d35400, #e67e22);
             
-            --glass-bg: rgba(255, 255, 255, 0.85);
-            --text-main: #2f3640;
-            --text-sub: #576574;
-            --accent: #218c74; /* Rich Fern Green */
-            --border: #ffffff;
-            --card-shadow: 0 8px 20px rgba(33, 140, 116, 0.1);
+            --glass-bg: #ffffff;
+            --text-main: #2c3e50;
+            --text-sub: #7f8c8d;
+            --accent: #d35400; /* Burnt Orange */
+            --border: #ecf0f1;
+            --card-shadow: 0 4px 15px rgba(211, 84, 0, 0.1);
         }
 
-        /* --- THEME 2: SOCIAL (Night: Neon & Violet) --- */
+        /* --- THEME 2: CAMPFIRE (Dark, Night Sky, Fire Glow) --- */
         body[data-mode="friends"] { 
-            --bg-gradient: linear-gradient(to top, #1e3c72 0%, #2a5298 100%);
-            --bg-gradient-accent: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+            /* Pitch Black Night Sky */
+            --bg-gradient: linear-gradient(to bottom, #000000, #1a1a1a);
+            /* Glowing Fire Text */
+            --bg-gradient-accent: linear-gradient(to right, #ff9966, #ff5e62);
             
-            --glass-bg: rgba(15, 23, 42, 0.85);
+            --glass-bg: rgba(30, 30, 30, 0.8);
             --text-main: #f1f2f6;
             --text-sub: #a4b0be;
-            --accent: #00d2d3; /* Electric Cyan */
-            --border: rgba(255, 255, 255, 0.1);
-            --card-shadow: 0 8px 30px rgba(0,0,0,0.4);
+            --accent: #ff9f43; /* Fire Orange */
+            --border: rgba(255, 159, 67, 0.2);
+            --card-shadow: 0 0 20px rgba(255, 159, 67, 0.2); /* Glow Effect */
         }
 
-        /* --- THEME 3: TEAM (Industry: Steel & Concrete) --- */
+        /* --- THEME 3: THE TEAM (Varsity, Energetic, Universal) --- */
         body[data-mode="work"] { 
-            /* Dark Industrial Gradient */
-            --bg-gradient: linear-gradient(to top, #232526, #414345);
-            /* Silver/Metal Text Header */
-            --bg-gradient-accent: linear-gradient(to right, #bdc3c7, #2c3e50);
+            /* Deep Varsity Blue */
+            --bg-gradient: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            /* Electric Blue/Cyan Header */
+            --bg-gradient-accent: linear-gradient(to right, #00c6ff, #0072ff);
             
-            --glass-bg: rgba(0, 0, 0, 0.6); /* Dark Glass */
-            --text-main: #ffffff;
-            --text-sub: #dcdde1;
-            --accent: #dcdcdc; /* Polished Steel Accent */
-            --border: rgba(255, 255, 255, 0.2);
-            --card-shadow: 0 8px 30px rgba(0,0,0,0.5);
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --text-main: #1e272e;
+            --text-sub: #57606f;
+            --accent: #0984e3; /* Strong Team Blue */
+            --border: #dcdde1;
+            --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -91,7 +93,7 @@
         .tab-btn { background: transparent; border: none; padding: 10px 30px; border-radius: 30px; cursor: pointer; font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--text-sub); transition: var(--transition); font-size: 0.95rem; }
         .tab-btn.active { background: var(--accent); color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         /* Text color adjustment for Team mode active tab */
-        body[data-mode="work"] .tab-btn.active { color: #232526; } 
+        body[data-mode="friends"] .tab-btn.active { color: #1e272e; } 
 
         /* GRID LAYOUT */
         .grid { 
@@ -129,8 +131,7 @@
 
         /* FOOTER CARD (Full Width) */
         .card-footer {
-            grid-column: 1 / -1;
-            /* Make footer card match others instead of being separate style */
+            /* Standard size now, handled by grid */
         }
 
         .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
@@ -160,8 +161,11 @@
         /* BUTTONS */
         .btn { background: var(--text-main); color: var(--glass-bg); border: none; width: 100%; padding: 14px; border-radius: 14px; font-weight: 700; font-family: 'Outfit', sans-serif; cursor: pointer; transition: var(--transition); }
         .btn:hover { background: var(--accent); color: white; transform: translateY(-2px); }
-        /* Text color tweak for Work mode buttons on hover */
-        body[data-mode="work"] .btn:hover { color: #232526; }
+        
+        /* Adjust button text color for Campfire mode */
+        body[data-mode="friends"] .btn { color: #1a1a1a; }
+        body[data-mode="friends"] .btn:hover { color: #1a1a1a; }
+
         .btn:active { transform: scale(0.98); }
 
         .counter-group { display: flex; align-items: center; gap: 10px; width: 100%; margin-top: auto;}
@@ -260,7 +264,7 @@
 <script>
     const db = {
         family: {
-            title: "The Dinner Table",
+            title: "Dinner Table",
             subtitle: "No phones. Just us. Pass the potatoes.",
             tags: ["Ice Breaker", "Rose, Bud, Thorn", "Wisdom", "Cheat Code", "Humor", "Life Skill"],
             btns: ["Next Question", "Pick Order", "Next Quote", "Next Cheat Code", "Next Joke", "Next Skill"],
@@ -322,21 +326,35 @@
         },
         work: {
             title: "The Huddle",
-            subtitle: "Align the crew, solve problems, win the day.",
+            subtitle: "Unite the squad. Clear the path. Win the day.",
             tags: ["Warm Up", "Check-In", "Mindset", "The Floor", "Humor", "Growth"],
             btns: ["Next Question", "Pick Order", "Inspire Me", "Next Topic", "Break Tension", "Next Tip"],
-            checkin: ["✅ <strong>Done:</strong> A win or completed task from yesterday.", "🎯 <strong>Focus:</strong> Your #1 priority for today.", "🚧 <strong>Roadblock:</strong> Anything slowing you down or in your way?"],
+            checkin: ["✅ <strong>The Win:</strong> What is one thing you crushed recently?", "🎯 <strong>The Goal:</strong> What are you hunting today?", "🚧 <strong>The Hurdle:</strong> What is standing in your way?"],
             iceBreakers: [ 
-                "What was the very first job you ever had?", "What is one tool or item you absolutely need to do your job well?", "Best career/life advice you ever received?", "What is your favorite way to decompress after a long shift?", "What is one skill you want to learn this year?", "What was the first thing you bought with your own money?", "Who is a leader or mentor you admire?", "What is the best team you have ever been a part of?", "What is your favorite work snack?", "How do you handle a highly stressful moment?", "What is one thing you are proud of accomplishing this month?", "What is one thing you would change about our industry as a whole?", "What is the most valuable lesson you've learned from a mistake?", "If you could have a 3-day weekend or higher pay, which would you pick?", "What music or podcast keeps you going during the day?", "What is a hill you are willing to die on professionally?", "What is the best professional compliment you've received?", "What is your biggest pet peeve in the workplace?", "If you could automate one part of your job, what would it be?", "What is the most useful app on your phone for work?", "What is the best team outing you've ever been on?", "What is your 'weird' productivity hack?", "What is the most difficult challenge you overcame at work?", "What is your favorite way to celebrate a big win?", "Who on the team makes you laugh the most?", "If you could work from any city in the world, where?", "What is one non-work hobby you are passionate about?", "What is the most important quality in a good manager?"
+                "What is your 'Walk Up' song?", "Who is the MVP of your life right now?", "What is the best team you have ever been a part of?", "If you could have any superpower to help this team, what would it be?", "What is one skill you want to master this year?", "What is the best advice a coach or mentor ever gave you?", "How do you handle a high-pressure moment?", "What is your favorite way to celebrate a big win?", "Who on this team makes you laugh the most?", "If we were a sports team, what would our mascot be?", "What is one thing you appreciate about the person to your left?", "What is your 'pre-game' ritual before a big project?", "If you could trade jobs with anyone in the world for a day, who would it be?", "What is the hardest thing you've ever had to do?", "What is one thing people misunderstand about your role?", "What is your favorite quote about success?", "If you could change one rule in the world, what would it be?", "What is something you are secretly really good at?", "What is the best compliment you've ever received?", "How do you recharge your batteries?", "What does 'Success' look like to you?", "Who is a leader you admire?", "What is one goal you are chasing outside of this group?"
             ],
             quotes: [
-                { text: "Individual commitment to a group effort—that is what makes a team work.", author: "Vince Lombardi" }, { text: "Alone we can do so little; together we can do so much.", author: "Helen Keller" }, { text: "It is not the strongest of the species that survives, but the most adaptable.", author: "Charles Darwin" }, { text: "Amateurs sit and wait for inspiration, the rest of us just get up and go to work.", author: "Stephen King" }, { text: "Coming together is a beginning. Keeping together is progress. Working together is success.", author: "Henry Ford" }, { text: "Success is not final, failure is not fatal: it is the courage to continue that counts.", author: "Winston Churchill" }, { text: "The secret of change is to focus all of your energy, not on fighting the old, but on building the new.", author: "Socrates" }, { text: "You don't have to be great to start, but you have to start to be great.", author: "Zig Ziglar" }, { text: "The only way to do great work is to love what you do.", author: "Steve Jobs" }, { text: "In the middle of difficulty lies opportunity.", author: "Albert Einstein" }
+                { text: "Individual commitment to a group effort—that is what makes a team work.", author: "Vince Lombardi" }, { text: "Alone we can do so little; together we can do so much.", author: "Helen Keller" }, { text: "Talent wins games, but teamwork and intelligence win championships.", author: "Michael Jordan" }, { text: "It is amazing what you can accomplish if you do not care who gets the credit.", author: "Harry Truman" }, { text: "Coming together is a beginning. Keeping together is progress. Working together is success.", author: "Henry Ford" }, { text: "Success is not final, failure is not fatal: it is the courage to continue that counts.", author: "Winston Churchill" }, { text: "The strength of the team is each individual member. The strength of each member is the team.", author: "Phil Jackson" }, { text: "You don't have to be great to start, but you have to start to be great.", author: "Zig Ziglar" }, { text: "The only way to do great work is to love what you do.", author: "Steve Jobs" }, { text: "In the middle of difficulty lies opportunity.", author: "Albert Einstein" }
             ],
-            dynamics: [ 
-                { title: "Safety & Wellbeing", body: "Is everyone feeling 100% today? Are there any hazards or burnout risks we need to address?" }, { title: "The Roadblock", body: "Is there a process, rule, or lack of resources that is making our jobs harder than they need to be?" }, { title: "Kudos", body: "Who deserves a shoutout today for going above and beyond?" }, { title: "Retrospective", body: "What went really well yesterday/last week?" }, { title: "Retrospective", body: "What is one thing that didn't go well recently, and what did we learn from it?" }, { title: "Innovation", body: "What is one crazy idea we haven't tried yet?" }, { title: "Client / Customer Focus", body: "What is the biggest complaint or request we hear from the people we serve?" }, { title: "Culture", body: "How can we make it more fun to work here?" }, { title: "Future", body: "Where do we want this team to be in 6 months?" }, { title: "Communication", body: "Are we communicating too much, too little, or just right?" }, { title: "Onboarding", body: "If someone started working here tomorrow, what is the first thing they need to know?" }, { title: "Priorities", body: "Are we focused on the right things right now, or are we getting distracted by the small stuff?" }, { title: "The Wishlist", body: "If we had budget for one new piece of equipment, tool, or software, what should it be?" }, { title: "Feedback", body: "What is one thing leadership can do better to support you?" }, { title: "Knowledge Sharing", body: "What is a shortcut or trick you learned recently that everyone should know?" }, { title: "Bottleneck", body: "Where do our tasks or projects usually get stuck?" }, { title: "Success Metrics", body: "How do we know if we had a 'good day'?" }, { title: "Morale", body: "On a scale of 1-5, what is the stress level of the team today?" }, { title: "Open Floor", body: "Does anyone have anything on their mind they need to get off their chest?" }
+            dynamics: [ // UNIVERSAL TEAM TOPICS
+                { title: "The Rally Cry", body: "How is the energy in the group right now? On a scale of 1-10, where are we at, and how do we get to a 10?" }, 
+                { title: "The Weak Link", body: "Is there anything slowing us down right now? A broken process, a missing tool, or a lack of communication?" }, 
+                { title: "The Assist", body: "Who needs help right now? Does anyone have too much on their plate that we can share?" }, 
+                { title: "The Highlight Reel", body: "Let's go around the circle: What is one thing we did really well as a group recently?" }, 
+                { title: "The Game Plan", body: "Are we all clear on the main goal? If a stranger walked in and asked 'What are you trying to do?', would we all say the same thing?" }, 
+                { title: "The Locker Room", body: "How is the vibe? Are we having fun? Do we trust each other?" }, 
+                { title: "The Scout Report", body: "What is coming up next week that we need to prepare for right now?" }, 
+                { title: "The Timeout", body: "Does anyone need to vent? This is a safe space to get frustrations off your chest." }, 
+                { title: "The MVP", body: "Who deserves a shoutout today for going above and beyond?" }, 
+                { title: "The Rookie", body: "If someone joined our team tomorrow, what is the #1 thing they would need to know to succeed?" }, 
+                { title: "The Vision", body: "Where do we want this team to be in 6 months?" }, 
+                { title: "The Audible", body: "What is one thing we should change about how we do things?" }, 
+                { title: "The Defense", body: "What is the biggest risk facing us right now? What could go wrong?" }, 
+                { title: "The Offense", body: "What is a big opportunity we aren't taking advantage of?" }, 
+                { title: "The Huddle", body: "How can we communicate better? Are we talking too much, too little, or just right?" }
             ],
-            skills: [ 
-                { title: "Box Breathing", body: "In for 4s, Hold for 4s, Out for 4s, Hold for 4s. Instantly lowers heart rate in stressful situations." }, { title: "The 2-Minute Rule", body: "If a quick task takes less than 2 minutes (taking out trash, sending a text), do it instantly. Don't let small things pile up." }, { title: "De-escalation", body: "When someone is angry, lower your voice, validate their frustration ('I hear you'), and focus on the solution, not the blame." }, { title: "Saying 'No' Politely", body: "Say: 'I can't prioritize that right now without dropping other balls. Which would you like me to do first?'" }, { title: "Efficient Huddles", body: "No agenda, no meeting. Always end a huddle with clear action items: Who is doing what by when?" }, { title: "Task Batching", body: "Group similar tasks together. Do all your prep work, or all your phone calls, in one block of time to save mental energy." }, { title: "Praise Publicly, Correct Privately", body: "Never discipline or correct a teammate in front of others. Always save it for a private, respectful conversation." }, { title: "Active Listening", body: "Listen to understand, not to reply. Wait 2 seconds after someone finishes speaking before you talk." }, { title: "The Eisenhower Matrix", body: "Sort tasks: Urgent/Important (Do now), Not Urgent/Important (Schedule for later), Urgent/Not Important (Delegate), Neither (Delete)." }, { title: "Lift with Your Legs", body: "Keep your back straight, bend at the hips and knees, and keep the load close to your body. Protect your spine." }, { title: "The 5 Why's", body: "When a problem happens, ask 'Why?' 5 times to get to the root cause, not just the symptom." }, { title: "Eat the Frog", body: "Do your hardest, most dreaded task first thing in the morning. The rest of the day is easy." }, { title: "Clear Communication", body: "BLUF: Bottom Line Up Front. Put the main point in the first sentence, then give details." }, { title: "The Check-Back", body: "When receiving complex instructions, repeat them back in your own words to ensure understanding." }, { title: "Boundary Setting", body: "Protect your time off. Do not check work channels when you are not being paid to work." }, { title: "Keyboard Shortcuts", body: "Learn Ctrl+C, Ctrl+V, Alt+Tab, and Ctrl+Z. It saves hours of mouse-clicking over a year." }, { title: "Clean Workspace", body: "A cluttered physical space creates a cluttered mental state. Reset your space at the end of every shift." }, { title: "The 80/20 Rule", body: "20% of your efforts yield 80% of your results. Focus on the high-impact tasks." }, { title: "Handling Mistakes", body: "Own it immediately. Do not make excuses. Say: 'I made a mistake, here is how I am fixing it.'" }
+            skills: [ // UNIVERSAL PERFORMANCE SKILLS
+                { title: "Box Breathing", body: "In for 4s, Hold for 4s, Out for 4s, Hold for 4s. Instantly lowers heart rate in stressful situations." }, { title: "The 2-Minute Rule", body: "If a quick task takes less than 2 minutes, do it instantly. Don't let small things pile up." }, { title: "De-escalation", body: "When someone is angry, lower your voice, validate their frustration ('I hear you'), and focus on the solution, not the blame." }, { title: "Saying 'No' Politely", body: "Say: 'I can't prioritize that right now without dropping other balls. Which would you like me to do first?'" }, { title: "The High Five", body: "Celebrating small wins releases dopamine and builds momentum. Don't wait for the championship to celebrate." }, { title: "Task Batching", body: "Group similar tasks together. Do all your prep work in one block to save mental energy." }, { title: "Praise Publicly, Correct Privately", body: "Never discipline or correct a teammate in front of others. Always save it for a private, respectful conversation." }, { title: "Active Listening", body: "Listen to understand, not to reply. Wait 2 seconds after someone finishes speaking before you talk." }, { title: "The Eisenhower Matrix", body: "Sort tasks: Urgent/Important (Do now), Not Urgent/Important (Schedule for later), Urgent/Not Important (Delegate), Neither (Delete)." }, { title: "Visualization", body: "Before you start a hard task, close your eyes and visualize yourself finishing it successfully. It primes your brain for the win." }, { title: "The 5 Why's", body: "When a problem happens, ask 'Why?' 5 times to get to the root cause, not just the symptom." }, { title: "Eat the Frog", body: "Do your hardest, most dreaded task first thing in the morning. The rest of the day is easy." }, { title: "Clear Communication", body: "BLUF: Bottom Line Up Front. Put the main point in the first sentence, then give details." }, { title: "The Check-Back", body: "When receiving complex instructions, repeat them back in your own words to ensure understanding." }, { title: "Boundary Setting", body: "Protect your time off. You can't play hard if you don't rest hard." }, { title: "Focus", body: "Multitasking is a myth. Focus on one thing at a time to do it faster and better." }, { title: "Clean Space", body: "A cluttered physical space creates a cluttered mental state. Reset your space at the end of every shift." }, { title: "The 80/20 Rule", body: "20% of your efforts yield 80% of your results. Focus on the high-impact tasks." }, { title: "Ownership", body: "Own your mistakes immediately. Don't make excuses. Say: 'I made a mistake, here is how I am fixing it.'" }
             ],
             ad_text: "Brought to you by",
             ad_link: "Noble Realty WV &rarr;"
