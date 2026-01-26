@@ -11,22 +11,22 @@
     <style>
         :root { --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
 
-        /* --- THEME 1: DINNER TABLE (Modern Farmhouse: Navy & Cream) --- */
+        /* --- THEME 1: DINNER TABLE (The Harvest: Thanksgiving/Fall Vibe) --- */
         body[data-mode="family"] { 
-            /* Soft Silver/Blue Mist Background */
-            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            /* Deep Navy Header Gradient */
-            --bg-gradient-accent: linear-gradient(to right, #243949 0%, #517fa4 100%);
+            /* Warm Cream to Soft Wheat Gradient */
+            --bg-gradient: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+            /* Burnt Orange to Deep Brown Header */
+            --bg-gradient-accent: linear-gradient(to right, #d84315, #5d4037);
             
-            --glass-bg: rgba(255, 255, 255, 0.9);
-            --text-main: #2c3e50; /* Deep Charcoal */
-            --text-sub: #576574;
-            --accent: #34495e; /* Slate Blue Accent */
-            --border: #ffffff;
-            --card-shadow: 0 8px 20px rgba(44, 62, 80, 0.15);
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --text-main: #3e2723; /* Dark Espresso Brown */
+            --text-sub: #6d4c41;
+            --accent: #d84315; /* Pumpkin / Rust */
+            --border: #ffe0b2;
+            --card-shadow: 0 8px 20px rgba(216, 67, 21, 0.15);
         }
 
-        /* --- THEME 2: CAMPFIRE (Midnight & Embers: Dark, Glowing) --- */
+        /* --- THEME 2: CAMPFIRE (Midnight & Embers) --- */
         body[data-mode="friends"] { 
             /* Pitch Black Night Sky */
             --bg-gradient: linear-gradient(to bottom, #000000, #1a1a1a);
@@ -38,10 +38,10 @@
             --text-sub: #a4b0be;
             --accent: #ff9f43; /* Fire Orange */
             --border: rgba(255, 159, 67, 0.2);
-            --card-shadow: 0 0 20px rgba(255, 159, 67, 0.2); /* Glow Effect */
+            --card-shadow: 0 0 20px rgba(255, 159, 67, 0.2);
         }
 
-        /* --- THEME 3: THE TEAM (Varsity: Electric Blue & Energy) --- */
+        /* --- THEME 3: THE TEAM (Varsity Blue) --- */
         body[data-mode="work"] { 
             /* Deep Varsity Blue */
             --bg-gradient: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
@@ -51,7 +51,7 @@
             --glass-bg: rgba(255, 255, 255, 0.95);
             --text-main: #1e272e;
             --text-sub: #57606f;
-            --accent: #0984e3; /* Strong Team Blue */
+            --accent: #0984e3;
             --border: #dcdde1;
             --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
         }
@@ -72,7 +72,7 @@
 
         .container { max-width: 1100px; margin: 0 auto; flex-grow: 1; width: 100%; }
 
-        header { text-align: center; margin-bottom: 40px; }
+        header { text-align: center; margin-bottom: 30px; }
         
         h1 { 
             font-weight: 800; 
@@ -86,23 +86,22 @@
             filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.1));
         }
         
-        .subtitle { font-size: 1.1rem; color: var(--text-sub); margin-bottom: 25px; font-weight: 600; opacity: 0.9; }
+        .subtitle { font-size: 1.1rem; color: var(--text-sub); margin-bottom: 15px; font-weight: 600; opacity: 0.9; }
+
+        /* GUIDE SECTION */
+        .guide-wrapper { margin-bottom: 25px; }
+        .guide-btn { background: transparent; border: none; font-size: 0.9rem; font-weight: 700; color: var(--accent); cursor: pointer; text-decoration: underline; opacity: 0.8; }
+        .guide-content { display: none; background: var(--glass-bg); padding: 15px; border-radius: 12px; margin-top: 10px; border: 1px solid var(--border); font-size: 0.95rem; line-height: 1.6; text-align: left; max-width: 600px; margin-left: auto; margin-right: auto; box-shadow: var(--card-shadow); }
+        .guide-content ol { padding-left: 20px; margin: 0; }
 
         /* TABS */
         .mode-tabs { background: var(--glass-bg); padding: 5px; border-radius: 50px; display: inline-flex; border: 1px solid var(--border); box-shadow: var(--card-shadow); backdrop-filter: blur(10px); }
         .tab-btn { background: transparent; border: none; padding: 10px 30px; border-radius: 30px; cursor: pointer; font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--text-sub); transition: var(--transition); font-size: 0.95rem; }
         .tab-btn.active { background: var(--accent); color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        /* Text color adjustment for darker active tabs */
         body[data-mode="friends"] .tab-btn.active { color: #1e272e; } 
 
-        /* GRID LAYOUT */
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 24px; 
-        }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
 
-        /* CARD STYLES */
         .card { 
             background: var(--glass-bg); 
             border: 1px solid var(--border); 
@@ -119,7 +118,6 @@
         }
         .card:hover { transform: translateY(-5px); border-color: var(--accent); }
 
-        /* FEATURE CARD (Full Width) */
         .card-feature {
             grid-column: 1 / -1;
             background: var(--glass-bg);
@@ -138,7 +136,6 @@
         .card-content p { width: 100%; }
         .card-content h3 { color: var(--accent); margin-bottom: 10px; font-size: 1.2rem; font-weight: 800; }
         
-        /* CHEAT CODE / PLAYBOOK BOX STYLE */
         .cheat-code-box {
             background: rgba(125,125,125,0.1); 
             border-left: 6px solid var(--accent);
@@ -153,16 +150,11 @@
         .check-list li { padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 0.95rem; color: var(--text-main); display: flex; gap: 10px; }
         .check-list li:last-child { border-bottom: none; }
 
-        /* BUTTONS */
         .btn { background: var(--text-main); color: var(--glass-bg); border: none; width: 100%; padding: 14px; border-radius: 14px; font-weight: 700; font-family: 'Outfit', sans-serif; cursor: pointer; transition: var(--transition); }
         .btn:hover { background: var(--accent); color: white; transform: translateY(-2px); }
-        
-        /* Adjust button text color for Campfire mode */
         body[data-mode="friends"] .btn { color: #1a1a1a; }
         body[data-mode="friends"] .btn:hover { color: #1a1a1a; }
-        /* Adjust for Work mode */
         body[data-mode="work"] .btn:hover { color: #ffffff; }
-
         .btn:active { transform: scale(0.98); }
 
         .counter-group { display: flex; align-items: center; gap: 10px; width: 100%; margin-top: auto;}
@@ -170,7 +162,6 @@
         .counter-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(255,255,255,0.05); }
         .counter-val { flex-grow: 1; text-align: center; font-size: 1.1rem; font-weight: 800; }
 
-        /* SPONSOR */
         .sponsor-area { margin-top: 50px; text-align: center; padding-bottom: 20px; }
         .sponsor-link { color: var(--accent); font-weight: 700; text-decoration: none; margin-left: 5px; opacity: 0.8; font-size: 1.1rem; }
         .sponsor-link:hover { text-decoration: underline; opacity: 1; }
@@ -190,6 +181,18 @@
             <h1 id="app-title">Home Deck</h1>
             <p class="subtitle" id="app-subtitle">Meaningful conversations, no screens required.</p>
             
+            <div class="guide-wrapper">
+                <button class="guide-btn" onclick="toggleGuide()">ℹ️ How to use this deck</button>
+                <div id="guide-box" class="guide-content">
+                    <ol>
+                        <li><strong>Pick a Mode:</strong> Select Home, Social, or Team below.</li>
+                        <li><strong>Place it Center:</strong> Put the phone in the middle of the table.</li>
+                        <li><strong>Pass the Potatoes:</strong> Take turns reading a card or answering a prompt.</li>
+                        <li><strong>No Scrolling:</strong> This screen is the only one allowed during the meeting.</li>
+                    </ol>
+                </div>
+            </div>
+
             <div class="mode-tabs">
                 <button class="tab-btn active" onclick="setMode('family')" id="tab-family">Home</button>
                 <button class="tab-btn" onclick="setMode('friends')" id="tab-friends">Social</button>
@@ -258,140 +261,155 @@
         </div>
     </div>
 
-<script src="data.js"></script>
-<script>
-    let currentMode = 'family';
-    let participants = 4;
-    let usedIndices = { iceBreaker: [], quote: [], dynamic: [], skill: [] };
+    <script src="data.js"></script>
 
-    window.onload = () => {
-        const savedMode = localStorage.getItem('meetingMode');
-        if(savedMode && db[savedMode]) {
-            setMode(savedMode);
-        } else {
-            setMode('family');
-        }
-    };
-
-    function setMode(mode) {
-        currentMode = mode;
-        localStorage.setItem('meetingMode', mode);
-        document.body.setAttribute('data-mode', mode);
-        
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.getElementById('tab-' + mode).classList.add('active');
-
-        const d = db[mode];
-        document.getElementById('app-title').innerText = d.title;
-        document.getElementById('app-subtitle').innerText = d.subtitle;
-        
-        document.getElementById('tag-1').innerText = d.tags[0];
-        document.getElementById('tag-2').innerText = d.tags[1];
-        document.getElementById('tag-3').innerText = d.tags[2];
-        document.getElementById('tag-4').innerText = d.tags[3];
-        document.getElementById('tag-6').innerText = d.tags[5];
-        
-        document.getElementById('btn-1').innerText = d.btns[0];
-        document.getElementById('btn-3').innerText = d.btns[2];
-        document.getElementById('btn-4').innerText = d.btns[3];
-        document.getElementById('btn-6').innerText = d.btns[5];
-
-        const list = document.getElementById('list-checkin');
-        list.innerHTML = '';
-        d.checkin.forEach(item => {
-            const li = document.createElement('li');
-            li.innerHTML = item;
-            list.appendChild(li);
-        });
-
-        document.getElementById('checkInOrder').innerText = "";
-        document.getElementById('ad-text').innerText = d.ad_text;
-        document.getElementById('ad-link').innerText = d.ad_link;
-
-        usedIndices = { iceBreaker: [], quote: [], dynamic: [], skill: [] };
-
-        generate('iceBreaker');
-        generate('quote');
-        generate('dynamic');
-        generate('skill');
-        generateJoke();
-        generateFact();
-    }
-
-    function generate(type) {
-        const d = db[currentMode];
-        let pool = [];
-        
-        if (type === 'iceBreaker') pool = d.iceBreakers;
-        else if (type === 'quote') pool = d.quotes;
-        else if (type === 'dynamic') pool = d.dynamics;
-        else if (type === 'skill') pool = d.skills;
-
-        if (!pool || pool.length === 0) return;
-
-        let index;
-        let attempts = 0;
-        do {
-            index = Math.floor(Math.random() * pool.length);
-            attempts++;
-            if (usedIndices[type].length >= pool.length) { usedIndices[type] = []; break; }
-        } while (usedIndices[type].includes(index) && attempts < 100);
-        
-        usedIndices[type].push(index);
-        const item = pool[index];
-        const container = document.getElementById('content-' + type);
-
-        const newContainer = container.cloneNode(false);
-
-        if (type === 'quote') {
-            newContainer.innerHTML = `<p class="quote-style">"${item.text}"<br><span style="font-size:0.85rem; font-weight:normal;">- ${item.author}</span></p>`;
-        } else if (typeof item === 'string') {
-            newContainer.innerHTML = `<p>${item}</p>`;
-        } else {
-            newContainer.innerHTML = `<h3>${item.title}</h3><p>${item.body}</p>`;
+    <script>
+        // FALLBACK: If data.js fails to load, this prevents a crash.
+        if (typeof db === 'undefined') {
+            document.body.innerHTML = "<div style='text-align:center; padding:50px;'><h1>Error Loading Content</h1><p>Please make sure both <strong>index.html</strong> and <strong>data.js</strong> are in the same folder (root) on GitHub.</p></div>";
         }
 
-        container.parentNode.replaceChild(newContainer, container);
-    }
+        let currentMode = 'family';
+        let participants = 4;
+        let usedIndices = { iceBreaker: [], quote: [], dynamic: [], skill: [] };
 
-    function generateJoke() {
-        const container = document.getElementById('content-joke');
-        const newContainer = container.cloneNode(false);
-        newContainer.innerHTML = "Thinking...";
-        container.parentNode.replaceChild(newContainer, container);
+        window.onload = () => {
+            const savedMode = localStorage.getItem('meetingMode');
+            if(savedMode && db[savedMode]) {
+                setMode(savedMode);
+            } else {
+                setMode('family');
+            }
+        };
 
-        fetch('https://official-joke-api.appspot.com/random_joke')
-            .then(r => r.json())
-            .then(data => { newContainer.innerHTML = `<p><strong>${data.setup}</strong><br><em>${data.punchline}</em></p>`; })
-            .catch(() => { newContainer.innerHTML = "<p>Why did the developer go broke? He used up all his cache.</p>"; });
-    }
+        function setMode(mode) {
+            currentMode = mode;
+            localStorage.setItem('meetingMode', mode);
+            document.body.setAttribute('data-mode', mode);
+            
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('tab-' + mode).classList.add('active');
 
-    function generateFact() {
-        const container = document.getElementById('content-fact');
-        const newContainer = container.cloneNode(false);
-        newContainer.innerHTML = "Thinking...";
-        container.parentNode.replaceChild(newContainer, container);
+            const d = db[mode];
+            document.getElementById('app-title').innerText = d.title;
+            document.getElementById('app-subtitle').innerText = d.subtitle;
+            
+            document.getElementById('tag-1').innerText = d.tags[0];
+            document.getElementById('tag-2').innerText = d.tags[1];
+            document.getElementById('tag-3').innerText = d.tags[2];
+            document.getElementById('tag-4').innerText = d.tags[3];
+            document.getElementById('tag-6').innerText = d.tags[5];
+            
+            document.getElementById('btn-1').innerText = d.btns[0];
+            document.getElementById('btn-3').innerText = d.btns[2];
+            document.getElementById('btn-4').innerText = d.btns[3];
+            document.getElementById('btn-6').innerText = d.btns[5];
 
-        fetch('https://uselessfacts.jsph.pl/random.json?language=en')
-            .then(r => r.json())
-            .then(data => { newContainer.innerHTML = `<p>${data.text}</p>`; })
-            .catch(() => { newContainer.innerHTML = "<p>Honey never spoils. Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old and still edible.</p>"; });
-    }
+            const list = document.getElementById('list-checkin');
+            list.innerHTML = '';
+            d.checkin.forEach(item => {
+                const li = document.createElement('li');
+                li.innerHTML = item;
+                list.appendChild(li);
+            });
 
-    function adjustCount(change) {
-        participants += change;
-        if (participants < 2) participants = 2;
-        if (participants > 20) participants = 20;
-        document.getElementById('count-display').innerText = participants + " People";
-    }
+            document.getElementById('checkInOrder').innerText = "";
+            document.getElementById('ad-text').innerText = d.ad_text;
+            document.getElementById('ad-link').innerText = d.ad_link;
 
-    function generateOrder() {
-        let arr = [];
-        for(let i=1; i<=participants; i++) arr.push(i);
-        arr.sort(() => Math.random() - 0.5);
-        document.getElementById('checkInOrder').innerText = "Order: Person " + arr.join(" → ");
-    }
-</script>
+            usedIndices = { iceBreaker: [], quote: [], dynamic: [], skill: [] };
+
+            generate('iceBreaker');
+            generate('quote');
+            generate('dynamic');
+            generate('skill');
+            generateJoke();
+            generateFact();
+        }
+
+        function generate(type) {
+            const d = db[currentMode];
+            let pool = [];
+            
+            if (type === 'iceBreaker') pool = d.iceBreakers;
+            else if (type === 'quote') pool = d.quotes;
+            else if (type === 'dynamic') pool = d.dynamics;
+            else if (type === 'skill') pool = d.skills;
+
+            if (!pool || pool.length === 0) return;
+
+            let index;
+            let attempts = 0;
+            do {
+                index = Math.floor(Math.random() * pool.length);
+                attempts++;
+                if (usedIndices[type].length >= pool.length) { usedIndices[type] = []; break; }
+            } while (usedIndices[type].includes(index) && attempts < 100);
+            
+            usedIndices[type].push(index);
+            const item = pool[index];
+            const container = document.getElementById('content-' + type);
+
+            const newContainer = container.cloneNode(false);
+
+            if (type === 'quote') {
+                newContainer.innerHTML = `<p class="quote-style">"${item.text}"<br><span style="font-size:0.85rem; font-weight:normal;">- ${item.author}</span></p>`;
+            } else if (typeof item === 'string') {
+                newContainer.innerHTML = `<p>${item}</p>`;
+            } else {
+                newContainer.innerHTML = `<h3>${item.title}</h3><p>${item.body}</p>`;
+            }
+
+            container.parentNode.replaceChild(newContainer, container);
+        }
+
+        function generateJoke() {
+            const container = document.getElementById('content-joke');
+            const newContainer = container.cloneNode(false);
+            newContainer.innerHTML = "Thinking...";
+            container.parentNode.replaceChild(newContainer, container);
+
+            fetch('https://official-joke-api.appspot.com/random_joke')
+                .then(r => r.json())
+                .then(data => { newContainer.innerHTML = `<p><strong>${data.setup}</strong><br><em>${data.punchline}</em></p>`; })
+                .catch(() => { newContainer.innerHTML = "<p>Why did the developer go broke? He used up all his cache.</p>"; });
+        }
+
+        function generateFact() {
+            const container = document.getElementById('content-fact');
+            const newContainer = container.cloneNode(false);
+            newContainer.innerHTML = "Thinking...";
+            container.parentNode.replaceChild(newContainer, container);
+
+            fetch('https://uselessfacts.jsph.pl/random.json?language=en')
+                .then(r => r.json())
+                .then(data => { newContainer.innerHTML = `<p>${data.text}</p>`; })
+                .catch(() => { newContainer.innerHTML = "<p>Honey never spoils. Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old and still edible.</p>"; });
+        }
+
+        function adjustCount(change) {
+            participants += change;
+            if (participants < 2) participants = 2;
+            if (participants > 20) participants = 20;
+            document.getElementById('count-display').innerText = participants + " People";
+        }
+
+        function generateOrder() {
+            let arr = [];
+            for(let i=1; i<=participants; i++) arr.push(i);
+            arr.sort(() => Math.random() - 0.5);
+            document.getElementById('checkInOrder').innerText = "Order: Person " + arr.join(" → ");
+        }
+
+        function toggleGuide() {
+            const guide = document.getElementById('guide-box');
+            if (guide.style.display === 'block') {
+                guide.style.display = 'none';
+            } else {
+                guide.style.display = 'block';
+            }
+        }
+    </script>
 
 </body>
 </html>
