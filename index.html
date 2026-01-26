@@ -75,6 +75,7 @@
         
         .subtitle { font-size: 1.1rem; color: var(--text-sub); margin-bottom: 25px; font-weight: 600; }
 
+        /* TABS */
         .mode-tabs { background: var(--glass-bg); padding: 5px; border-radius: 50px; display: inline-flex; border: 1px solid var(--border); box-shadow: var(--card-shadow); }
         .tab-btn { background: transparent; border: none; padding: 10px 30px; border-radius: 30px; cursor: pointer; font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--text-sub); transition: var(--transition); font-size: 0.95rem; }
         .tab-btn.active { background: var(--accent); color: white; box-shadow: 0 2px 10px rgba(0,0,0,0.15); }
@@ -112,6 +113,13 @@
         .card-feature h3 { font-size: 1.8rem !important; margin-bottom: 20px !important; }
         .card-feature p { font-size: 1.2rem !important; line-height: 1.8 !important; }
 
+        /* FOOTER CARD (Full Width) */
+        .card-footer {
+            grid-column: 1 / -1;
+            text-align: center;
+            opacity: 0.9;
+        }
+
         .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .tag { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 800; color: var(--accent); opacity: 0.8; }
 
@@ -148,7 +156,7 @@
 
         /* SPONSOR */
         .sponsor-area { margin-top: 40px; text-align: center; padding-bottom: 20px; }
-        .sponsor-link { color: var(--accent); font-weight: 700; text-decoration: none; margin-left: 5px; opacity: 0.8; }
+        .sponsor-link { color: var(--accent); font-weight: 700; text-decoration: none; margin-left: 5px; opacity: 0.8; font-size: 1.1rem; }
         .sponsor-link:hover { text-decoration: underline; opacity: 1; }
 
         @media (max-width: 768px) { 
@@ -167,7 +175,7 @@
             <p class="subtitle" id="app-subtitle">Meaningful conversations, no screens required.</p>
             
             <div class="mode-tabs">
-                <button class="tab-btn active" onclick="setMode('family')" id="tab-family">Household</button>
+                <button class="tab-btn active" onclick="setMode('family')" id="tab-family">Home</button>
                 <button class="tab-btn" onclick="setMode('friends')" id="tab-friends">Social</button>
                 <button class="tab-btn" onclick="setMode('work')" id="tab-work">Team</button>
             </div>
@@ -228,8 +236,9 @@
         </div>
 
         <div class="sponsor-area">
-            <span id="ad-text">Put the screens away.</span> 
-            <a href="https://amazon.com" target="_blank" class="sponsor-link" id="ad-link">Get the Physical Deck &rarr;</a>
+            <span id="ad-text" style="opacity: 0.6; font-size: 0.8rem;">Brought to you by</span><br>
+            <a href="https://noblerealtywv.com" target="_blank" class="sponsor-link" id="ad-link">Noble Realty WV &rarr;</a>
+            <div style="margin-top: 5px; font-size: 0.8rem; opacity: 0.7;">Serving Community Heroes First.</div>
         </div>
     </div>
 
@@ -247,7 +256,7 @@
             quotes: [
                 { text: "Family is not an important thing. It's everything.", author: "Michael J. Fox" }, { text: "The love of a family is life's greatest blessing.", author: "Unknown" }, { text: "In time of test, family is best.", author: "Burmese Proverb" }, { text: "The strength of a family, like the strength of an army, is in its loyalty to each other.", author: "Mario Puzo" }, { text: "What can you do to promote world peace? Go home and love your family.", author: "Mother Teresa" }, { text: "A happy family is but an earlier heaven.", author: "George Bernard Shaw" }, { text: "No act of kindness, no matter how small, is ever wasted.", author: "Aesop" }, { text: "Alone we can do so little; together we can do so much.", author: "Helen Keller" }, { text: "If you want to lift yourself up, lift up someone else.", author: "Booker T. Washington" }, { text: "Do what you can, with what you have, where you are.", author: "Theodore Roosevelt" }, { text: "Family means no one gets left behind or forgotten.", author: "David Ogden Stiers" }, { text: "Home is where you are loved the most and act the worst.", author: "Marjorie Pay Hinckley" }, { text: "The memories we make with our family is everything.", author: "Candace Cameron Bure" }, { text: "Family is a life jacket in the stormy sea of life.", author: "J.K. Rowling" }, { text: "It does not matter how slowly you go as long as you do not stop.", author: "Confucius" }
             ],
-            dynamics: [ // "CHEAT CODES" - REMASTERED, STORY DRIVEN
+            dynamics: [ 
                 { title: "The Level 99 Paladin", body: "Alex loved video games. He spent all weekend grinding levels to get the 'Golden Armor' for his character. He felt powerful. But on Monday morning, he realized he hadn't studied for his math test, his room was a disaster, and he was exhausted. He failed the test. The next day, the game released a new update and his Golden Armor wasn't the best anymore. He realized he had leveled up a fake character while his real character was failing. <div class='cheat-code-box'>🔑 <strong>Cheat Code:</strong> Real life progress (grades, skills, health) is saved forever. Video game progress can be deleted in a second. Prioritize your main character (You).</div>" },
                 { title: "The Million Dollar Dust", body: "A man finally bought his dream car—a vintage red convertible. He loved driving it, but he hated the boring stuff like oil changes and tire rotations. 'It runs fine,' he said. 'I'd rather spend that money on gas.' Two years later, the engine seized up on the highway. The mechanic told him the engine was ruined because of the old oil. He had to sell the car for scrap metal. His neighbor, who drove a cheap sedan but took care of it, was still driving happily. <div class='cheat-code-box'>🔑 <strong>Cheat Code:</strong> Taking care of your things is the ultimate money hack. Maintenance is boring, but it is much cheaper than replacement.</div>" },
                 { title: "The Green Cloud", body: "Sam decided he didn't need to shower after soccer practice. 'I don't smell that bad,' he told himself. He put on extra deodorant and went to school. He didn't notice the smell because he was used to it—he was 'nose blind.' But when he sat next to his crush in science class, she quietly moved three seats away without saying a word. He realized too late that just because you can't smell yourself, doesn't mean others can't. <div class='cheat-code-box'>🔑 <strong>Cheat Code:</strong> You are the last person to know if you smell. Trust your parents when they say you need soap. Hygiene is social survival.</div>" },
@@ -272,8 +281,8 @@
             skills: [
                 { title: "The Perfect Handshake", body: "Stand up. Make eye contact. Smile. Grip firmly (web to web). Shake twice. Release. It builds instant respect." }, { title: "The 2-Minute Rule", body: "If a task takes less than 2 minutes (hanging a coat, washing a dish), do it immediately. Never add it to a to-do list." }, { title: "Active Listening", body: "When someone talks, look at them. Do not think about your response. Just listen. When they finish, ask one question about what they said." }, { title: "Box Breathing", body: "Anxiety hack: Breathe in for 4 seconds. Hold for 4 seconds. Exhale for 4 seconds. Hold for 4 seconds. Repeat." }, { title: "How to Apologize", body: "A real apology has 3 parts: 1. 'I am sorry.' 2. 'It was my fault because...' 3. 'Next time I will...' Without part 3, it is just an excuse." }, { title: "Budgeting 50/30/20", body: "Money rule: 50% for Needs (Rent/Food). 30% for Wants (Fun). 20% for Savings. Always pay your savings first." }, { title: "Table Manners", body: "Wait until everyone is served before eating. Chew with your mouth closed. Keep elbows off the table while eating. It shows respect for the cook." }, { title: "The Gratitude Pivot", body: "When you complain ('I have to go to school'), switch 'Have' to 'Get'. 'I GET to go to school.' It changes your brain chemistry." }, { title: "Changing a Tire", body: "Loosen nuts BEFORE jacking up the car. Jack it up. Remove nuts. Swap tire. Tighten nuts by hand. Lower car. Tighten nuts fully." }, { title: "How to Introduce People", body: "Say the name of the older/higher status person first. 'Grandma, this is my friend Sam.' It shows social grace." }, { title: "Making a Bed", body: "Hospital corners: Tuck the foot. Lift the side of the sheet, tuck the excess triangle under, then drop the side. Crisp and tight." }, { title: "Remembering Names", body: "When introduced, say their name back immediately. 'Nice to meet you, Sarah.' Visualize 'Sarah' written on her forehead." }, { title: "Writing a Thank You Note", body: "1. Salutation. 2. Mention the specific gift. 3. Say how you will use it. 4. Mention seeing them soon. 5. Sign off." }, { title: "Doing Laundry", body: "Separate lights and darks. Check pockets! Use cold water to save energy and clothes. Fold immediately to avoid wrinkles." }, { title: "Unclogging a Sink", body: "Pour boiling water first. Then 1/2 cup baking soda, followed by 1/2 cup vinegar. Cover for 10 mins. Flush with boiling water." }, { title: "Treating a Burn", body: "Run cool (not freezing) water over it for 10 minutes. Do not pop blisters. Cover loosely with sterile gauze." }, { title: "Checking Oil", body: "Park on flat ground. Pull dipstick, wipe clean. Re-insert fully. Pull out and check if oil is between min/max lines." }, { title: "Turning off Water Valve", body: "If a pipe bursts, find the main valve (usually in basement/garage). Turn clockwise until tight. Open faucets to drain." }
             ],
-            ad_text: "Put the screens away.",
-            ad_link: "Get the 'TableTopics' Deck for your kitchen table &rarr;"
+            ad_text: "Brought to you by",
+            ad_link: "Noble Realty WV &rarr;"
         },
         friends: {
             title: "The Hangout",
@@ -293,8 +302,8 @@
             skills: [ 
                 { title: "Open a Bottle Without an Opener", body: "Use the edge of a lighter or a spoon as a lever under the cap." }, { title: "The Perfect High Five", body: "Look at the other person's ELBOW, not their hand. You will never miss." }, { title: "Saber a Champagne Bottle", body: "Find the seam of the bottle. Chill the neck. Slide a blunt knife along the seam and hit the lip firmly." }, { title: "Exit a Boring Conversation", body: "Say 'I need to grab a drink/food/bathroom' or 'I see [Name], I need to say hi.'" }, { title: "Remove Red Wine Stains", body: "Pour white wine or salt on the stain immediately to absorb it." }, { title: "Whistle with Fingers", body: "Make an 'A' shape with index and middle fingers. Fold tongue back. Blow over the tongue." }, { title: "Rip an Apple in Half", body: "Grip apple with palms, thumbs on top. Pull apart with chest muscles, rolling palms outward." }, { title: "Coin Knuckle Roll", body: "Balance coin on index finger. Use thumb to push it over middle finger. Catch with ring finger. Practice." }, { title: "Zippo Snap Start", body: "Hold Zippo by the lid. Snap fingers, hitting the wheel. It lights instantly." }, { title: "Beer Mat Flip", body: "Place beer mat on edge of table. Flip it 180 degrees with back of hand and catch it." }, { title: "Cool a Beer Fast", body: "Wrap the bottle/can in a wet paper towel and put it in the freezer for 15 minutes." }, { title: "Relieve Brain Freeze", body: "Press your tongue flat against the roof of your mouth to warm up the nerves." }, { title: "Look Good in Photos", body: "Push your forehead slightly forward and down. Put your tongue behind your front teeth. Breathe out." }, { title: "Remember Drinks", body: "Assign a visual number to people. Person 1 is a Bun (Beer). Person 2 is a Shoe (Wine). Simple memory palace." }, { title: "Light a Match with One Hand", body: "Fold the matchbook cover back. Press the matchhead inside against the striker. Squeeze and pull." }
             ],
-            ad_text: "Spice up the party.",
-            ad_link: "Get the 'Cards Against Humanity' Game &rarr;"
+            ad_text: "Brought to you by",
+            ad_link: "Noble Realty WV &rarr;"
         },
         work: {
             title: "Team Sync",
@@ -314,8 +323,8 @@
             skills: [ 
                 { title: "Box Breathing", body: "In for 4s, Hold for 4s, Out for 4s, Hold for 4s. Instantly lowers heart rate in stressful situations." }, { title: "The 2-Minute Rule", body: "If a quick task takes less than 2 minutes (taking out trash, sending a text), do it instantly. Don't let small things pile up." }, { title: "De-escalation", body: "When someone is angry, lower your voice, validate their frustration ('I hear you'), and focus on the solution, not the blame." }, { title: "Saying 'No' Politely", body: "Say: 'I can't prioritize that right now without dropping other balls. Which would you like me to do first?'" }, { title: "Efficient Huddles", body: "No agenda, no meeting. Always end a huddle with clear action items: Who is doing what by when?" }, { title: "Task Batching", body: "Group similar tasks together. Do all your prep work, or all your phone calls, in one block of time to save mental energy." }, { title: "Praise Publicly, Correct Privately", body: "Never discipline or correct a teammate in front of others. Always save it for a private, respectful conversation." }, { title: "Active Listening", body: "Listen to understand, not to reply. Wait 2 seconds after someone finishes speaking before you talk." }, { title: "The Eisenhower Matrix", body: "Sort tasks: Urgent/Important (Do now), Not Urgent/Important (Schedule for later), Urgent/Not Important (Delegate), Neither (Delete)." }, { title: "Lift with Your Legs", body: "Keep your back straight, bend at the hips and knees, and keep the load close to your body. Protect your spine." }, { title: "The 5 Why's", body: "When a problem happens, ask 'Why?' 5 times to get to the root cause, not just the symptom." }, { title: "Eat the Frog", body: "Do your hardest, most dreaded task first thing in the morning. The rest of the day is easy." }, { title: "Clear Communication", body: "BLUF: Bottom Line Up Front. Put the main point in the first sentence, then give details." }, { title: "The Check-Back", body: "When receiving complex instructions, repeat them back in your own words to ensure understanding." }, { title: "Boundary Setting", body: "Protect your time off. Do not check work channels when you are not being paid to work." }, { title: "Keyboard Shortcuts", body: "Learn Ctrl+C, Ctrl+V, Alt+Tab, and Ctrl+Z. It saves hours of mouse-clicking over a year." }, { title: "Clean Workspace", body: "A cluttered physical space creates a cluttered mental state. Reset your space at the end of every shift." }, { title: "The 80/20 Rule", body: "20% of your efforts yield 80% of your results. Focus on the high-impact tasks." }, { title: "Handling Mistakes", body: "Own it immediately. Do not make excuses. Say: 'I made a mistake, here is how I am fixing it.'" }
             ],
-            ad_text: "Boost your team's mindset.",
-            ad_link: "Get 'Atomic Habits' by James Clear &rarr;"
+            ad_text: "Brought to you by",
+            ad_link: "Noble Realty WV &rarr;"
         }
     };
 
