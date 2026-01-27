@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meeting Deck</title>
+    <title>Gather</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;800&display=swap" rel="stylesheet">
@@ -11,49 +11,40 @@
     <style>
         :root { --transition: all 0.3s ease; }
 
-        /* --- THEME 1: FAMILY (The Harvest - Thanksgiving Vibe) --- */
-        body[data-mode="family"] { 
-            /* Warm Cream to Soft Wheat Gradient */
+        /* --- THEME 1: FAMILY (Harvest) --- */
+        body[data-mode="home"] { 
             --bg-gradient: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
-            /* Burnt Orange to Deep Brown Header */
             --bg-gradient-accent: linear-gradient(to right, #d84315, #5d4037);
-            
             --glass-bg: rgba(255, 255, 255, 0.95);
-            --text-main: #3e2723; /* Dark Espresso Brown */
+            --text-main: #3e2723;
             --text-sub: #6d4c41;
-            --accent: #d84315; /* Pumpkin / Rust */
+            --accent: #d84315;
             --border: #ffe0b2;
             --card-shadow: 0 4px 12px rgba(216, 67, 21, 0.1);
             --btn-text: #ffffff;
         }
 
-        /* --- THEME 2: FRIENDS (The Campfire) --- */
-        body[data-mode="friends"] { 
-            /* Pitch Black Night Sky */
+        /* --- THEME 2: SOCIAL (Campfire) --- */
+        body[data-mode="social"] { 
             --bg-gradient: linear-gradient(to bottom, #000000, #1a1a1a);
-            /* Glowing Fire Text */
             --bg-gradient-accent: linear-gradient(to right, #ff9966, #ff5e62);
-            
             --glass-bg: rgba(30, 30, 30, 0.9);
             --text-main: #f1f2f6;
             --text-sub: #a4b0be;
-            --accent: #ff9f43; /* Fire Orange */
+            --accent: #ff9f43;
             --border: rgba(255, 159, 67, 0.2);
             --card-shadow: 0 4px 15px rgba(255, 159, 67, 0.15);
             --btn-text: #1a1a1a;
         }
 
-        /* --- THEME 3: WORK (The Varsity) --- */
-        body[data-mode="work"] { 
-            /* Deep Varsity Blue */
+        /* --- THEME 3: TEAM (Varsity) --- */
+        body[data-mode="team"] { 
             --bg-gradient: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            /* Electric Blue/Cyan Header */
             --bg-gradient-accent: linear-gradient(to right, #00c6ff, #0072ff);
-            
             --glass-bg: rgba(255, 255, 255, 0.98);
             --text-main: #1e272e;
             --text-sub: #57606f;
-            --accent: #0984e3; /* Strong Team Blue */
+            --accent: #0984e3;
             --border: #dcdde1;
             --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             --btn-text: #ffffff;
@@ -74,7 +65,7 @@
 
         .container { max-width: 900px; margin: 0 auto; width: 100%; }
 
-        header { text-align: center; margin-bottom: 25px; }
+        header { text-align: center; margin-bottom: 30px; }
         
         h1 { 
             font-weight: 800; 
@@ -88,58 +79,73 @@
             text-transform: uppercase;
         }
         
-        .tagline { font-size: 1.1rem; color: var(--text-sub); margin-bottom: 10px; font-weight: 600; opacity: 0.8; letter-spacing: 0.5px; }
+        .tagline { font-size: 1.1rem; color: var(--text-sub); margin-bottom: 25px; font-weight: 600; opacity: 0.8; letter-spacing: 0.5px; }
         
-        .vibe-indicator { font-size: 0.9rem; font-weight: 500; color: var(--accent); margin-bottom: 20px; opacity: 0.9; display: block; }
+        /* --- TABS --- */
+        .mode-tabs { 
+            background: var(--glass-bg); 
+            padding: 4px; 
+            border-radius: 50px; 
+            display: inline-flex; 
+            border: 1px solid var(--border); 
+            box-shadow: var(--card-shadow); 
+            backdrop-filter: blur(10px); 
+            margin-bottom: 15px; /* Spacing below tabs */
+        }
+        .tab-btn { background: transparent; border: none; padding: 10px 25px; border-radius: 30px; cursor: pointer; font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--text-sub); transition: var(--transition); font-size: 0.9rem; }
+        .tab-btn.active { background: var(--accent); color: var(--btn-text); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        body[data-mode="social"] .tab-btn.active { color: #1a1a1a; } 
 
-        /* --- NEW COOL GUIDE BUTTON --- */
+        /* --- SUBTLE GUIDE BUTTON (Moved Below Tabs) --- */
         .guide-btn {
-            background: var(--glass-bg);
-            border: 1px solid var(--border);
-            color: var(--accent);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 700;
+            background: transparent;
+            border: none;
+            color: var(--text-sub);
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            margin-bottom: 15px;
+            gap: 5px;
+            opacity: 0.7;
             transition: var(--transition);
-            box-shadow: var(--card-shadow);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        .guide-btn:hover { transform: translateY(-2px); opacity: 0.9; }
+        .guide-btn:hover { opacity: 1; color: var(--accent); }
         .guide-icon {
             display: flex; justify-content: center; align-items: center;
-            width: 18px; height: 18px; border-radius: 50%;
-            background: var(--accent); color: var(--bg-gradient); 
-            font-size: 12px;
+            width: 14px; height: 14px; border-radius: 50%;
+            background: var(--text-sub); color: var(--glass-bg); 
+            font-size: 10px; font-weight: bold;
         }
+        .guide-btn:hover .guide-icon { background: var(--accent); }
 
         .guide-content { 
             display: none; 
             background: var(--glass-bg); 
             padding: 20px; 
             border-radius: 16px; 
-            margin: 10px auto 20px auto; 
+            margin: 10px auto 0 auto; 
             border: 1px solid var(--accent); 
             font-size: 0.95rem; 
             line-height: 1.6; 
             text-align: left; 
             max-width: 500px;
             animation: fadeIn 0.3s ease;
+            box-shadow: var(--card-shadow);
         }
         .guide-step { display: flex; gap: 12px; margin-bottom: 10px; align-items: flex-start; }
         .step-num { color: var(--accent); font-weight: 800; min-width: 20px; }
 
-        /* --- TABS --- */
-        .mode-tabs { background: var(--glass-bg); padding: 4px; border-radius: 50px; display: inline-flex; border: 1px solid var(--border); box-shadow: var(--card-shadow); backdrop-filter: blur(10px); margin-bottom: 10px; }
-        .tab-btn { background: transparent; border: none; padding: 10px 25px; border-radius: 30px; cursor: pointer; font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--text-sub); transition: var(--transition); font-size: 0.9rem; }
-        .tab-btn.active { background: var(--accent); color: var(--btn-text); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-        body[data-mode="friends"] .tab-btn.active { color: #1a1a1a; } 
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; align-items: start; }
+        /* --- GRID --- */
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 16px; 
+            align-items: stretch; 
+        }
 
         .card { 
             background: var(--glass-bg); 
@@ -148,11 +154,12 @@
             padding: 20px; 
             display: flex; 
             flex-direction: column; 
+            justify-content: space-between;
             transition: var(--transition); 
             box-shadow: var(--card-shadow); 
-            position: relative;
-            overflow: hidden;
+            position: relative; 
             backdrop-filter: blur(12px);
+            height: 100%;
         }
         .card:hover { transform: translateY(-3px); border-color: var(--accent); }
 
@@ -165,17 +172,17 @@
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-        .card-content { flex-grow: 1; margin-bottom: 20px; font-size: 1rem; line-height: 1.5; color: var(--text-main); display: flex; align-items: center; animation: fadeIn 0.4s ease-out; min-height: 50px; }
+        .card-content { flex-grow: 1; margin-bottom: 20px; font-size: 1rem; line-height: 1.5; color: var(--text-main); display: flex; align-items: center; justify-content: center; text-align: center; animation: fadeIn 0.4s ease-out; min-height: 100px; }
         .card-content p { width: 100%; }
-        .card-content h3 { color: var(--accent); margin-bottom: 8px; font-size: 1.1rem; font-weight: 800; }
+        .card-content h3 { color: var(--accent); margin-bottom: 8px; font-size: 1.1rem; font-weight: 800; width: 100%; }
         
-        .check-list { list-style: none; width: 100%; }
+        .check-list { list-style: none; width: 100%; text-align: left; }
         .check-list li { padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; color: var(--text-main); display: flex; gap: 8px; }
         .check-list li:last-child { border-bottom: none; }
 
-        .btn { background: var(--text-main); color: var(--glass-bg); border: none; width: 100%; padding: 12px; border-radius: 10px; font-weight: 700; font-family: 'Outfit', sans-serif; cursor: pointer; transition: var(--transition); font-size: 0.95rem; }
+        .btn { background: var(--text-main); color: var(--glass-bg); border: none; width: 100%; padding: 12px; border-radius: 10px; font-weight: 700; font-family: 'Outfit', sans-serif; cursor: pointer; transition: var(--transition); font-size: 0.95rem; margin-top: auto; }
         .btn:hover { background: var(--accent); color: var(--btn-text); transform: translateY(-2px); }
-        body[data-mode="friends"] .btn:hover { color: #1a1a1a; }
+        body[data-mode="social"] .btn:hover { color: #1a1a1a; }
         .btn:active { transform: scale(0.98); }
 
         .counter-group { display: flex; align-items: center; gap: 8px; width: 100%; margin-top: auto;}
@@ -195,31 +202,29 @@
         }
     </style>
 </head>
-<body data-mode="family">
+<body data-mode="home">
 
     <div class="container">
         <header>
             <h1>GATHER</h1>
             <div class="tagline">Meaningful conversations, made easy.</div>
             
+            <div class="mode-tabs">
+                <button class="tab-btn active" onclick="setMode('home')" id="tab-home">Home</button>
+                <button class="tab-btn" onclick="setMode('social')" id="tab-social">Social</button>
+                <button class="tab-btn" onclick="setMode('team')" id="tab-team">Team</button>
+            </div>
+
             <button class="guide-btn" onclick="toggleGuide()">
                 <div class="guide-icon">?</div> How it works
             </button>
             
             <div id="guide-box" class="guide-content">
-                <div class="guide-step"><div class="step-num">1.</div><div><strong>Select a Mode:</strong> Tap Family, Friends, or Work below.</div></div>
+                <div class="guide-step"><div class="step-num">1.</div><div><strong>Select a Mode:</strong> Tap Home, Social, or Team above.</div></div>
                 <div class="guide-step"><div class="step-num">2.</div><div><strong>Set the Stage:</strong> Put the phone in the center of the table.</div></div>
                 <div class="guide-step"><div class="step-num">3.</div><div><strong>Pass it Around:</strong> Read a card, answer, then pass the phone.</div></div>
                 <div class="guide-step"><div class="step-num">4.</div><div><strong>No Scrolling:</strong> This is the only screen allowed right now.</div></div>
             </div>
-
-            <div class="mode-tabs">
-                <button class="tab-btn active" onclick="setMode('family')" id="tab-family">Family</button>
-                <button class="tab-btn" onclick="setMode('friends')" id="tab-friends">Friends</button>
-                <button class="tab-btn" onclick="setMode('work')" id="tab-work">Work</button>
-            </div>
-            
-            <span id="current-vibe" class="vibe-indicator">Current Vibe: Dinner Table</span>
         </header>
 
         <div class="grid">
@@ -290,7 +295,7 @@
             document.body.innerHTML = "<div style='text-align:center; padding:50px; font-family:sans-serif;'><h1>⚠️ Connection Error</h1><p>I cannot find your <strong>data.js</strong> file.</p><p>Make sure both <strong>index.html</strong> and <strong>data.js</strong> are in the same folder on GitHub.</p></div>";
         }
 
-        let currentMode = 'family';
+        let currentMode = 'home';
         let participants = 4;
         let usedIndices = { iceBreaker: [], quote: [], dynamic: [], skill: [] };
 
@@ -299,7 +304,7 @@
             if(savedMode && db[savedMode]) {
                 setMode(savedMode);
             } else {
-                setMode('family');
+                setMode('home');
             }
         };
 
@@ -312,11 +317,6 @@
             document.getElementById('tab-' + mode).classList.add('active');
 
             const d = db[mode];
-            
-            let vibeName = "Dinner Table";
-            if(mode === 'friends') vibeName = "The Campfire";
-            if(mode === 'work') vibeName = "The Huddle";
-            document.getElementById('current-vibe').innerText = "Current Vibe: " + vibeName;
             
             document.getElementById('tag-1').innerText = d.tags[0];
             document.getElementById('tag-2').innerText = d.tags[1];
