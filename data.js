@@ -1,11 +1,11 @@
 const db = {
-    family: {
+    home: {
         title: "Dinner Table",
         subtitle: "No phones. Just us. Pass the potatoes.",
         tags: ["Ice Breaker", "The Menu", "Wisdom", "Cheat Code", "Humor", "Life Skill"],
         btns: ["Next Question", "Pick Order", "Next Quote", "Next Cheat Code", "Next Joke", "Next Skill"],
         
-        // FAMILY CHECK IN: Compact "Meat & Potatoes" Version
+        // CHECK IN
         checkin: [
             "🥦 <strong>Veggies:</strong> What challenge is making you stronger?", 
             "🥩 <strong>Meat & Potatoes:</strong> What are you most grateful for?", 
@@ -243,7 +243,7 @@ const db = {
             { title: "Identifying Constellations", body: "Find the Big Dipper. The two outer stars of the bowl point directly to the North Star (Polaris)." }
         ]
     },
-    friends: {
+    social: {
         title: "The Campfire",
         subtitle: "Sparking conversations that burn bright.",
         tags: ["Vibe Check", "Highs & Lows", "Wisdom", "Hot Take", "Humor", "Party Trick"],
