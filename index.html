@@ -12,7 +12,7 @@
         :root { --transition: all 0.3s ease; }
 
         /* --- THEME 1: FAMILY (Harvest) --- */
-        body[data-mode="home"] { 
+        body[data-mode="dinner"] { 
             --bg-gradient: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
             --bg-gradient-accent: linear-gradient(to right, #d84315, #5d4037);
             --glass-bg: rgba(255, 255, 255, 0.95);
@@ -25,7 +25,7 @@
         }
 
         /* --- THEME 2: SOCIAL (Campfire) --- */
-        body[data-mode="social"] { 
+        body[data-mode="campfire"] { 
             --bg-gradient: linear-gradient(to bottom, #000000, #1a1a1a);
             --bg-gradient-accent: linear-gradient(to right, #ff9966, #ff5e62);
             --glass-bg: rgba(30, 30, 30, 0.9);
@@ -38,7 +38,7 @@
         }
 
         /* --- THEME 3: TEAM (Varsity) --- */
-        body[data-mode="team"] { 
+        body[data-mode="huddle"] { 
             --bg-gradient: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             --bg-gradient-accent: linear-gradient(to right, #00c6ff, #0072ff);
             --glass-bg: rgba(255, 255, 255, 0.98);
@@ -69,7 +69,7 @@
         
         h1 { 
             font-weight: 800; 
-            font-size: 3rem; 
+            font-size: 3.2rem; 
             margin-bottom: 5px; 
             letter-spacing: -2px; 
             background: var(--bg-gradient-accent);
@@ -81,42 +81,59 @@
         
         .tagline { font-size: 1.1rem; color: var(--text-sub); margin-bottom: 25px; font-weight: 600; opacity: 0.8; letter-spacing: 0.5px; }
         
-        /* --- TABS --- */
+        /* --- BIG MODE TABS --- */
         .mode-tabs { 
             background: var(--glass-bg); 
-            padding: 4px; 
+            padding: 6px; 
             border-radius: 50px; 
             display: inline-flex; 
             border: 1px solid var(--border); 
             box-shadow: var(--card-shadow); 
             backdrop-filter: blur(10px); 
-            margin-bottom: 15px; /* Spacing below tabs */
+            margin-bottom: 10px; 
         }
-        .tab-btn { background: transparent; border: none; padding: 10px 25px; border-radius: 30px; cursor: pointer; font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--text-sub); transition: var(--transition); font-size: 0.9rem; }
+        .tab-btn { 
+            background: transparent; 
+            border: none; 
+            padding: 12px 30px; 
+            border-radius: 30px; 
+            cursor: pointer; 
+            font-family: 'Outfit', sans-serif; 
+            font-weight: 800; 
+            color: var(--text-sub); 
+            transition: var(--transition); 
+            font-size: 1.1rem; 
+        }
         .tab-btn.active { background: var(--accent); color: var(--btn-text); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-        body[data-mode="social"] .tab-btn.active { color: #1a1a1a; } 
+        body[data-mode="campfire"] .tab-btn.active { color: #1a1a1a; } 
 
-        /* --- SUBTLE GUIDE BUTTON (Moved Below Tabs) --- */
+        /* --- CENTERED, SMALL GUIDE BUTTON --- */
+        .guide-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
         .guide-btn {
             background: transparent;
             border: none;
             color: var(--text-sub);
             padding: 6px 12px;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: 600;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
             opacity: 0.7;
             transition: var(--transition);
             text-transform: uppercase;
             letter-spacing: 1px;
+            margin-top: 5px;
         }
         .guide-btn:hover { opacity: 1; color: var(--accent); }
         .guide-icon {
             display: flex; justify-content: center; align-items: center;
-            width: 14px; height: 14px; border-radius: 50%;
+            width: 16px; height: 16px; border-radius: 50%;
             background: var(--text-sub); color: var(--glass-bg); 
             font-size: 10px; font-weight: bold;
         }
@@ -125,19 +142,19 @@
         .guide-content { 
             display: none; 
             background: var(--glass-bg); 
-            padding: 20px; 
+            padding: 25px; 
             border-radius: 16px; 
-            margin: 10px auto 0 auto; 
+            margin: 15px auto 0 auto; 
             border: 1px solid var(--accent); 
-            font-size: 0.95rem; 
+            font-size: 1rem; 
             line-height: 1.6; 
             text-align: left; 
             max-width: 500px;
             animation: fadeIn 0.3s ease;
             box-shadow: var(--card-shadow);
         }
-        .guide-step { display: flex; gap: 12px; margin-bottom: 10px; align-items: flex-start; }
-        .step-num { color: var(--accent); font-weight: 800; min-width: 20px; }
+        .guide-step { display: flex; gap: 15px; margin-bottom: 12px; align-items: flex-start; }
+        .step-num { color: var(--accent); font-weight: 800; min-width: 20px; font-size: 1.2rem; }
 
         /* --- GRID --- */
         .grid { 
@@ -182,7 +199,7 @@
 
         .btn { background: var(--text-main); color: var(--glass-bg); border: none; width: 100%; padding: 12px; border-radius: 10px; font-weight: 700; font-family: 'Outfit', sans-serif; cursor: pointer; transition: var(--transition); font-size: 0.95rem; margin-top: auto; }
         .btn:hover { background: var(--accent); color: var(--btn-text); transform: translateY(-2px); }
-        body[data-mode="social"] .btn:hover { color: #1a1a1a; }
+        body[data-mode="campfire"] .btn:hover { color: #1a1a1a; }
         .btn:active { transform: scale(0.98); }
 
         .counter-group { display: flex; align-items: center; gap: 8px; width: 100%; margin-top: auto;}
@@ -197,12 +214,12 @@
         @media (max-width: 768px) { 
             h1 { font-size: 2.5rem; } 
             .mode-tabs { width: 100%; display: flex; } 
-            .tab-btn { flex: 1; padding: 10px 0; } 
+            .tab-btn { flex: 1; padding: 12px 0; } 
             .card-feature { padding: 20px; }
         }
     </style>
 </head>
-<body data-mode="home">
+<body data-mode="dinner">
 
     <div class="container">
         <header>
@@ -210,19 +227,21 @@
             <div class="tagline">Meaningful conversations, made easy.</div>
             
             <div class="mode-tabs">
-                <button class="tab-btn active" onclick="setMode('home')" id="tab-home">Home</button>
-                <button class="tab-btn" onclick="setMode('social')" id="tab-social">Social</button>
-                <button class="tab-btn" onclick="setMode('team')" id="tab-team">Team</button>
+                <button class="tab-btn active" onclick="setMode('dinner')" id="tab-dinner">Dinner Table</button>
+                <button class="tab-btn" onclick="setMode('campfire')" id="tab-campfire">Campfire</button>
+                <button class="tab-btn" onclick="setMode('huddle')" id="tab-huddle">Huddle Up</button>
             </div>
 
-            <button class="guide-btn" onclick="toggleGuide()">
-                <div class="guide-icon">?</div> How it works
-            </button>
+            <div class="guide-container">
+                <button class="guide-btn" onclick="toggleGuide()">
+                    <div class="guide-icon">?</div> How it works
+                </button>
+            </div>
             
             <div id="guide-box" class="guide-content">
-                <div class="guide-step"><div class="step-num">1.</div><div><strong>Select a Mode:</strong> Tap Home, Social, or Team above.</div></div>
-                <div class="guide-step"><div class="step-num">2.</div><div><strong>Set the Stage:</strong> Put the phone in the center of the table.</div></div>
-                <div class="guide-step"><div class="step-num">3.</div><div><strong>Pass it Around:</strong> Read a card, answer, then pass the phone.</div></div>
+                <div class="guide-step"><div class="step-num">1.</div><div><strong>Pick a Vibe:</strong> Choose Dinner Table, Campfire, or Huddle Up above.</div></div>
+                <div class="guide-step"><div class="step-num">2.</div><div><strong>Set the Stage:</strong> Place this phone in the middle of the table.</div></div>
+                <div class="guide-step"><div class="step-num">3.</div><div><strong>Pass it Around:</strong> Read a card, share your answer, then pass it on.</div></div>
                 <div class="guide-step"><div class="step-num">4.</div><div><strong>No Scrolling:</strong> This is the only screen allowed right now.</div></div>
             </div>
         </header>
@@ -295,7 +314,7 @@
             document.body.innerHTML = "<div style='text-align:center; padding:50px; font-family:sans-serif;'><h1>⚠️ Connection Error</h1><p>I cannot find your <strong>data.js</strong> file.</p><p>Make sure both <strong>index.html</strong> and <strong>data.js</strong> are in the same folder on GitHub.</p></div>";
         }
 
-        let currentMode = 'home';
+        let currentMode = 'dinner';
         let participants = 4;
         let usedIndices = { iceBreaker: [], quote: [], dynamic: [], skill: [] };
 
@@ -304,7 +323,7 @@
             if(savedMode && db[savedMode]) {
                 setMode(savedMode);
             } else {
-                setMode('home');
+                setMode('dinner');
             }
         };
 

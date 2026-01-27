@@ -1,6 +1,6 @@
 const db = {
-    // --- HOME MODE (Family/Dinner) ---
-    home: {
+    // --- MODE 1: DINNER TABLE ---
+    dinner: {
         title: "Dinner Table",
         subtitle: "No phones. Just us. Pass the potatoes.",
         tags: ["Ice Breaker", "The Menu", "Wisdom", "Cheat Code", "Humor", "Life Skill"],
@@ -143,8 +143,8 @@ const db = {
             { title: "Identifying Constellations", body: "Find the Big Dipper. The two outer stars of the bowl point directly to the North Star (Polaris)." }
         ]
     },
-    // --- SOCIAL MODE (Friends/Campfire) ---
-    social: {
+    // --- MODE 2: CAMPFIRE ---
+    campfire: {
         title: "The Campfire",
         subtitle: "Sparking conversations that burn bright.",
         tags: ["Vibe Check", "Highs & Lows", "Wisdom", "Hot Take", "Humor", "Party Trick"],
@@ -175,8 +175,8 @@ const db = {
         ad_text: "Brought to you by",
         ad_link: "Noble Realty WV &rarr;"
     },
-    // --- TEAM MODE (Work/Huddle) ---
-    team: {
+    // --- MODE 3: HUDDLE UP ---
+    huddle: {
         title: "The Huddle",
         subtitle: "Unite the squad. Clear the path. Win the day.",
         tags: ["Warm Up", "Check-In", "Mindset", "The Playbook", "Humor", "Growth"],
