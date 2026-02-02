@@ -11,137 +11,74 @@
     <style>
         :root { --transition: all 0.3s ease; }
 
-        /* --- THEME 1: FAMILY (Harvest) --- */
-        body[data-mode="dinner"] { 
-            --bg-gradient: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
-            --bg-gradient-accent: linear-gradient(to right, #d84315, #5d4037);
-            --glass-bg: rgba(255, 255, 255, 0.95);
-            --text-main: #3e2723;
-            --text-sub: #6d4c41;
+        /* THEME: HARVEST (Warm) - PERMANENT */
+        body { 
+            font-family: 'Outfit', sans-serif; 
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+            background-attachment: fixed;
+            color: #3e2723;
+            min-height: 100vh; 
+            padding: 20px; 
+            display: flex; 
+            flex-direction: column;
             --accent: #d84315;
+            --glass-bg: rgba(255, 255, 255, 0.95);
             --border: #ffe0b2;
             --card-shadow: 0 4px 12px rgba(216, 67, 21, 0.1);
             --btn-text: #ffffff;
         }
 
-        /* --- THEME 2: SOCIAL (Campfire) --- */
-        body[data-mode="campfire"] { 
-            --bg-gradient: linear-gradient(to bottom, #000000, #1a1a1a);
-            --bg-gradient-accent: linear-gradient(to right, #ff9966, #ff5e62);
-            --glass-bg: rgba(30, 30, 30, 0.9);
-            --text-main: #f1f2f6;
-            --text-sub: #a4b0be;
-            --accent: #ff9f43;
-            --border: rgba(255, 159, 67, 0.2);
-            --card-shadow: 0 4px 15px rgba(255, 159, 67, 0.15);
-            --btn-text: #1a1a1a;
-        }
-
-        /* --- THEME 3: TEAM (Varsity) --- */
-        body[data-mode="huddle"] { 
-            --bg-gradient: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            --bg-gradient-accent: linear-gradient(to right, #00c6ff, #0072ff);
-            --glass-bg: rgba(255, 255, 255, 0.98);
-            --text-main: #1e272e;
-            --text-sub: #57606f;
-            --accent: #0984e3;
-            --border: #dcdde1;
-            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            --btn-text: #ffffff;
-        }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body { 
-            font-family: 'Outfit', sans-serif; 
-            background: var(--bg-gradient);
-            background-attachment: fixed;
-            color: var(--text-main); 
-            min-height: 100vh; 
-            padding: 20px; 
-            display: flex; 
-            flex-direction: column;
-        }
-
         .container { max-width: 900px; margin: 0 auto; width: 100%; }
 
-        header { text-align: center; margin-bottom: 30px; }
+        header { text-align: center; margin-bottom: 20px; }
         
         h1 { 
             font-weight: 800; 
-            font-size: 3.2rem; 
+            font-size: 3.5rem; 
             margin-bottom: 5px; 
             letter-spacing: -2px; 
-            background: var(--bg-gradient-accent);
+            background: linear-gradient(to right, #d84315, #5d4037);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            display: inline-block;
             text-transform: uppercase;
         }
         
-        .tagline { font-size: 1.1rem; color: var(--text-sub); margin-bottom: 25px; font-weight: 600; opacity: 0.8; letter-spacing: 0.5px; }
-        
-        /* --- MODE TABS --- */
-        .mode-tabs { 
-            background: var(--glass-bg); 
-            padding: 6px; 
-            border-radius: 50px; 
-            display: inline-flex; 
-            border: 1px solid var(--border); 
-            box-shadow: var(--card-shadow); 
-            backdrop-filter: blur(10px); 
-            margin-bottom: 10px; 
-        }
-        .tab-btn { 
-            background: transparent; 
-            border: none; 
-            padding: 12px 30px; 
-            border-radius: 30px; 
-            cursor: pointer; 
-            font-family: 'Outfit', sans-serif; 
-            font-weight: 800; 
-            color: var(--text-sub); 
-            transition: var(--transition); 
-            font-size: 1.1rem; 
-        }
-        .tab-btn.active { background: var(--accent); color: var(--btn-text); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-        body[data-mode="campfire"] .tab-btn.active { color: #1a1a1a; } 
+        .tagline { font-size: 1.1rem; color: #6d4c41; margin-bottom: 25px; font-weight: 600; opacity: 0.8; letter-spacing: 0.5px; }
 
-        /* --- GUIDE BUTTON (Centered & Small) --- */
-        .guide-container { display: flex; justify-content: center; width: 100%; }
+        /* --- GUIDE BUTTON (Small, Centered) --- */
+        .guide-container { display: flex; justify-content: center; width: 100%; margin-bottom: 15px; }
         .guide-btn {
             background: transparent;
-            border: none;
-            color: var(--text-sub);
-            padding: 6px 12px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            color: #6d4c41;
+            padding: 6px 14px;
             font-size: 0.8rem;
             font-weight: 600;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            opacity: 0.7;
+            background: var(--glass-bg);
             transition: var(--transition);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 5px;
+            box-shadow: var(--card-shadow);
         }
-        .guide-btn:hover { opacity: 1; color: var(--accent); }
+        .guide-btn:hover { color: var(--accent); transform: translateY(-1px); }
         .guide-icon {
             display: flex; justify-content: center; align-items: center;
             width: 16px; height: 16px; border-radius: 50%;
-            background: var(--text-sub); color: var(--glass-bg); 
+            background: var(--accent); color: white; 
             font-size: 10px; font-weight: bold;
         }
-        .guide-btn:hover .guide-icon { background: var(--accent); }
 
-        /* Updated Guide Content (Helpful & Idiot-Proof) */
+        /* --- GUIDE CONTENT (Idiot-Proof) --- */
         .guide-content { 
             display: none; 
             background: var(--glass-bg); 
             padding: 25px; 
             border-radius: 16px; 
-            margin: 15px auto 0 auto; 
+            margin: 10px auto 20px auto; 
             border: 1px solid var(--accent); 
             font-size: 1rem; 
             line-height: 1.6; 
@@ -150,10 +87,11 @@
             animation: fadeIn 0.3s ease;
             box-shadow: var(--card-shadow);
         }
-        .guide-step { display: flex; gap: 15px; margin-bottom: 12px; align-items: flex-start; }
-        .step-num { color: var(--accent); font-weight: 800; min-width: 20px; font-size: 1.2rem; }
+        .guide-step { display: flex; gap: 15px; margin-bottom: 15px; align-items: flex-start; }
+        .step-num { color: var(--accent); font-weight: 800; min-width: 25px; font-size: 1.2rem; }
+        .guide-text strong { display: block; margin-bottom: 3px; color: var(--accent); }
 
-        /* --- GRID (Even Squares & Alignment Fixes) --- */
+        /* --- GRID --- */
         .grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
@@ -186,29 +124,14 @@
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Content grows to fill space, pushing button down */
-        .card-content { 
-            flex-grow: 1; 
-            margin-bottom: 20px; 
-            font-size: 1rem; 
-            line-height: 1.5; 
-            color: var(--text-main); 
-            display: flex; 
-            flex-direction: column;
-            justify-content: center; /* Vertically center content */
-            text-align: left; /* Default alignment */
-            animation: fadeIn 0.4s ease-out; 
-            min-height: 100px; 
-        }
+        .card-content { flex-grow: 1; margin-bottom: 20px; font-size: 1rem; line-height: 1.5; color: var(--text-main); display: flex; flex-direction: column; justify-content: center; animation: fadeIn 0.4s ease-out; min-height: 100px; }
         
-        /* Center text for specific cards */
-        #content-iceBreaker, #content-quote, #content-joke, #content-fact {
-            text-align: center;
-            align-items: center;
-        }
-
+        /* Center short text, Left align long text */
         .card-content p { width: 100%; margin: 0; }
-        .card-content h3 { color: var(--accent); margin-bottom: 8px; font-size: 1.1rem; font-weight: 800; width: 100%; }
+        .text-center { text-align: center; }
+        .text-left { text-align: left; }
+
+        .card-content h3 { color: var(--accent); margin-bottom: 8px; font-size: 1.1rem; font-weight: 800; width: 100%; text-align: left; }
         
         .cheat-code-box {
             background: rgba(125,125,125,0.1); 
@@ -222,12 +145,11 @@
         }
 
         .check-list { list-style: none; width: 100%; text-align: left; padding: 0; margin: 0; }
-        .check-list li { padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; color: var(--text-main); display: flex; gap: 8px; }
+        .check-list li { padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 0.95rem; color: var(--text-main); display: flex; gap: 10px; line-height: 1.4; }
         .check-list li:last-child { border-bottom: none; }
 
-        .btn { background: var(--text-main); color: var(--glass-bg); border: none; width: 100%; padding: 12px; border-radius: 10px; font-weight: 700; font-family: 'Outfit', sans-serif; cursor: pointer; transition: var(--transition); font-size: 0.95rem; margin-top: auto; }
-        .btn:hover { background: var(--accent); color: var(--btn-text); transform: translateY(-2px); }
-        body[data-mode="campfire"] .btn:hover { color: #1a1a1a; }
+        .btn { background: #3e2723; color: white; border: none; width: 100%; padding: 14px; border-radius: 12px; font-weight: 700; font-family: 'Outfit', sans-serif; cursor: pointer; transition: var(--transition); font-size: 0.95rem; margin-top: auto; }
+        .btn:hover { background: var(--accent); transform: translateY(-2px); }
         .btn:active { transform: scale(0.98); }
 
         .counter-group { display: flex; align-items: center; gap: 8px; width: 100%; margin-top: auto;}
@@ -240,26 +162,18 @@
         .sponsor-link:hover { text-decoration: underline; opacity: 1; }
 
         @media (max-width: 768px) { 
-            h1 { font-size: 2.5rem; } 
-            .mode-tabs { width: 100%; display: flex; } 
-            .tab-btn { flex: 1; padding: 10px 0; } 
+            h1 { font-size: 2.8rem; } 
             .card-feature { padding: 20px; }
         }
     </style>
 </head>
-<body data-mode="dinner">
+<body>
 
     <div class="container">
         <header>
             <h1>GATHER</h1>
             <div class="tagline">Meaningful conversations, made easy.</div>
             
-            <div class="mode-tabs">
-                <button class="tab-btn active" onclick="setMode('dinner')" id="tab-dinner">Dinner Table</button>
-                <button class="tab-btn" onclick="setMode('campfire')" id="tab-campfire">Campfire</button>
-                <button class="tab-btn" onclick="setMode('huddle')" id="tab-huddle">Huddle Up</button>
-            </div>
-
             <div class="guide-container">
                 <button class="guide-btn" onclick="toggleGuide()">
                     <div class="guide-icon">?</div> How it works
@@ -267,23 +181,35 @@
             </div>
             
             <div id="guide-box" class="guide-content">
-                <div class="guide-step"><div class="step-num">1.</div><div><strong>Assign a "Host":</strong> One person holds the phone. They are the MC.</div></div>
-                <div class="guide-step"><div class="step-num">2.</div><div><strong>No Phones Rule:</strong> Everyone else puts their phone away. This screen is the only one allowed.</div></div>
-                <div class="guide-step"><div class="step-num">3.</div><div><strong>Start with Warm Up:</strong> Tap "Next Question". Ask the group. Everyone answers.</div></div>
-                <div class="guide-step"><div class="step-num">4.</div><div><strong>Go Deeper:</strong> Move to "Check In" or "Lesson" when you're ready. Pass the phone if you want a new Host.</div></div>
+                <div class="guide-step">
+                    <div class="step-num">1.</div>
+                    <div class="guide-text"><strong>The Device Rule</strong><br>This is the only screen allowed. Everyone else puts their phone away.</div>
+                </div>
+                <div class="guide-step">
+                    <div class="step-num">2.</div>
+                    <div class="guide-text"><strong>Set the Stage</strong><br>Place this phone in the middle of the table (or prop it up).</div>
+                </div>
+                <div class="guide-step">
+                    <div class="step-num">3.</div>
+                    <div class="guide-text"><strong>Pass the Baton</strong><br>One person reads a card. Everyone answers. Then, pass the phone to the next person to read.</div>
+                </div>
+                <div class="guide-step">
+                    <div class="step-num">4.</div>
+                    <div class="guide-text"><strong>Go Deeper</strong><br>Start with "Warm Up." Move to "Wisdom" or "Lesson" when the group is ready for something real.</div>
+                </div>
             </div>
         </header>
 
         <div class="grid">
             
             <div class="card">
-                <div class="card-header"><span class="tag" id="tag-1">Warm Up</span></div>
-                <div class="card-content" id="content-iceBreaker"><p>Loading...</p></div>
-                <button class="btn" onclick="generate('iceBreaker')" id="btn-1">Next Question</button>
+                <div class="card-header"><span class="tag">Warm Up</span></div>
+                <div class="card-content text-center" id="content-iceBreaker"><p>Loading...</p></div>
+                <button class="btn" onclick="generate('iceBreaker')">Next Question</button>
             </div>
 
             <div class="card">
-                <div class="card-header"><span class="tag" id="tag-2">Check In</span></div>
+                <div class="card-header"><span class="tag">Check In</span></div>
                 <div class="card-content" style="display:block;">
                     <ul class="check-list" id="list-checkin"></ul>
                 </div>
@@ -297,32 +223,32 @@
             </div>
 
             <div class="card">
-                <div class="card-header"><span class="tag" id="tag-3">Wisdom</span></div>
-                <div class="card-content" id="content-quote"><p>Loading...</p></div>
-                <button class="btn" onclick="generate('quote')" id="btn-3">Next Quote</button>
+                <div class="card-header"><span class="tag">Wisdom</span></div>
+                <div class="card-content text-center" id="content-quote"><p>Loading...</p></div>
+                <button class="btn" onclick="generate('quote')">Next Quote</button>
             </div>
 
             <div class="card card-feature">
-                <div class="card-header"><span class="tag" id="tag-4">Lesson</span></div>
-                <div class="card-content" id="content-dynamic" style="display: block;"><p>Loading...</p></div>
-                <button class="btn" onclick="generate('dynamic')" id="btn-4" style="width: auto; margin: 0 auto; display: block; padding: 12px 30px;">Read Next Lesson</button>
+                <div class="card-header"><span class="tag">Lesson</span></div>
+                <div class="card-content text-left" id="content-dynamic" style="display: block;"><p>Loading...</p></div>
+                <button class="btn" onclick="generate('dynamic')" style="width: auto; margin: 0 auto; display: block; padding: 12px 30px;">Read Next Lesson</button>
             </div>
 
             <div class="card">
                 <div class="card-header"><span class="tag">Humor</span></div>
-                <div class="card-content" id="content-joke"><p>Loading...</p></div>
+                <div class="card-content text-center" id="content-joke"><p>Loading...</p></div>
                 <button class="btn" onclick="generateJoke()">Next Joke</button>
             </div>
 
             <div class="card">
-                <div class="card-header"><span class="tag" id="tag-6">Growth</span></div>
-                <div class="card-content" id="content-skill"><p>Loading...</p></div>
-                <button class="btn" onclick="generate('skill')" id="btn-6">Next Skill</button>
+                <div class="card-header"><span class="tag">Growth</span></div>
+                <div class="card-content text-left" id="content-skill"><p>Loading...</p></div>
+                <button class="btn" onclick="generate('skill')">Next Skill</button>
             </div>
 
             <div class="card">
                 <div class="card-header"><span class="tag">Wonder</span></div>
-                <div class="card-content" id="content-fact"><p>Loading...</p></div>
+                <div class="card-content text-center" id="content-fact"><p>Loading...</p></div>
                 <button class="btn" onclick="generateFact()">Get Fact</button>
             </div>
 
@@ -342,40 +268,20 @@
             document.body.innerHTML = "<div style='text-align:center; padding:50px; font-family:sans-serif;'><h1>⚠️ Connection Error</h1><p>I cannot find your <strong>data.js</strong> file.</p><p>Make sure both <strong>index.html</strong> and <strong>data.js</strong> are in the same folder on GitHub.</p></div>";
         }
 
-        let currentMode = 'dinner';
+        // --- SINGLE MODE: FAMILY DINNER ---
         let participants = 4;
         let usedIndices = { iceBreaker: [], quote: [], dynamic: [], skill: [] };
 
+        // Auto-Run on Load
         window.onload = () => {
-            const savedMode = localStorage.getItem('meetingMode');
-            if(savedMode && db[savedMode]) {
-                setMode(savedMode);
-            } else {
-                setMode('dinner');
-            }
+            initApp();
         };
 
-        function setMode(mode) {
-            currentMode = mode;
-            localStorage.setItem('meetingMode', mode);
-            document.body.setAttribute('data-mode', mode);
+        function initApp() {
+            // Load "Dinner" data by default since we are single mode now
+            const d = db.dinner; 
             
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById('tab-' + mode).classList.add('active');
-
-            const d = db[mode];
-            
-            document.getElementById('tag-1').innerText = d.tags[0];
-            document.getElementById('tag-2').innerText = d.tags[1];
-            document.getElementById('tag-3').innerText = d.tags[2];
-            document.getElementById('tag-4').innerText = d.tags[3];
-            document.getElementById('tag-6').innerText = d.tags[5];
-            
-            document.getElementById('btn-1').innerText = d.btns[0];
-            document.getElementById('btn-3').innerText = d.btns[2];
-            document.getElementById('btn-4').innerText = d.btns[3];
-            document.getElementById('btn-6').innerText = d.btns[5];
-
+            // Populate Check-in List
             const list = document.getElementById('list-checkin');
             list.innerHTML = '';
             d.checkin.forEach(item => {
@@ -384,12 +290,11 @@
                 list.appendChild(li);
             });
 
-            document.getElementById('checkInOrder').innerText = "";
+            // Set Footer info
             document.getElementById('ad-text').innerText = d.ad_text;
             document.getElementById('ad-link').innerText = d.ad_link;
 
-            usedIndices = { iceBreaker: [], quote: [], dynamic: [], skill: [] };
-
+            // Generate initial cards
             generate('iceBreaker');
             generate('quote');
             generate('dynamic');
@@ -399,8 +304,9 @@
         }
 
         function generate(type) {
-            const d = db[currentMode];
+            const d = db.dinner; // Always use dinner data
             let pool = [];
+            
             if (type === 'iceBreaker') pool = d.iceBreakers;
             else if (type === 'quote') pool = d.quotes;
             else if (type === 'dynamic') pool = d.dynamics;
@@ -419,13 +325,17 @@
             usedIndices[type].push(index);
             const item = pool[index];
             const container = document.getElementById('content-' + type);
-            const newContainer = container.cloneNode(false);
+            
+            // Create fresh container to reset content
+            const newContainer = container.cloneNode(false); // Clone without children
+            newContainer.id = container.id; // Ensure ID is kept
 
             if (type === 'quote') {
-                newContainer.innerHTML = `<p class="quote-style">"${item.text}"<br><span style="font-size:0.85rem; font-weight:normal;">- ${item.author}</span></p>`;
+                newContainer.innerHTML = `<p class="quote-style">"${item.text}"<br><span style="font-size:0.85rem; font-weight:normal; margin-top:5px; display:block;">- ${item.author}</span></p>`;
             } else if (typeof item === 'string') {
                 newContainer.innerHTML = `<p>${item}</p>`;
             } else {
+                // For Stories/Skills (Object with Title/Body)
                 newContainer.innerHTML = `<h3>${item.title}</h3><p>${item.body}</p>`;
             }
             container.parentNode.replaceChild(newContainer, container);
