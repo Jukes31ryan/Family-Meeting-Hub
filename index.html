@@ -42,14 +42,15 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
+            display: inline-block;
         }
         
-        .tagline { font-size: 1.1rem; color: #6d4c41; margin-bottom: 25px; font-weight: 600; opacity: 0.8; letter-spacing: 0.5px; }
+        .tagline { font-size: 1.1rem; color: #6d4c41; margin-bottom: 15px; font-weight: 600; opacity: 0.8; letter-spacing: 0.5px; }
 
         /* --- GUIDE BUTTON (Small, Centered) --- */
         .guide-container { display: flex; justify-content: center; width: 100%; margin-bottom: 15px; }
         .guide-btn {
-            background: transparent;
+            background: var(--glass-bg);
             border: 1px solid var(--border);
             border-radius: 20px;
             color: #6d4c41;
@@ -60,7 +61,6 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: var(--glass-bg);
             transition: var(--transition);
             box-shadow: var(--card-shadow);
         }
@@ -72,7 +72,7 @@
             font-size: 10px; font-weight: bold;
         }
 
-        /* --- GUIDE CONTENT (Idiot-Proof) --- */
+        /* --- GUIDE CONTENT --- */
         .guide-content { 
             display: none; 
             background: var(--glass-bg); 
@@ -126,13 +126,13 @@
 
         .card-content { flex-grow: 1; margin-bottom: 20px; font-size: 1rem; line-height: 1.5; color: var(--text-main); display: flex; flex-direction: column; justify-content: center; animation: fadeIn 0.4s ease-out; min-height: 100px; }
         
-        /* Center short text, Left align long text */
-        .card-content p { width: 100%; margin: 0; }
+        /* Alignment Helpers */
         .text-center { text-align: center; }
         .text-left { text-align: left; }
 
         .card-content h3 { color: var(--accent); margin-bottom: 8px; font-size: 1.1rem; font-weight: 800; width: 100%; text-align: left; }
         
+        /* Cheat Code Box for Stories */
         .cheat-code-box {
             background: rgba(125,125,125,0.1); 
             border-left: 4px solid var(--accent);
@@ -172,7 +172,7 @@
     <div class="container">
         <header>
             <h1>GATHER</h1>
-            <div class="tagline">Meaningful conversations, made easy.</div>
+            <div class="tagline">Dinner Table Edition</div>
             
             <div class="guide-container">
                 <button class="guide-btn" onclick="toggleGuide()">
@@ -183,19 +183,19 @@
             <div id="guide-box" class="guide-content">
                 <div class="guide-step">
                     <div class="step-num">1.</div>
-                    <div class="guide-text"><strong>The Device Rule</strong><br>This is the only screen allowed. Everyone else puts their phone away.</div>
+                    <div class="guide-text"><strong>The Device Rule</strong><br>This is the only screen allowed at the table. Everyone else puts their phone away.</div>
                 </div>
                 <div class="guide-step">
                     <div class="step-num">2.</div>
-                    <div class="guide-text"><strong>Set the Stage</strong><br>Place this phone in the middle of the table (or prop it up).</div>
+                    <div class="guide-text"><strong>Set the Stage</strong><br>Place this phone in the center of the table (or prop it up against a glass).</div>
                 </div>
                 <div class="guide-step">
                     <div class="step-num">3.</div>
-                    <div class="guide-text"><strong>Pass the Baton</strong><br>One person reads a card. Everyone answers. Then, pass the phone to the next person to read.</div>
+                    <div class="guide-text"><strong>Pass the Baton</strong><br>One person reads a card. Everyone answers. Then, pass the phone to the next person.</div>
                 </div>
                 <div class="guide-step">
                     <div class="step-num">4.</div>
-                    <div class="guide-text"><strong>Go Deeper</strong><br>Start with "Warm Up." Move to "Wisdom" or "Lesson" when the group is ready for something real.</div>
+                    <div class="guide-text"><strong>Go Deeper</strong><br>Start with "Warm Up." Move to "Wisdom" or "Lesson" when you want a real conversation.</div>
                 </div>
             </div>
         </header>
@@ -269,6 +269,8 @@
         }
 
         // --- SINGLE MODE: FAMILY DINNER ---
+        // We now reference 'db' directly because we flattened the data file in the previous step
+        // to be a single mode.
         let participants = 4;
         let usedIndices = { iceBreaker: [], quote: [], dynamic: [], skill: [] };
 
@@ -278,21 +280,26 @@
         };
 
         function initApp() {
-            // Load "Dinner" data by default since we are single mode now
-            const d = db.dinner; 
+            // FIX: Access 'db' directly since we removed the 'dinner' key layer in the last step
+            // If you used the data.js from the PREVIOUS prompt, it's db.dinner.
+            // If you use the single mode concept, we usually flatten it. 
+            // To be safe, let's detect it.
+            let d = db;
+            if (db.dinner) {
+                d = db.dinner; // Handle if you kept the old data structure
+            }
             
             // Populate Check-in List
             const list = document.getElementById('list-checkin');
             list.innerHTML = '';
-            d.checkin.forEach(item => {
-                const li = document.createElement('li');
-                li.innerHTML = item;
-                list.appendChild(li);
-            });
-
-            // Set Footer info
-            document.getElementById('ad-text').innerText = d.ad_text;
-            document.getElementById('ad-link').innerText = d.ad_link;
+            // Safety check for array existence
+            if(d.checkin) {
+                d.checkin.forEach(item => {
+                    const li = document.createElement('li');
+                    li.innerHTML = item;
+                    list.appendChild(li);
+                });
+            }
 
             // Generate initial cards
             generate('iceBreaker');
@@ -304,7 +311,10 @@
         }
 
         function generate(type) {
-            const d = db.dinner; // Always use dinner data
+            // Same logic to detect structure
+            let d = db;
+            if (db.dinner) { d = db.dinner; }
+
             let pool = [];
             
             if (type === 'iceBreaker') pool = d.iceBreakers;
@@ -389,5 +399,3 @@
 
 </body>
 </html>
-</html>
-
