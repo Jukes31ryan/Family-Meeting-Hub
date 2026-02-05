@@ -3,15 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>Lanturn — A Brighter Way to Check In</title>
+<title>Lanturn</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,600&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
 <style>
-/* THEME: ENCHANTED MOONLIGHT 
-   Inspired by: Deep blues, mist, glowing cyan moon
-*/
-
+/* THEME: ENCHANTED MOONLIT FOREST */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 html, body {
   height:100%; width:100%; overflow:hidden;
@@ -19,92 +16,82 @@ html, body {
   -webkit-font-smoothing:antialiased;
   -webkit-tap-highlight-color:transparent;
   touch-action:manipulation;
-  color:#E0F7FA; /* Cool white text */
+  color:#E0F7FA;
 }
 
-/* BACKGROUND LAYERS - Shifted to Deep Blue/Cyan */
+/* DEEP SPACE TEAL GRADIENT */
 .bg-layer {
   position:fixed; inset:0;
   transition:opacity 1.2s ease;
+  background: linear-gradient(180deg, #011219 0%, #042330 40%, #0a3d4d 100%);
 }
-#bg-a { z-index:1; }
-#bg-b { z-index:2; opacity:0; }
 
-/* Base Gradient structure */
-.bg--base { background: linear-gradient(180deg, #020c1b 0%, #051626 40%, #0a2e36 100%); }
-
-/* Subtle variations per screen */
-.bg--home       { background: linear-gradient(180deg, #020c1b 0%, #051626 40%, #0a2e36 100%); }
-.bg--icebreaker { background: linear-gradient(180deg, #041021 0%, #092036 40%, #0e3d45 100%); }
-.bg--quote      { background: linear-gradient(180deg, #070d1f 0%, #0f2238 40%, #13404a 100%); }
-.bg--checkin    { background: linear-gradient(180deg, #06121f 0%, #0e2b33 40%, #16454d 100%); }
-.bg--story      { background: linear-gradient(180deg, #0b1026 0%, #14243d 40%, #1b4a52 100%); }
-.bg--lesson     { background: linear-gradient(180deg, #0d1429 0%, #162b45 40%, #1f5057 100%); }
-.bg--mindful    { background: linear-gradient(180deg, #050b14 0%, #0b1e2e 40%, #10333b 100%); }
-.bg--joke       { background: linear-gradient(180deg, #0f1229 0%, #1c2b45 40%, #225259 100%); }
-.bg--close      { background: linear-gradient(180deg, #020c1b 0%, #051626 40%, #0a2e36 100%); }
-
-/* MOON - Updated to match image (Cooler/Cyan Glow) */
+/* INTENSE MOON GLOW */
 .moon {
   position:fixed;
-  top:50px; right:30px;
-  width:90px; height:90px;
+  top:40px; right:50%; transform:translateX(50%);
+  width:120px; height:120px;
   border-radius:50%;
-  background: radial-gradient(circle at 35% 35%, #FFFFFF, #E0F7FA 60%, #B2EBF2);
+  background: radial-gradient(circle at 40% 40%, #FFFFFF 10%, #E0F7FA 50%, #80DEEA 90%);
   box-shadow: 
-    0 0 30px rgba(178,235,242,0.6), /* Inner Glow */
-    0 0 80px rgba(178,235,242,0.3), /* Outer Glow */
-    0 0 140px rgba(178,235,242,0.1); /* Haze */
+    0 0 50px rgba(128, 222, 234, 0.9),   
+    0 0 120px rgba(128, 222, 234, 0.6),  
+    0 0 300px rgba(128, 222, 234, 0.3);
   z-index:5;
-  animation: moonPulse 8s ease-in-out infinite;
-}
-@keyframes moonPulse {
-  0%, 100% { box-shadow: 0 0 30px rgba(178,235,242,0.6), 0 0 80px rgba(178,235,242,0.3); }
-  50% { box-shadow: 0 0 45px rgba(178,235,242,0.8), 0 0 100px rgba(178,235,242,0.4); }
 }
 
-/* RIVER/MIST - Bottom Reflection */
+/* HORIZON SILHOUETTE */
+.silhouette {
+  position:fixed;
+  bottom:140px; left:0; right:0; height:150px;
+  background: linear-gradient(to top, #010a12 20%, transparent 100%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* MIST FOG */
+.mist {
+  position:fixed;
+  bottom:100px; left:-20%; right:-20%; height:120px;
+  background: radial-gradient(ellipse at bottom, rgba(178,235,242,0.2) 0%, transparent 70%);
+  filter: blur(30px);
+  z-index: 4;
+  opacity: 0.6;
+  animation: mistDrift 60s linear infinite alternate;
+  pointer-events: none;
+}
+@keyframes mistDrift { from { transform: translateX(0); } to { transform: translateX(40px); } }
+
+/* RIVER REFLECTION */
 .river {
   position:fixed;
   bottom:0; left:0; right:0;
-  height:140px;
-  background: linear-gradient(180deg, 
-    transparent 0%,
-    rgba(178,235,242,0.05) 30%,
-    rgba(178,235,242,0.15) 100%);
+  height:160px;
+  background: linear-gradient(180deg, rgba(4, 35, 48, 0.6) 0%, rgba(178,235,242,0.1) 40%, rgba(178,235,242,0.2) 100%);
   z-index:4;
   pointer-events: none;
 }
 .river::before {
-  content:'';
-  position:absolute;
-  top:30px; left:50%; transform:translateX(-50%);
-  width:160px; height:40px;
-  background: radial-gradient(ellipse, rgba(255,255,255,0.2) 0%, transparent 70%);
-  filter: blur(8px);
-  animation: moonReflection 5s ease-in-out infinite;
-}
-@keyframes moonReflection {
-  0%, 100% { opacity:0.5; transform:translateX(-50%) scaleX(1); }
-  50% { opacity:0.8; transform:translateX(-50%) scaleX(1.1); }
+  content:''; position:absolute;
+  top:0px; left:50%; transform:translateX(-50%);
+  width:200px; height:160px;
+  background: radial-gradient(ellipse at top, rgba(255,255,255,0.5) 0%, rgba(128,222,234,0.3) 30%, transparent 80%);
+  filter: blur(20px); opacity:0.7;
 }
 
-/* FIREFLIES/STARS */
+/* FIREFLIES */
 #fireflies { position:fixed; inset:0; z-index:6; pointer-events:none; }
 .firefly {
-  position:absolute;
-  border-radius:50%;
-  background: white;
+  position:absolute; border-radius:50%;
   animation: fireflyFloat linear infinite;
 }
-
 @keyframes fireflyFloat {
   0% { transform:translate(0, 0) scale(1); opacity:0; }
-  20% { opacity:0.8; }
-  100% { transform:translate(20px, -100px) scale(0.5); opacity:0; }
+  20% { opacity:0.9; }
+  100% { transform:translate(30px, -80px) scale(0.2); opacity:0; }
 }
 
-/* UI ELEMENTS */
+/* LAYOUT */
 .screen {
   position:fixed; inset:0; z-index:10;
   display:flex; flex-direction:column;
@@ -121,13 +108,12 @@ html, body {
   transition:opacity 0.7s ease, transform 0.7s ease;
 }
 .screen.active .anim-in { opacity:1; transform:translateY(0); }
-/* Stagger delays for smooth entrance */
 .screen.active .anim-in:nth-child(1) { transition-delay:0.1s; }
 .screen.active .anim-in:nth-child(2) { transition-delay:0.2s; }
 .screen.active .anim-in:nth-child(3) { transition-delay:0.3s; }
 .screen.active .anim-in:nth-child(4) { transition-delay:0.4s; }
 
-/* NAVIGATION CHROME */
+/* CHROME (Back/Home) */
 #top-chrome {
   position:fixed; top:0; left:0; right:0; z-index:100;
   display:flex; align-items:center; justify-content:space-between;
@@ -139,162 +125,120 @@ html, body {
 
 .nav-btn {
   background:none; border:none;
-  color:rgba(224,247,250,0.6);
-  font-size:1.2rem; cursor:pointer;
-  transition:color 0.2s;
+  color:rgba(224,247,250,0.6); font-size:1.2rem; cursor:pointer;
 }
 .nav-btn:hover { color:#fff; }
 
 .dots { display:flex; gap:8px; }
 .dot {
   width:6px; height:6px; border-radius:50%;
-  background:rgba(224,247,250,0.2);
-  transition:all 0.3s;
+  background:rgba(224,247,250,0.2); transition:all 0.3s;
 }
 .dot.active { background:#80DEEA; transform:scale(1.2); box-shadow:0 0 8px #80DEEA; }
 .dot.done { background:rgba(128,222,234,0.4); }
 
 /* HOME SCREEN */
+#screen-home { justify-content: flex-end; padding-bottom: 120px; }
 .lantern-logo {
   font-size:4rem; 
-  filter:drop-shadow(0 0 20px rgba(128,222,234,0.6));
-  animation: floatLogo 4s ease-in-out infinite;
-  margin-bottom:20px;
+  filter:drop-shadow(0 0 25px rgba(128,222,234,0.8));
+  animation: floatLogo 4s ease-in-out infinite; margin-bottom:20px;
 }
-@keyframes floatLogo {
-  0%, 100% { transform:translateY(0); }
-  50% { transform:translateY(-10px); }
-}
+@keyframes floatLogo { 0%, 100% { transform:translateY(0); } 50% { transform:translateY(-10px); } }
 
 .title-main {
-  font-family:'Cormorant Garamond', serif;
-  font-size:3.5rem; font-weight:600;
+  font-family:'Cormorant Garamond', serif; font-size:3.8rem; font-weight:600;
   letter-spacing:0.02em; color:#fff;
-  text-shadow:0 0 20px rgba(128,222,234,0.4);
+  text-shadow:0 2px 30px rgba(0,0,0,0.5), 0 0 30px rgba(128,222,234,0.4);
+  margin-bottom: 5px;
 }
 .title-sub {
-  font-size:1.1rem; color:rgba(224,247,250,0.7);
-  font-weight:400; margin-top:-5px; margin-bottom:40px;
+  font-size:1.2rem; color:rgba(224,247,250,0.8); font-weight:400; margin-bottom:45px;
+  text-shadow:0 1px 10px rgba(0,0,0,0.5);
 }
 
-.btn-start {
+/* CRYSTALLINE BUTTON */
+.btn-start, .btn-continue {
   padding:18px 50px; border-radius:50px;
-  background:rgba(128,222,234,0.15);
-  border:1px solid rgba(128,222,234,0.4);
+  background: linear-gradient(135deg, rgba(128,222,234,0.2), rgba(77,208,225,0.3));
+  border:1px solid rgba(128,222,234,0.5);
   backdrop-filter:blur(10px);
   color:#fff; font-family:'Cormorant Garamond', serif;
   font-size:1.4rem; font-weight:600; letter-spacing:0.05em;
   cursor:pointer; transition:all 0.3s ease;
-  box-shadow:0 0 20px rgba(128,222,234,0.1);
+  box-shadow:0 0 30px rgba(128,222,234,0.2);
 }
-.btn-start:hover {
-  background:rgba(128,222,234,0.25);
-  box-shadow:0 0 30px rgba(128,222,234,0.3);
-  transform:scale(1.02);
+.btn-start:hover, .btn-continue:hover {
+  background: linear-gradient(135deg, rgba(128,222,234,0.3), rgba(77,208,225,0.5));
+  box-shadow:0 0 50px rgba(128,222,234,0.5); transform:scale(1.02) translateY(-2px);
+}
+.btn-continue {
+  position:fixed; bottom:40px; font-family:'Nunito', sans-serif; font-size:1rem; padding:16px 40px; z-index:20;
 }
 
-/* CONTENT STYLES */
+/* TEXT STYLES */
 .label-top {
   font-size:0.8rem; text-transform:uppercase; letter-spacing:0.15em;
-  color:#80DEEA; margin-bottom:20px; font-weight:700;
-  opacity:0.8;
+  color:#80DEEA; margin-bottom:20px; font-weight:700; opacity:0.8;
 }
-
 .card-text-lg {
-  font-family:'Cormorant Garamond', serif;
-  font-size:2rem; line-height:1.3; text-align:center;
-  color:#fff; margin-bottom:10px;
+  font-family:'Cormorant Garamond', serif; font-size:2rem; line-height:1.3;
+  text-align:center; color:#fff; margin-bottom:10px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 .card-text-md {
   font-size:1.1rem; line-height:1.6; text-align:center;
   color:rgba(224,247,250,0.9); max-width:600px;
 }
 
-/* STORY SCROLL AREA */
+/* CARD-SPECIFIC ALIGNMENT */
+.text-left { text-align: left; }
 .story-scroll {
-  max-height:40vh; overflow-y:auto;
-  padding-right:10px; margin-bottom:20px;
-  text-align:left;
-  /* Scrollbar styling */
-  scrollbar-width: thin;
-  scrollbar-color: rgba(128,222,234,0.3) transparent;
+  max-height:40vh; overflow-y:auto; padding-right:10px; margin-bottom:20px; text-align:left;
+  scrollbar-width: thin; scrollbar-color: rgba(128,222,234,0.3) transparent;
 }
 .story-scroll::-webkit-scrollbar { width:4px; }
 .story-scroll::-webkit-scrollbar-thumb { background:rgba(128,222,234,0.3); border-radius:4px; }
 
 .moral-box {
-  background:rgba(128,222,234,0.1);
-  border-left:2px solid #80DEEA;
-  padding:15px; border-radius:0 8px 8px 0;
-  margin-top:20px; font-style:italic;
-  color:#E0F7FA;
+  background:rgba(128,222,234,0.1); border-left:2px solid #80DEEA;
+  padding:15px; border-radius:0 8px 8px 0; margin-top:20px; font-style:italic; color:#E0F7FA;
 }
 
-/* ACTION BUTTONS (Bottom Row) */
-.action-row {
-  display:flex; gap:15px; width:100%; max-width:340px;
-  margin-top:40px; justify-content:center; align-items:center;
+.cheat-code-box {
+  background:rgba(128,222,234,0.1); border-left:4px solid #80DEEA;
+  padding:15px; margin-top:15px; border-radius:0 8px 8px 0; font-weight:500; font-size:0.95rem; text-align:left;
 }
 
-/* THE PRIMARY "CONTINUE" BUTTON */
-.btn-continue {
-  position:fixed; bottom:40px;
-  padding:16px 40px; border-radius:50px;
-  background:#E0F7FA; color:#051626;
-  font-weight:700; font-size:1rem; border:none;
-  cursor:pointer; box-shadow:0 10px 30px rgba(0,0,0,0.3);
-  transition:transform 0.2s;
-  z-index:20;
-}
-.btn-continue:active { transform:scale(0.95); }
-
-/* SECONDARY ACTIONS (Refresh / Heart) */
-.btn-icon-group {
-  display:flex; gap:12px;
-  margin-top:30px;
-}
-
+/* SECONDARY BUTTONS (Refresh / Heart) */
+.btn-icon-group { display:flex; gap:12px; margin-top:30px; }
 .btn-icon {
   width:44px; height:44px; border-radius:50%;
-  background:rgba(255,255,255,0.05);
-  border:1px solid rgba(255,255,255,0.2);
-  color:rgba(255,255,255,0.7);
-  font-size:1.2rem; cursor:pointer;
-  display:flex; align-items:center; justify-content:center;
-  transition:all 0.2s ease;
+  background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.2);
+  color:rgba(255,255,255,0.7); font-size:1.2rem; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; transition:all 0.2s ease;
 }
-.btn-icon:hover { background:rgba(255,255,255,0.15); color:#fff; }
-.btn-icon:active { transform:scale(0.9); }
-
-/* Heart Toggle State */
+.btn-icon:hover { background:rgba(255,255,255,0.15); color:#fff; box-shadow: 0 0 15px rgba(128,222,234,0.3); }
 .btn-icon.saved {
-  background:rgba(255,100,100,0.2);
-  border-color:rgba(255,100,100,0.5);
-  color:#ff6b6b;
+  background:rgba(255,100,100,0.2); border-color:rgba(255,100,100,0.5); color:#ff6b6b;
   animation: heartPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-@keyframes heartPop {
-  0% { transform:scale(1); }
-  50% { transform:scale(1.3); }
-  100% { transform:scale(1); }
-}
+@keyframes heartPop { 0% { transform:scale(1); } 50% { transform:scale(1.3); } 100% { transform:scale(1); } }
 
-/* Reveal Button for Joke */
+/* REVEAL BUTTON (Joke) */
 .btn-reveal {
-  background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.3);
+  background:rgba(128,222,234,0.1); border:1px solid rgba(128,222,234,0.3);
   color:#fff; padding:10px 24px; border-radius:20px;
-  cursor:pointer; margin-top:20px; font-family:'Cormorant Garamond', serif;
-  font-size:1.1rem;
+  cursor:pointer; margin-top:20px; font-family:'Cormorant Garamond', serif; font-size:1.1rem;
 }
-
 </style>
 </head>
 <body>
 
-<div class="bg-layer bg--home" id="bg-a"></div>
-<div class="bg-layer bg--home" id="bg-b"></div>
-
+<div class="bg-layer" id="bg-a"></div>
 <div class="moon"></div>
+<div class="silhouette"></div>
+<div class="mist"></div>
 <div class="river"></div>
 <div id="fireflies"></div>
 
@@ -314,12 +258,10 @@ html, body {
 <div class="screen" id="screen-icebreaker">
   <div class="label-top anim-in">Ice Breaker</div>
   <div class="card-text-lg anim-in" id="ib-text">Loading...</div>
-  
   <div class="btn-icon-group anim-in">
     <button class="btn-icon" onclick="oneMore('icebreaker')">↻</button>
     <button class="btn-icon" onclick="toggleSave(this)">♡</button>
   </div>
-  
   <button class="btn-continue" onclick="goToAct(2)">Continue</button>
 </div>
 
@@ -328,92 +270,72 @@ html, body {
   <div style="font-size:4rem; line-height:0.5; color:#80DEEA; opacity:0.5; margin-bottom:20px;" class="anim-in">"</div>
   <div class="card-text-lg anim-in" style="font-style:italic;" id="qt-text"></div>
   <div class="anim-in" style="margin-top:20px; color:#80DEEA; font-weight:600;" id="qt-author"></div>
-  
   <div class="btn-icon-group anim-in">
     <button class="btn-icon" onclick="oneMore('quote')">↻</button>
     <button class="btn-icon" onclick="toggleSave(this)">♡</button>
   </div>
-  
   <button class="btn-continue" onclick="goToAct(3)">Continue</button>
 </div>
 
 <div class="screen" id="screen-checkin">
   <div class="label-top anim-in">Check In</div>
-  
-  <div class="anim-in" style="background:rgba(255,255,255,0.05); padding:20px; border-radius:12px; width:100%; max-width:400px; margin-bottom:10px; border-left:3px solid #80DEEA;">
+  <div class="anim-in" style="background:rgba(4, 35, 48, 0.5); padding:20px; border-radius:12px; width:100%; max-width:400px; margin-bottom:10px; border-left:3px solid #80DEEA;">
     <div style="font-size:0.8rem; color:#80DEEA; margin-bottom:5px;">GRATITUDE</div>
     <div style="font-size:1.1rem;" id="ci-grat"></div>
   </div>
-
-  <div class="anim-in" style="background:rgba(255,255,255,0.05); padding:20px; border-radius:12px; width:100%; max-width:400px; border-left:3px solid #C4B7EB;">
+  <div class="anim-in" style="background:rgba(4, 35, 48, 0.5); padding:20px; border-radius:12px; width:100%; max-width:400px; border-left:3px solid #C4B7EB;">
     <div style="font-size:0.8rem; color:#C4B7EB; margin-bottom:5px;">INTENTION</div>
     <div style="font-size:1.1rem;" id="ci-goal"></div>
   </div>
-
   <div class="btn-icon-group anim-in">
     <button class="btn-icon" onclick="oneMore('checkin')">↻</button>
   </div>
-  
   <button class="btn-continue" onclick="goToAct(4)">Continue</button>
 </div>
 
 <div class="screen" id="screen-story">
   <div class="label-top anim-in">Story</div>
   <div class="card-text-lg anim-in" style="font-size:1.8rem; margin-bottom:20px;" id="story-title"></div>
-  
   <div class="story-scroll anim-in">
-    <div id="story-body" style="font-size:1.1rem; line-height:1.7; color:rgba(255,255,255,0.9);"></div>
-    <div class="moral-box" id="story-moral"></div>
-  </div>
-
+    <div id="story-body" style="font-size:1.1rem; line-height:1.7; color:rgba(224,247,250,0.9);"></div>
+    </div>
   <div class="btn-icon-group anim-in">
     <button class="btn-icon" onclick="oneMore('story')">↻</button>
     <button class="btn-icon" onclick="toggleSave(this)">♡</button>
   </div>
-  
   <button class="btn-continue" onclick="goToAct(5)">Continue</button>
 </div>
 
 <div class="screen" id="screen-lesson">
   <div class="label-top anim-in">Skill</div>
-  <div class="anim-in" style="color:#80DEEA; font-size:3rem; margin-bottom:10px;" id="les-icon"></div>
   <div class="card-text-lg anim-in" style="font-size:1.6rem;" id="les-title"></div>
-  <div class="card-text-md anim-in" style="text-align:left; margin-top:15px;" id="les-body"></div>
-
+  <div class="card-text-md anim-in text-left" style="margin-top:15px;" id="les-body"></div>
   <div class="btn-icon-group anim-in">
     <button class="btn-icon" onclick="oneMore('lesson')">↻</button>
     <button class="btn-icon" onclick="toggleSave(this)">♡</button>
   </div>
-  
   <button class="btn-continue" onclick="goToAct(6)">Continue</button>
 </div>
 
 <div class="screen" id="screen-mindful">
   <div class="label-top anim-in">Breathe</div>
   <div class="card-text-md anim-in">Take 30 seconds. Close your eyes. Just be here.</div>
-  
-  <div class="anim-in" style="font-family:'Cormorant Garamond'; font-size:5rem; margin:30px 0; font-variant-numeric:tabular-nums;" id="mindful-timer">0:30</div>
-  
+  <div class="anim-in" style="font-family:'Cormorant Garamond'; font-size:5rem; margin:30px 0; font-variant-numeric:tabular-nums; text-shadow:0 0 20px rgba(128,222,234,0.5);" id="mindful-timer">0:30</div>
   <button class="btn-reveal anim-in" id="btn-mindful" onclick="startMindful()">Start Timer</button>
-  
   <button class="btn-continue" style="display:none;" id="mindful-cont" onclick="goToAct(7)">Continue</button>
 </div>
 
 <div class="screen" id="screen-joke">
   <div class="label-top anim-in">Smile</div>
   <div class="card-text-lg anim-in" id="jk-setup"></div>
-  
   <button class="btn-reveal anim-in" id="btn-reveal" onclick="revealJoke()">Reveal</button>
-  
   <div id="pk-wrap" style="display:none; margin-top:30px; flex-direction:column; align-items:center;">
     <div style="width:50px; height:2px; background:#fff; opacity:0.3; margin-bottom:20px;"></div>
     <div class="card-text-lg" style="color:#80DEEA;" id="jk-punch"></div>
   </div>
-
   <div class="btn-icon-group anim-in" style="margin-top:40px;">
     <button class="btn-icon" onclick="oneMore('joke')">↻</button>
   </div>
-  
   <button class="btn-continue" onclick="goToAct(8)">Finish</button>
 </div>
 
@@ -424,63 +346,46 @@ html, body {
   <button class="btn-start anim-in" style="margin-top:40px;" onclick="goHome()">Home</button>
 </div>
 
+<script src="data.js"></script>
 <script>
-// DATA (Shortened for brevity in this block, assume full data exists or paste D object here)
-const D = {
-  ib: [
-    "If you could have dinner with anyone, living or dead, who would it be?",
-    "What's a skill you'd love to learn?",
-    "What's the best trip you've ever taken?",
-    "If you could live anywhere in the world, where would it be?",
-    "What's a movie you could watch over and over?"
-  ],
-  qt: [
-    {t:"The best time to plant a tree was 20 years ago. The second best time is now.",a:"Chinese Proverb"},
-    {t:"Be the change you wish to see in the world.",a:"Mahatma Gandhi"}
-  ],
-  gr: ["What's one thing you're grateful for today?", "Who made a difference for you recently?"],
-  gl: ["What's one thing you want to focus on this week?", "What's a habit you want to build?"],
-  st: [
-    {t:"The Two Wolves",s:"A grandfather tells his grandson about two wolves fighting inside everyone — one is anger, the other is joy. The grandson asks which wolf wins. The grandfather replies: 'The one you feed.'",m:"We become what we focus on."}
-  ],
-  ls: [
-    {c:"Self Care",i:"💆",t:"How to Calm Down",b:"Stop and name what you're feeling. Take 5 slow breaths: in for 4, hold for 4, out for 6. Ground yourself by naming 5 things you can see."}
-  ],
-  jk: [
-    {s:"Why don't scientists trust atoms?",p:"Because they make up everything!"}
-  ]
-};
-
-// --- LOGIC ---
-
+// Logic to handle Data + UI
 let S = { act: 0 };
 let mindfulInterval = null;
 
-// Fireflies Logic
+// FIREFLIES GENERATOR (Enchanted & Varied)
 (function() {
   const c = document.getElementById('fireflies');
-  for(let i=0; i<15; i++){
+  // Colors: Warm Yellow, Magic Cyan, Soft White, Pale Green
+  const colors = ['#FFF9C4', '#80DEEA', '#FFFFFF', '#C8E6C9']; 
+  for(let i=0; i<30; i++){
     let d = document.createElement('div');
     d.className='firefly';
     d.style.left = Math.random()*100 + '%';
     d.style.top = Math.random()*100 + '%';
-    d.style.animationDuration = (Math.random()*10 + 5) + 's';
+    // Randomize movement duration
+    d.style.animationDuration = (Math.random()*15 + 10) + 's'; 
     d.style.animationDelay = (Math.random()*5) + 's';
-    d.style.width = d.style.height = (Math.random()*4 + 2) + 'px';
+    // Randomize size
+    let size = Math.random()*4 + 2;
+    d.style.width = size + 'px';
+    d.style.height = size + 'px';
+    // Randomize color
+    let color = colors[Math.floor(Math.random() * colors.length)];
+    d.style.background = color;
+    d.style.boxShadow = `0 0 ${size*2}px ${color}`;
+    d.style.opacity = Math.random() * 0.7 + 0.3;
     c.appendChild(d);
   }
 })();
 
-function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+function pick(arr) { 
+    if(!arr || arr.length === 0) return "Loading...";
+    return arr[Math.floor(Math.random() * arr.length)]; 
+}
 
 function toggleSave(btn) {
   btn.classList.toggle('saved');
   btn.innerHTML = btn.classList.contains('saved') ? '♥' : '♡';
-}
-
-function setBg(key) {
-  // Simplification: Keeping basic deep blue gradient for now to ensure smoothness
-  // In a full version, we'd swap classes on bg-layers
 }
 
 function show(id) {
@@ -520,9 +425,8 @@ function goToAct(n) {
   updateDots(n);
   show('screen-' + screens[n]);
   
-  // Logic to show/hide the main Continue button
   const btn = document.querySelector('.btn-continue');
-  btn.style.display = (n === 7 || n === 9) ? 'none' : 'block'; // Hide on Mindful(7) until done, Hide on Close(9)
+  btn.style.display = (n === 7 || n === 9) ? 'none' : 'block';
 
   if(n===1) loadIB();
   if(n===2) loadQT();
@@ -543,34 +447,41 @@ function oneMore(type) {
   if(type==='lesson') loadLS();
   if(type==='joke') loadJK();
   
-  // Reset hearts on refresh
   document.querySelectorAll('.btn-icon.saved').forEach(b => {
     b.classList.remove('saved');
     b.innerHTML = '♡';
   });
 }
 
-function loadIB() { document.getElementById('ib-text').innerText = pick(D.ib); }
+// Single Mode: Hard-coded to 'dinner' key in data.js
+function loadIB() { document.getElementById('ib-text').innerText = pick(db.dinner.iceBreakers); }
 function loadQT() { 
-  let q = pick(D.qt);
-  document.getElementById('qt-text').innerText = q.t;
-  document.getElementById('qt-author').innerText = "- " + q.a;
+  let q = pick(db.dinner.quotes);
+  document.getElementById('qt-text').innerText = q.text;
+  document.getElementById('qt-author').innerText = "- " + q.author;
 }
 function loadCI() {
-  document.getElementById('ci-grat').innerText = pick(D.gr);
-  document.getElementById('ci-goal').innerText = pick(D.gl);
+  // Randomly picking one prompt from checkin array or just static instructions? 
+  // Let's use the provided static checkins for structure but randomized prompts for variety would be better.
+  // For now, let's grab random items from the checkin array if it exists, or specific prompts.
+  // Actually, data.js has specific prompts. Let's make it dynamic.
+  // Wait, data.js checkin is an array of 3 specific strings. Let's just use them all or pick 2 randoms.
+  // The UI has slots for 'Gratitude' and 'Intention'. I'll mock up random selection.
+  const gratitudePrompts = ["What made you smile today?", "Who helped you recently?", "What is a simple pleasure you enjoyed?"];
+  const intentionPrompts = ["What is one goal for tomorrow?", "How can you be kind this week?", "What do you want to improve?"];
+  
+  document.getElementById('ci-grat').innerText = pick(gratitudePrompts);
+  document.getElementById('ci-goal').innerText = pick(intentionPrompts);
 }
 function loadST() {
-  let s = pick(D.st);
-  document.getElementById('story-title').innerText = s.t;
-  document.getElementById('story-body').innerText = s.s;
-  document.getElementById('story-moral').innerText = "Moral: " + s.m;
+  let s = pick(db.dinner.dynamics);
+  document.getElementById('story-title').innerText = s.title;
+  document.getElementById('story-body').innerHTML = s.body; // InnerHTML to allow bolding/cheat codes
 }
 function loadLS() {
-  let l = pick(D.ls);
-  document.getElementById('les-icon').innerText = l.i;
-  document.getElementById('les-title').innerText = l.t;
-  document.getElementById('les-body').innerText = l.b;
+  let l = pick(db.dinner.skills);
+  document.getElementById('les-title').innerText = l.title;
+  document.getElementById('les-body').innerText = l.body;
 }
 function loadMF() {
   document.getElementById('mindful-timer').innerText = "0:30";
@@ -590,19 +501,28 @@ function startMindful() {
   }, 1000);
 }
 function loadJK() {
-  let j = pick(D.jk);
-  document.getElementById('jk-setup').innerText = j.s;
-  document.getElementById('jk-punch').innerText = j.p;
+  // Fetch joke from API or fallback to DB if API fails
+  fetch('https://official-joke-api.appspot.com/random_joke')
+    .then(r => r.json())
+    .then(data => {
+        document.getElementById('jk-setup').innerText = data.setup;
+        document.getElementById('jk-punch').innerText = data.punchline;
+    })
+    .catch(() => {
+        // Fallback
+        document.getElementById('jk-setup').innerText = "Why did the developer go broke?";
+        document.getElementById('jk-punch').innerText = "He used up all his cache.";
+    });
+
   document.getElementById('btn-reveal').style.display = "block";
   document.getElementById('pk-wrap').style.display = "none";
-  document.querySelector('.btn-continue').style.display = "none"; // Hide continue until punchline
+  document.querySelector('.btn-continue').style.display = "none";
 }
 function revealJoke() {
   document.getElementById('btn-reveal').style.display = "none";
   document.getElementById('pk-wrap').style.display = "flex";
   document.querySelector('.btn-continue').style.display = "block";
 }
-
 </script>
 </body>
 </html>
