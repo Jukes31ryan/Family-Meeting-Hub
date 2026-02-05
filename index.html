@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Lanturn — A Warmer Way to Check In</title>
+    <title>Lanturn — Check-in</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* WARMER PALETTE: Ivory, Amber, and Soft Clay */
             --bg-warm: #fdfaf5; 
             --accent-glow: #ffcc80;
-            --glass: rgba(255, 255, 255, 0.7);
+            --glass: rgba(255, 255, 255, 0.85);
             --glass-border: rgba(180, 160, 140, 0.2);
             --text-main: #4a4238;
             --text-dim: #8c8376;
-            --noble-gold: #c5a059;
+            --gold: #c5a059;
+            --help-bg: #fdfaf5;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
         body {
             background: var(--bg-warm);
             color: var(--text-main);
@@ -29,7 +29,6 @@
             justify-content: center;
         }
 
-        /* AMBIENT SUNLIGHT */
         .orb-field { position: fixed; inset: 0; z-index: 0; filter: blur(100px); opacity: 0.6; }
         .orb {
             position: absolute; border-radius: 50%;
@@ -37,10 +36,7 @@
             width: 80vw; height: 80vw; top: -10%; right: -10%;
             animation: sunMove 20s infinite alternate ease-in-out;
         }
-        @keyframes sunMove {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(-20%, 20%) scale(1.1); }
-        }
+        @keyframes sunMove { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(-20%, 20%) scale(1.1); } }
 
         .container {
             position: relative; z-index: 10; width: 100%; max-width: 440px; height: 90vh;
@@ -49,17 +45,17 @@
 
         header {
             display: flex; justify-content: space-between; align-items: center; 
-            margin-bottom: 30px; opacity: 0; transition: 0.8s ease;
+            margin-bottom: 30px; opacity: 0; transition: 0.5s ease; pointer-events: none;
         }
-        header.visible { opacity: 1; }
+        header.visible { opacity: 1; pointer-events: auto; }
 
         .progress-rail { flex: 1; height: 3px; background: rgba(0,0,0,0.05); margin: 0 20px; position: relative; border-radius: 4px; }
         .progress-bar {
-            position: absolute; height: 100%; background: var(--noble-gold); width: 0%;
+            position: absolute; height: 100%; background: var(--gold); width: 0%;
             transition: width 0.6s cubic-bezier(0.2, 0, 0, 1);
         }
 
-        .stage { display: none; flex-direction: column; height: 100%; animation: softFade 1s forwards; }
+        .stage { display: none; flex-direction: column; height: 100%; animation: softFade 0.6s forwards; }
         .stage.active { display: flex; }
         @keyframes softFade { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
 
@@ -67,99 +63,219 @@
             background: var(--glass); backdrop-filter: blur(15px); border: 1px solid var(--glass-border);
             border-radius: 40px; padding: 40px 30px; flex: 1; display: flex; flex-direction: column;
             justify-content: center; box-shadow: 0 30px 60px rgba(180, 160, 140, 0.15);
+            position: relative; overflow: hidden;
         }
 
-        h1 { font-family: 'Playfair Display', serif; font-size: 2.4rem; margin-bottom: 15px; color: #3a332a; }
-        .label { text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.7rem; font-weight: 800; color: var(--noble-gold); margin-bottom: 20px; }
-        p { font-size: 1.1rem; line-height: 1.7; color: var(--text-dim); }
+        .help-btn {
+            position: absolute; top: 25px; right: 25px; width: 32px; height: 32px;
+            border-radius: 50%; border: 1px solid var(--glass-border); background: white;
+            color: var(--gold); font-weight: 800; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; font-size: 0.9rem;
+            transition: 0.3s; z-index: 100;
+        }
+
+        .help-overlay {
+            position: absolute; inset: 0; background: var(--help-bg); border-radius: 40px;
+            padding: 40px 30px; display: none; flex-direction: column; justify-content: center;
+            text-align: center; z-index: 101; border: 1px solid var(--gold);
+        }
+        .help-overlay.active { display: flex; }
+
+        h1 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 15px; color: #3a332a; line-height: 1.2; }
+        .label { text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.65rem; font-weight: 800; color: var(--gold); margin-bottom: 20px; }
+        p { font-size: 1rem; line-height: 1.6; color: var(--text-dim); }
 
         .btn-main {
-            background: #3a332a; color: #fff; border: none; padding: 20px;
-            border-radius: 24px; font-weight: 700; font-size: 1.05rem; margin-top: 30px; cursor: pointer;
-            box-shadow: 0 10px 20px rgba(58, 51, 42, 0.2);
+            background: #3a332a; color: #fff; border: none; padding: 18px;
+            border-radius: 20px; font-weight: 700; font-size: 1rem; margin-top: 25px; cursor: pointer;
         }
         .btn-ghost {
             background: transparent; color: var(--text-dim); border: 1.5px solid var(--glass-border);
-            padding: 12px; border-radius: 18px; font-size: 0.85rem; margin-top: 15px; font-weight: 600;
+            padding: 12px; border-radius: 16px; font-size: 0.8rem; margin-top: 15px; font-weight: 600; cursor: pointer;
         }
 
-        .heartfelt-note { font-style: italic; font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--text-main); margin: 20px 0; }
-        .footer-tag { font-size: 0.65rem; font-weight: 800; letter-spacing: 0.1em; color: var(--text-dim); margin-top: 40px; }
+        .heartfelt-note { font-style: italic; font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--text-main); margin: 15px 0 25px; text-align: center; }
+        .ci-row { display: flex; gap: 15px; background: rgba(0,0,0,0.02); padding: 15px; border-radius: 20px; margin-bottom: 10px; border: 1px solid rgba(0,0,0,0.05); text-align: left; }
+        .story-scroll { overflow-y: auto; max-height: 250px; padding-right: 10px; margin-bottom: 15px; text-align: left; }
+        
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 10px; }
     </style>
 </head>
 <body>
 
-<div class="orb-field"><div class="orb" id="glow-orb"></div></div>
+<div class="orb-field"><div class="orb"></div></div>
 
 <div class="container">
     <header id="nav-header">
-        <span style="font-size: 0.75rem; font-weight: 900; letter-spacing: 0.1em; color: #3a332a;">NOBLE REALTY</span>
+        <span style="font-size: 0.75rem; font-weight: 900; letter-spacing: 0.1em; color: #3a332a;">LANTURN</span>
         <div class="progress-rail"><div class="progress-bar" id="p-bar"></div></div>
         <button onclick="goHome()" style="background:none; border:none; color:var(--text-dim); font-size: 1.4rem; cursor:pointer;">✕</button>
     </header>
 
-    <div class="stage active" id="s0" style="justify-content: center; text-align: center;">
-        <h1 style="font-size: 4.8rem; margin-bottom: 0;">Lanturn</h1>
+    <div class="stage active" id="s0" style="justify-content: center;">
+        <h1 style="font-size: 4rem; text-align: center; margin-bottom: 0;">Lanturn</h1>
         <p class="heartfelt-note">"Lanturn is a guided check-in — for families, friends, or just yourself. Use it to start conversations, share gratitude, learn something new, and end with a smile. No prep. No pressure. Just begin."</p>
-        <button class="btn-main" onclick="nextStage()">Begin Today's Check-in</button>
-        <div class="footer-tag">EST. 2022 • MORGANTOWN, WV</div>
+        <button class="btn-main" onclick="nextStage()">Begin Check-in</button>
+        <div style="text-align: center; margin-top: 30px; font-size: 0.6rem; letter-spacing: 0.1em; color: var(--text-dim);">MADE WITH ✨</div>
     </div>
 
     <div class="stage" id="s1">
         <div class="card">
+            <button class="help-btn" onclick="toggleHelp(true)">?</button>
+            <div class="help-overlay"><span class="label">Icebreaker</span><p>Read the question out loud. Everyone takes a turn to answer. No judgment, just sharing.</p><button class="btn-main" onclick="toggleHelp(false)">Got it</button></div>
             <span class="label">Step 01 — Spark</span>
-            <h1 id="ib-text">What's something you're proud of this week?</h1>
-            <button class="btn-ghost" onclick="shuffle('ib')">Give me another</button>
+            <h1 id="ib-text"></h1>
+            <button class="btn-ghost" onclick="shuffle('ib')">New Question</button>
             <button class="btn-main" onclick="nextStage()">Next</button>
         </div>
     </div>
 
     <div class="stage" id="s2">
         <div class="card">
+            <button class="help-btn" onclick="toggleHelp(true)">?</button>
+            <div class="help-overlay"><span class="label">Quote</span><p>Read the quote and discuss: What does this mean to you? How can we use this today?</p><button class="btn-main" onclick="toggleHelp(false)">Got it</button></div>
             <span class="label">Step 02 — Insight</span>
-            <h1 style="font-style: italic; font-weight: 400; font-size: 2rem;" id="qt-text">"It always seems impossible until it's done."</h1>
-            <p id="qt-author" style="font-weight: 700;">— Nelson Mandela</p>
+            <h1 style="font-style: italic; font-weight: 400;" id="qt-text"></h1>
+            <p id="qt-author" style="font-weight: 700;"></p>
+            <button class="btn-ghost" onclick="shuffle('qt')">Another Quote</button>
             <button class="btn-main" onclick="nextStage()">Continue</button>
         </div>
     </div>
 
-    <div class="stage" id="s3" style="text-align: center; justify-content: center;">
-        <h1 style="font-size: 6rem; margin-bottom: 10px;">☀️</h1>
-        <span class="label">Ready to go</span>
-        <p>The best part of the day is ahead of you.</p>
-        <button class="btn-main" onclick="goHome()">Done</button>
+    <div class="stage" id="s3">
+        <div class="card" style="justify-content: flex-start;">
+            <button class="help-btn" onclick="toggleHelp(true)">?</button>
+            <div class="help-overlay"><span class="label">Check-in</span><p>Share one thing you're thankful for and one thing you want to focus on this week.</p><button class="btn-main" onclick="toggleHelp(false)">Got it</button></div>
+            <span class="label">Step 03 — Presence</span>
+            <div class="ci-row"><div>🙏</div><div><p style="font-size: 0.6rem; font-weight: 800; color: var(--gold);">GRATITUDE</p><p id="ci-grat" style="color: var(--text-main);"></p></div></div>
+            <div class="ci-row"><div>🌱</div><div><p style="font-size: 0.6rem; font-weight: 800; color: var(--gold);">INTENTION</p><p id="ci-goal" style="color: var(--text-main);"></p></div></div>
+            <button class="btn-ghost" onclick="shuffle('ci')">New Prompts</button>
+            <button class="btn-main" onclick="nextStage()">Next</button>
+        </div>
+    </div>
+
+    <div class="stage" id="s4">
+        <div class="card" style="justify-content: flex-start;">
+            <button class="help-btn" onclick="toggleHelp(true)">?</button>
+            <div class="help-overlay"><span class="label">Story</span><p>Read the fable aloud. Consider the moral at the end together.</p><button class="btn-main" onclick="toggleHelp(false)">Got it</button></div>
+            <span class="label">Step 04 — Wisdom</span>
+            <h1 id="st-title" style="font-size: 1.5rem;"></h1>
+            <div class="story-scroll"><p id="st-body"></p></div>
+            <div style="padding: 15px; background: rgba(197,160,89,0.1); border-left: 3px solid var(--gold); border-radius: 4px;"><p id="st-moral" style="font-style: italic; color: var(--text-main); font-size: 0.9rem;"></p></div>
+            <button class="btn-ghost" onclick="shuffle('st')">New Story</button>
+            <button class="btn-main" onclick="nextStage()">Next</button>
+        </div>
+    </div>
+
+    <div class="stage" id="s5">
+        <div class="card">
+            <button class="help-btn" onclick="toggleHelp(true)">?</button>
+            <div class="help-overlay"><span class="label">Skill</span><p>Discuss this practical tip. How could this improve our communication or well-being?</p><button class="btn-main" onclick="toggleHelp(false)">Got it</button></div>
+            <span class="label" id="ls-cat"></span>
+            <h1 id="ls-title" style="font-size: 1.5rem;"></h1>
+            <p id="ls-body"></p>
+            <button class="btn-ghost" onclick="shuffle('ls')">New Skill</button>
+            <button class="btn-main" onclick="nextStage()">Next</button>
+        </div>
+    </div>
+
+    <div class="stage" id="s6" style="text-align: center;">
+        <div class="card">
+            <span class="label">Step 06 — Stillness</span>
+            <p>Close your eyes. Breathe deeply for 30 seconds.</p>
+            <h1 style="font-size: 4rem; margin: 20px 0;" id="timer">0:30</h1>
+            <button class="btn-main" id="timer-btn" onclick="startTimer()">Begin</button>
+        </div>
+    </div>
+
+    <div class="stage" id="s7" style="text-align: center;">
+        <div class="card">
+            <button class="help-btn" onclick="toggleHelp(true)">?</button>
+            <div class="help-overlay"><span class="label">Smile</span><p>End the session with a laugh. One person reads the setup, then reveals the punchline.</p><button class="btn-main" onclick="toggleHelp(false)">Got it</button></div>
+            <span class="label">Step 07 — Joy</span>
+            <h1 id="jk-setup"></h1>
+            <h1 id="jk-punch" style="display: none; color: var(--gold); margin-top: 20px;"></h1>
+            <button class="btn-main" id="jk-btn" onclick="revealJoke()">Reveal</button>
+            <button class="btn-ghost" id="jk-next" style="display:none;" onclick="nextStage()">Finish</button>
+        </div>
+    </div>
+
+    <div class="stage" id="s8" style="text-align: center; justify-content: center;">
+        <h1 style="font-size: 5rem;">☀️</h1>
+        <span class="label">Complete</span>
+        <p>Well done. Go make it a great day.</p>
+        <button class="btn-main" onclick="goHome()">Back to Home</button>
     </div>
 </div>
 
 <script>
-    // Logic stays identical to previous version, just targeting new IDs/Classes
-    let stage = 0;
-    const total = 3;
+const D = {
+    ib: ["If you could have dinner with anyone, living or dead, who would it be?","What's a skill you'd love to learn?","What's the best trip you've ever taken?","If you could live anywhere in the world, where would it be?","What's a movie you could watch over and over?","What's something you're proud of this week?","If you could have any superpower, what would it be?","What's your favorite family tradition?","What's a food you could eat every day?","If you won the lottery, what's the first thing you'd do?","What's your earliest childhood memory?","What's a book that changed your life?","If you could time travel, would you go to the past or future?","What's the best advice you've ever received?","What's something that always makes you laugh?","If you could master any instrument, which would it be?","What's your dream job?","What's a small thing that makes your day better?","What's the most adventurous thing you've ever done?","What's a goal you have for this year?","What's your favorite way to spend a rainy day?","What's a song that brings back memories?","What's the kindest thing someone has done for you?","What makes you feel most loved?","What's the most interesting thing you learned recently?","What's something you're looking forward to?"],
+    qt: [{t:"The best time to plant a tree was 20 years ago. The second best time is now.",a:"Chinese Proverb"},{t:"Be the change you wish to see in the world.",a:"Mahatma Gandhi"},{t:"In the middle of difficulty lies opportunity.",a:"Albert Einstein"},{t:"It is not the mountain we conquer, but ourselves.",a:"Edmund Hillary"},{t:"The only way to do great work is to love what you do.",a:"Steve Jobs"},{t:"Happiness is not something ready made. It comes from your own actions.",a:"Dalai Lama"},{t:"The future belongs to those who believe in the beauty of their dreams.",a:"Eleanor Roosevelt"},{t:"You miss 100% of the shots you don't take.",a:"Wayne Gretzky"},{t:"Success is not final, failure is not fatal: it is the courage to continue that counts.",a:"Winston Churchill"},{t:"It always seems impossible until it's done.",a:"Nelson Mandela"},{t:"Believe you can and you're halfway there.",a:"Theodore Roosevelt"},{t:"The secret of getting ahead is getting started.",a:"Mark Twain"}],
+    gr: ["What's one thing you're grateful for today?","Who made a difference for you recently?","What's something small that brought you joy?","What ability are you grateful to have?","What's a memory you're thankful for?","What made you smile recently?","Who helped you recently?"],
+    gl: ["What's one thing you want to focus on this week?","What's a habit you want to build?","Is there something you want to learn?","What's a kind thing you could do for someone?","How do you want to take care of yourself this week?","What's a small step toward a bigger goal?","What do you want to do more of?"],
+    st: [{t:"The Two Wolves",s:"A grandfather tells his grandson about two wolves fighting inside everyone — one is anger, envy, and ego; the other is joy, peace, and love. The grandson asks which wolf wins. The grandfather replies: 'The one you feed.'",m:"We become what we focus on."},{t:"The Cracked Pot",s:"A water bearer had two pots — one perfect, one cracked. The cracked pot felt ashamed for only delivering half its water. But the bearer showed it the flowers growing on its side of the path, watered by its leak every day.",m:"Our flaws can create unexpected beauty."},{t:"The Empty Boat",s:"A man rowing on a foggy river gets angry when another boat crashes into him — until he realizes the other boat is empty. The boat wasn't trying to hit him.",m:"Most offenses aren't personal."},{t:"The Farmer's Luck",s:"When a farmer's horse runs away, neighbors say 'Bad luck.' He replies: 'Maybe.' The horse returns with wild horses. 'Good luck!' 'Maybe.' His son breaks his leg taming them. 'Bad luck!' 'Maybe.' The army comes recruiting, but skips his injured son.",m:"We rarely know what's truly good or bad in the moment."},{t:"The Golden Windows",s:"A boy admires a faraway house with golden windows. He walks miles to see it, only to find plain glass. Looking back, he sees his own home's windows glowing gold in the sunset.",m:"What we seek is often already ours."},{t:"The Echo",s:"A boy yells 'I hate you!' into a valley and hears it back. Frightened, he tells his mother. She asks him to yell 'I love you!' He does, and the valley echoes love back.",m:"The world reflects what we put into it."}],
+    ls: [{c:"Self Care",t:"How to Calm Yourself Down",b:"Stop and name what you're feeling — just labeling it helps. Take 5 slow breaths: in for 4 counts, hold for 4, out for 6. Ground yourself by naming 5 things you can see, 4 you can hear, 3 you can touch."},{c:"Communication",t:"Active Listening",b:"Stop thinking about your response. Make eye contact. Don't interrupt. Repeat back key points: 'So what you're saying is...' Put your phone away completely."},{c:"Communication",t:"How to Say No",b:"You don't need to explain or apologize. 'I can't take that on right now' is a complete sentence. Don't say 'maybe' when you mean 'no.'"},{c:"Personal Growth",t:"How to Meditate",b:"Sit comfortably. Close eyes. Focus on breathing. When mind wanders, gently return focus to breath. Start with 2 minutes. Consistency matters more than duration."},{c:"Emotional Intelligence",t:"Understanding Your Emotions",b:"Emotions aren't good or bad — they're information. Ask: what is this feeling trying to tell me? Name it specifically. Notice where you feel it in your body."}],
+    jk: [{s:"Why don't scientists trust atoms?",p:"Because they make up everything!"},{s:"What do you call a fake noodle?",p:"An impasta!"},{s:"Why did the scarecrow win an award?",p:"He was outstanding in his field!"},{s:"What do you call a bear with no teeth?",p:"A gummy bear!"},{s:"What did the ocean say to the beach?",p:"Nothing — it just waved!"},{s:"Why don't eggs tell jokes?",p:"They'd crack each other up!"},{s:"What do you call a sleeping dinosaur?",p:"A dino-snore!"},{s:"Why did the bicycle fall over?",p:"It was two tired!"},{s:"What do you call cheese that isn't yours?",p:"Nacho cheese!"},{s:"Why did the mushroom go to the party?",p:"Because he was a fungi!"}]
+};
 
-    function nextStage() {
-        document.getElementById(`s${stage}`).classList.remove('active');
-        stage++;
-        document.getElementById(`s${stage}`).classList.add('active');
-        updateHeader();
-    }
+let stage = 0;
+const total = 8;
+let tInt;
 
-    function goHome() {
-        document.querySelectorAll('.stage').forEach(s => s.classList.remove('active'));
-        stage = 0;
-        document.getElementById('s0').classList.add('active');
-        updateHeader();
-    }
+function nextStage() {
+    document.getElementById(`s${stage}`).classList.remove('active');
+    stage++;
+    document.getElementById(`s${stage}`).classList.add('active');
+    updateUI();
+    loadContent();
+}
 
-    function updateHeader() {
-        const hdr = document.getElementById('nav-header');
-        hdr.classList.toggle('visible', stage > 0 && stage < total);
-        const p = (stage / total) * 100;
-        document.getElementById('p-bar').style.width = p + "%";
-    }
+function goHome() {
+    document.querySelectorAll('.stage').forEach(s => s.classList.remove('active'));
+    stage = 0;
+    document.getElementById('s0').classList.add('active');
+    updateUI();
+}
 
-    function shuffle(key) {
-        // Shuffling logic as per previous build
-    }
+function updateUI() {
+    const hdr = document.getElementById('nav-header');
+    hdr.classList.toggle('visible', stage > 0 && stage < 8);
+    document.getElementById('p-bar').style.width = (stage / total) * 100 + "%";
+}
+
+function toggleHelp(show) {
+    const overlay = document.querySelector(`#s${stage} .help-overlay`);
+    if (overlay) overlay.classList.toggle('active', show);
+}
+
+function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+function loadContent() {
+    if(stage === 1) document.getElementById('ib-text').innerText = pick(D.ib);
+    if(stage === 2) { let q = pick(D.qt); document.getElementById('qt-text').innerText = `"${q.t}"`; document.getElementById('qt-author').innerText = "— " + q.a; }
+    if(stage === 3) { document.getElementById('ci-grat').innerText = pick(D.gr); document.getElementById('ci-goal').innerText = pick(D.gl); }
+    if(stage === 4) { let s = pick(D.st); document.getElementById('st-title').innerText = s.t; document.getElementById('st-body').innerText = s.s; document.getElementById('st-moral').innerText = s.m; }
+    if(stage === 5) { let l = pick(D.ls); document.getElementById('ls-cat').innerText = l.c; document.getElementById('ls-title').innerText = l.t; document.getElementById('ls-body').innerText = l.b; }
+    if(stage === 7) { let j = pick(D.jk); document.getElementById('jk-setup').innerText = j.s; document.getElementById('jk-punch').innerText = j.p; document.getElementById('jk-punch').style.display = 'none'; document.getElementById('jk-btn').style.display = 'block'; document.getElementById('jk-next').style.display = 'none'; }
+}
+
+function shuffle(key) { loadContent(); }
+
+function startTimer() {
+    let s = 30; document.getElementById('timer-btn').style.display = 'none';
+    tInt = setInterval(() => {
+        s--; document.getElementById('timer').innerText = `0:${s < 10 ? '0' : ''}${s}`;
+        if(s <= 0) { clearInterval(tInt); document.getElementById('timer').innerText = "Done"; document.getElementById('timer-btn').innerText = "Continue"; document.getElementById('timer-btn').style.display = 'block'; document.getElementById('timer-btn').onclick = nextStage; }
+    }, 1000);
+}
+
+function revealJoke() {
+    document.getElementById('jk-punch').style.display = 'block';
+    document.getElementById('jk-btn').style.display = 'none';
+    document.getElementById('jk-next').style.display = 'block';
+}
 </script>
 </body>
 </html>
