@@ -8,8 +8,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,600&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
 <style>
-/* THEME: ENCHANTED AURORA (Day & Night Friendly) 
-   Colors: Soft Purple, Sunset Pink, Magical Gold, Deep Teal.
+/* THEME: DREAMY TWILIGHT (Softened) 
+   Colors: Pastel Lavender, Soft Peach, Muted Teal, Warm White.
+   Vibe: Calming, ethereal, not neon.
 */
 
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -22,12 +23,13 @@ html, body {
   color:#fff;
 }
 
-/* BACKGROUND: Living Gradient Animation */
+/* BACKGROUND: Soft Living Gradient */
 .bg-layer {
   position:fixed; inset:0; z-index:1;
-  background: linear-gradient(300deg, #4a1c40, #1a2a6c, #b21f1f, #fdbb2d);
+  /* New Soft Palette */
+  background: linear-gradient(300deg, #667eea, #764ba2, #ff9a9e, #fad0c4);
   background-size: 400% 400%;
-  animation: aurora 20s ease infinite;
+  animation: aurora 25s ease infinite;
 }
 @keyframes aurora {
   0% { background-position: 0% 50%; }
@@ -35,25 +37,26 @@ html, body {
   100% { background-position: 0% 50%; }
 }
 
-/* OVERLAY: Adds depth and "sparkle" texture */
+/* OVERLAY: Adds depth and texture */
 .texture-overlay {
   position:fixed; inset:0; z-index:2;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
   pointer-events: none;
 }
 
-/* PARTICLES (Pixie Dust) */
+/* PARTICLES (Soft Floating Lights) */
 #particles { position:fixed; inset:0; z-index:3; pointer-events:none; }
 .particle {
   position:absolute; border-radius:50%;
-  background: white; box-shadow: 0 0 4px #fff, 0 0 10px #fdbb2d;
+  background: rgba(255, 255, 255, 0.8); 
+  box-shadow: 0 0 10px rgba(255,255,255,0.5);
   opacity: 0; animation: floatUp linear infinite;
 }
 @keyframes floatUp {
   0% { transform:translateY(0) scale(0); opacity:0; }
-  20% { opacity:0.8; }
-  80% { opacity:0.6; }
-  100% { transform:translateY(-100px) scale(1.5); opacity:0; }
+  20% { opacity:0.6; }
+  80% { opacity:0.4; }
+  100% { transform:translateY(-100px) scale(1); opacity:0; }
 }
 
 /* UI CONTAINER */
@@ -84,35 +87,35 @@ html, body {
 #top-chrome.visible { opacity:1; pointer-events:auto; }
 
 .nav-btn {
-  background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.2);
+  background:rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.3);
   width:40px; height:40px; border-radius:50%;
   color:white; font-size:1.2rem; cursor:pointer;
   display:flex; align-items:center; justify-content:center;
   backdrop-filter:blur(5px);
 }
-.nav-btn:hover { background:rgba(255,255,255,0.2); }
+.nav-btn:hover { background:rgba(255,255,255,0.4); }
 
 .dots { display:flex; gap:8px; }
 .dot {
   width:8px; height:8px; border-radius:50%;
-  background:rgba(255,255,255,0.3); transition:all 0.3s;
+  background:rgba(255,255,255,0.4); transition:all 0.3s;
 }
-.dot.active { background:#fdbb2d; transform:scale(1.3); box-shadow:0 0 10px #fdbb2d; }
-.dot.done { background:rgba(255,255,255,0.6); }
+.dot.active { background:#fff; transform:scale(1.3); box-shadow:0 0 10px #fff; }
+.dot.done { background:rgba(255,255,255,0.7); }
 
-/* --- HOME SCREEN SPECIFIC --- */
+/* --- HOME SCREEN --- */
 #screen-home { justify-content: center; padding-bottom: 40px; }
 
-/* CUSTOM SVG LANTERN LOGO */
+/* LANTERN LOGO */
 .lantern-svg {
   width: 120px; height: auto;
   margin-bottom: 20px;
-  filter: drop-shadow(0 0 20px rgba(253, 187, 45, 0.6));
+  filter: drop-shadow(0 0 25px rgba(255, 230, 150, 0.7)); /* Softer Gold Glow */
   animation: hover 4s ease-in-out infinite;
 }
 @keyframes hover { 0%, 100% { transform:translateY(0); } 50% { transform:translateY(-10px); } }
 
-/* FLAME ANIMATION INSIDE SVG */
+/* FLAME ANIMATION */
 .flame { animation: flicker 0.1s infinite alternate; transform-origin: center bottom; }
 @keyframes flicker { 
   0% { transform: scale(1); opacity: 0.9; } 
@@ -122,29 +125,29 @@ html, body {
 .title-main {
   font-family:'Cormorant Garamond', serif; font-size:4rem; font-weight:600;
   letter-spacing:0.02em; color:#fff;
-  text-shadow:0 4px 20px rgba(0,0,0,0.3);
+  text-shadow:0 4px 20px rgba(0,0,0,0.1); /* Softer Shadow */
   margin-bottom: 5px;
 }
 .title-sub {
-  font-size:1.2rem; color:rgba(255,255,255,0.9);
+  font-size:1.2rem; color:rgba(255,255,255,0.95);
   font-weight:400; margin-bottom:45px; letter-spacing:1px;
 }
 
-/* GLASS BUTTONS */
+/* GLASS BUTTONS (Softer borders) */
 .btn-start, .btn-continue {
   padding:18px 50px; border-radius:50px;
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
   color:#fff; font-family:'Cormorant Garamond', serif;
   font-size:1.5rem; font-weight:700; letter-spacing:0.05em;
   cursor:pointer; transition:all 0.3s ease;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 .btn-start:hover, .btn-continue:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.35);
   transform:scale(1.02) translateY(-2px);
-  box-shadow: 0 15px 40px rgba(0,0,0,0.3), 0 0 20px rgba(253, 187, 45, 0.4);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
 }
 .btn-continue {
   position:fixed; bottom:40px; font-family:'Nunito', sans-serif; font-size:1.1rem; padding:16px 40px; z-index:20;
@@ -153,32 +156,34 @@ html, body {
 /* CARD CONTENT STYLES */
 .label-top {
   font-size:0.8rem; text-transform:uppercase; letter-spacing:0.2em;
-  color:#fdbb2d; margin-bottom:25px; font-weight:800; opacity:0.9;
+  color:#fff; margin-bottom:25px; font-weight:800; opacity:0.9;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 .card-text-lg {
   font-family:'Cormorant Garamond', serif; font-size:2.2rem; line-height:1.3;
   text-align:center; color:#fff; margin-bottom:15px;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  text-shadow: 0 2px 10px rgba(0,0,0,0.15);
 }
 .card-text-md {
   font-size:1.2rem; line-height:1.7; text-align:center;
-  color:rgba(255,255,255,0.95); max-width:600px;
+  color:rgba(255,255,255,0.98); max-width:600px;
 }
 
-/* STORY SCROLL & BOXES */
+/* STORY SCROLL */
 .story-scroll {
   max-height:45vh; overflow-y:auto; padding-right:10px; margin-bottom:20px; text-align:left;
-  scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.3) transparent;
+  scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.4) transparent;
 }
 .story-scroll::-webkit-scrollbar { width:4px; }
-.story-scroll::-webkit-scrollbar-thumb { background:rgba(255,255,255,0.3); border-radius:4px; }
+.story-scroll::-webkit-scrollbar-thumb { background:rgba(255,255,255,0.4); border-radius:4px; }
 
+/* Highlight Boxes */
 .moral-box {
-  background:rgba(255,255,255,0.1); border-left:3px solid #fdbb2d;
+  background:rgba(255,255,255,0.2); border-left:3px solid #fff;
   padding:20px; border-radius:0 12px 12px 0; margin-top:25px; font-style:italic; color:#fff;
 }
 .cheat-code-box {
-  background:rgba(255,255,255,0.1); border-left:4px solid #fdbb2d;
+  background:rgba(255,255,255,0.15); border-left:4px solid #fff;
   padding:20px; margin-top:20px; border-radius:0 12px 12px 0; font-weight:500; font-size:1rem; text-align:left; color:#fff;
 }
 
@@ -186,18 +191,18 @@ html, body {
 .btn-icon-group { display:flex; gap:15px; margin-top:30px; }
 .btn-icon {
   width:50px; height:50px; border-radius:50%;
-  background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.3);
+  background:rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.4);
   color:white; font-size:1.4rem; cursor:pointer;
   display:flex; align-items:center; justify-content:center; transition:all 0.2s ease;
 }
-.btn-icon:hover { background:rgba(255,255,255,0.25); transform:scale(1.05); }
+.btn-icon:hover { background:rgba(255,255,255,0.4); transform:scale(1.05); }
 .btn-icon.saved {
-  background:rgba(255, 107, 107, 0.2); border-color:#ff6b6b; color:#ff6b6b;
+  background:rgba(255, 255, 255, 0.8); border-color:#fff; color:#ff6b6b;
 }
 
-/* REVEAL BUTTON (Joke) */
+/* REVEAL BUTTON */
 .btn-reveal {
-  background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3);
+  background:rgba(255,255,255,0.2); border:1px solid rgba(255,255,255,0.4);
   color:#fff; padding:12px 30px; border-radius:30px;
   cursor:pointer; margin-top:20px; font-family:'Cormorant Garamond', serif; font-size:1.2rem; font-weight:600;
 }
@@ -226,17 +231,17 @@ html, body {
   <div class="anim-in">
       <svg class="lantern-svg" viewBox="0 0 100 160" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="50" cy="10" r="8" stroke="white" stroke-width="2"/>
-        <path d="M30 20 L70 20 L60 35 L40 35 Z" fill="rgba(0,0,0,0.5)" stroke="white" stroke-width="2"/>
+        <path d="M30 20 L70 20 L60 35 L40 35 Z" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="2"/>
         <line x1="25" y1="35" x2="20" y2="120" stroke="white" stroke-width="2"/>
         <line x1="75" y1="35" x2="80" y2="120" stroke="white" stroke-width="2"/>
-        <path d="M20 120 L80 120 L85 140 L15 140 Z" fill="rgba(0,0,0,0.5)" stroke="white" stroke-width="2"/>
+        <path d="M20 120 L80 120 L85 140 L15 140 Z" fill="rgba(255,255,255,0.2)" stroke="white" stroke-width="2"/>
         <path d="M25 35 L75 35 L80 120 L20 120 Z" fill="url(#glowGradient)" opacity="0.6"/>
-        <path class="flame" d="M50 115 Q40 100 50 70 Q60 100 50 115" fill="#fdbb2d"/>
+        <path class="flame" d="M50 115 Q40 100 50 70 Q60 100 50 115" fill="#ffd700"/>
         
         <defs>
             <radialGradient id="glowGradient" cx="0.5" cy="0.6" r="0.5">
-                <stop offset="0%" stop-color="#fdbb2d" stop-opacity="0.8"/>
-                <stop offset="100%" stop-color="#fdbb2d" stop-opacity="0"/>
+                <stop offset="0%" stop-color="#ffd700" stop-opacity="0.6"/>
+                <stop offset="100%" stop-color="#ffd700" stop-opacity="0"/>
             </radialGradient>
         </defs>
       </svg>
@@ -264,9 +269,9 @@ html, body {
 
 <div class="screen" id="screen-quote">
   <div class="label-top anim-in">Perspective</div>
-  <div style="font-size:4rem; line-height:0.5; color:#fdbb2d; opacity:0.8; margin-bottom:20px;" class="anim-in">"</div>
+  <div style="font-size:4rem; line-height:0.5; color:rgba(255,255,255,0.6); margin-bottom:20px;" class="anim-in">"</div>
   <div class="card-text-lg anim-in" style="font-style:italic;" id="qt-text"></div>
-  <div class="anim-in" style="margin-top:20px; color:#fdbb2d; font-weight:600;" id="qt-author"></div>
+  <div class="anim-in" style="margin-top:20px; color:#fff; font-weight:600;" id="qt-author"></div>
   <div class="btn-icon-group anim-in">
     <button class="btn-icon" onclick="oneMore('quote')">↻</button>
     <button class="btn-icon" onclick="toggleSave(this)">♡</button>
@@ -277,13 +282,13 @@ html, body {
 <div class="screen" id="screen-checkin">
   <div class="label-top anim-in">Check In</div>
   
-  <div class="anim-in" style="background:rgba(255,255,255,0.1); padding:20px; border-radius:12px; width:100%; max-width:400px; margin-bottom:10px; border-left:3px solid #fdbb2d;">
-    <div style="font-size:0.8rem; color:#fdbb2d; margin-bottom:5px;">GRATITUDE</div>
+  <div class="anim-in" style="background:rgba(255,255,255,0.15); padding:20px; border-radius:12px; width:100%; max-width:400px; margin-bottom:10px; border-left:3px solid #fff;">
+    <div style="font-size:0.8rem; color:#fff; margin-bottom:5px;">GRATITUDE</div>
     <div style="font-size:1.1rem;" id="ci-grat"></div>
   </div>
 
-  <div class="anim-in" style="background:rgba(255,255,255,0.1); padding:20px; border-radius:12px; width:100%; max-width:400px; border-left:3px solid #ff9a9e;">
-    <div style="font-size:0.8rem; color:#ff9a9e; margin-bottom:5px;">INTENTION</div>
+  <div class="anim-in" style="background:rgba(255,255,255,0.15); padding:20px; border-radius:12px; width:100%; max-width:400px; border-left:3px solid #ffdde1;">
+    <div style="font-size:0.8rem; color:#ffdde1; margin-bottom:5px;">INTENTION</div>
     <div style="font-size:1.1rem;" id="ci-goal"></div>
   </div>
 
@@ -320,9 +325,11 @@ html, body {
 <div class="screen" id="screen-mindful">
   <div class="label-top anim-in">Breathe</div>
   <div class="card-text-md anim-in">Take 30 seconds. Close your eyes. Just be here.</div>
-  <div class="anim-in" style="font-family:'Cormorant Garamond'; font-size:5rem; margin:30px 0; font-variant-numeric:tabular-nums; text-shadow:0 0 20px rgba(255,255,255,0.5);" id="mindful-timer">0:30</div>
+  <div class="anim-in" style="font-family:'Cormorant Garamond'; font-size:5rem; margin:30px 0; font-variant-numeric:tabular-nums; text-shadow:0 0 20px rgba(255,255,255,0.3);" id="mindful-timer">0:30</div>
+  
   <button class="btn-reveal anim-in" id="btn-mindful" onclick="startMindful()">Start Timer</button>
-  <button class="btn-continue" style="display:none;" id="mindful-cont" onclick="goToAct(7)">Continue</button>
+  
+  <button class="btn-continue" id="mindful-cont" style="display:block; opacity:0.7; background:rgba(255,255,255,0.1);" onclick="goToAct(7)">Skip / Continue</button>
 </div>
 
 <div class="screen" id="screen-joke">
@@ -331,7 +338,7 @@ html, body {
   <button class="btn-reveal anim-in" id="btn-reveal" onclick="revealJoke()">Reveal</button>
   <div id="pk-wrap" style="display:none; margin-top:30px; flex-direction:column; align-items:center;">
     <div style="width:50px; height:2px; background:#fff; opacity:0.3; margin-bottom:20px;"></div>
-    <div class="card-text-lg" style="color:#fdbb2d;" id="jk-punch"></div>
+    <div class="card-text-lg" style="color:#fff;" id="jk-punch"></div>
   </div>
   <div class="btn-icon-group anim-in" style="margin-top:40px;">
     <button class="btn-icon" onclick="oneMore('joke')">↻</button>
@@ -346,26 +353,25 @@ html, body {
   <button class="btn-start anim-in" style="margin-top:40px;" onclick="goHome()">Home</button>
 </div>
 
-<script src="data.js?v=2.0"></script> 
+<script src="data.js?v=3.0"></script> 
 
 <script>
 // --- LOGIC ---
 let S = { act: 0 };
 let mindfulInterval = null;
 
-// PARTICLE GENERATOR (Pixie Dust)
+// PARTICLE GENERATOR (Soft/Dreamy)
 (function() {
   const c = document.getElementById('particles');
-  // Magic colors: White, Gold, Soft Pink
-  const colors = ['#ffffff', '#fdbb2d', '#ff9a9e']; 
-  for(let i=0; i<35; i++){
+  const colors = ['#fff', '#ffd1dc', '#d4fc79']; 
+  for(let i=0; i<30; i++){
     let d = document.createElement('div');
     d.className='particle';
     d.style.left = Math.random()*100 + '%';
     d.style.top = Math.random()*100 + '%';
-    d.style.animationDuration = (Math.random()*10 + 10) + 's'; 
+    d.style.animationDuration = (Math.random()*15 + 10) + 's'; 
     d.style.animationDelay = (Math.random()*5) + 's';
-    let size = Math.random()*3 + 1;
+    let size = Math.random()*4 + 2;
     d.style.width = size + 'px';
     d.style.height = size + 'px';
     d.style.background = colors[Math.floor(Math.random() * colors.length)];
@@ -427,8 +433,16 @@ function goToAct(n) {
   updateDots(n);
   show('screen-' + screens[n]);
   
-  const btn = document.querySelector('.btn-continue');
-  btn.style.display = (n === 7 || n === 9) ? 'none' : 'block';
+  // Logic: Continue button is explicitly managed for Mindful(7), else standard
+  if (n !== 7) {
+      document.querySelector('.btn-continue').style.display = (n === 9) ? 'none' : 'block';
+      document.querySelector('.btn-continue').innerText = "Continue";
+      document.querySelector('.btn-continue').style.opacity = "1";
+      document.querySelector('.btn-continue').style.background = ""; // Reset
+  } else {
+      // On Mindful screen, we ensure the button is visible but distinct
+      // Logic handled in HTML style, but ensured here
+  }
 
   if(n===1) loadIB();
   if(n===2) loadQT();
@@ -464,7 +478,6 @@ function loadQT() {
 function loadCI() {
   const gratitudePrompts = ["What made you smile today?", "Who helped you recently?", "What is a simple pleasure you enjoyed?"];
   const intentionPrompts = ["What is one goal for tomorrow?", "How can you be kind this week?", "What do you want to improve?"];
-  
   document.getElementById('ci-grat').innerText = pick(gratitudePrompts);
   document.getElementById('ci-goal').innerText = pick(intentionPrompts);
 }
@@ -481,7 +494,10 @@ function loadLS() {
 function loadMF() {
   document.getElementById('mindful-timer').innerText = "0:30";
   document.getElementById('btn-mindful').style.display = "block";
-  document.getElementById('mindful-cont').style.display = "none";
+  // Reset button state
+  let btn = document.getElementById('mindful-cont');
+  btn.innerText = "Skip / Continue";
+  btn.style.opacity = "0.7";
 }
 function startMindful() {
   document.getElementById('btn-mindful').style.display = "none";
@@ -491,7 +507,10 @@ function startMindful() {
     document.getElementById('mindful-timer').innerText = "0:" + (t<10?"0":"") + t;
     if(t<=0) {
       clearInterval(mindfulInterval);
-      document.getElementById('mindful-cont').style.display = "block";
+      let btn = document.getElementById('mindful-cont');
+      btn.innerText = "Continue";
+      btn.style.opacity = "1";
+      btn.style.background = "rgba(255,255,255,0.3)";
     }
   }, 1000);
 }
@@ -519,3 +538,4 @@ function revealJoke() {
 </script>
 </body>
 </html>
+
