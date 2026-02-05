@@ -1,17 +1,17 @@
 const db = {
-    // --- SINGLE MODE: DINNER TABLE ---
+    // --- SINGLE MODE: FAMILY DINNER ---
     dinner: {
         title: "Lanturn",
-        subtitle: "A brighter way to check in.",
+        subtitle: "Light up the conversation.",
         
-        // CHECK IN (3 Steps)
+        // CHECK IN
         checkin: [
             "🥦 <strong>Veggies:</strong> What is one challenge that tested your patience today?", 
             "🥩 <strong>Meat & Potatoes:</strong> What is the best thing that happened to you today?", 
             "🍰 <strong>Dessert:</strong> What is one thing you are looking forward to tomorrow?"
         ],
         
-        // ICE BREAKERS (60+ items)
+        // ICE BREAKERS
         iceBreakers: [
             "If you could have a boring superpower (like refilling water cups instantly), what would it be?", 
             "What is the weirdest thing you have ever eaten?", 
@@ -78,12 +78,12 @@ const db = {
             "What is the grossest bug?"
         ],
 
-        // QUOTES (60+ items)
+        // QUOTES
         quotes: [
             { text: "Family is not an important thing. It's everything.", author: "Michael J. Fox" }, { text: "The love of a family is life's greatest blessing.", author: "Unknown" }, { text: "In time of test, family is best.", author: "Burmese Proverb" }, { text: "The strength of a family, like the strength of an army, is in its loyalty to each other.", author: "Mario Puzo" }, { text: "What can you do to promote world peace? Go home and love your family.", author: "Mother Teresa" }, { text: "A happy family is but an earlier heaven.", author: "George Bernard Shaw" }, { text: "No act of kindness, no matter how small, is ever wasted.", author: "Aesop" }, { text: "Alone we can do so little; together we can do so much.", author: "Helen Keller" }, { text: "If you want to lift yourself up, lift up someone else.", author: "Booker T. Washington" }, { text: "Do what you can, with what you have, where you are.", author: "Theodore Roosevelt" }, { text: "Family means no one gets left behind or forgotten.", author: "David Ogden Stiers" }, { text: "Home is where you are loved the most and act the worst.", author: "Marjorie Pay Hinckley" }, { text: "The memories we make with our family is everything.", author: "Candace Cameron Bure" }, { text: "Family is a life jacket in the stormy sea of life.", author: "J.K. Rowling" }, { text: "It does not matter how slowly you go as long as you do not stop.", author: "Confucius" }, { text: "Happiness is homemade.", author: "Unknown" }, { text: "Ohana means family.", author: "Lilo & Stitch" }, { text: "The most important thing in the world is family and love.", author: "John Wooden" }, { text: "Rejoice with your family in the beautiful land of life.", author: "Albert Einstein" }, { text: "Family is where life begins and love never ends.", author: "Unknown" }, { text: "You don't choose your family. They are God's gift to you.", author: "Desmond Tutu" }, { text: "Other things may change us, but we start and end with the family.", author: "Anthony Brandt" }, { text: "To us, family means putting your arms around each other and being there.", author: "Barbara Bush" }, { text: "A house is built with hands, but a home is built with hearts.", author: "Unknown" }, { text: "Family is the anchor that holds us through life’s storms.", author: "Unknown" }, { text: "The family is one of nature's masterpieces.", author: "George Santayana" }, { text: "Being a family means you are a part of something very wonderful.", author: "Lisa Weed" }, { text: "Peace is the beauty of life. It is sunshine. It is the smile of a child.", author: "Menachem Begin" }, { text: "Children are the hands by which we take hold of heaven.", author: "Henry Ward Beecher" }, { text: "While we try to teach our children all about life, our children teach us what life is all about.", author: "Angela Schwindt" }, { text: "Every day is a fresh start.", author: "Unknown" }, { text: "Kindness is a language which the deaf can hear and the blind can see.", author: "Mark Twain" }, { text: "Be the change that you wish to see in the world.", author: "Mahatma Gandhi" }, { text: "Yesterday is history. Tomorrow is a mystery. Today is a gift.", author: "Eleanor Roosevelt" }, { text: "Try to be a rainbow in someone's cloud.", author: "Maya Angelou" }, { text: "Don't count the days, make the days count.", author: "Muhammad Ali" }, { text: "The best way to predict the future is to create it.", author: "Abraham Lincoln" }, { text: "Believe you can and you're halfway there.", author: "Theodore Roosevelt" }, { text: "It always seems impossible until it's done.", author: "Nelson Mandela" }, { text: "You are braver than you believe, stronger than you seem, and smarter than you think.", author: "A.A. Milne" }, { text: "Life is 10% what happens to us and 90% how we react to it.", author: "Charles R. Swindoll" }, { text: "Act as if what you do makes a difference. It does.", author: "William James" }, { text: "Start where you are. Use what you have. Do what you can.", author: "Arthur Ashe" }, { text: "Don't let yesterday take up too much of today.", author: "Will Rogers" }, { text: "You miss 100% of the shots you don't take.", author: "Wayne Gretzky" }, { text: "A person who never made a mistake never tried anything new.", author: "Albert Einstein" }, { text: "It is never too late to be what you might have been.", author: "George Eliot" }, { text: "Do the right thing, even when no one is looking.", author: "C.S. Lewis" }, { text: "Honesty is the first chapter in the book of wisdom.", author: "Thomas Jefferson" }, { text: "Politeness is a sign of dignity, not subservience.", author: "Theodore Roosevelt" }, { text: "Gratitude turns what we have into enough.", author: "Unknown" }, { text: "Listening is an act of love.", author: "Unknown" }, { text: "The roots of education are bitter, but the fruit is sweet.", author: "Aristotle" }, { text: "Mistakes are proof that you are trying.", author: "Unknown" }, { text: "Integrity is doing the right thing, even when no one is watching.", author: "C.S. Lewis" }, { text: "If you can dream it, you can do it.", author: "Walt Disney" }, { text: "Be silly, be honest, be kind.", author: "Ralph Waldo Emerson" }, { text: "Make each day your masterpiece.", author: "John Wooden" }, { text: "Attitude is a little thing that makes a big difference.", author: "Winston Churchill" }, { text: "The expert in anything was once a beginner.", author: "Helen Hayes" }, { text: "What we think, we become.", author: "Buddha" }, { text: "Tough times never last, but tough people do.", author: "Robert H. Schuller" }, { text: "Turn your wounds into wisdom.", author: "Oprah Winfrey" }
         ],
 
-        // MORAL STORIES - Restored to Full Narrative Versions
+        // MORAL STORIES
         dynamics: [ 
             { 
                 title: "The Level 99 Paladin", 
@@ -243,7 +243,7 @@ const db = {
             }
         ],
         
-        // SKILLS (60+ items)
+        // SKILLS
         skills: [
             { title: "The Perfect Handshake", body: "Stand up. Make eye contact. Smile. Grip firmly (web to web). Shake twice. Release. It builds instant respect." },
             { title: "The 2-Minute Rule", body: "If a task takes less than 2 minutes (hanging a coat, washing a dish), do it immediately. Never add it to a to-do list." },
