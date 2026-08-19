@@ -1,281 +1,626 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Lanturn — Check-in</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-warm: #fdfaf5; 
-            --accent-glow: #ffcc80;
-            --glass: rgba(255, 255, 255, 0.85);
-            --glass-border: rgba(180, 160, 140, 0.2);
-            --text-main: #4a4238;
-            --text-dim: #8c8376;
-            --gold: #c5a059;
-            --help-bg: #fdfaf5;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
-        body {
-            background: var(--bg-warm);
-            color: var(--text-main);
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            height: 100vh;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .orb-field { position: fixed; inset: 0; z-index: 0; filter: blur(100px); opacity: 0.6; }
-        .orb {
-            position: absolute; border-radius: 50%;
-            background: radial-gradient(circle, var(--accent-glow), transparent 75%);
-            width: 80vw; height: 80vw; top: -10%; right: -10%;
-            animation: sunMove 20s infinite alternate ease-in-out;
-        }
-        @keyframes sunMove { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(-20%, 20%) scale(1.1); } }
-
-        .container {
-            position: relative; z-index: 10; width: 100%; max-width: 440px; height: 90vh;
-            display: flex; flex-direction: column; padding: 20px;
-        }
-
-        header {
-            display: flex; justify-content: space-between; align-items: center; 
-            margin-bottom: 30px; opacity: 0; transition: 0.5s ease; pointer-events: none;
-        }
-        header.visible { opacity: 1; pointer-events: auto; }
-
-        .progress-rail { flex: 1; height: 3px; background: rgba(0,0,0,0.05); margin: 0 20px; position: relative; border-radius: 4px; }
-        .progress-bar {
-            position: absolute; height: 100%; background: var(--gold); width: 0%;
-            transition: width 0.6s cubic-bezier(0.2, 0, 0, 1);
-        }
-
-        .stage { display: none; flex-direction: column; height: 100%; animation: softFade 0.6s forwards; }
-        .stage.active { display: flex; }
-        @keyframes softFade { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
-
-        .card {
-            background: var(--glass); backdrop-filter: blur(15px); border: 1px solid var(--glass-border);
-            border-radius: 40px; padding: 40px 30px; flex: 1; display: flex; flex-direction: column;
-            justify-content: center; box-shadow: 0 30px 60px rgba(180, 160, 140, 0.15);
-            position: relative; overflow: hidden;
-        }
-
-        .help-btn {
-            position: absolute; top: 25px; right: 25px; width: 32px; height: 32px;
-            border-radius: 50%; border: 1px solid var(--glass-border); background: white;
-            color: var(--gold); font-weight: 800; cursor: pointer;
-            display: flex; align-items: center; justify-content: center; font-size: 0.9rem;
-            transition: 0.3s; z-index: 100;
-        }
-
-        .help-overlay {
-            position: absolute; inset: 0; background: var(--help-bg); border-radius: 40px;
-            padding: 40px 30px; display: none; flex-direction: column; justify-content: center;
-            text-align: center; z-index: 101; border: 1px solid var(--gold);
-        }
-        .help-overlay.active { display: flex; }
-
-        h1 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 15px; color: #3a332a; line-height: 1.2; }
-        .label { text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.65rem; font-weight: 800; color: var(--gold); margin-bottom: 20px; }
-        p { font-size: 1rem; line-height: 1.6; color: var(--text-dim); }
-
-        .btn-main {
-            background: #3a332a; color: #fff; border: none; padding: 18px;
-            border-radius: 20px; font-weight: 700; font-size: 1rem; margin-top: 25px; cursor: pointer;
-        }
-        .btn-ghost {
-            background: transparent; color: var(--text-dim); border: 1.5px solid var(--glass-border);
-            padding: 12px; border-radius: 16px; font-size: 0.8rem; margin-top: 15px; font-weight: 600; cursor: pointer;
-        }
-
-        .heartfelt-note { font-style: italic; font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--text-main); margin: 15px 0 25px; text-align: center; }
-        .ci-row { display: flex; gap: 15px; background: rgba(0,0,0,0.02); padding: 15px; border-radius: 20px; margin-bottom: 10px; border: 1px solid rgba(0,0,0,0.05); text-align: left; }
-        .story-scroll { overflow-y: auto; max-height: 250px; padding-right: 10px; margin-bottom: 15px; text-align: left; }
-        
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 10px; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Family Meeting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#111714;--card:#1a201c;--card2:#212923;
+--border:rgba(255,255,255,0.07);
+--text:#eef0ed;--text2:#949c92;--text3:#5a6058;
+--accent:#8bc455;--accent2:rgba(139,196,85,0.12);
+--gold:#d4a84b;--gold2:rgba(212,168,75,0.12);
+--coral:#c76a5e;--coral2:rgba(199,106,94,0.12);
+--teal:#4db89a;--teal2:rgba(77,184,154,0.12);
+--btn-text:#111;
+--bggrad:linear-gradient(180deg,#111714 0%,#141c17 55%,#1a2a1d 100%);
+--chrome:rgba(17,23,20,0.85);
+}
+body[data-theme="campfire"]{
+--bg:#1a110a;--card:#241810;--card2:#2e1f15;
+--border:rgba(255,220,180,0.08);
+--text:#f5ede2;--text2:#b09a85;--text3:#6e5c4c;
+--accent:#e8944a;--accent2:rgba(232,148,74,0.14);
+--gold:#f0b35e;--gold2:rgba(240,179,94,0.14);
+--coral:#d4694f;--coral2:rgba(212,105,79,0.14);
+--teal:#c99a5b;--teal2:rgba(201,154,91,0.14);
+--btn-text:#1a110a;
+--bggrad:radial-gradient(ellipse 120% 60% at 50% 115%,#5a2c10 0%,#331a0b 45%,#160c05 100%);
+--chrome:rgba(22,12,5,0.82);
+}
+body[data-theme="morning"]{
+--bg:#f7f3ea;--card:#ffffff;--card2:#efe9dc;
+--border:rgba(60,50,30,0.1);
+--text:#2b2e28;--text2:#6b7064;--text3:#9b9f92;
+--accent:#6aa53c;--accent2:rgba(106,165,60,0.12);
+--gold:#dd9c2e;--gold2:rgba(221,156,46,0.13);
+--coral:#d4694f;--coral2:rgba(212,105,79,0.12);
+--teal:#3d9b83;--teal2:rgba(61,155,131,0.12);
+--btn-text:#fff;
+--bggrad:linear-gradient(180deg,#c3ddf2 0%,#e8e4d8 32%,#f8dfb4 58%,#fbcd8a 80%,#f8bd6e 100%);
+--chrome:rgba(248,240,224,0.82);
+}
+body[data-theme="evening"]{
+--bg:#151422;--card:#1e1c30;--card2:#27243c;
+--border:rgba(200,190,255,0.08);
+--text:#ecebf5;--text2:#9d9ab5;--text3:#5f5c78;
+--accent:#9d8cf0;--accent2:rgba(157,140,240,0.14);
+--gold:#e8b46a;--gold2:rgba(232,180,106,0.13);
+--coral:#d4728a;--coral2:rgba(212,114,138,0.13);
+--teal:#6aabd4;--teal2:rgba(106,171,212,0.13);
+--btn-text:#151422;
+--bggrad:linear-gradient(180deg,#0b0a18 0%,#151330 55%,#241d47 100%);
+--chrome:rgba(13,12,26,0.82);
+}
+html,body{
+height:100%;width:100%;
+font-family:'DM Sans',system-ui,sans-serif;
+background:var(--bggrad);
+background-attachment:fixed;
+color:var(--text);
+-webkit-font-smoothing:antialiased;
+overflow:hidden;
+transition:background 0.4s;
+}
+#fx{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.fx-p{position:absolute;border-radius:50%}
+@keyframes rise{0%{transform:translateY(0) translateX(0);opacity:0}8%{opacity:1}60%{transform:translateY(-55vh) translateX(12px);opacity:0.9}100%{transform:translateY(-105vh) translateX(-8px);opacity:0}}
+@keyframes twinkle{0%,100%{opacity:0.15;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
+@keyframes firefly{0%{transform:translate(0,0);opacity:0}15%{opacity:0.9}40%{transform:translate(25px,-20px);opacity:0.4}65%{transform:translate(-10px,-45px);opacity:0.9}100%{transform:translate(15px,-70px);opacity:0}}
+@keyframes sunray{0%,100%{opacity:0.25}50%{opacity:0.55}}
+@keyframes sunpulse{0%,100%{opacity:0.75;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
+@keyframes cloudmove{0%{transform:translateX(-30vw)}100%{transform:translateX(130vw)}}
+.scr{position:fixed;inset:0;display:none;flex-direction:column;overflow-y:auto;overflow-x:hidden;z-index:1}
+.scr.on{display:flex}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;position:sticky;top:0;background:var(--chrome);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:50}
+.nav-btn{width:38px;height:38px;border-radius:10px;background:var(--card);border:1px solid var(--border);color:var(--text2);font-size:15px;display:flex;align-items:center;justify-content:center;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.nav-btn:active{opacity:0.6}
+.nav-step{font-size:11px;font-weight:600;color:var(--text3);letter-spacing:0.6px;text-transform:uppercase}
+.prog{display:flex;gap:4px;padding:0 18px 18px}
+.prog-bar{flex:1;height:3px;border-radius:2px;background:var(--card2)}
+.prog-bar.done{background:var(--accent)}
+.prog-bar.now{background:var(--gold)}
+.main{flex:1;padding:0 18px 110px}
+.h1{font-size:22px;font-weight:700;color:var(--text);margin-bottom:6px}
+.p{font-size:14px;font-weight:500;color:var(--text2);line-height:1.55}
+.box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin-top:14px}
+.rule{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}
+.rule:last-child{border:none}
+.rule-n{min-width:22px;height:22px;border-radius:6px;background:var(--accent2);color:var(--accent);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.rule-t{font-size:14px;font-weight:500;color:var(--text)}
+.q-text{font-size:17px;font-weight:600;color:var(--text);line-height:1.55;text-align:center;margin:14px 0}
+.q-auth{font-size:13px;font-weight:600;color:var(--gold);text-align:center}
+.ci{display:flex;align-items:flex-start;gap:12px;padding:14px;margin-top:10px;background:var(--card);border:1px solid var(--border);border-radius:12px}
+.ci.high{border-left:3px solid var(--teal)}
+.ci.low{border-left:3px solid var(--coral)}
+.ci.buffalo{border-left:3px solid var(--gold)}
+.ci-ico{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.ci.high .ci-ico{background:var(--teal2)}
+.ci.low .ci-ico{background:var(--coral2)}
+.ci.buffalo .ci-ico{background:var(--gold2)}
+.ci-lbl{font-size:10px;font-weight:700;letter-spacing:0.7px;text-transform:uppercase;margin-bottom:2px}
+.ci.high .ci-lbl{color:var(--teal)}
+.ci.low .ci-lbl{color:var(--coral)}
+.ci.buffalo .ci-lbl{color:var(--gold)}
+.ci-txt{font-size:13px;font-weight:500;color:var(--text);line-height:1.4}
+.who{margin-top:14px;padding:14px;background:var(--gold2);border-radius:12px;text-align:center;border:1px dashed var(--gold)}
+.who-txt{font-size:14px;font-weight:600;color:var(--text);margin-bottom:10px;line-height:1.4}
+.who-btn{padding:9px 16px;border-radius:8px;background:var(--gold);border:none;font-family:inherit;font-size:12px;font-weight:700;color:var(--btn-text);cursor:pointer}
+.who-btn:active{opacity:0.8}
+.story{font-size:14px;font-weight:400;color:var(--text2);line-height:1.75;margin:14px 0;padding:16px;background:var(--card);border:1px solid var(--border);border-radius:12px}
+.moral{padding:14px;background:var(--accent2);border-radius:10px;border-left:3px solid var(--accent)}
+.moral-lbl{font-size:10px;font-weight:700;letter-spacing:0.7px;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+.moral-txt{font-size:13px;font-weight:600;color:var(--text);line-height:1.45}
+.joke-q{font-size:17px;font-weight:600;color:var(--text);text-align:center;line-height:1.5;padding:18px 0}
+.joke-btn{width:100%;padding:14px;border-radius:10px;background:var(--gold);border:none;font-family:inherit;font-size:14px;font-weight:700;color:var(--btn-text);cursor:pointer}
+.joke-btn:active{opacity:0.8}
+.joke-a{display:none;text-align:center;padding-top:18px}
+.joke-a.show{display:block}
+.joke-ans{font-size:17px;font-weight:700;color:var(--gold);margin-bottom:18px}
+.rate-lbl{font-size:11px;font-weight:600;color:var(--text3);margin-bottom:8px}
+.rate-row{display:flex;gap:5px;justify-content:center;flex-wrap:wrap}
+.rate-num{width:30px;height:30px;border-radius:7px;background:var(--card2);border:1px solid var(--border);color:var(--text2);font-family:inherit;font-size:12px;font-weight:600;cursor:pointer}
+.rate-num.sel{background:var(--gold);border-color:var(--gold);color:var(--btn-text)}
+.rate-avg{margin-top:8px;font-size:11px;color:var(--text3)}
+.act-tag{display:inline-block;padding:4px 9px;border-radius:5px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.4px;margin-bottom:8px}
+.act-tag.game{background:var(--teal2);color:var(--teal)}
+.act-tag.science{background:var(--accent2);color:var(--accent)}
+.act-tag.creative{background:var(--coral2);color:var(--coral)}
+.act-name{font-size:17px;font-weight:700;color:var(--text);margin-bottom:4px}
+.act-desc{font-size:12px;font-weight:500;color:var(--text2)}
+.act-how{margin-top:12px;padding:12px;background:var(--bg);border-radius:8px}
+.act-how-lbl{font-size:9px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(--text3);margin-bottom:4px}
+.act-how-txt{font-size:12px;font-weight:400;color:var(--text2);line-height:1.55}
+.act-mats{margin-top:10px;padding:10px 12px;background:var(--gold2);border-radius:7px;border-left:3px solid var(--gold)}
+.act-mats-lbl{font-size:9px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(--gold);margin-bottom:3px}
+.act-mats-txt{font-size:11px;font-weight:500;color:var(--text);line-height:1.4}
+.act-filter{display:flex;gap:6px;margin-top:12px;justify-content:center}
+.filt{padding:7px 13px;border-radius:8px;background:var(--card);border:1px solid var(--border);font-family:inherit;font-size:11px;font-weight:600;color:var(--text2);cursor:pointer}
+.filt.on{background:var(--accent);border-color:var(--accent);color:var(--btn-text)}
+.tip{margin-top:14px;padding:12px;background:var(--card);border:1px solid var(--border);border-radius:10px;border-left:3px solid var(--teal)}
+.tip-lbl{font-size:9px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;color:var(--teal);margin-bottom:3px}
+.tip-txt{font-size:12px;font-weight:500;color:var(--text2);line-height:1.45}
+.btn-row{display:flex;gap:8px;margin-top:14px;justify-content:center}
+.btn-sec{padding:9px 15px;border-radius:8px;background:var(--card);border:1px solid var(--border);font-family:inherit;font-size:12px;font-weight:600;color:var(--text2);cursor:pointer}
+.btn-sec:active{opacity:0.6}
+.foot{position:sticky;bottom:0;padding:14px 18px 26px;background:var(--chrome);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--border);margin-top:auto}
+.btn-go{width:100%;padding:15px;border-radius:11px;background:var(--accent);border:none;font-family:inherit;font-size:15px;font-weight:700;color:var(--btn-text);cursor:pointer}
+.btn-go:active{opacity:0.85}
+.home{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:36px 22px;min-height:100%}
+.home-ico{width:60px;height:60px;border-radius:15px;background:linear-gradient(135deg,var(--accent),var(--teal));display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:18px}
+.home-title{font-size:26px;font-weight:700;color:var(--text);margin-bottom:4px}
+.home-sub{font-size:13px;font-weight:500;color:var(--text2);margin-bottom:20px}
+.themes{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap;justify-content:center}
+.theme-chip{width:42px;height:42px;border-radius:50%;background:var(--card);border:1px solid var(--border);font-family:inherit;font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform 0.15s}
+.theme-chip.on{border-color:var(--accent);border-width:2px;transform:scale(1.12);background:var(--accent2)}
+.home-stat{padding:12px 26px;background:var(--card);border:1px solid var(--border);border-radius:11px;margin-bottom:20px}
+.stat-n{font-size:26px;font-weight:700;color:var(--accent)}
+.stat-l{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.5px}
+.home-p{font-size:13px;font-weight:500;color:var(--text3);max-width:270px;line-height:1.55;margin-bottom:24px}
+.home-btn{padding:15px 42px;border-radius:11px;background:var(--accent);border:none;font-family:inherit;font-size:15px;font-weight:700;color:var(--btn-text);cursor:pointer}
+.home-btn:active{opacity:0.85}
+.end{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:36px 22px;min-height:100%}
+.end-ico{font-size:52px;margin-bottom:14px}
+.end-h{font-size:22px;font-weight:700;color:var(--text);margin-bottom:6px}
+.end-p{font-size:13px;font-weight:500;color:var(--text2);max-width:250px;line-height:1.55;margin-bottom:22px}
+</style>
 </head>
-<body>
+<body data-theme="meadow">
+<div id="fx"></div>
 
-<div class="orb-field"><div class="orb"></div></div>
+<div class="scr on" id="s-home">
+<div class="home">
+<div class="home-ico" id="homeIco">🏠</div>
+<div class="home-title">Family Meeting</div>
+<div class="home-sub">Quality time, simplified</div>
+<div class="themes">
+<button class="theme-chip on" data-t="meadow" onclick="setTheme('meadow')" aria-label="Meadow theme">🌿</button>
+<button class="theme-chip" data-t="campfire" onclick="setTheme('campfire')" aria-label="Campfire theme">🔥</button>
+<button class="theme-chip" data-t="morning" onclick="setTheme('morning')" aria-label="Morning theme">🌅</button>
+<button class="theme-chip" data-t="evening" onclick="setTheme('evening')" aria-label="Evening theme">🌙</button>
+</div>
+<div class="home-stat">
+<div class="stat-n" id="hStreak">0</div>
+<div class="stat-l">Meetings</div>
+</div>
+<div class="home-p">Connect, share, laugh, and learn. About 15 minutes. No prep needed.</div>
+<button class="home-btn" onclick="begin()">Start Meeting</button>
+</div>
+</div>
 
-<div class="container">
-    <header id="nav-header">
-        <span style="font-size: 0.75rem; font-weight: 900; letter-spacing: 0.1em; color: #3a332a;">LANTURN</span>
-        <div class="progress-rail"><div class="progress-bar" id="p-bar"></div></div>
-        <button onclick="goHome()" style="background:none; border:none; color:var(--text-dim); font-size: 1.4rem; cursor:pointer;">✕</button>
-    </header>
+<div class="scr" id="s-rules">
+<div class="nav"><button class="nav-btn" onclick="home()">←</button><div class="nav-step">Step 1 of 6</div><button class="nav-btn" onclick="home()">✕</button></div>
+<div class="prog"><div class="prog-bar now"></div><div class="prog-bar"></div><div class="prog-bar"></div><div class="prog-bar"></div><div class="prog-bar"></div><div class="prog-bar"></div></div>
+<div class="main">
+<div class="h1">Ground Rules</div>
+<div class="p">Quick reminders for a good meeting.</div>
+<div class="box">
+<div class="rule"><span class="rule-n">1</span><span class="rule-t">One voice at a time</span></div>
+<div class="rule"><span class="rule-n">2</span><span class="rule-t">Listen with curiosity</span></div>
+<div class="rule"><span class="rule-n">3</span><span class="rule-t">Phones away</span></div>
+<div class="rule"><span class="rule-n">4</span><span class="rule-t">Okay to pass</span></div>
+<div class="rule"><span class="rule-n">5</span><span class="rule-t">What's shared stays here</span></div>
+</div>
+<div class="tip"><div class="tip-lbl">Why this matters</div><div class="tip-txt">Simple guidelines help everyone feel safe to share openly.</div></div>
+</div>
+<div class="foot"><button class="btn-go" onclick="go(2)">Continue</button></div>
+</div>
 
-    <div class="stage active" id="s0" style="justify-content: center;">
-        <h1 style="font-size: 4rem; text-align: center; margin-bottom: 0;">Lanturn</h1>
-        <p class="heartfelt-note">"Lanturn is a guided check-in — for families, friends, or just yourself. Use it to start conversations, share gratitude, learn something new, and end with a smile. No prep. No pressure. Just begin."</p>
-        <button class="btn-main" onclick="nextStage()">Begin Check-in</button>
-        <div style="text-align: center; margin-top: 30px; font-size: 0.6rem; letter-spacing: 0.1em; color: var(--text-dim);">MADE WITH ✨</div>
-    </div>
+<div class="scr" id="s-quote">
+<div class="nav"><button class="nav-btn" onclick="go(1)">←</button><div class="nav-step">Step 2 of 6</div><button class="nav-btn" onclick="home()">✕</button></div>
+<div class="prog"><div class="prog-bar done"></div><div class="prog-bar now"></div><div class="prog-bar"></div><div class="prog-bar"></div><div class="prog-bar"></div><div class="prog-bar"></div></div>
+<div class="main">
+<div class="h1">Inspiring Quote</div>
+<div class="p">Something to reflect on together.</div>
+<div class="box" style="text-align:center">
+<div class="q-text" id="qText"></div>
+<div class="q-auth" id="qAuth"></div>
+</div>
+<div class="btn-row"><button class="btn-sec" onclick="nextQ()">↻ Another</button></div>
+<div class="tip"><div class="tip-lbl">Discuss</div><div class="tip-txt">What does this mean to you? Any stories come to mind?</div></div>
+</div>
+<div class="foot"><button class="btn-go" onclick="go(3)">Continue</button></div>
+</div>
 
-    <div class="stage" id="s1">
-        <div class="card">
-            <button class="help-btn" onclick="toggleHelp(true)">?</button>
-            <div class="help-overlay"><span class="label">Icebreaker</span><p>Read the question out loud. Everyone takes a turn to answer. No judgment, just sharing.</p><button class="btn-main" onclick="toggleHelp(false)">Got it</button></div>
-            <span class="label">Step 01 — Spark</span>
-            <h1 id="ib-text"></h1>
-            <button class="btn-ghost" onclick="shuffle('ib')">New Question</button>
-            <button class="btn-main" onclick="nextStage()">Next</button>
-        </div>
-    </div>
+<div class="scr" id="s-checkin">
+<div class="nav"><button class="nav-btn" onclick="go(2)">←</button><div class="nav-step">Step 3 of 6</div><button class="nav-btn" onclick="home()">✕</button></div>
+<div class="prog"><div class="prog-bar done"></div><div class="prog-bar done"></div><div class="prog-bar now"></div><div class="prog-bar"></div><div class="prog-bar"></div><div class="prog-bar"></div></div>
+<div class="main">
+<div class="h1">Check-In</div>
+<div class="p">Everyone shares. No right or wrong answers.</div>
+<div class="who">
+<div class="who-txt" id="whoTxt">Who goes first?</div>
+<button class="who-btn" onclick="pickWho()">🎲 Pick for us</button>
+</div>
+<div class="ci high"><div class="ci-ico">⬆️</div><div><div class="ci-lbl">High</div><div class="ci-txt">What's something good that happened?</div></div></div>
+<div class="ci low"><div class="ci-ico">⬇️</div><div><div class="ci-lbl">Low</div><div class="ci-txt">What's something that was hard or frustrating?</div></div></div>
+<div class="ci buffalo"><div class="ci-ico">🦬</div><div><div class="ci-lbl">Buffalo</div><div class="ci-txt">Something random, funny, or surprising</div></div></div>
+<div class="tip"><div class="tip-lbl">Why this works</div><div class="tip-txt">Highs build gratitude. Lows build trust. Buffalo keeps it fun.</div></div>
+</div>
+<div class="foot"><button class="btn-go" onclick="go(4)">Continue</button></div>
+</div>
 
-    <div class="stage" id="s2">
-        <div class="card">
-            <button class="help-btn" onclick="toggleHelp(true)">?</button>
-            <div class="help-overlay"><span class="label">Quote</span><p>Read the quote and discuss: What does this mean to you? How can we use this today?</p><button class="btn-main" onclick="toggleHelp(false)">Got it</button></div>
-            <span class="label">Step 02 — Insight</span>
-            <h1 style="font-style: italic; font-weight: 400;" id="qt-text"></h1>
-            <p id="qt-author" style="font-weight: 700;"></p>
-            <button class="btn-ghost" onclick="shuffle('qt')">Another Quote</button>
-            <button class="btn-main" onclick="nextStage()">Continue</button>
-        </div>
-    </div>
+<div class="scr" id="s-lesson">
+<div class="nav"><button class="nav-btn" onclick="go(3)">←</button><div class="nav-step">Step 4 of 6</div><button class="nav-btn" onclick="home()">✕</button></div>
+<div class="prog"><div class="prog-bar done"></div><div class="prog-bar done"></div><div class="prog-bar done"></div><div class="prog-bar now"></div><div class="prog-bar"></div><div class="prog-bar"></div></div>
+<div class="main">
+<div class="h1" id="lTitle"></div>
+<div class="story" id="lStory"></div>
+<div class="moral"><div class="moral-lbl">Takeaway</div><div class="moral-txt" id="lMoral"></div></div>
+<div class="btn-row"><button class="btn-sec" onclick="nextL()">↻ Different Story</button></div>
+<div class="tip"><div class="tip-lbl">Discuss</div><div class="tip-txt">What stood out? Has something like this happened to you?</div></div>
+</div>
+<div class="foot"><button class="btn-go" onclick="go(5)">Continue</button></div>
+</div>
 
-    <div class="stage" id="s3">
-        <div class="card" style="justify-content: flex-start;">
-            <button class="help-btn" onclick="toggleHelp(true)">?</button>
-            <div class="help-overlay"><span class="label">Check-in</span><p>Share one thing you're thankful for and one thing you want to focus on this week.</p><button class="btn-main" onclick="toggleHelp(false)">Got it</button></div>
-            <span class="label">Step 03 — Presence</span>
-            <div class="ci-row"><div>🙏</div><div><p style="font-size: 0.6rem; font-weight: 800; color: var(--gold);">GRATITUDE</p><p id="ci-grat" style="color: var(--text-main);"></p></div></div>
-            <div class="ci-row"><div>🌱</div><div><p style="font-size: 0.6rem; font-weight: 800; color: var(--gold);">INTENTION</p><p id="ci-goal" style="color: var(--text-main);"></p></div></div>
-            <button class="btn-ghost" onclick="shuffle('ci')">New Prompts</button>
-            <button class="btn-main" onclick="nextStage()">Next</button>
-        </div>
-    </div>
+<div class="scr" id="s-joke">
+<div class="nav"><button class="nav-btn" onclick="go(4)">←</button><div class="nav-step">Step 5 of 6</div><button class="nav-btn" onclick="home()">✕</button></div>
+<div class="prog"><div class="prog-bar done"></div><div class="prog-bar done"></div><div class="prog-bar done"></div><div class="prog-bar done"></div><div class="prog-bar now"></div><div class="prog-bar"></div></div>
+<div class="main">
+<div class="h1">Dad Joke</div>
+<div class="p">Time to laugh (or groan).</div>
+<div class="box">
+<div class="joke-q" id="jSetup"></div>
+<button class="joke-btn" id="jBtn" onclick="reveal()">Reveal Answer</button>
+<div class="joke-a" id="jArea">
+<div class="joke-ans" id="jAns"></div>
+<div class="rate-lbl">Rate this joke (1-10)</div>
+<div class="rate-row" id="rBtns"></div>
+<div class="rate-avg" id="rAvg"></div>
+</div>
+</div>
+<div class="btn-row"><button class="btn-sec" onclick="nextJ()">↻ Another Joke</button></div>
+</div>
+<div class="foot"><button class="btn-go" onclick="go(6)">Continue</button></div>
+</div>
 
-    <div class="stage" id="s4">
-        <div class="card" style="justify-content: flex-start;">
-            <button class="help-btn" onclick="toggleHelp(true)">?</button>
-            <div class="help-overlay"><span class="label">Story</span><p>Read the fable aloud. Consider the moral at the end together.</p><button class="btn-main" onclick="toggleHelp(false)">Got it</button></div>
-            <span class="label">Step 04 — Wisdom</span>
-            <h1 id="st-title" style="font-size: 1.5rem;"></h1>
-            <div class="story-scroll"><p id="st-body"></p></div>
-            <div style="padding: 15px; background: rgba(197,160,89,0.1); border-left: 3px solid var(--gold); border-radius: 4px;"><p id="st-moral" style="font-style: italic; color: var(--text-main); font-size: 0.9rem;"></p></div>
-            <button class="btn-ghost" onclick="shuffle('st')">New Story</button>
-            <button class="btn-main" onclick="nextStage()">Next</button>
-        </div>
-    </div>
+<div class="scr" id="s-act">
+<div class="nav"><button class="nav-btn" onclick="go(5)">←</button><div class="nav-step">Step 6 of 6</div><button class="nav-btn" onclick="home()">✕</button></div>
+<div class="prog"><div class="prog-bar done"></div><div class="prog-bar done"></div><div class="prog-bar done"></div><div class="prog-bar done"></div><div class="prog-bar done"></div><div class="prog-bar now"></div></div>
+<div class="main">
+<div class="h1">Bonus Activity</div>
+<div class="p">Optional extra fun if you have time.</div>
+<div class="act-filter">
+<button class="filt on" data-f="all" onclick="setFilt('all')">All</button>
+<button class="filt" data-f="Game" onclick="setFilt('Game')">Games</button>
+<button class="filt" data-f="Science" onclick="setFilt('Science')">Science</button>
+<button class="filt" data-f="Creative" onclick="setFilt('Creative')">Creative</button>
+</div>
+<div class="box">
+<div class="act-tag" id="aTag"></div>
+<div class="act-name" id="aName"></div>
+<div class="act-desc" id="aDesc"></div>
+<div class="act-how"><div class="act-how-lbl">How to play</div><div class="act-how-txt" id="aHow"></div></div>
+<div class="act-mats" id="aMats" style="display:none"><div class="act-mats-lbl">You'll need</div><div class="act-mats-txt" id="aMatsTxt"></div></div>
+</div>
+<div class="btn-row">
+<button class="btn-sec" onclick="nextA()">↻ Different</button>
+<button class="btn-sec" onclick="go(7)">Skip</button>
+</div>
+</div>
+<div class="foot"><button class="btn-go" onclick="go(7)">Finish Meeting</button></div>
+</div>
 
-    <div class="stage" id="s5">
-        <div class="card">
-            <button class="help-btn" onclick="toggleHelp(true)">?</button>
-            <div class="help-overlay"><span class="label">Skill</span><p>Discuss this practical tip. How could this improve our communication or well-being?</p><button class="btn-main" onclick="toggleHelp(false)">Got it</button></div>
-            <span class="label" id="ls-cat"></span>
-            <h1 id="ls-title" style="font-size: 1.5rem;"></h1>
-            <p id="ls-body"></p>
-            <button class="btn-ghost" onclick="shuffle('ls')">New Skill</button>
-            <button class="btn-main" onclick="nextStage()">Next</button>
-        </div>
-    </div>
-
-    <div class="stage" id="s6" style="text-align: center;">
-        <div class="card">
-            <span class="label">Step 06 — Stillness</span>
-            <p>Close your eyes. Breathe deeply for 30 seconds.</p>
-            <h1 style="font-size: 4rem; margin: 20px 0;" id="timer">0:30</h1>
-            <button class="btn-main" id="timer-btn" onclick="startTimer()">Begin</button>
-        </div>
-    </div>
-
-    <div class="stage" id="s7" style="text-align: center;">
-        <div class="card">
-            <button class="help-btn" onclick="toggleHelp(true)">?</button>
-            <div class="help-overlay"><span class="label">Smile</span><p>End the session with a laugh. One person reads the setup, then reveals the punchline.</p><button class="btn-main" onclick="toggleHelp(false)">Got it</button></div>
-            <span class="label">Step 07 — Joy</span>
-            <h1 id="jk-setup"></h1>
-            <h1 id="jk-punch" style="display: none; color: var(--gold); margin-top: 20px;"></h1>
-            <button class="btn-main" id="jk-btn" onclick="revealJoke()">Reveal</button>
-            <button class="btn-ghost" id="jk-next" style="display:none;" onclick="nextStage()">Finish</button>
-        </div>
-    </div>
-
-    <div class="stage" id="s8" style="text-align: center; justify-content: center;">
-        <h1 style="font-size: 5rem;">☀️</h1>
-        <span class="label">Complete</span>
-        <p>Well done. Go make it a great day.</p>
-        <button class="btn-main" onclick="goHome()">Back to Home</button>
-    </div>
+<div class="scr" id="s-end">
+<div class="end">
+<div class="end-ico">🎉</div>
+<div class="end-h">Great meeting!</div>
+<div class="end-p">You invested in your family today. These moments add up.</div>
+<div class="home-stat"><div class="stat-n" id="eStreak">1</div><div class="stat-l">Total Meetings</div></div>
+<button class="home-btn" onclick="home()">Done</button>
+</div>
 </div>
 
 <script>
-const D = {
-    ib: ["If you could have dinner with anyone, living or dead, who would it be?","What's a skill you'd love to learn?","What's the best trip you've ever taken?","If you could live anywhere in the world, where would it be?","What's a movie you could watch over and over?","What's something you're proud of this week?","If you could have any superpower, what would it be?","What's your favorite family tradition?","What's a food you could eat every day?","If you won the lottery, what's the first thing you'd do?","What's your earliest childhood memory?","What's a book that changed your life?","If you could time travel, would you go to the past or future?","What's the best advice you've ever received?","What's something that always makes you laugh?","If you could master any instrument, which would it be?","What's your dream job?","What's a small thing that makes your day better?","What's the most adventurous thing you've ever done?","What's a goal you have for this year?","What's your favorite way to spend a rainy day?","What's a song that brings back memories?","What's the kindest thing someone has done for you?","What makes you feel most loved?","What's the most interesting thing you learned recently?","What's something you're looking forward to?"],
-    qt: [{t:"The best time to plant a tree was 20 years ago. The second best time is now.",a:"Chinese Proverb"},{t:"Be the change you wish to see in the world.",a:"Mahatma Gandhi"},{t:"In the middle of difficulty lies opportunity.",a:"Albert Einstein"},{t:"It is not the mountain we conquer, but ourselves.",a:"Edmund Hillary"},{t:"The only way to do great work is to love what you do.",a:"Steve Jobs"},{t:"Happiness is not something ready made. It comes from your own actions.",a:"Dalai Lama"},{t:"The future belongs to those who believe in the beauty of their dreams.",a:"Eleanor Roosevelt"},{t:"You miss 100% of the shots you don't take.",a:"Wayne Gretzky"},{t:"Success is not final, failure is not fatal: it is the courage to continue that counts.",a:"Winston Churchill"},{t:"It always seems impossible until it's done.",a:"Nelson Mandela"},{t:"Believe you can and you're halfway there.",a:"Theodore Roosevelt"},{t:"The secret of getting ahead is getting started.",a:"Mark Twain"}],
-    gr: ["What's one thing you're grateful for today?","Who made a difference for you recently?","What's something small that brought you joy?","What ability are you grateful to have?","What's a memory you're thankful for?","What made you smile recently?","Who helped you recently?"],
-    gl: ["What's one thing you want to focus on this week?","What's a habit you want to build?","Is there something you want to learn?","What's a kind thing you could do for someone?","How do you want to take care of yourself this week?","What's a small step toward a bigger goal?","What do you want to do more of?"],
-    st: [{t:"The Two Wolves",s:"A grandfather tells his grandson about two wolves fighting inside everyone — one is anger, envy, and ego; the other is joy, peace, and love. The grandson asks which wolf wins. The grandfather replies: 'The one you feed.'",m:"We become what we focus on."},{t:"The Cracked Pot",s:"A water bearer had two pots — one perfect, one cracked. The cracked pot felt ashamed for only delivering half its water. But the bearer showed it the flowers growing on its side of the path, watered by its leak every day.",m:"Our flaws can create unexpected beauty."},{t:"The Empty Boat",s:"A man rowing on a foggy river gets angry when another boat crashes into him — until he realizes the other boat is empty. The boat wasn't trying to hit him.",m:"Most offenses aren't personal."},{t:"The Farmer's Luck",s:"When a farmer's horse runs away, neighbors say 'Bad luck.' He replies: 'Maybe.' The horse returns with wild horses. 'Good luck!' 'Maybe.' His son breaks his leg taming them. 'Bad luck!' 'Maybe.' The army comes recruiting, but skips his injured son.",m:"We rarely know what's truly good or bad in the moment."},{t:"The Golden Windows",s:"A boy admires a faraway house with golden windows. He walks miles to see it, only to find plain glass. Looking back, he sees his own home's windows glowing gold in the sunset.",m:"What we seek is often already ours."},{t:"The Echo",s:"A boy yells 'I hate you!' into a valley and hears it back. Frightened, he tells his mother. She asks him to yell 'I love you!' He does, and the valley echoes love back.",m:"The world reflects what we put into it."}],
-    ls: [{c:"Self Care",t:"How to Calm Yourself Down",b:"Stop and name what you're feeling — just labeling it helps. Take 5 slow breaths: in for 4 counts, hold for 4, out for 6. Ground yourself by naming 5 things you can see, 4 you can hear, 3 you can touch."},{c:"Communication",t:"Active Listening",b:"Stop thinking about your response. Make eye contact. Don't interrupt. Repeat back key points: 'So what you're saying is...' Put your phone away completely."},{c:"Communication",t:"How to Say No",b:"You don't need to explain or apologize. 'I can't take that on right now' is a complete sentence. Don't say 'maybe' when you mean 'no.'"},{c:"Personal Growth",t:"How to Meditate",b:"Sit comfortably. Close eyes. Focus on breathing. When mind wanders, gently return focus to breath. Start with 2 minutes. Consistency matters more than duration."},{c:"Emotional Intelligence",t:"Understanding Your Emotions",b:"Emotions aren't good or bad — they're information. Ask: what is this feeling trying to tell me? Name it specifically. Notice where you feel it in your body."}],
-    jk: [{s:"Why don't scientists trust atoms?",p:"Because they make up everything!"},{s:"What do you call a fake noodle?",p:"An impasta!"},{s:"Why did the scarecrow win an award?",p:"He was outstanding in his field!"},{s:"What do you call a bear with no teeth?",p:"A gummy bear!"},{s:"What did the ocean say to the beach?",p:"Nothing — it just waved!"},{s:"Why don't eggs tell jokes?",p:"They'd crack each other up!"},{s:"What do you call a sleeping dinosaur?",p:"A dino-snore!"},{s:"Why did the bicycle fall over?",p:"It was two tired!"},{s:"What do you call cheese that isn't yours?",p:"Nacho cheese!"},{s:"Why did the mushroom go to the party?",p:"Because he was a fungi!"}]
+const DATA={
+quotes:[
+{t:"The best time to plant a tree was 20 years ago. The second best time is now.",a:"Chinese Proverb"},
+{t:"Be the change you wish to see in the world.",a:"Gandhi"},
+{t:"In the middle of difficulty lies opportunity.",a:"Albert Einstein"},
+{t:"Kindness is a language the deaf can hear and the blind can see.",a:"Mark Twain"},
+{t:"It always seems impossible until it's done.",a:"Nelson Mandela"},
+{t:"The only way to have a friend is to be one.",a:"Ralph Waldo Emerson"},
+{t:"What we learn with pleasure we never forget.",a:"Alfred Mercier"},
+{t:"No act of kindness, no matter how small, is ever wasted.",a:"Aesop"},
+{t:"Fall seven times, stand up eight.",a:"Japanese Proverb"},
+{t:"You miss 100% of the shots you don't take.",a:"Wayne Gretzky"},
+{t:"Whether you think you can or you think you can't, you're right.",a:"Henry Ford"},
+{t:"A journey of a thousand miles begins with a single step.",a:"Lao Tzu"},
+{t:"Do what you can, with what you have, where you are.",a:"Theodore Roosevelt"},
+{t:"Alone we can do so little; together we can do so much.",a:"Helen Keller"},
+{t:"Courage doesn't always roar. Sometimes it's the quiet voice saying, 'I will try again tomorrow.'",a:"Mary Anne Radmacher"},
+{t:"If you want to go fast, go alone. If you want to go far, go together.",a:"African Proverb"},
+{t:"Worry does not empty tomorrow of its sorrow. It empties today of its strength.",a:"Corrie ten Boom"},
+{t:"How wonderful it is that nobody need wait a single moment before starting to improve the world.",a:"Anne Frank"},
+{t:"Try to be a rainbow in someone's cloud.",a:"Maya Angelou"},
+{t:"We rise by lifting others.",a:"Robert Ingersoll"},
+{t:"Nothing is impossible. The word itself says 'I'm possible!'",a:"Audrey Hepburn"},
+{t:"The more you give away, the happier you become.",a:"Unknown"},
+{t:"A smooth sea never made a skilled sailor.",a:"Franklin D. Roosevelt"},
+{t:"Everyone you meet is fighting a battle you know nothing about. Be kind.",a:"Unknown"},
+{t:"You are braver than you believe, stronger than you seem, and smarter than you think.",a:"A.A. Milne"},
+{t:"The best way to predict the future is to create it.",a:"Peter Drucker"},
+{t:"Gratitude turns what we have into enough.",a:"Melody Beattie"},
+{t:"Mistakes are proof that you are trying.",a:"Unknown"},
+{t:"When you can't find the sunshine, be the sunshine.",a:"Unknown"},
+{t:"It's not what happens to you, but how you react to it that matters.",a:"Epictetus"},
+{t:"Small deeds done are better than great deeds planned.",a:"Peter Marshall"},
+{t:"A person who never made a mistake never tried anything new.",a:"Albert Einstein"},
+{t:"Don't count the days, make the days count.",a:"Muhammad Ali"},
+{t:"Act as if what you do makes a difference. It does.",a:"William James"},
+{t:"Happiness is not something ready made. It comes from your own actions.",a:"Dalai Lama"},
+{t:"The secret of getting ahead is getting started.",a:"Mark Twain"},
+{t:"You don't have to be great to start, but you have to start to be great.",a:"Zig Ziglar"},
+{t:"Never bend your head. Always hold it high. Look the world straight in the eye.",a:"Helen Keller"},
+{t:"Even the darkest night will end and the sun will rise.",a:"Victor Hugo"},
+{t:"Being honest may not get you a lot of friends, but it'll always get you the right ones.",a:"John Lennon"},
+{t:"Success is not final, failure is not fatal: it is the courage to continue that counts.",a:"Winston Churchill"},
+{t:"If you judge a fish by its ability to climb a tree, it will live its whole life believing it is stupid.",a:"Unknown"},
+{t:"What you do speaks so loudly that I cannot hear what you say.",a:"Ralph Waldo Emerson"},
+{t:"The time is always right to do what is right.",a:"Martin Luther King Jr."},
+{t:"Life is 10% what happens to us and 90% how we react to it.",a:"Charles Swindoll"},
+{t:"Comparison is the thief of joy.",a:"Theodore Roosevelt"},
+{t:"Do small things with great love.",a:"Mother Teresa"},
+{t:"Family is not an important thing. It's everything.",a:"Michael J. Fox"},
+{t:"Where there is love there is life.",a:"Gandhi"},
+{t:"Rejoice with your family in the beautiful land of life.",a:"Albert Einstein"}
+],
+lessons:[
+{t:"The Two Wolves",s:"One evening, a grandparent sat by the fire with their grandchild and said, 'There's a battle going on inside me. It's between two wolves. One is angry, jealous, greedy, and afraid. The other is joyful, peaceful, kind, and brave. The same battle is happening inside you, and inside everyone.' The grandchild thought quietly, then asked, 'Which wolf wins?' The grandparent smiled. 'The one you feed.'",m:"We become what we focus on. Feed the good inside you."},
+{t:"The Cracked Pot",s:"A water carrier walked to the river every day with two pots. One was perfect. The other had a crack and always arrived half empty. The cracked pot felt ashamed and finally apologized. The carrier smiled and said, 'Did you notice the flowers on your side of the path? I planted seeds there because I knew you'd water them every day. Without you being exactly as you are, there would be no flowers to bring home.'",m:"What seems like a flaw can quietly create something beautiful."},
+{t:"The Starfish",s:"After a big storm, thousands of starfish washed up on the beach. A child walked along, picking them up one by one and tossing them back into the sea. An adult watched and said, 'There are too many. You can't possibly make a difference.' The child gently threw another starfish into the waves, watched it drift down safely, and said, 'I made a difference to that one.'",m:"You can't help everyone, but you can always help someone."},
+{t:"The Bamboo Tree",s:"A farmer planted a bamboo seed and watered it every single day. A year went by. Nothing. Two years. Three years. Four years, and still not a single sprout. The neighbors laughed. But the farmer kept watering. In the fifth year, the bamboo burst from the ground and grew eighty feet in six weeks. It hadn't been doing nothing all those years. It had been growing roots strong enough to hold up something amazing.",m:"Real growth often happens where no one can see it. Keep watering."},
+{t:"The Lion and the Mouse",s:"A tiny mouse accidentally ran across a sleeping lion's nose. The lion woke with a roar and trapped the mouse under one huge paw. 'Please let me go,' squeaked the mouse. 'Someday I'll help you.' The lion laughed at the idea but let the mouse go. Weeks later, the lion got tangled in a hunter's net. He roared in despair. The mouse heard, ran over, and chewed through the ropes until the lion was free.",m:"No one is too small to make a big difference."},
+{t:"The Tortoise and the Hare",s:"A hare teased a tortoise for being slow, so the tortoise challenged him to a race. The hare shot ahead, got bored, and decided to nap. The tortoise just kept walking. Step, step, step. Never fast, never stopping. When the hare woke up, the tortoise was crossing the finish line.",m:"Steady effort beats talent that gives up."},
+{t:"The Bundle of Sticks",s:"A parent noticed their kids arguing constantly. One day the parent handed each child a single stick. 'Snap it.' Easy. Then the parent tied a bundle of sticks together and said, 'Now snap this.' No one could, no matter how hard they tried. 'When you each stand alone,' the parent said, 'you can be broken. When you stick together, nothing can break you.'",m:"A family that sticks together is hard to break."},
+{t:"The Wind and the Sun",s:"The Wind and the Sun argued about who was stronger. They spotted a traveler in a coat and agreed: whoever could get the coat off wins. The Wind blew with all its might, but the harder it blew, the tighter the traveler wrapped the coat. Then the Sun simply shone, warm and gentle. Within minutes, the traveler smiled and took the coat off on their own.",m:"Warmth and kindness persuade better than force."},
+{t:"Stone Soup",s:"A hungry traveler arrived in a village where everyone claimed to have no food to share. So the traveler filled a pot with water, dropped in a stone, and started cooking. 'Stone soup,' they announced. 'Delicious, but even better with a carrot.' Curious, someone brought a carrot. Then someone added potatoes. Then beans, then herbs. Soon the whole village was eating a rich, wonderful soup together, started from nothing but a stone.",m:"When everyone shares a little, everyone gets a lot."},
+{t:"The Fence and the Nails",s:"A kid had a hot temper, so their parent handed them a bag of nails: 'Every time you lose your temper, hammer a nail into the fence.' The first day: 37 nails. But hammering was hard work, and slowly the numbers dropped until one day, zero. Then the parent said, 'Now pull out one nail for every day you stay calm.' When the last nail came out, they looked at the fence together. 'See the holes? The fence will never be the same. Angry words leave marks like that.'",m:"Words leave marks. Choose them carefully."},
+{t:"Sand and Stone",s:"Two friends were crossing a desert. During an argument, one slapped the other. The hurt friend wrote in the sand: 'Today my best friend hurt me.' Later, at an oasis, the hurt friend slipped into deep water, and the other pulled them out. This time they carved into stone: 'Today my best friend saved my life.' When asked why, the friend said, 'Write hurts in sand where the wind can erase them. Carve kindness in stone where nothing ever will.'",m:"Let hurts fade. Let kindness last forever."},
+{t:"The Donkey in the Well",s:"A donkey fell into a dry well. The farmer decided the well was too deep and started shoveling dirt in to fill it. At first the donkey cried out. Then it went quiet. When the farmer peeked in, he was amazed: with every shovelful of dirt that landed on its back, the donkey shook it off and stepped up. Shake it off, step up. Shake it off, step up. Soon the donkey stepped right out of the well.",m:"When life dumps dirt on you, shake it off and step up."},
+{t:"The Elephant and the Rope",s:"A visitor at a camp noticed huge elephants held only by a small rope tied to one leg. 'Why don't they break free?' she asked. The trainer explained: 'When they're babies, that rope is strong enough to hold them. They try and try, and can't break it. As they grow, they stop trying. They still believe the rope is stronger than they are.'",m:"The only thing holding you back might be an old belief that's no longer true."},
+{t:"The Three Bricklayers",s:"A traveler met three bricklayers doing the exact same job. 'What are you doing?' the traveler asked each one. The first sighed: 'Laying bricks.' The second said: 'Building a wall.' The third looked up with bright eyes: 'I'm building a cathedral that will stand for a thousand years.' Same bricks. Same wall. Completely different lives.",m:"How you see your work changes everything about it."},
+{t:"The Farmer Who Said 'We'll See'",s:"A farmer's horse ran away. 'Terrible luck!' said the neighbors. 'We'll see,' said the farmer. The horse returned leading three wild horses. 'Amazing luck!' they cried. 'We'll see.' The farmer's kid broke a leg taming one. 'Awful luck!' 'We'll see.' The next week, the army came to draft young people for war, but skipped the kid with the broken leg. 'We'll see,' said the farmer.",m:"Don't judge a moment too quickly. The story isn't over yet."},
+{t:"The Carrot, the Egg, and the Coffee Bean",s:"A kid complained to their grandparent that life was too hard. The grandparent boiled three pots of water and dropped a carrot in one, an egg in another, and coffee beans in the third. 'Same boiling water,' the grandparent said. 'The hard carrot turned soft. The fragile egg turned hard. But the coffee beans changed the water itself into something wonderful. When hard times come, which one are you?'",m:"Hard times don't decide who you become. You do."},
+{t:"The Two Frogs",s:"Two frogs fell into a bucket of cream. The sides were too slippery to climb. 'It's hopeless,' said the first frog, and stopped kicking. The second frog kept kicking. And kicking. And kicking. Slowly, all that kicking churned the cream into solid butter, and the frog hopped right out.",m:"Keep kicking. You might be closer to solid ground than you think."},
+{t:"The Mountain Echo",s:"A child hiking with their parent tripped and yelled, 'Owww!' A voice yelled back from the mountain: 'Owww!' Surprised, the child shouted, 'Who are you?' The voice answered, 'Who are you?' Angry now: 'You're a coward!' Back came: 'You're a coward!' The parent smiled and shouted, 'You are wonderful!' The mountain answered, 'You are wonderful!' The parent said, 'That's how life works. It gives back what you give it.'",m:"Life echoes back what you send out."},
+{t:"The Six Travelers and the Elephant",s:"Six travelers who could not see were introduced to an elephant. One touched the trunk: 'It's like a snake!' One touched the ear: 'No, a fan!' One touched a leg: 'A tree trunk!' One touched the side: 'A wall!' One the tusk: 'A spear!' One the tail: 'A rope!' They argued all day. Each one was partly right, but none of them had the whole picture until they finally listened to each other.",m:"Everyone sees part of the truth. Listening reveals the whole picture."},
+{t:"The Kid Who Cried Wolf",s:"A kid watching the village sheep got bored and shouted 'Wolf! Wolf!' The villagers came running, and the kid laughed at the trick. It was so funny they did it again the next day. Then one evening, a real wolf appeared. The kid screamed 'WOLF!' with everything they had. Nobody came. The villagers had heard that before.",m:"Trust takes a long time to build and only a moment to lose."},
+{t:"The Ant and the Grasshopper",s:"All summer, the ant hauled food to its nest while the grasshopper played music and laughed at all that work. When winter came, the grasshopper was freezing and starving, and knocked on the ant's door. The ant had plenty, because summer-ant had taken care of winter-ant. The ant shared a warm meal, and the grasshopper spent the winter learning that the best time to prepare is before you need to.",m:"Take care of your future self. They're counting on you."},
+{t:"The Golden Windows",s:"Every evening, a kid looked across the valley at a house with brilliant golden windows. 'One day I'll visit that amazing house,' they thought. Finally, they hiked all the way across the valley. But up close, the house had plain windows, and a kid who lived there pointed back across the valley: 'We always wondered about YOUR house. At sunset, its windows look like pure gold.'",m:"Sometimes the amazing life you're dreaming of is the one you already have."},
+{t:"The Boulder in the Road",s:"A king secretly placed a giant boulder on the main road, then hid to watch. Wealthy merchants walked around it, grumbling. Important people complained the king should keep roads clear. Then a farmer came along carrying vegetables. Instead of complaining, the farmer pushed and strained until the boulder finally rolled aside. Underneath it lay a purse of gold and a note from the king: 'For whoever moves the boulder.'",m:"Inside every obstacle is a hidden opportunity for the one willing to try."},
+{t:"The Butterfly's Struggle",s:"A kid found a cocoon with a butterfly struggling to squeeze out of a tiny hole. Wanting to help, the kid carefully snipped the cocoon open. The butterfly emerged easily, but its wings were weak and crumpled, and it never flew. Later they learned: the struggle through the tight opening is exactly what pumps strength into a butterfly's wings. It needed the struggle to be able to fly.",m:"Some struggles are exactly what make us strong enough to fly."},
+{t:"The Wise Woman's Stone",s:"A wise woman found a precious gemstone in a stream. The next day she met a hungry traveler, opened her bag to share food, and the traveler spotted the stone. She gave it to him without hesitation. He left overjoyed, rich for life. But days later he came back and returned it. 'I'm hoping you'll give me something more valuable,' he said. 'Teach me whatever it is inside you that let you give this away so easily.'",m:"A generous heart is worth more than treasure."},
+{t:"The Empty Pot",s:"An emperor gave every child in the kingdom a seed: 'Whoever grows the finest plant will be the next ruler.' A kid named Ling planted, watered, and waited. Nothing grew. Months later, every other child arrived with gorgeous plants. Ling arrived, embarrassed, with an empty pot. The emperor smiled. 'I boiled all those seeds. None of them could grow. Only one of you was honest enough to bring the truth.' Ling became the next ruler.",m:"Honesty takes courage, and courage gets rewarded."},
+{t:"The Hole in the Boat",s:"A family hired a painter to paint their old boat. While painting, he noticed a small hole in the hull and quietly patched it, though nobody asked him to. Weeks later, the family rushed to thank him with tears in their eyes. 'Our kids took the boat out on the lake. We forgot all about the hole. You saved their lives, and you weren't even asked to fix it.'",m:"Small kindnesses done quietly can matter more than you'll ever know."},
+{t:"The Fox and the Grapes",s:"A fox spotted juicy grapes hanging high on a vine. She jumped. Missed. Jumped again. Missed again. After many tries, she stomped off muttering, 'They were probably sour anyway.' But the truth was simpler: she wanted them, couldn't reach them, and it was easier to pretend they were bad than to admit she was disappointed.",m:"It's okay to admit disappointment. Pretending we never cared isn't honest."},
+{t:"The Dog and the Reflection",s:"A dog trotted across a bridge carrying a delicious bone. Looking down, he saw another dog in the water holding what looked like an even bigger bone. Greedy for both, he barked at the 'other dog' and his own bone dropped into the river and sank. The reflection vanished too. He walked home with nothing, having lost what he had while grabbing for what wasn't real.",m:"Being grateful for what you have beats grabbing for what isn't real."},
+{t:"The Travelers and the Bear",s:"Two friends were walking through the forest when a bear appeared. One instantly scrambled up a tree, leaving the other alone. The second dropped to the ground and played dead. The bear sniffed his ear and wandered off. The first friend climbed down and joked, 'What did the bear whisper to you?' The friend stood up and said, 'He told me to be careful about who I hike with, and to be the kind of friend who stays.'",m:"Be the friend who stays when things get scary."}
+],
+jokes:[
+{s:"Why don't scientists trust atoms?",p:"Because they make up everything!"},
+{s:"What do you call a fake noodle?",p:"An impasta!"},
+{s:"Why did the scarecrow win an award?",p:"He was outstanding in his field!"},
+{s:"What do you call a bear with no teeth?",p:"A gummy bear!"},
+{s:"Why don't eggs tell jokes?",p:"They'd crack each other up!"},
+{s:"What did the ocean say to the beach?",p:"Nothing, it just waved!"},
+{s:"Why did the bicycle fall over?",p:"It was two-tired!"},
+{s:"What do you call cheese that isn't yours?",p:"Nacho cheese!"},
+{s:"Why can't you give Elsa a balloon?",p:"Because she'll let it go!"},
+{s:"What do you call a dinosaur that crashes their car?",p:"Tyrannosaurus Wrecks!"},
+{s:"How do you make a tissue dance?",p:"You put a little boogie in it!"},
+{s:"What's brown and sticky?",p:"A stick!"},
+{s:"Why did the math book look so sad?",p:"It had too many problems!"},
+{s:"What do you call a sleeping dinosaur?",p:"A dino-snore!"},
+{s:"Why did the cookie go to the doctor?",p:"Because it was feeling crummy!"},
+{s:"What do you call a pig that does karate?",p:"A pork chop!"},
+{s:"Why are ghosts bad liars?",p:"Because you can see right through them!"},
+{s:"What did one wall say to the other wall?",p:"I'll meet you at the corner!"},
+{s:"Why did the golfer bring two pairs of pants?",p:"In case he got a hole in one!"},
+{s:"What kind of tree fits in your hand?",p:"A palm tree!"},
+{s:"What did the zero say to the eight?",p:"Nice belt!"},
+{s:"Why can't a nose be 12 inches long?",p:"Because then it would be a foot!"},
+{s:"What do you call a fish without eyes?",p:"A fsh!"},
+{s:"What has ears but can't hear?",p:"A cornfield!"},
+{s:"Why did the student eat their homework?",p:"Because the teacher said it was a piece of cake!"},
+{s:"What do you call a cow with no legs?",p:"Ground beef!"},
+{s:"Why do bees have sticky hair?",p:"Because they use honeycombs!"},
+{s:"What's orange and sounds like a parrot?",p:"A carrot!"},
+{s:"Why did the tomato turn red?",p:"Because it saw the salad dressing!"},
+{s:"What do you call a boomerang that won't come back?",p:"A stick!"},
+{s:"How does the moon cut its hair?",p:"Eclipse it!"},
+{s:"What do you call a snowman with a six-pack?",p:"An abdominal snowman!"},
+{s:"Why don't skeletons fight each other?",p:"They don't have the guts!"},
+{s:"What time is it when an elephant sits on your fence?",p:"Time to get a new fence!"},
+{s:"What musical instrument is found in the bathroom?",p:"A tuba toothpaste!"},
+{s:"Why did the banana go to the doctor?",p:"It wasn't peeling well!"},
+{s:"What do you get when you cross a snowman and a vampire?",p:"Frostbite!"},
+{s:"How do you organize a space party?",p:"You planet!"},
+{s:"Why was six afraid of seven?",p:"Because seven eight nine!"},
+{s:"What do you call a dog that can do magic?",p:"A labracadabrador!"},
+{s:"Where do cows go on Friday nights?",p:"To the moo-vies!"},
+{s:"What do you call an alligator in a vest?",p:"An investigator!"},
+{s:"Why couldn't the pony sing?",p:"Because she was a little horse!"},
+{s:"What did the buffalo say when his kid left for school?",p:"Bison!"},
+{s:"Why do ducks have tail feathers?",p:"To cover their buttquacks!"},
+{s:"What's a cat's favorite color?",p:"Purrr-ple!"},
+{s:"What do you call two birds in love?",p:"Tweethearts!"},
+{s:"Why did the teddy bear say no to dessert?",p:"Because she was stuffed!"},
+{s:"What did the left eye say to the right eye?",p:"Between you and me, something smells!"},
+{s:"What kind of shoes do ninjas wear?",p:"Sneakers!"}
+],
+acts:[
+{type:"Game",n:"Two Truths & a Tall Tale",d:"Can you spot the fib?",h:"Each person shares 3 things about themselves. Two are true, one is made up. Everyone else guesses which is the tall tale!",m:null},
+{type:"Game",n:"Would You Rather",d:"Silly choices, fun talks",h:"Take turns asking 'Would you rather...' questions. Fly or be invisible? Pet dragon or pet unicorn? Talk to animals or speak every language?",m:null},
+{type:"Game",n:"Family Trivia",d:"How well do you know each other?",h:"Take turns asking questions about family members. Favorite food? Dream vacation? First memory together? Score a point for each right answer.",m:null},
+{type:"Game",n:"Charades",d:"Act it out, no talking!",h:"Take turns acting out an animal, movie, or activity without speaking. Everyone else guesses. First to guess acts next!",m:null},
+{type:"Game",n:"20 Questions",d:"Guess what I'm thinking",h:"One person thinks of an object. Everyone else asks yes-or-no questions to figure it out. Can you guess it in 20 questions or fewer?",m:null},
+{type:"Game",n:"The Telephone Game",d:"Whisper it down the line",h:"Whisper a silly sentence to the person next to you. They whisper it to the next person. The last person says it out loud. How different is it?",m:null},
+{type:"Game",n:"Freeze Dance",d:"Dance until the music stops",h:"Play music and everyone dances. When the music stops, freeze! Anyone caught moving is out (or does 5 jumping jacks).",m:"Music player"},
+{type:"Game",n:"Indoor Scavenger Hunt",d:"Find it fast!",h:"Call out an item: 'Something blue! Something soft! Something that starts with B!' First person back with it wins the round.",m:null},
+{type:"Game",n:"The Alphabet Game",d:"A to Z, don't get stuck",h:"Pick a category (animals, foods, places). Go around naming one for each letter: Apple, Banana, Carrot... Stuck for 10 seconds? Next category!",m:null},
+{type:"Game",n:"Guess the Sound",d:"Close your eyes and listen",h:"One person makes a sound with something in the room (keys, zipper, tapping a cup). Everyone else closes their eyes and guesses what it is.",m:null},
+{type:"Game",n:"Hot and Cold",d:"Find the hidden treasure",h:"One person hides an object while another waits outside. Guide the seeker with 'warmer' and 'colder' until they find it!",m:null},
+{type:"Game",n:"Thumb War Tournament",d:"1, 2, 3, 4, I declare...",h:"Everyone pairs up for thumb wars. Winners face winners until there's a family champion. Best of three for the finals!",m:null},
+{type:"Game",n:"Categories Countdown",d:"Think fast!",h:"Pick a category like 'pizza toppings.' Go around the circle fast — each person names one. Repeat or freeze and you're out!",m:null},
+{type:"Game",n:"Silly Story Questions",d:"Answer without saying yes or no",h:"Ask each other rapid-fire questions. The catch: you can't say 'yes,' 'no,' or 'maybe.' Last one standing wins!",m:null},
+{type:"Game",n:"Copy Cat",d:"Follow the leader's moves",h:"One person is the leader and does moves (clap, spin, wiggle). Everyone copies. The leader speeds up! Take turns leading.",m:null},
+{type:"Science",n:"Potato Power",d:"Make electricity from a potato",h:"Stick a copper coin and a galvanized (zinc) nail into a potato, not touching each other. Connect wires from each to a small LED. It glows! The potato juice lets tiny charged particles flow between the metals — a real battery.",m:"Potato, copper coin, galvanized nail, small LED, 2 wires with clips"},
+{type:"Science",n:"Volcano Eruption",d:"Create a fizzy eruption",h:"Put 2 spoonfuls of baking soda in a cup. Mix vinegar with a squirt of dish soap and food coloring. Pour it in and watch it erupt! The baking soda and vinegar make carbon dioxide gas — the same bubbles in soda.",m:"Baking soda, vinegar, dish soap, food coloring, cup, tray for mess"},
+{type:"Science",n:"Dancing Raisins",d:"Watch raisins boogie",h:"Drop 5 raisins into a clear glass of fresh sparkling water. They sink, then bubbles attach to them like tiny life jackets and float them up. At the top the bubbles pop and they sink again. Dancing!",m:"Raisins, clear sparkling water, tall glass"},
+{type:"Science",n:"Invisible Ink",d:"Write secret messages",h:"Dip a cotton swab in lemon juice and write a message on white paper. Let it dry completely — invisible! Hold the paper near a warm light bulb (careful, adult helps) and watch the secret message appear in brown.",m:"Lemon juice, cotton swab, white paper, lamp"},
+{type:"Science",n:"Egg Drop Challenge",d:"Protect the egg!",h:"Each person (or team) builds a protective case for a raw egg using household stuff. Drop them from shoulder height outside. Whose egg survives? Talk about what worked and why.",m:"Raw eggs, tape, paper, straws, cotton balls, small boxes"},
+{type:"Science",n:"Static Magic",d:"Bend water with a balloon",h:"Rub a balloon on your hair for 20 seconds. Turn on a thin stream of water from the faucet. Hold the balloon close (don't touch!) and watch the water bend toward it. That's static electricity pulling on the water!",m:"Balloon, faucet"},
+{type:"Science",n:"Rainbow in a Glass",d:"Stack colorful liquid layers",h:"Mix 4 glasses of warm water with different food colors. Add 1 spoon of sugar to the first, 2 to the second, 3 to the third, 4 to the fourth. Slowly layer them in one glass, heaviest (most sugar) first, using a spoon. Rainbow!",m:"Sugar, food coloring, 5 glasses, spoon"},
+{type:"Science",n:"Milk Fireworks",d:"Explosions of color in milk",h:"Pour milk in a shallow dish. Add drops of different food coloring. Touch the milk's surface with a cotton swab dipped in dish soap. The colors explode and swirl! The soap breaks the milk's surface tension.",m:"Milk, food coloring, dish soap, cotton swab, shallow dish"},
+{type:"Science",n:"Homemade Lava Lamp",d:"Blobs that rise and fall",h:"Fill a clear bottle 1/4 with water, then top with vegetable oil. Add food coloring drops (they sink through oil and color the water). Drop in half a fizzy antacid tablet. Colorful blobs rise and fall like a lava lamp!",m:"Clear bottle, vegetable oil, water, food coloring, fizzy antacid tablet"},
+{type:"Science",n:"The Floating Egg",d:"Make an egg defy gravity",h:"Place an egg in a glass of plain water — it sinks. Now stir 4-5 big spoonfuls of salt into another glass of water. Place the egg in — it floats! Salt water is denser than the egg. That's why it's easier to float in the ocean.",m:"2 eggs, 2 glasses, water, salt"},
+{type:"Science",n:"Oobleck",d:"Is it liquid or solid? Both!",h:"Mix 2 cups of cornstarch with 1 cup of water in a bowl. Squeeze it — it feels solid! Open your hand — it melts and drips. Punch it slowly vs fast. It's a 'non-Newtonian fluid' that acts different under pressure.",m:"Cornstarch, water, big bowl"},
+{type:"Science",n:"Ice Fishing",d:"Lift an ice cube with string",h:"Float an ice cube in a glass of water. Lay a string across the top of the cube. Sprinkle salt on it and count to 30. Lift the string — the ice comes with it! Salt melted the surface, then it refroze around the string.",m:"Ice cubes, string, salt, glass of water"},
+{type:"Science",n:"Celery Rainbow",d:"Watch a plant drink color",h:"Put celery stalks (with leaves) in glasses of water mixed with bright food coloring. Check back over the next day — the leaves change color! Plants pull water up through tiny tubes like straws.",m:"Celery stalks, food coloring, glasses"},
+{type:"Science",n:"Marshmallow Towers",d:"Engineering challenge!",h:"Using only toothpicks and marshmallows, build the tallest tower you can in 10 minutes. Teams or solo. Triangles are stronger than squares — see who discovers it first!",m:"Toothpicks, mini marshmallows, timer"},
+{type:"Science",n:"Shiny Penny Lab",d:"Make old pennies new",h:"Put dull pennies in a bowl with 1/4 cup vinegar and 1 teaspoon salt. Wait 2 minutes and rinse. Shiny! The mix dissolves the dull copper oxide layer. Try leaving one unrinsed — it turns green over time!",m:"Dull pennies, vinegar, salt, bowl"},
+{type:"Creative",n:"Gratitude Circle",d:"Share appreciation",h:"Go around the circle. Each person says one specific thing they appreciate about the person on their left. Then reverse directions so everyone gets it from both sides!",m:null},
+{type:"Creative",n:"Story Builders",d:"Create a tale together",h:"One person starts: 'Once upon a time...' Each person adds exactly one sentence. Keep going around 3 times, then someone gets to make up the ending!",m:null},
+{type:"Creative",n:"Compliment Shower",d:"One person gets all the love",h:"Pick one family member. For 60 seconds, everyone showers them with genuine compliments. Then switch until everyone gets a turn. Watch the smiles!",m:null},
+{type:"Creative",n:"Invent a Family Handshake",d:"Your secret greeting",h:"Work together to invent a secret family handshake with at least 5 moves. Practice until everyone has it down. Use it all week!",m:null},
+{type:"Creative",n:"Blind Portraits",d:"Draw without looking",h:"Pair up. Draw a portrait of your partner without ever looking down at your paper (and no lifting the pen!). Reveal them at the same time. Prepare to laugh.",m:"Paper, pens"},
+{type:"Creative",n:"Postcards to the Future",d:"Write to future you",h:"Everyone writes a short note to themselves one year from now. What do you hope you're doing? Seal them in an envelope, write the date to open, and hide it somewhere safe.",m:"Paper, envelope, pens"},
+{type:"Creative",n:"Family Bucket List",d:"Dream together",h:"Brainstorm 10 things your family wants to do together someday. Big or small — camp in the backyard, visit the ocean, learn to juggle. Post the list where everyone can see it.",m:"Paper, pen"},
+{type:"Creative",n:"One-Word Story",d:"A story, one word at a time",h:"Tell a story going around the circle, but each person can only say ONE word at a time. It gets weird fast. Try to make it make sense... or don't!",m:null},
+{type:"Creative",n:"Design a Family Flag",d:"What represents us?",h:"Draw a flag for your family together. What colors? What symbols? What motto? Everyone adds one element. Hang the final flag somewhere proud.",m:"Paper, markers or crayons"},
+{type:"Creative",n:"Family Interview Show",d:"Late night talk show, family edition",h:"One person is the talk show host, another is the celebrity guest. Interview them about their week, dreams, and favorite things. Dramatic host voice required!",m:null}
+]
 };
 
-let stage = 0;
-const total = 8;
-let tInt;
+const WHO=[
+"Whoever woke up earliest today goes first!",
+"The youngest person goes first!",
+"The oldest person goes first!",
+"Whoever has the longest hair goes first!",
+"Whoever is wearing the most colors goes first!",
+"The person who laughed most recently goes first!",
+"Whoever ate breakfast first today goes first!",
+"The tallest person goes first!",
+"The shortest person goes first!",
+"Whoever's name comes first alphabetically goes first!",
+"The person with the next birthday goes first!",
+"Whoever can touch their nose with their tongue goes first (or just the silliest person)!",
+"The last person to yawn goes first!",
+"Whoever did a chore most recently goes first!"
+];
 
-function nextStage() {
-    document.getElementById(`s${stage}`).classList.remove('active');
-    stage++;
-    document.getElementById(`s${stage}`).classList.add('active');
-    updateUI();
-    loadContent();
+let S={qi:0,li:0,ji:0,ai:0,rated:false,filt:'all',pool:[]};
+const $=id=>document.getElementById(id);
+const getStreak=()=>+localStorage.getItem('fmStreak')||0;
+const addStreak=()=>{const n=getStreak()+1;localStorage.setItem('fmStreak',n);return n};
+const getRatings=()=>JSON.parse(localStorage.getItem('fmRatings')||'{}');
+const saveRating=(i,r)=>{const R=getRatings();R[i]=R[i]||[];R[i].push(r);localStorage.setItem('fmRatings',JSON.stringify(R))};
+const getAvg=i=>{const R=getRatings();return R[i]&&R[i].length?(R[i].reduce((a,b)=>a+b,0)/R[i].length).toFixed(1):null};
+
+function setTheme(t){
+document.body.setAttribute('data-theme',t);
+localStorage.setItem('fmTheme',t);
+document.querySelectorAll('.theme-chip').forEach(c=>c.classList.toggle('on',c.dataset.t===t));
+const icons={meadow:'🏠',campfire:'🔥',morning:'🌅',evening:'🌙'};
+$('homeIco').textContent=icons[t]||'🏠';
+makeFX(t);
+}
+function makeFX(t){
+const fx=$('fx');fx.innerHTML='';
+const mk=(styles)=>{const d=document.createElement('div');d.className='fx-p';Object.assign(d.style,styles);fx.appendChild(d)};
+const R=(a,b)=>a+Math.random()*(b-a);
+if(t==='campfire'){
+for(let i=0;i<16;i++){const sz=R(2.5,5.5);mk({width:sz+'px',height:sz+'px',left:R(5,95)+'%',top:'102%',background:Math.random()>0.5?'#f0a050':'#e8c060',boxShadow:'0 0 '+R(4,8)+'px #e8944a',animation:'rise '+R(6,13)+'s linear '+R(0,10)+'s infinite'})}
+}else if(t==='evening'){
+for(let i=0;i<36;i++){const sz=R(1,2.5);mk({width:sz+'px',height:sz+'px',left:R(2,98)+'%',top:R(2,75)+'%',background:'#e8e6ff',boxShadow:'0 0 '+R(2,5)+'px #c0baff',animation:'twinkle '+R(2,5)+'s ease '+R(0,4)+'s infinite'})}
+}else if(t==='meadow'){
+for(let i=0;i<9;i++){const sz=R(2.5,4);mk({width:sz+'px',height:sz+'px',left:R(5,95)+'%',top:R(30,95)+'%',background:'#c8e88a',boxShadow:'0 0 '+R(4,7)+'px #a0d060',animation:'firefly '+R(7,13)+'s ease '+R(0,8)+'s infinite'})}
+}else if(t==='morning'){
+mk({width:'340px',height:'340px',left:'50%',marginLeft:'-170px',top:'55%',background:'radial-gradient(circle,rgba(255,190,80,0.55),rgba(255,170,60,0.2) 45%,transparent 68%)',animation:'sunpulse 7s ease infinite'});
+mk({width:'170px',height:'170px',left:'50%',marginLeft:'-85px',top:'63%',background:'radial-gradient(circle,rgba(255,225,150,0.95),rgba(255,195,95,0.75) 55%,transparent 75%)',animation:'sunpulse 5s ease infinite'});
+for(let i=0;i<4;i++){mk({width:R(130,230)+'px',height:R(26,44)+'px',left:R(-10,70)+'%',top:R(4,30)+'%',background:'rgba(255,255,255,0.75)',borderRadius:'50%',filter:'blur(14px)',animation:'cloudmove '+R(55,110)+'s linear '+R(-60,0)+'s infinite'})}
+}
 }
 
-function goHome() {
-    document.querySelectorAll('.stage').forEach(s => s.classList.remove('active'));
-    stage = 0;
-    document.getElementById('s0').classList.add('active');
-    updateUI();
-}
+const show=id=>{document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));$(id).classList.add('on')};
+const home=()=>{show('s-home');$('hStreak').textContent=getStreak()};
+const go=n=>{
+const screens=['','s-rules','s-quote','s-checkin','s-lesson','s-joke','s-act','s-end'];
+show(screens[n]);
+if(n===2)loadQ();
+if(n===3)$('whoTxt').textContent='Who goes first?';
+if(n===4)loadL();
+if(n===5)loadJ();
+if(n===6)loadA();
+if(n===7)finish();
+};
+const begin=()=>{
+S.qi=Math.floor(Math.random()*DATA.quotes.length);
+S.li=Math.floor(Math.random()*DATA.lessons.length);
+S.ji=Math.floor(Math.random()*DATA.jokes.length);
+S.filt='all';buildPool();
+S.ai=Math.floor(Math.random()*S.pool.length);
+S.rated=false;
+go(1);
+};
 
-function updateUI() {
-    const hdr = document.getElementById('nav-header');
-    hdr.classList.toggle('visible', stage > 0 && stage < 8);
-    document.getElementById('p-bar').style.width = (stage / total) * 100 + "%";
-}
+const pickWho=()=>{$('whoTxt').textContent=WHO[Math.floor(Math.random()*WHO.length)]};
 
-function toggleHelp(show) {
-    const overlay = document.querySelector(`#s${stage} .help-overlay`);
-    if (overlay) overlay.classList.toggle('active', show);
-}
+const loadQ=()=>{const q=DATA.quotes[S.qi];$('qText').textContent='"'+q.t+'"';$('qAuth').textContent='— '+q.a};
+const nextQ=()=>{S.qi=(S.qi+1)%DATA.quotes.length;loadQ()};
 
-function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+const loadL=()=>{const l=DATA.lessons[S.li];$('lTitle').textContent=l.t;$('lStory').textContent=l.s;$('lMoral').textContent=l.m};
+const nextL=()=>{S.li=(S.li+1)%DATA.lessons.length;loadL()};
 
-function loadContent() {
-    if(stage === 1) document.getElementById('ib-text').innerText = pick(D.ib);
-    if(stage === 2) { let q = pick(D.qt); document.getElementById('qt-text').innerText = `"${q.t}"`; document.getElementById('qt-author').innerText = "— " + q.a; }
-    if(stage === 3) { document.getElementById('ci-grat').innerText = pick(D.gr); document.getElementById('ci-goal').innerText = pick(D.gl); }
-    if(stage === 4) { let s = pick(D.st); document.getElementById('st-title').innerText = s.t; document.getElementById('st-body').innerText = s.s; document.getElementById('st-moral').innerText = s.m; }
-    if(stage === 5) { let l = pick(D.ls); document.getElementById('ls-cat').innerText = l.c; document.getElementById('ls-title').innerText = l.t; document.getElementById('ls-body').innerText = l.b; }
-    if(stage === 7) { let j = pick(D.jk); document.getElementById('jk-setup').innerText = j.s; document.getElementById('jk-punch').innerText = j.p; document.getElementById('jk-punch').style.display = 'none'; document.getElementById('jk-btn').style.display = 'block'; document.getElementById('jk-next').style.display = 'none'; }
-}
+const loadJ=()=>{
+const j=DATA.jokes[S.ji];
+$('jSetup').textContent=j.s;
+$('jAns').textContent=j.p;
+$('jBtn').style.display='block';
+$('jArea').classList.remove('show');
+S.rated=false;
+const btns=$('rBtns');btns.innerHTML='';
+for(let i=1;i<=10;i++){const b=document.createElement('button');b.className='rate-num';b.textContent=i;b.onclick=()=>rate(i);btns.appendChild(b)}
+const avg=getAvg(S.ji);$('rAvg').textContent=avg?'Family avg: '+avg+'/10':'';
+};
+const reveal=()=>{$('jBtn').style.display='none';$('jArea').classList.add('show')};
+const rate=r=>{
+if(S.rated)return;S.rated=true;
+saveRating(S.ji,r);
+document.querySelectorAll('.rate-num').forEach((b,i)=>{if(i+1===r)b.classList.add('sel')});
+$('rAvg').textContent='Family avg: '+getAvg(S.ji)+'/10';
+};
+const nextJ=()=>{S.ji=(S.ji+1)%DATA.jokes.length;loadJ()};
 
-function shuffle(key) { loadContent(); }
+const buildPool=()=>{
+S.pool=DATA.acts.map((a,i)=>({...a,idx:i})).filter(a=>S.filt==='all'||a.type===S.filt);
+};
+const setFilt=f=>{
+S.filt=f;buildPool();
+S.ai=Math.floor(Math.random()*S.pool.length);
+document.querySelectorAll('.filt').forEach(b=>b.classList.toggle('on',b.dataset.f===f));
+loadA();
+};
+const loadA=()=>{
+const a=S.pool[S.ai];
+const tag=$('aTag');tag.textContent=a.type;tag.className='act-tag '+a.type.toLowerCase();
+$('aName').textContent=a.n;
+$('aDesc').textContent=a.d;
+$('aHow').textContent=a.h;
+if(a.m){$('aMats').style.display='block';$('aMatsTxt').textContent=a.m}else{$('aMats').style.display='none'}
+};
+const nextA=()=>{S.ai=(S.ai+1)%S.pool.length;loadA()};
 
-function startTimer() {
-    let s = 30; document.getElementById('timer-btn').style.display = 'none';
-    tInt = setInterval(() => {
-        s--; document.getElementById('timer').innerText = `0:${s < 10 ? '0' : ''}${s}`;
-        if(s <= 0) { clearInterval(tInt); document.getElementById('timer').innerText = "Done"; document.getElementById('timer-btn').innerText = "Continue"; document.getElementById('timer-btn').style.display = 'block'; document.getElementById('timer-btn').onclick = nextStage; }
-    }, 1000);
-}
+const finish=()=>{$('eStreak').textContent=addStreak()};
 
-function revealJoke() {
-    document.getElementById('jk-punch').style.display = 'block';
-    document.getElementById('jk-btn').style.display = 'none';
-    document.getElementById('jk-next').style.display = 'block';
-}
+setTheme(localStorage.getItem('fmTheme')||'meadow');
+$('hStreak').textContent=getStreak();
 </script>
 </body>
 </html>
