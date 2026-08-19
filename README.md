@@ -1,89 +1,87 @@
 # ✨ Family Meeting Hub
 
-> A free, interactive web tool designed to spark meaningful conversations and bring structure to your family meetings.
+> A free, guided web app that walks your family through a 15-minute meeting — connect, share, laugh, and learn. No accounts, no ads, no data collection.
 
 [![Website](https://img.shields.io/badge/Website-Live-blue?style=for-the-badge&logo=googlechrome)](https://jukes31ryan.github.io/Family-Meeting-Hub/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-Welcome to the Family Meeting Hub! This tool was built to solve a common problem: making family meetings engaging, consistent, and fun for everyone, from the youngest to the oldest. It provides structure and endless variety, so you can focus on what really matters: connecting with each other.
-
-![Family Meeting Hub Screenshot](https://raw.githubusercontent.com/jukes31ryan/Family-Meeting-Hub/main/screenshot.gif)
-*(**Pro-Tip:** To make the image above appear, create a screen recording of your site, name the file `screenshot.gif`, and upload it to the main branch of this repository. It will automatically show up here.)*
+![Family Meeting Hub](screenshot.png)
 
 ---
 
 ## 🤔 What is this?
 
-The Family Meeting Hub is a single-page web application that acts as a digital guide for your weekly family check-ins. It eliminates the "what should we talk about?" problem by providing a series of interactive cards with randomized prompts. Whether you want to share highs and lows, learn a new skill, or just have a good laugh, this tool provides the spark.
+Family meetings die from one question: *"so... what do we talk about?"*
 
-It's built with simplicity in mind: no logins, no ads, no data collection. Just a clean, beautiful interface that works on any device with a web browser.
+This app answers it. Press **Start Meeting** and it walks you through six steps in order, each with a prompt already picked for you. About 15 minutes, no prep, works on any phone, tablet, or laptop.
 
 ## 🚀 Live Demo
-
-**You can use the live version of the tool right here:**
 
 ### **[https://jukes31ryan.github.io/Family-Meeting-Hub/](https://jukes31ryan.github.io/Family-Meeting-Hub/)**
 
 ---
 
-## ✨ Key Features
+## 📋 The Six Steps
 
-* **Interactive Content Cards:** A full suite of prompts to guide your meeting:
-    * **🎯 Ice Breakers:** 50+ fun, thought-provoking questions to get everyone talking.
-    * **💬 Inspiring Quotes:** A new quote from a public API to set a positive tone.
-    * **💖 Rose/Bud/Thorn Check-In:** The classic format for sharing highs, lows, and things to look forward to.
-    * **💡 Amazing Facts:** Learn something new together with random facts from an API.
-    * **📖 Story Time:** 50+ short, meaningful fables and stories with clear morals.
-    * **🛠️ Life Skills:** 50+ practical mini-lessons on everything from emotional intelligence to household chores.
-    * **😂 Joke Time:** A family-friendly joke from an API to ensure you always end with a laugh.
-* **Dynamic Theming:** Cycle through **8 unique color themes** to keep the look and feel fresh for every meeting.
-* **Helpful Guides:** Onboard new users instantly with built-in pop-up modals for "How to Use" and "Meeting Rules."
-* **Visual Progress Indicator:** Cards glow when used, providing a simple visual checklist of what you've covered.
-* **Notes & Export:** A simple notepad to capture decisions or memories, with an easy "Export to .txt" function.
-* **Fully Responsive:** Looks and works great on desktops, tablets, and mobile phones.
+| # | Step | What happens |
+|---|------|--------------|
+| 1 | **Ground Rules** | Five quick reminders — one voice at a time, phones away, okay to pass, what's shared stays here |
+| 2 | **Inspiring Quote** | A quote to reflect on together, with a discussion prompt. Tap ↻ for another |
+| 3 | **Check-In** | Everyone shares a **High**, a **Low**, and a **Buffalo** (something random, funny, or surprising) |
+| 4 | **Story Time** | A short fable with a clear takeaway, plus a question to talk it over |
+| 5 | **Dad Joke** | Setup, tap to reveal, then rate it 1–10. Ratings are saved and averaged over time |
+| 6 | **Bonus Activity** | An optional game, science experiment, or creative exercise if you have time |
 
 ---
 
-## 🛠️ How to Use
+## ✨ Features
 
-1.  **Open the website.**
-2.  Click **"Meeting Rules"** to review the ground rules for a positive conversation.
-3.  Click **"New Meeting"** to reset all the cards.
-4.  Follow the cards in order, or choose your own adventure! Click the button on any card to generate a new prompt.
-5.  Use the **"Change Theme"** button to cycle through different looks.
-6.  Enjoy connecting with your family!
+* **Guided flow with a progress bar** — always know where you are and what's next. Go back or exit any time.
+* **A lot of content, zero repetition:**
+  * 50 quotes
+  * 30 stories, each with a takeaway
+  * 50 family-friendly jokes
+  * 40 activities — 15 games, 15 science experiments, 10 creative exercises (filterable by type)
+  * 14 "who goes first?" tiebreakers
+* **Science experiments include materials lists** — you'll know before you start whether you have what you need.
+* **🎲 Pick for us** — settles who shares first without an argument ("whoever ate breakfast first goes first!").
+* **Joke ratings** — rate each joke 1–10; the app remembers your family's running average.
+* **Meeting counter** — tracks how many meetings you've completed.
+* **4 themes** with animated backgrounds: 🌿 Meadow (fireflies), 🔥 Campfire (rising embers), 🌅 Morning (sun and drifting clouds), 🌙 Evening (stars). Your pick is remembered.
+* **Fully offline** — no API calls, no network needed after first load.
 
 ---
 
 ## 💻 Tech Stack
 
-This project was intentionally kept simple and accessible. It is built with:
+A single self-contained `index.html`. That's the whole app.
 
 * **HTML5**
-* **CSS3** (with CSS Variables for theming)
-* **Vanilla JavaScript** (no frameworks or libraries)
+* **CSS3** (CSS variables for theming)
+* **Vanilla JavaScript** — no frameworks, no build step, no dependencies
 
-APIs are used to fetch dynamic content for Facts, Quotes, and Jokes.
+All content is embedded in the file, so nothing breaks when a third-party API goes down. Your theme, meeting count, and joke ratings are stored in your browser's `localStorage` and never leave your device.
+
+### Running it locally
+
+Clone the repo and open `index.html` in a browser. There is no build step.
 
 ---
 
 ## 💬 Feedback & Contributions
 
-This is a personal project built with love. If you have any feedback, ideas for new features, or suggestions for prompts, please feel free to open an "Issue" here on GitHub!
+This is a personal project built with love. If you have feedback, feature ideas, or suggestions for prompts, please open an Issue.
 
-While formal code contributions are not being sought, you are welcome to fork this repository and customize it for your own family's needs.
+While formal code contributions are not being sought, you are welcome to fork this repository and customize it for your own family.
 
 ---
 
 ## 📄 License
 
-This project is licensed under the MIT License.
+MIT
 
 ---
 
 ## 👤 Author
 
-**jukes31ryan**
-
-* GitHub: [@jukes31ryan](https://github.com/jukes31ryan)
-
+**jukes31ryan** · [@jukes31ryan](https://github.com/jukes31ryan)
