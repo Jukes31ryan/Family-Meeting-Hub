@@ -68,6 +68,23 @@ Clone the repo and open `index.html` in a browser. There is no build step.
 
 ---
 
+## 🌅 Also in this repo: First Light
+
+A second, separate app lives in [`first-light/`](first-light/) — a personal *morning* launcher, not a family one. A boot sequence for the brain: a quote, a laugh, a full-length fable, a breathing timer, your own daily reminders one card at a time, then Purge / Top 3 / WIN to point you at the day. A 5x5 mini crossword wakes the brain up, and a 15-second evening close-out shuts the loop at night.
+
+### **[Open First Light →](https://jukes31ryan.github.io/Family-Meeting-Hub/first-light/)**
+
+* **Installable PWA** — `manifest.webmanifest` + `sw.js` + icons. Add it to your home screen and it runs full-screen and fully offline.
+* **18 full-length fables**, each ending on an earned takeaway.
+* **69 quotes** from warriors and poets — Sun Tzu, Musashi, Marcus Aurelius, Seneca, Epictetus, Rumi, Whitman, Oliver, Rilke, Frost, Kipling, Angelou, Emerson, Whyte.
+* **18 hand-built mini crosswords**, one per day, no external API.
+* **Your software is yours** — reminders and quotes are edited in Settings, never in the code.
+* **Export / import** your whole history as a JSON file, so a cleared browser can't erase it.
+
+Data lives in `localStorage` under `fl`-prefixed keys and never leaves the device.
+
+---
+
 ## 💬 Feedback & Contributions
 
 This is a personal project built with love. If you have feedback, feature ideas, or suggestions for prompts, please open an Issue.
