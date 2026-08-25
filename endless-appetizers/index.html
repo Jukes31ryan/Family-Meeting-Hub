@@ -1,0 +1,1893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>Endless Appetizers</title>
+<meta name="description" content="You are sixteen. You are in an Applebee's. You cannot leave. A small adventure game.">
+<meta name="theme-color" content="#12100d">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#f2e9d8; --ink2:#a3947c; --ink3:#6b6151;
+  --bg:#0d0b09; --panel:#191411; --panel2:#221a15;
+  --line:rgba(255,225,180,.10);
+  --apple:#c0392b; --apple2:#e0574a;
+  --brass:#d8a24a; --green:#5f9b57;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+html,body{height:100%}
+body{
+  background:var(--bg);color:var(--ink);font-family:var(--sans);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;overscroll-behavior:none;-webkit-user-select:none;user-select:none;
+  -webkit-tap-highlight-color:transparent;
+}
+#app{width:100%;height:100%;max-width:1100px;display:flex;flex-direction:column;gap:8px;padding:8px;}
+
+/* ---------- HUD ---------- */
+#hud{display:flex;align-items:center;gap:10px;flex:0 0 auto;font-family:var(--mono);font-size:12px}
+#objwrap{flex:1;min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:7px 11px;display:flex;align-items:center;gap:9px;overflow:hidden}
+#objlabel{color:var(--brass);font-weight:700;letter-spacing:.08em;flex:0 0 auto}
+#obj{color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#meters{flex:0 0 auto;display:flex;align-items:center;gap:8px}
+.meter{width:88px;height:9px;border-radius:6px;background:#2a201a;border:1px solid var(--line);overflow:hidden;position:relative}
+.meter i{display:block;height:100%;width:0%;background:linear-gradient(90deg,#5f9b57,#d8a24a 55%,#c0392b);transition:width .25s}
+.mlab{color:var(--ink3);letter-spacing:.06em}
+#flair{color:var(--ink2);flex:0 0 auto;white-space:nowrap}
+#helpbtn{flex:0 0 auto;width:28px;height:28px;border-radius:8px;background:var(--panel);border:1px solid var(--line);color:var(--ink2);font-family:var(--mono);font-size:13px;cursor:pointer}
+#helpbtn:hover{color:var(--ink);border-color:var(--brass)}
+
+/* ---------- stage ---------- */
+#stage{
+  position:relative;flex:1 1 auto;min-height:0;
+  container-type:inline-size;
+  align-self:center;width:100%;
+  aspect-ratio:25/16;max-height:100%;
+  border:1px solid var(--line);border-radius:12px;overflow:hidden;
+  background:#0a0806;box-shadow:0 18px 50px rgba(0,0,0,.6);
+}
+canvas{display:block;width:100%;height:100%;image-rendering:auto}
+
+/* ---------- inventory strip ---------- */
+#inv{flex:0 0 auto;display:flex;gap:6px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;min-height:26px}
+.item{background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:5px 10px;color:var(--ink2)}
+.item b{color:var(--brass);font-weight:700}
+#inv:empty::after{content:"pockets: empty";color:var(--ink3);font-family:var(--mono);font-size:11px;padding:5px 2px}
+
+/* ---------- dialogue ---------- */
+#dlg{position:absolute;left:3%;right:3%;bottom:3%;background:rgba(15,11,9,.96);
+  border:1px solid rgba(216,162,74,.35);border-radius:12px;padding:3.2cqi 3.6cqi;
+  box-shadow:0 12px 40px rgba(0,0,0,.7);display:none}
+#dlg.on{display:block}
+#who{font-family:var(--mono);font-size:clamp(11px,2.1cqi,17px);letter-spacing:.1em;text-transform:uppercase;color:var(--brass);margin-bottom:.6em}
+#txt{font-size:clamp(13px,2.7cqi,22px);line-height:1.5;min-height:3em;white-space:pre-wrap}
+#txt .cur{opacity:.55}
+#choices{display:flex;flex-direction:column;gap:.45em;margin-top:.9em}
+.choice{text-align:left;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:8px;
+  padding:.55em .8em;color:var(--ink);font:inherit;font-size:clamp(12px,2.4cqi,19px);cursor:pointer}
+.choice:hover,.choice.sel{background:rgba(216,162,74,.16);border-color:var(--brass)}
+#more{position:absolute;right:1.6cqi;bottom:1.1cqi;font-family:var(--mono);font-size:clamp(9px,1.7cqi,13px);color:var(--ink3)}
+
+/* ---------- toast ---------- */
+#toasts{position:absolute;top:2.5%;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:6px;pointer-events:none}
+.toast{background:rgba(15,11,9,.94);border:1px solid rgba(216,162,74,.4);color:var(--ink);
+  border-radius:999px;padding:.5em 1.1em;font-family:var(--mono);font-size:clamp(10px,1.9cqi,15px);
+  animation:pop 4.2s ease forwards}
+@keyframes pop{0%{opacity:0;transform:translateY(-8px)}8%{opacity:1;transform:none}80%{opacity:1}100%{opacity:0;transform:translateY(-6px)}}
+
+/* ---------- screens ---------- */
+.screen{position:absolute;inset:0;background:linear-gradient(180deg,#0f0c0a,#160f0b 60%,#241108);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.4cqi;text-align:center;padding:5cqi;z-index:6;overflow:auto}
+.screen.off{display:none}
+.screen h1{font-family:var(--mono);font-size:clamp(20px,6.4cqi,58px);letter-spacing:-.02em;line-height:1;color:var(--ink)}
+.screen h1 span{color:var(--apple2)}
+.screen .sub{color:var(--ink2);font-size:clamp(12px,2.5cqi,20px);max-width:34em;line-height:1.55}
+.screen .tiny{color:var(--ink3);font-family:var(--mono);font-size:clamp(9px,1.8cqi,13px);line-height:1.7}
+.btn{margin-top:.6em;background:var(--apple);color:#fff;border:0;border-radius:10px;
+  padding:.7em 1.6em;font-family:var(--mono);font-size:clamp(12px,2.4cqi,19px);letter-spacing:.06em;cursor:pointer;
+  box-shadow:0 6px 0 #7d2418}
+.btn:active{transform:translateY(3px);box-shadow:0 3px 0 #7d2418}
+.btn.ghost{background:transparent;color:var(--ink2);border:1px solid var(--line);box-shadow:none}
+.btn.ghost:hover{color:var(--ink);border-color:var(--brass)}
+#endtext{white-space:pre-wrap;text-align:left}
+#stats{font-family:var(--mono);font-size:clamp(10px,2cqi,15px);color:var(--ink2);line-height:1.9}
+#stats b{color:var(--brass)}
+.apple{width:clamp(34px,9cqi,80px);height:clamp(34px,9cqi,80px)}
+
+/* ---------- touch pad ---------- */
+#pad{flex:0 0 auto;display:none;justify-content:space-between;align-items:flex-end;padding:2px 4px 6px}
+body.touch #pad{display:flex}
+#dpad{display:grid;grid-template-columns:repeat(3,52px);grid-template-rows:repeat(3,44px);gap:4px}
+.pk{background:var(--panel);border:1px solid var(--line);border-radius:10px;color:var(--ink2);font-size:17px;
+  display:flex;align-items:center;justify-content:center}
+.pk:active,.pk.down{background:rgba(216,162,74,.22);color:var(--ink)}
+.pk.blank{background:transparent;border:0}
+#abtn{width:78px;height:78px;border-radius:50%;background:var(--apple);color:#fff;border:0;
+  font-family:var(--mono);font-size:16px;letter-spacing:.06em;box-shadow:0 5px 0 #7d2418}
+#abtn:active{transform:translateY(3px);box-shadow:0 2px 0 #7d2418}
+@media (max-width:520px){#hud{font-size:11px}#meters .meter{width:58px}#flair{display:none}}
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="hud">
+    <button id="helpbtn" title="Controls">?</button>
+    <div id="objwrap"><span id="objlabel">TASK</span><span id="obj">&nbsp;</span></div>
+    <div id="meters">
+      <span class="mlab">BORED</span>
+      <div class="meter"><i id="boredbar"></i></div>
+    </div>
+    <div id="flair">FLAIR 0/5</div>
+  </div>
+
+  <div id="stage">
+    <canvas id="cv" width="800" height="512"></canvas>
+    <div id="toasts"></div>
+    <div id="dlg">
+      <div id="who"></div>
+      <div id="txt"></div>
+      <div id="choices"></div>
+      <div id="more"></div>
+    </div>
+
+    <div class="screen" id="title">
+      <svg class="apple" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 18c-6-7-16-6-20 0-5 8-1 22 6 30 3 3 6 4 8 2 3-2 6-2 9 0 2 2 5 1 8-2 7-8 11-22 6-30-4-6-14-7-17 0z" fill="#c0392b"/><path d="M32 18c0-6 3-10 9-12-1 7-3 11-9 12z" fill="#5f9b57"/></svg>
+      <h1>ENDLESS<br><span>APPETIZERS</span></h1>
+      <p class="sub">You are sixteen years old. It is a Tuesday. You are in an Applebee's, and for reasons nobody will explain to you, you cannot leave until the check comes.</p>
+      <button class="btn" id="startbtn">PRESS START</button>
+      <p class="tiny">MOVE — arrows / WASD &nbsp;·&nbsp; TALK &amp; USE — E / SPACE<br>skip text — E &nbsp;·&nbsp; choose — number keys or click</p>
+    </div>
+
+    <div class="screen off" id="ending">
+      <h1 id="endtitle">THE END</h1>
+      <p class="sub" id="endtext"></p>
+      <div id="stats"></div>
+      <button class="btn" id="againbtn">PLAY AGAIN</button>
+    </div>
+  </div>
+
+  <div id="inv"></div>
+
+  <div id="pad">
+    <div id="dpad">
+      <div class="pk blank"></div><div class="pk" data-k="up">▲</div><div class="pk blank"></div>
+      <div class="pk" data-k="left">◀</div><div class="pk blank"></div><div class="pk" data-k="right">▶</div>
+      <div class="pk blank"></div><div class="pk" data-k="down">▼</div><div class="pk blank"></div>
+    </div>
+    <button id="abtn">A</button>
+  </div>
+</div>
+
+<script>
+"use strict";
+/* ============================================================
+   ENDLESS APPETIZERS
+   A small adventure about a 16-year-old who cannot leave.
+   One file. No dependencies. No build step. No escape.
+   ============================================================ */
+
+const TS = 32, COLS = 25, ROWS = 16, W = COLS*TS, H = ROWS*TS;
+const cv = document.getElementById('cv'), ctx = cv.getContext('2d');
+
+/* ---------- tiny helpers ---------- */
+const $ = s => document.querySelector(s);
+const clamp = (v,a,b) => v<a?a:v>b?b:v;
+const pick = a => a[(Math.random()*a.length)|0];
+const rr = (x,y,w,h,r)=>{ctx.beginPath();ctx.roundRect(x,y,w,h,r);};
+function fillRect(x,y,w,h,c){ctx.fillStyle=c;ctx.fillRect(x,y,w,h);}
+function rnd(seed){ // deterministic 0..1 from an integer
+  let t = (seed*1103515245+12345)>>>0; t^=t>>>15; t=(t*2246822519)>>>0; return (t>>>8)/16777216;
+}
+
+/* ============================================================
+   WORLD DATA
+   ============================================================ */
+const ROOMS = {
+dining:{
+  name:"DINING ROOM",
+  floor:'carpet',
+  tiles:[
+  '############dd###########',
+  '#.......................#',
+  '#.......................#',
+  '#.......................#',
+  '#.......................#',
+  '#.......................#',
+  '#.......................#',
+  'd.......................d',
+  'd.......................d',
+  '#.......................#',
+  '#.......................#',
+  '#.......................#',
+  '#.......................#',
+  '#.......................#',
+  '#.......................#',
+  '######dd#################'],
+  doors:[
+    {x:12,y:0,to:'lobby',tx:12,ty:14},{x:13,y:0,to:'lobby',tx:13,ty:14},
+    {x:24,y:7,to:'bar',tx:1,ty:7},{x:24,y:8,to:'bar',tx:1,ty:8},
+    {x:6,y:15,to:'hall',tx:6,ty:1},{x:7,y:15,to:'hall',tx:7,ty:1},
+    {x:0,y:7,to:'kitchen',tx:23,ty:7,lock:'employee'},
+    {x:0,y:8,to:'kitchen',tx:23,ty:8,lock:'employee'}],
+  objs:[
+    {k:'booth',x:2,y:1,w:3,h:2,s:1},{k:'booth',x:6,y:1,w:3,h:2,s:1},
+    {k:'booth',x:16,y:1,w:3,h:2,s:1,mine:1},{k:'booth',x:20,y:1,w:3,h:2,s:1},
+    {k:'table4',x:4,y:6,w:2,h:2,s:1},{k:'table4',x:9,y:6,w:2,h:2,s:1},
+    {k:'table4',x:14,y:6,w:2,h:2,s:1},{k:'table4',x:19,y:6,w:2,h:2,s:1},
+    {k:'table4',x:4,y:10,w:2,h:2,s:1},{k:'table4',x:9,y:10,w:2,h:2,s:1},
+    {k:'table4',x:14,y:10,w:2,h:2,s:1},{k:'table4',x:19,y:10,w:2,h:2,s:1},
+    {k:'plant',x:1,y:13,w:1,h:1,s:1},{k:'plant',x:23,y:5,w:1,h:1,s:1},
+    {k:'drinkstation',x:1,y:3,w:2,h:1,s:1,id:'drinkstation',label:'the drink station'},
+    {k:'wetfloor',x:13,y:9,w:1,h:1,s:0,id:'wetfloor',label:'a caution sign'},
+    {k:'stain',x:12,y:9,w:1,h:1,s:0,id:'stain',label:'a sticky patch'},
+    {k:'jukebox',x:23,y:13,w:1,h:1,s:1,id:'jukebox',label:'jukebox'},
+    {k:'platter',x:17,y:1,w:1,h:1,s:0,z:99,id:'platter',label:'the platter'},
+    {k:'trumpet',x:10,y:0,w:1,h:1,s:1,id:'flair_trumpet',label:'a mounted trumpet'},
+    {k:'exitsign',x:0,y:6,w:1,h:1,s:0}],
+  npcs:[
+    {id:'mom',x:16,y:1,name:'MOM',shirt:'#7a4f8c',hair:'#4b2f1e',skin:'#d8a878',dir:'r',sit:1,z:98},
+    {id:'wyatt',x:18,y:1,name:'WYATT',shirt:'#3f77b5',hair:'#2b1a10',skin:'#d8a878',dir:'l',sit:1,small:1,z:98},
+    {id:'karla',x:11,y:11,name:'KARLA',shirt:'#2c2c2c',hair:'#1a1210',skin:'#8a5a3b',dir:'d',apron:1},
+    {id:'diner1',x:13,y:6,name:'A REGULAR',shirt:'#4a5a3f',hair:'#8e8a80',skin:'#d2a67c',dir:'r',sit:1,z:250},
+    {id:'diner2',x:16,y:6,name:'HIS WIFE',shirt:'#8c5a72',hair:'#6b5a4a',skin:'#d8ac84',dir:'l',sit:1,z:250}]
+},
+
+lobby:{
+  name:"FRONT LOBBY",
+  floor:'tile',
+  ext:7,
+  tiles:[
+  '#########################',
+  '#########################',
+  '#########################',
+  '#########################',
+  '#########################',
+  '#########################',
+  '#########################',
+  '########WWWddWWW#########',
+  '#.......................#',
+  '#.......................#',
+  '#.......................#',
+  '#.......................#',
+  '#.......................#',
+  '#.......................#',
+  '#.......................#',
+  '############dd###########'],
+  doors:[
+    {x:12,y:15,to:'dining',tx:12,ty:1},{x:13,y:15,to:'dining',tx:13,ty:1},
+    {x:11,y:7,to:'OUT',tx:0,ty:0,lock:'front'},{x:12,y:7,to:'OUT',tx:0,ty:0,lock:'front'}],
+  objs:[
+    {k:'frontdoor',x:11,y:7,w:2,h:1,s:0,z:8},
+    {k:'mat',x:11,y:8,w:2,h:1,s:0},
+    {k:'hoststand',x:9,y:9,w:2,h:2,s:1,id:'hoststand',label:'the host stand'},
+    {k:'mints',x:11,y:9,w:1,h:1,s:1,id:'mints',label:'a bowl of mints'},
+    {k:'claw',x:16,y:8,w:2,h:2,s:1,id:'claw',label:'THE CLAW'},
+    {k:'bench',x:3,y:9,w:1,h:3,s:1},
+    {k:'bike',x:20,y:8,w:2,h:2,s:1,id:'flair_bike',label:'a very old bicycle'},
+    {k:'plant',x:7,y:13,w:1,h:1,s:1},{k:'plant',x:19,y:13,w:1,h:1,s:1},
+    {k:'corkboard',x:5,y:7,w:2,h:1,s:0,id:'wallofwow',label:'the WALL OF WOW'}],
+  npcs:[
+    {id:'brayden',x:10,y:11,name:'BRAYDEN',shirt:'#2c2c2c',hair:'#c8a35a',skin:'#e0b58c',dir:'d',apron:1},
+    {id:'todd',x:14,y:10,name:'TODD',shirt:'#233d63',hair:'#3b2a1c',skin:'#dfae83',dir:'d',tie:1}]
+},
+
+bar:{
+  name:"THE BAR",
+  floor:'wood',
+  tiles:[
+  '#########################',
+  '#.......................#',
+  '#.......................#',
+  '#.......................#',
+  '#.......................#',
+  '#.......................#',
+  '#.......................#',
+  'd.......................#',
+  'd.......................#',
+  '#.......................#',
+  '#.......................#',
+  '#.......................#',
+  '#.......................#',
+  '#########################',
+  '#########################',
+  '#########################'],
+  doors:[{x:0,y:7,to:'dining',tx:23,ty:7},{x:0,y:8,to:'dining',tx:23,ty:8}],
+  objs:[
+    {k:'backbar',x:7,y:1,w:11,h:1,s:1},
+    {k:'barcounter',x:7,y:3,w:11,h:2,s:1},
+    {k:'stool',x:8,y:5,w:1,h:1,s:0},{k:'stool',x:10,y:5,w:1,h:1,s:0},
+    {k:'stool',x:12,y:5,w:1,h:1,s:0},{k:'stool',x:14,y:5,w:1,h:1,s:0},
+    {k:'stool',x:16,y:5,w:1,h:1,s:0},
+    {k:'tv',x:1,y:0,w:2,h:1,s:1,id:'tv1',label:'a television'},
+    {k:'tv',x:9,y:0,w:2,h:1,s:1},
+    {k:'tv',x:14,y:0,w:2,h:1,s:1},
+    {k:'tv',x:19,y:0,w:2,h:1,s:1,id:'tv2',label:'another television'},
+    {k:'ski',x:4,y:0,w:1,h:1,s:1,id:'flair_ski',label:'a single wooden ski'},
+    {k:'hightable',x:20,y:2,w:2,h:2,s:1},{k:'hightable',x:20,y:7,w:2,h:2,s:1},
+    {k:'hightable',x:4,y:10,w:2,h:2,s:1},{k:'hightable',x:9,y:10,w:2,h:2,s:1},
+    {k:'hightable',x:14,y:10,w:2,h:2,s:1},
+    {k:'chalkboard',x:5,y:0,w:2,h:1,s:1,id:'chalkboard',label:'a chalkboard'},
+    {k:'dartboard',x:24,y:11,w:1,h:1,s:1,id:'dartboard',label:'a dartboard'},
+    {k:'plant',x:2,y:8,w:1,h:1,s:1}],
+  npcs:[
+    {id:'doug',x:12,y:5,name:'DOUG',shirt:'#6b6f4a',hair:'#9a9a94',skin:'#cf9d74',dir:'u',sit:1,z:194},
+    {id:'renee',x:15,y:2,name:'RENEE',shirt:'#2c2c2c',hair:'#5a2b1c',skin:'#e2b489',dir:'d',apron:1}]
+},
+
+hall:{
+  name:"BACK HALLWAY",
+  floor:'carpet',
+  tiles:[
+  '######dd#################',
+  '#####....################',
+  '#####....################',
+  '#####....################',
+  '#####....################',
+  '#####...................#',
+  '#####...................#',
+  '#####...................#',
+  '#####...................#',
+  '#####....################',
+  '#####....################',
+  '#####....################',
+  '#####....################',
+  '#####....################',
+  '#####....################',
+  '#########################'],
+  doors:[{x:6,y:0,to:'dining',tx:6,ty:14},{x:7,y:0,to:'dining',tx:7,ty:14}],
+  objs:[
+    {k:'payphone',x:4,y:2,w:1,h:1,s:1,id:'payphone',label:'a payphone'},
+    {k:'paddle',x:17,y:4,w:1,h:1,s:1,id:'flair_paddle',label:'a canoe paddle'},
+    {k:'rdoor',x:12,y:9,w:1,h:1,s:1,id:'restroom_a',label:'a restroom'},
+    {k:'rdoor',x:14,y:9,w:1,h:1,s:1,id:'restroom_b',label:'the other restroom'},
+    {k:'closet',x:20,y:9,w:1,h:1,s:1,id:'mopcloset',label:'a closet door'},
+    {k:'schedule',x:4,y:10,w:1,h:1,s:1,id:'schedule',label:'the schedule'},
+    {k:'icemachine',x:5,y:13,w:2,h:2,s:1,id:'icemachine',label:'the ice machine'},
+    {k:'highchairs',x:8,y:11,w:1,h:1,s:1},
+    {k:'bustub',x:22,y:5,w:1,h:1,s:1},
+    {k:'plant',x:8,y:6,w:1,h:1,s:1}],
+  npcs:[]
+},
+
+kitchen:{
+  name:"KITCHEN",
+  floor:'kfloor',
+  tiles:[
+  '###dd####################',
+  '#.......................#',
+  '#.......................#',
+  '#.......................#',
+  '#.......................#',
+  '#.......................#',
+  '#.......................#',
+  '#.......................d',
+  '#.......................d',
+  '#.......................#',
+  '#.......................#',
+  '#########################',
+  '#########################',
+  '#########################',
+  '#########################',
+  '#########################'],
+  doors:[
+    {x:24,y:7,to:'dining',tx:1,ty:7},{x:24,y:8,to:'dining',tx:1,ty:8},
+    {x:3,y:0,to:'freezer',tx:11,ty:13,lock:'freezer'},
+    {x:4,y:0,to:'freezer',tx:12,ty:13,lock:'freezer'}],
+  objs:[
+    {k:'walkin',x:2,y:0,w:4,h:1,s:0},
+    {k:'prep',x:2,y:4,w:7,h:2,s:1},
+    {k:'fryer',x:12,y:1,w:5,h:2,s:1,id:'fryer',label:'the fry station'},
+    {k:'expo',x:2,y:8,w:8,h:1,s:1},
+    {k:'shelf',x:19,y:1,w:4,h:1,s:1},
+    {k:'printer',x:21,y:5,w:1,h:1,s:1,id:'printer',label:'the ticket printer'},
+    {k:'dishpit',x:19,y:8,w:4,h:2,s:1},
+    {k:'highchairs',x:11,y:9,w:1,h:1,s:1},
+    {k:'prep',x:12,y:6,w:4,h:1,s:1},
+    {k:'catfish',x:18,y:0,w:1,h:1,s:1,id:'flair_catfish',label:'a taxidermied catfish'}],
+  npcs:[
+    {id:'ramon',x:14,y:4,name:'RAMON',shirt:'#3d4a4f',hair:'#1a1210',skin:'#a06a42',dir:'d',apron:1}]
+},
+
+freezer:{
+  name:"THE WALK-IN",
+  floor:'ice',
+  tiles:[
+  '#########################',
+  '#########################',
+  '#########################',
+  '#########################',
+  '#########################',
+  '#######...........#######',
+  '#######...........#######',
+  '#######...........#######',
+  '#######...........#######',
+  '#######...........#######',
+  '#######...........#######',
+  '#######...........#######',
+  '#######...........#######',
+  '#######...........#######',
+  '#######...........#######',
+  '###########dd############'],
+  doors:[{x:11,y:15,to:'kitchen',tx:3,ty:1},{x:12,y:15,to:'kitchen',tx:4,ty:1}],
+  objs:[
+    {k:'shelf',x:7,y:5,w:4,h:1,s:1},{k:'shelf',x:14,y:5,w:4,h:1,s:1},
+    {k:'shelf',x:7,y:11,w:3,h:1,s:1},
+    {k:'crates',x:15,y:12,w:2,h:1,s:1},{k:'crates',x:8,y:8,w:2,h:1,s:1},
+    {k:'roll',x:8,y:5,w:1,h:1,s:0,z:193,id:'roll',label:'a roll of receipt paper'},
+    {k:'hatch',x:18,y:9,w:1,h:1,s:1,id:'hatch',label:'a delivery hatch'}],
+  npcs:[
+    {id:'marcus',x:14,y:9,name:'MARCUS',shirt:'#2c2c2c',hair:'#231712',skin:'#7a4c2e',dir:'l',apron:1,frost:1}]
+}
+};
+
+/* ============================================================
+   STATE
+   ============================================================ */
+const S = {
+  room:'dining', px:17*TS+16, py:3*TS+22, dir:'d', vx:0, vy:0, walk:0,
+  started:false, ended:false, t:0,
+  inv:{}, flags:{}, flair:{}, bored:0, apps:0, boredIdx:0, nextBored:22,
+  mini:null, blocked:0, visited:{}
+};
+let solidGrid = [];
+
+const ITEM_NAMES = {
+  mint:'a lint-flavored mint', knife:'a butter knife', quarter:'a sticky quarter',
+  pen:'a two-foot novelty pen', card:'a guest comment card', card2:'a completed comment card',
+  key:'a small brass key', apron:'a spare apron', roll:'a roll of receipt paper',
+  check:'THE CHECK'
+};
+const has = k => !!S.inv[k];
+function give(k){ if(S.inv[k]) return; S.inv[k]=true; toast('Got: '+ITEM_NAMES[k]); drawInv(); }
+function take(k){ delete S.inv[k]; drawInv(); }
+function flag(k,v){ S.flags[k]= v===undefined?true:v; refreshHud(); }
+const F = k => !!S.flags[k];
+
+/* ============================================================
+   INPUT
+   ============================================================ */
+const keys = {};
+const KEYMAP = {ArrowUp:'up',ArrowDown:'down',ArrowLeft:'left',ArrowRight:'right',
+  w:'up',s:'down',a:'left',d:'right',W:'up',S:'down',A:'left',D:'right'};
+addEventListener('keydown',e=>{
+  const k = KEYMAP[e.key];
+  if(k){ keys[k]=true; e.preventDefault(); }
+  if(e.key===' '||e.key==='e'||e.key==='E'||e.key==='Enter'){ e.preventDefault(); pressA(); }
+  if(/^[1-9]$/.test(e.key)) chooseByIndex(+e.key-1);
+});
+addEventListener('keyup',e=>{ const k=KEYMAP[e.key]; if(k){keys[k]=false; e.preventDefault();} });
+addEventListener('blur',()=>{for(const k in keys) keys[k]=false;});
+
+if(matchMedia('(pointer:coarse)').matches) document.body.classList.add('touch');
+document.querySelectorAll('.pk[data-k]').forEach(el=>{
+  const k = el.dataset.k;
+  const on = e=>{e.preventDefault(); keys[k]=true; el.classList.add('down');};
+  const off= e=>{e.preventDefault(); keys[k]=false; el.classList.remove('down');};
+  el.addEventListener('touchstart',on,{passive:false}); el.addEventListener('touchend',off,{passive:false});
+  el.addEventListener('touchcancel',off,{passive:false});
+  el.addEventListener('mousedown',on); el.addEventListener('mouseup',off); el.addEventListener('mouseleave',off);
+});
+$('#abtn').addEventListener('click',e=>{e.preventDefault();pressA();});
+cv.addEventListener('click',()=>{ if(dlg.open) pressA(); });
+
+/* ============================================================
+   COLLISION / MOVEMENT
+   ============================================================ */
+function buildSolids(){
+  const R = ROOMS[S.room];
+  solidGrid = [];
+  for(let y=0;y<ROWS;y++){
+    const row=[];
+    for(let x=0;x<COLS;x++){ const c=R.tiles[y][x]; row.push(c==='#'||c==='W'); }
+    solidGrid.push(row);
+  }
+  for(const o of R.objs){ if(!o.s) continue;
+    for(let y=o.y;y<o.y+o.h;y++) for(let x=o.x;x<o.x+o.w;x++)
+      if(solidGrid[y]!==undefined && solidGrid[y][x]!==undefined) solidGrid[y][x]=true;
+  }
+}
+function solidAt(px,py){
+  const x=(px/TS)|0, y=(py/TS)|0;
+  if(x<0||y<0||x>=COLS||y>=ROWS) return true;
+  return solidGrid[y][x];
+}
+const BW=11, BH=7; // half-width / half-height of the player's foot box
+function canStand(px,py){
+  return !solidAt(px-BW,py-BH) && !solidAt(px+BW,py-BH) &&
+         !solidAt(px-BW,py+BH) && !solidAt(px+BW,py+BH);
+}
+function doorAt(px,py){
+  const x=(px/TS)|0, y=(py/TS)|0;
+  return ROOMS[S.room].doors.find(d=>d.x===x&&d.y===y);
+}
+
+function enterRoom(to,tx,ty){
+  S.room=to; S.px=tx*TS+TS/2; S.py=ty*TS+TS/2+6;
+  buildSolids();
+  if(!S.visited[to]){ S.visited[to]=true; }
+  toast(ROOMS[to].name);
+  fade=1;
+}
+let fade=0;
+
+const LOCKS = {
+  employee(){
+    if(has('apron')&&F('aproned')) return null;
+    if(has('apron')) { flag('aproned'); toast('You put on the apron. You are, legally, staff.'); return null; }
+    return ['DOOR','A laminated sign at eye level: EMPLOYEES ONLY.\n\nYou are not employees. You are barely people.'];
+  },
+  freezer(){
+    if(F('pried')) return null;
+    if(has('pen')){
+      flag('pried');
+      say([['DYLAN','The walk-in handle is broken off. There is a hole where it used to be.'],
+           ['DYLAN','You slot the two-foot novelty pen into the hole and pull.'],
+           ['','*CHUNK*'],
+           ['DYLAN','The door swings open. Cold pours out like something arriving.']]);
+      return 'HANDLED';
+    }
+    return ['WALK-IN','The handle is missing. There is a square hole where it used to be, about the width of a pen that no reasonable person would own.'];
+  },
+  front(){
+    if(has('check')) return null;
+    if(F('paid')) return null;
+    return ['FRONT DOOR','You put your hand on the door. Your hand knows the door. The door knows your hand.\n\nAnd yet: you have not paid. You cannot leave a restaurant you have not paid. This is not a law. It is worse than a law.'];
+  }
+};
+
+function tryDoor(d){
+  if(d.lock){
+    const r = LOCKS[d.lock]();
+    if(r==='HANDLED'){ S.blocked=0.35; return; }
+    if(r){ say([[r[0],r[1]]]); S.blocked=0.35; return; }
+  }
+  if(d.to==='OUT'){ endGame('front'); return; }
+  enterRoom(d.to,d.tx,d.ty);
+}
+
+function moveUpdate(dt){
+  if(dlg.open||S.mini||!S.started||S.ended){ S.vx=S.vy=0; return; }
+  let mx=0,my=0;
+  if(keys.left)mx--; if(keys.right)mx++; if(keys.up)my--; if(keys.down)my++;
+  if(mx&&my){ mx*=0.7071; my*=0.7071; }
+  const SP = 132;
+  if(mx||my){
+    if(Math.abs(mx)>Math.abs(my)) S.dir = mx<0?'l':'r'; else S.dir = my<0?'u':'d';
+    S.walk += dt*10;
+  } else S.walk = 0;
+
+  if(S.blocked>0){ S.blocked-=dt; }
+  const nx = S.px+mx*SP*dt, ny = S.py+my*SP*dt;
+  if(canStand(nx,S.py)) S.px=nx;
+  if(canStand(S.px,ny)) S.py=ny;
+  S.px=clamp(S.px,BW,W-BW); S.py=clamp(S.py,BH,H-BH);
+
+  const d = doorAt(S.px,S.py);
+  if(d && S.blocked<=0) tryDoor(d);
+}
+
+/* ============================================================
+   INTERACTION TARGETING
+   ============================================================ */
+function interactables(){
+  const R=ROOMS[S.room], out=[];
+  for(const o of R.objs) if(o.id) out.push({t:'obj',id:o.id,label:o.label||'',cx:(o.x+o.w/2)*TS,cy:(o.y+o.h/2)*TS});
+  for(const n of R.npcs) out.push({t:'npc',id:n.id,label:n.name,cx:n.x*TS+TS/2,cy:n.y*TS+TS/2});
+  return out;
+}
+function findTarget(){
+  const fx = S.px + (S.dir==='l'?-24:S.dir==='r'?24:0);
+  const fy = S.py + (S.dir==='u'?-26:S.dir==='d'?18:-6);
+  let best=null,bd=1e9;
+  for(const c of interactables()){
+    const dx=c.cx-fx, dy=c.cy-fy, d=Math.hypot(dx,dy*1.15);
+    if(d<44 && d<bd){ bd=d; best=c; }
+  }
+  return best;
+}
+function pressA(){
+  if(!S.started) return;
+  if(S.mini){ clawPress(); return; }
+  if(dlg.open){ dlgAdvance(); return; }
+  const t = findTarget();
+  if(t) interact(t.id);
+}
+
+/* ============================================================
+   DIALOGUE
+   ============================================================ */
+const dlg = {open:false, q:[], i:0, txt:'', full:'', speed:1.6, done:false, choices:null, after:null};
+const elDlg=$('#dlg'), elWho=$('#who'), elTxt=$('#txt'), elCh=$('#choices'), elMore=$('#more');
+
+function say(lines, after){
+  dlg.q = lines.slice(); dlg.i=0; dlg.open=true; dlg.after=after||null;
+  elDlg.classList.add('on'); nextLine();
+}
+function nextLine(){
+  if(dlg.i>=dlg.q.length){ closeDlg(); return; }
+  const l = dlg.q[dlg.i];
+  if(l && l.choices){ showChoices(l); return; }
+  elCh.innerHTML=''; dlg.choices=null;
+  elWho.textContent = l[0]||'';
+  dlg.full = l[1]; dlg.txt=''; dlg.done=false;
+  elTxt.textContent='';
+  elMore.textContent='';
+}
+function showChoices(node){
+  dlg.choices = node.choices; dlg.done=true;
+  elWho.textContent = node.who||''; elTxt.textContent = node.text||'';
+  dlg.full = node.text||''; dlg.txt = dlg.full;
+  elMore.textContent='';
+  elCh.innerHTML='';
+  node.choices.forEach((c,idx)=>{
+    const b=document.createElement('button');
+    b.className='choice'; b.textContent = (idx+1)+'. '+c.label;
+    b.onclick=()=>{ closeDlg(); setTimeout(()=>c.go(),20); };
+    elCh.appendChild(b);
+  });
+}
+function chooseByIndex(i){
+  if(!dlg.open||!dlg.choices) return;
+  const b = elCh.children[i]; if(b) b.click();
+}
+function dlgAdvance(){
+  if(dlg.choices) return;
+  if(!dlg.done){ dlg.txt = dlg.full; dlg.done=true; elTxt.textContent=dlg.txt; elMore.textContent='▼ E'; return; }
+  dlg.i++; nextLine();
+}
+function closeDlg(){
+  dlg.open=false; dlg.choices=null; elDlg.classList.remove('on'); elCh.innerHTML='';
+  const a=dlg.after; dlg.after=null; if(a) a();
+  refreshHud();
+}
+function dlgUpdate(dt){
+  if(!dlg.open||dlg.done||dlg.choices) return;
+  dlg.txt = dlg.full.slice(0, Math.min(dlg.full.length, dlg.txt.length + Math.ceil(dt*62)));
+  elTxt.textContent = dlg.txt;
+  if(dlg.txt.length>=dlg.full.length){ dlg.done=true; elMore.textContent = (dlg.i>=dlg.q.length-1?'▼ E':'▼ E'); }
+}
+
+/* ============================================================
+   HUD
+   ============================================================ */
+function toast(msg){
+  const d=document.createElement('div'); d.className='toast'; d.textContent=msg;
+  $('#toasts').appendChild(d); setTimeout(()=>d.remove(),4300);
+}
+function drawInv(){
+  const el=$('#inv'); el.innerHTML='';
+  for(const k in S.inv){
+    const s=document.createElement('span'); s.className='item';
+    s.innerHTML='<b>◈</b> '+ITEM_NAMES[k]; el.appendChild(s);
+  }
+}
+function objective(){
+  if(!F('talkedMom')) return 'Talk to Mom.';
+  if(has('check')) return 'Give the check to Mom.';
+  if(F('paid')) return 'Walk out the front door. Just walk out.';
+  if(F('rollIn')) return 'Ask Karla for the check. Again.';
+  if(has('roll')) return 'Put the paper roll in the kitchen ticket printer.';
+  if(F('aproned')||has('apron')) return 'Get the receipt roll out of the walk-in freezer.';
+  if(has('key')) return 'Open the closet in the back hallway.';
+  if(has('card2')) return 'Give the comment card to Todd.';
+  if(has('pen')&&has('card')) return 'Fill out the comment card.';
+  if(F('toddQuest')) return has('pen') ? 'Get a comment card from the host stand.' : 'Find a pen that works.';
+  if(F('karlaPrinter')) return 'Get into the kitchen. You are not staff. Fix that.';
+  return 'Ask Karla the server for the check.';
+}
+function refreshHud(){
+  $('#obj').textContent = S.started ? objective() : '\u2014';
+  $('#boredbar').style.width = clamp(S.bored,0,100)+'%';
+  $('#flair').textContent = 'FLAIR '+Object.keys(S.flair).length+'/5';
+}
+$('#helpbtn').onclick = ()=>{
+  if(dlg.open||!S.started||S.ended) return;
+  say([['CONTROLS','MOVE — arrow keys or WASD (or the pad on touch)\nTALK / USE / EAT — E, SPACE, or the A button\nSKIP TEXT — press E again\nCHOOSE — click, or press the number key'],
+       ['THE POINT','You cannot leave until the check comes. The check will not come on its own. Nothing here comes on its own.']]);
+};
+
+/* ============================================================
+   RENDERING
+   ============================================================ */
+function drawFloor(kind){
+  for(let y=0;y<ROWS;y++)for(let x=0;x<COLS;x++){
+    const c = ROOMS[S.room].tiles[y][x];
+    if(c==='#'||c==='W') continue;
+    const X=x*TS, Y=y*TS, r=rnd(x*73+y*131);
+    if(kind==='carpet'){
+      fillRect(X,Y,TS,TS,'#57262f');
+      ctx.fillStyle='rgba(0,0,0,.16)';
+      ctx.beginPath();ctx.moveTo(X+16,Y+3);ctx.lineTo(X+29,Y+16);ctx.lineTo(X+16,Y+29);ctx.lineTo(X+3,Y+16);ctx.closePath();ctx.fill();
+      ctx.fillStyle='rgba(212,162,74,.10)';
+      ctx.fillRect(X+14,Y+14,4,4);
+      ctx.fillStyle='rgba(255,255,255,.035)';
+      ctx.fillRect(X+(r*28|0),Y+(rnd(x*11+y*7)*28|0),2,2);
+    } else if(kind==='tile'){
+      fillRect(X,Y,TS,TS, ((x+y)%2) ? '#c2ad88' : '#b39d78');
+      ctx.fillStyle='rgba(0,0,0,.12)'; ctx.fillRect(X,Y,TS,1); ctx.fillRect(X,Y,1,TS);
+      ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fillRect(X+2,Y+2,10,2);
+    } else if(kind==='wood'){
+      fillRect(X,Y,TS,TS, r>0.5?'#59401f':'#523a1c');
+      ctx.fillStyle='rgba(0,0,0,.22)'; ctx.fillRect(X,Y+((y%2)?10:22),TS,1);
+      ctx.fillStyle='rgba(255,220,160,.05)'; ctx.fillRect(X,Y+((y%2)?11:23),TS,1);
+    } else if(kind==='kfloor'){
+      fillRect(X,Y,TS,TS,'#45463f');
+      ctx.fillStyle='rgba(0,0,0,.25)'; ctx.fillRect(X,Y,TS,2); ctx.fillRect(X,Y,2,TS);
+      ctx.fillStyle='rgba(255,255,255,.045)'; ctx.fillRect(X+3,Y+3,TS-6,3);
+    } else if(kind==='ice'){
+      fillRect(X,Y,TS,TS,'#7f97a4');
+      ctx.fillStyle='rgba(255,255,255,'+(0.05+r*0.09).toFixed(3)+')';
+      ctx.fillRect(X+2,Y+2,TS-4,TS-4);
+      ctx.fillStyle='rgba(255,255,255,.28)';
+      ctx.fillRect(X+(r*26|0)+2,Y+(rnd(y*5+x)*26|0)+2,2,2);
+    }
+  }
+}
+function drawCar(x,y,col){
+  ctx.fillStyle='rgba(0,0,0,.45)'; rr(x-20,y-32,40,68,10); ctx.fill();
+  ctx.fillStyle=col; rr(x-19,y-34,38,66,10); ctx.fill();
+  ctx.fillStyle='rgba(255,255,255,.07)'; rr(x-16,y-31,32,20,7); ctx.fill();
+  ctx.fillStyle='#10151c'; rr(x-15,y-24,30,16,5); ctx.fill(); rr(x-15,y+8,30,14,5); ctx.fill();
+  ctx.fillStyle='rgba(255,255,255,.10)'; ctx.fillRect(x-19,y-6,38,3);
+}
+function drawExterior(ext){
+  const bot = ext*TS;
+  const g=ctx.createLinearGradient(0,0,0,bot);
+  g.addColorStop(0,'#070a10'); g.addColorStop(.55,'#12161f'); g.addColorStop(1,'#1c212a');
+  ctx.fillStyle=g; ctx.fillRect(0,0,W,bot);
+  ctx.fillStyle='#060810';
+  ctx.beginPath(); ctx.moveTo(0,52);
+  for(let x=0;x<=W;x+=36) ctx.lineTo(x, 30+rnd(x*3)*24);
+  ctx.lineTo(W,0); ctx.lineTo(0,0); ctx.closePath(); ctx.fill();
+  ctx.fillStyle='#0b0e15'; ctx.fillRect(596,22,166,34);
+  ctx.fillStyle='rgba(255,214,140,.28)';
+  for(let i=0;i<11;i++) if(rnd(i*23)>0.42) ctx.fillRect(606+i*14,30,7,9);
+  ctx.fillStyle='rgba(232,226,212,.13)';
+  for(let i=0;i<10;i++) ctx.fillRect(24+i*84, bot-104, 3, 84);
+  ctx.fillRect(0,bot-108,W,3);
+  drawCar(120,bot-56,'#4a2626'); drawCar(268,bot-52,'#22304a'); drawCar(700,bot-58,'#2c3a2c');
+  // light pole with a cone of parking-lot light
+  ctx.fillStyle='#1a1f26'; ctx.fillRect(500,26,6,bot-136);
+  ctx.fillStyle='#2a3038'; ctx.fillRect(492,20,26,8);
+  ctx.save(); ctx.globalCompositeOperation='lighter';
+  const lg=ctx.createRadialGradient(505,28,6,505,28,150);
+  lg.addColorStop(0,'rgba(255,224,168,.22)'); lg.addColorStop(1,'rgba(255,224,168,0)');
+  ctx.fillStyle=lg; ctx.fillRect(355,-120,300,300);
+  ctx.restore();
+  // the sign, out by the road, glowing like a small red planet
+  ctx.fillStyle='#1a1f26'; ctx.fillRect(94,18,7,60);
+  ctx.fillStyle='#7d1f16'; rr(66,6,64,26,5); ctx.fill();
+  ctx.fillStyle='#c0392b'; rr(69,9,58,20,4); ctx.fill();
+  ctx.save(); ctx.globalCompositeOperation='lighter';
+  const sg=ctx.createRadialGradient(98,19,4,98,19,74);
+  sg.addColorStop(0,'rgba(224,87,74,.30)'); sg.addColorStop(1,'rgba(224,87,74,0)');
+  ctx.fillStyle=sg; ctx.fillRect(24,-55,150,150); ctx.restore();
+  // curb, then the awning over the entrance
+  ctx.fillStyle='#2b3038'; ctx.fillRect(0,bot-20,W,10);
+  ctx.fillStyle='rgba(255,255,255,.08)'; ctx.fillRect(0,bot-20,W,2);
+  ctx.fillStyle='#7d1f16'; ctx.fillRect(8*TS,bot-14,8*TS,14);
+  ctx.fillStyle='#a02c20';
+  for(let i=0;i<8;i++){ ctx.beginPath(); ctx.arc(8*TS+16+i*32, bot-14, 16, 0, Math.PI); ctx.fill(); }
+  ctx.fillStyle='rgba(0,0,0,.3)'; ctx.fillRect(8*TS,bot-4,8*TS,4);
+}
+function structural(T,x,y){
+  for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){
+    const r=T[y+dy]; if(!r) continue; const c=r[x+dx];
+    if(c && c!=='#' && c!=='W') return true;
+  }
+  return false;
+}
+function drawWalls(){
+  const R0 = ROOMS[S.room], T = R0.tiles, ext = R0.ext||0;
+  if(ext) drawExterior(ext);
+  for(let y=0;y<ROWS;y++)for(let x=0;x<COLS;x++){
+    if(ext && y<ext) continue;
+    const c=T[y][x]; if(c!=='#'&&c!=='W') continue;
+    const X=x*TS,Y=y*TS;
+    if(!structural(T,x,y)){
+      fillRect(X,Y,TS,TS,'#0a0806');
+      ctx.fillStyle='rgba(255,240,220,.012)';
+      ctx.fillRect(X+(rnd(x*7+y*3)*30|0),Y+(rnd(x*5+y*11)*30|0),2,2);
+      continue;
+    }
+    if(c==='W'){
+      fillRect(X,Y,TS,TS,'#0c1220');
+      const gg=ctx.createLinearGradient(X,Y,X,Y+TS);
+      gg.addColorStop(0,'rgba(122,168,208,.22)'); gg.addColorStop(1,'rgba(58,88,124,.10)');
+      ctx.fillStyle=gg; ctx.fillRect(X+1,Y+3,TS-2,TS-11);
+      ctx.save(); ctx.beginPath(); ctx.rect(X+1,Y+3,TS-2,TS-11); ctx.clip();
+      ctx.fillStyle='rgba(255,255,255,.06)';
+      ctx.beginPath(); ctx.moveTo(X-12,Y+28); ctx.lineTo(X+12,Y-2);
+      ctx.lineTo(X+21,Y-2); ctx.lineTo(X-3,Y+28); ctx.closePath(); ctx.fill();
+      ctx.restore();
+      ctx.fillStyle='#241a12'; ctx.fillRect(X,Y+1,2,TS-9);
+      ctx.fillStyle='#3a2a1e'; ctx.fillRect(X,Y+TS-8,TS,8);
+      ctx.fillStyle='rgba(216,162,74,.20)'; ctx.fillRect(X,Y+TS-9,TS,1);
+    } else {
+      fillRect(X,Y,TS,TS,'#3a2a1e');
+      for(let i=0;i<4;i++){ ctx.fillStyle='rgba(0,0,0,.20)'; ctx.fillRect(X+i*8+7,Y,1,TS); }
+      ctx.fillStyle='rgba(255,210,150,.05)'; ctx.fillRect(X,Y,TS,3);
+    }
+    const below = T[y+1] && T[y+1][x];
+    if(below && below!=='#' && below!=='W'){
+      ctx.fillStyle='#241a12'; ctx.fillRect(X,Y+TS-7,TS,7);
+      ctx.fillStyle='rgba(216,162,74,.22)'; ctx.fillRect(X,Y+TS-8,TS,1);
+      ctx.fillStyle='rgba(0,0,0,.35)'; ctx.fillRect(X,Y+TS,TS,6);
+    }
+  }
+}
+
+/* --- object art --- */
+function wood(x,y,w,h,c1,c2){
+  ctx.fillStyle=c1; rr(x,y,w,h,4); ctx.fill();
+  ctx.fillStyle=c2; rr(x+2,y+2,w-4,h-5,3); ctx.fill();
+}
+function drawObj(o){
+  const X=o.x*TS, Y=o.y*TS, w=o.w*TS, h=o.h*TS;
+  switch(o.k){
+  case 'booth':{
+    // two benches with high backs and a table between
+    for(const side of [0,2]){
+      const bx=X+side*TS;
+      ctx.fillStyle='#20351f'; rr(bx+2,Y+2,TS-4,h-4,5); ctx.fill();
+      ctx.fillStyle='#2f5330'; rr(bx+4,Y+5,TS-8,h-10,4); ctx.fill();
+      ctx.fillStyle='rgba(255,255,255,.06)'; ctx.fillRect(bx+6,Y+8,TS-12,2);
+      ctx.fillStyle='rgba(0,0,0,.25)'; ctx.fillRect(bx+4,Y+h/2-1,TS-8,2);
+    }
+    wood(X+TS+1,Y+3,TS-2,h-6,'#3d2a18','#6b4526');
+    ctx.fillStyle='rgba(255,255,255,.07)'; ctx.fillRect(X+TS+5,Y+7,TS-10,3);
+    // condiment caddy
+    ctx.fillStyle='#1e1a16'; ctx.fillRect(X+TS+10,Y+h-20,12,10);
+    ctx.fillStyle='#c0392b'; ctx.fillRect(X+TS+12,Y+h-24,3,6);
+    ctx.fillStyle='#d8b84a'; ctx.fillRect(X+TS+17,Y+h-24,3,6);
+    break;}
+  case 'table4':{
+    ctx.fillStyle='#241a12';
+    for(const [cx,cy] of [[X+w/2,Y+4],[X+w/2,Y+h-4],[X+5,Y+h/2],[X+w-5,Y+h/2]]){
+      rr(cx-8,cy-6,16,12,3); ctx.fill();
+      ctx.fillStyle='#3b2b1c'; rr(cx-6,cy-4,12,8,2); ctx.fill(); ctx.fillStyle='#241a12';
+    }
+    ctx.fillStyle='rgba(0,0,0,.3)'; ctx.beginPath(); ctx.ellipse(X+w/2,Y+h/2+3,20,15,0,0,7); ctx.fill();
+    ctx.fillStyle='#6b4526'; ctx.beginPath(); ctx.ellipse(X+w/2,Y+h/2,20,15,0,0,7); ctx.fill();
+    ctx.fillStyle='#7d5430'; ctx.beginPath(); ctx.ellipse(X+w/2,Y+h/2-2,17,12,0,0,7); ctx.fill();
+    ctx.fillStyle='#1e1a16'; ctx.fillRect(X+w/2-6,Y+h/2-6,12,9);
+    ctx.fillStyle='#c0392b'; ctx.fillRect(X+w/2-4,Y+h/2-9,3,5);
+    break;}
+  case 'plant':{
+    ctx.fillStyle='#2a1c12'; rr(X+8,Y+16,16,14,3); ctx.fill();
+    ctx.fillStyle='#3a2718'; ctx.fillRect(X+7,Y+14,18,4);
+    ctx.fillStyle='#2f6b3a';
+    for(let i=0;i<7;i++){ const a=i/7*6.283+0.4;
+      ctx.beginPath(); ctx.ellipse(X+16+Math.cos(a)*8,Y+12+Math.sin(a)*7,6,4,a,0,7); ctx.fill(); }
+    ctx.fillStyle='#3f8a4a'; ctx.beginPath(); ctx.ellipse(X+16,Y+9,7,5,0,0,7); ctx.fill();
+    break;}
+  case 'stain':{
+    ctx.fillStyle='rgba(60,30,10,.45)';
+    ctx.beginPath(); ctx.ellipse(X+16,Y+18,11,7,0.4,0,7); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(X+9,Y+22,4,3,0,0,7); ctx.fill();
+    ctx.fillStyle='rgba(255,255,255,.07)'; ctx.beginPath(); ctx.ellipse(X+13,Y+16,4,2,0.4,0,7); ctx.fill();
+    break;}
+  case 'jukebox':{
+    ctx.fillStyle='#2a1a14'; rr(X+3,Y+2,26,28,6); ctx.fill();
+    const g=ctx.createLinearGradient(X,Y,X,Y+30); g.addColorStop(0,'#e04a4a'); g.addColorStop(1,'#7a1f1f');
+    ctx.fillStyle=g; rr(X+5,Y+4,22,12,5); ctx.fill();
+    ctx.fillStyle='#f4d78a'; ctx.fillRect(X+8,Y+18,16,8);
+    ctx.fillStyle='#1a1210'; ctx.fillRect(X+9,Y+19,14,3);
+    ctx.fillStyle='rgba(255,220,140,'+(0.35+0.25*Math.sin(S.t*3)).toFixed(2)+')';
+    rr(X+5,Y+4,22,12,5); ctx.fill();
+    break;}
+  case 'platter':{
+    ctx.fillStyle='rgba(0,0,0,.25)'; ctx.beginPath(); ctx.ellipse(X+16,Y+20,13,8,0,0,7); ctx.fill();
+    ctx.fillStyle='#e8e2d4'; ctx.beginPath(); ctx.ellipse(X+16,Y+17,13,8,0,0,7); ctx.fill();
+    ctx.fillStyle='#c9a34e';
+    ctx.fillRect(X+8,Y+13,10,4); ctx.fillRect(X+10,Y+16,10,4);
+    ctx.fillStyle='#b5762f'; ctx.beginPath(); ctx.arc(X+21,Y+15,4,0,7); ctx.fill();
+    ctx.fillStyle='#7fa54a'; ctx.beginPath(); ctx.arc(X+12,Y+19,3,0,7); ctx.fill();
+    ctx.fillStyle='rgba(255,255,255,.25)'; ctx.fillRect(X+9,Y+12,6,1);
+    // steam
+    ctx.strokeStyle='rgba(255,255,255,.15)'; ctx.lineWidth=2;
+    for(let i=0;i<2;i++){ ctx.beginPath();
+      const ox=X+12+i*8, t=S.t*1.6+i;
+      ctx.moveTo(ox,Y+10); ctx.quadraticCurveTo(ox+Math.sin(t)*4,Y+4,ox,Y-2); ctx.stroke(); }
+    break;}
+  case 'trumpet':{
+    ctx.fillStyle='#2a1a12'; rr(X+3,Y+6,26,20,3); ctx.fill();
+    ctx.fillStyle='#d8a24a'; ctx.fillRect(X+8,Y+14,14,4);
+    ctx.beginPath(); ctx.moveTo(X+22,Y+10); ctx.lineTo(X+27,Y+8); ctx.lineTo(X+27,Y+24); ctx.lineTo(X+22,Y+22); ctx.closePath(); ctx.fill();
+    ctx.fillStyle='#b5822f'; ctx.fillRect(X+11,Y+11,3,4); ctx.fillRect(X+16,Y+11,3,4);
+    break;}
+  case 'exitsign':{
+    ctx.fillStyle='#0e2a16'; rr(X+4,Y+9,24,13,3); ctx.fill();
+    ctx.fillStyle='rgba(80,230,120,'+(0.65+0.2*Math.sin(S.t*2)).toFixed(2)+')';
+    ctx.font='bold 9px '+MONO; ctx.textAlign='center'; ctx.fillText('EXIT',X+16,Y+19);
+    break;}
+  case 'hoststand':{
+    wood(X+2,Y+4,w-4,h-10,'#2a1c12','#5a3d22');
+    ctx.fillStyle='#3d2a18'; ctx.fillRect(X+4,Y+h-8,w-8,6);
+    ctx.fillStyle='#e8e2d4'; ctx.fillRect(X+10,Y+10,22,14);
+    ctx.fillStyle='#9a8f7a'; for(let i=0;i<4;i++) ctx.fillRect(X+13,Y+13+i*3,16,1);
+    ctx.fillStyle='#c0392b'; ctx.fillRect(X+w-14,Y+8,4,10);
+    break;}
+  case 'mints':{
+    ctx.fillStyle='#2a1c12'; rr(X+6,Y+14,20,12,3); ctx.fill();
+    ctx.fillStyle='#d8d2c4'; ctx.beginPath(); ctx.ellipse(X+16,Y+15,10,6,0,0,7); ctx.fill();
+    ctx.fillStyle='#f2ece0';
+    for(let i=0;i<7;i++){ const a=rnd(i*17)*6.28, r2=rnd(i*31)*7;
+      ctx.beginPath(); ctx.arc(X+16+Math.cos(a)*r2,Y+15+Math.sin(a)*r2*0.6,2.4,0,7); ctx.fill(); }
+    ctx.fillStyle='#5f9b57'; ctx.beginPath(); ctx.arc(X+13,Y+14,2.4,0,7); ctx.fill();
+    break;}
+  case 'claw':{
+    ctx.fillStyle='#1c1410'; rr(X+2,Y+2,w-4,h-4,6); ctx.fill();
+    const g=ctx.createLinearGradient(X,Y,X,Y+h); g.addColorStop(0,'rgba(120,190,220,.30)'); g.addColorStop(1,'rgba(60,90,120,.16)');
+    ctx.fillStyle=g; rr(X+6,Y+8,w-12,h-22,4); ctx.fill();
+    const cols=['#c0392b','#d8a24a','#5f9b57','#7a4f8c','#3f77b5'];
+    for(let i=0;i<9;i++){ ctx.fillStyle=cols[i%5];
+      ctx.beginPath(); ctx.arc(X+12+ (i%5)*10, Y+h-28+((i/5|0)*7), 4,0,7); ctx.fill(); }
+    ctx.fillStyle='#d8a24a'; ctx.fillRect(X+10+Math.sin(S.t*1.4)*14, Y+10, 3, 8);
+    ctx.fillStyle='#8a7a4a'; ctx.fillRect(X+8+Math.sin(S.t*1.4)*14, Y+17, 7, 4);
+    ctx.fillStyle='#c0392b'; rr(X+6,Y+h-12,w-12,9,3); ctx.fill();
+    ctx.fillStyle='#f2e9d8'; ctx.font='bold 8px '+MONO; ctx.textAlign='center';
+    ctx.fillText('THE CLAW',X+w/2,Y+h-5);
+    break;}
+  case 'bench':{
+    wood(X+4,Y+2,TS-8,h-4,'#2a1c12','#5a3d22');
+    ctx.fillStyle='rgba(0,0,0,.2)'; for(let i=1;i<o.h;i++) ctx.fillRect(X+6,Y+i*TS,TS-12,2);
+    break;}
+  case 'bike':{
+    ctx.fillStyle='#2a1c12'; rr(X+2,Y+2,w-4,h-4,4); ctx.fill();
+    ctx.strokeStyle='#8a6a3a'; ctx.lineWidth=3;
+    ctx.beginPath(); ctx.arc(X+24,Y+30,16,0,7); ctx.stroke();
+    ctx.lineWidth=2; ctx.beginPath(); ctx.arc(X+44,Y+42,7,0,7); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(X+24,Y+14); ctx.lineTo(X+44,Y+42); ctx.stroke();
+    ctx.fillStyle='#5a3d22'; ctx.fillRect(X+18,Y+10,12,4);
+    break;}
+  case 'corkboard':{
+    ctx.fillStyle='#7a5a30'; rr(X+2,Y+4,w-4,h+14,3); ctx.fill();
+    ctx.fillStyle='#8f6b3a'; rr(X+5,Y+7,w-10,h+8,2); ctx.fill();
+    const cs=['#f2ece0','#f4d78a','#f2ece0','#cfe0f2'];
+    for(let i=0;i<6;i++){ ctx.fillStyle=cs[i%4];
+      ctx.save(); ctx.translate(X+12+(i%3)*17, Y+13+((i/3|0)*13)); ctx.rotate((rnd(i*13)-0.5)*0.4);
+      ctx.fillRect(-6,-5,12,10); ctx.restore(); }
+    break;}
+  case 'frontdoor':{
+    ctx.fillStyle='#2a1c12'; ctx.fillRect(X-4,Y,w+8,TS);
+    const gg=ctx.createLinearGradient(0,Y,0,Y+TS);
+    gg.addColorStop(0,'rgba(150,200,235,.20)'); gg.addColorStop(1,'rgba(90,130,170,.10)');
+    ctx.fillStyle=gg; ctx.fillRect(X+2,Y+4,w-4,TS-6);
+    ctx.fillStyle='#3a2a1e'; ctx.fillRect(X+w/2-2,Y+2,4,TS-4);
+    ctx.fillStyle='#d8a24a'; ctx.fillRect(X+w/2-9,Y+16,4,9); ctx.fillRect(X+w/2+5,Y+16,4,9);
+    ctx.fillStyle='rgba(216,162,74,.5)'; ctx.font='7px '+MONO; ctx.textAlign='center';
+    ctx.fillText('PULL',X+w/2,Y+11);
+    break;}
+  case 'mat':{ ctx.fillStyle='rgba(20,15,10,.55)'; rr(X+3,Y+8,w-6,h+8,3); ctx.fill();
+    ctx.fillStyle='rgba(216,162,74,.25)'; ctx.font='bold 8px '+MONO; ctx.textAlign='center';
+    ctx.fillText('WELCOME',X+w/2,Y+24); break;}
+  case 'backbar':{
+    ctx.fillStyle='#241a12'; ctx.fillRect(X,Y+4,w,h-2);
+    ctx.fillStyle='#0f0b08'; ctx.fillRect(X+2,Y+6,w-4,16);
+    const bc=['#8a5a2a','#c0392b','#5f9b57','#d8a24a','#7a4f8c','#3f77b5','#cfa96a'];
+    for(let i=0;i<w/9;i++){ ctx.fillStyle=bc[i%7];
+      const bh=8+((rnd(i*29)*8)|0); ctx.fillRect(X+5+i*9,Y+20-bh,4,bh);
+      ctx.fillStyle='rgba(255,255,255,.22)'; ctx.fillRect(X+5+i*9,Y+20-bh,1,bh); }
+    ctx.fillStyle='rgba(216,162,74,.15)'; ctx.fillRect(X,Y+22,w,3);
+    break;}
+  case 'barcounter':{
+    ctx.fillStyle='rgba(0,0,0,.3)'; ctx.fillRect(X,Y+6,w,h-2);
+    wood(X,Y,w,h-6,'#2a1c12','#6b4526');
+    ctx.fillStyle='rgba(255,225,170,.10)'; ctx.fillRect(X+3,Y+4,w-6,4);
+    ctx.fillStyle='#4a3320'; ctx.fillRect(X,Y+h-10,w,5);
+    for(let i=0;i<w/28;i++){ // napkin caddies & glasses
+      ctx.fillStyle='#c9c2b2'; ctx.fillRect(X+12+i*28,Y+12,5,7); }
+    break;}
+  case 'stool':{
+    ctx.fillStyle='rgba(0,0,0,.25)'; ctx.beginPath(); ctx.ellipse(X+16,Y+22,9,4,0,0,7); ctx.fill();
+    ctx.fillStyle='#3a2a1e'; ctx.fillRect(X+14,Y+10,4,12);
+    ctx.fillStyle='#5b2733'; ctx.beginPath(); ctx.ellipse(X+16,Y+10,10,6,0,0,7); ctx.fill();
+    ctx.fillStyle='#6d3040'; ctx.beginPath(); ctx.ellipse(X+16,Y+9,8,4.5,0,0,7); ctx.fill();
+    break;}
+  case 'tv':{
+    ctx.fillStyle='#14100c'; rr(X+2,Y+6,w-4,h+8,3); ctx.fill();
+    const t=S.t;
+    ctx.fillStyle='#183a2a'; ctx.fillRect(X+5,Y+9,w-10,h+2);
+    ctx.fillStyle='#2f6b3a'; ctx.fillRect(X+5,Y+9,w-10,4);
+    for(let i=0;i<5;i++){ ctx.fillStyle='rgba(255,255,255,'+(0.25+0.2*Math.sin(t*3+i)).toFixed(2)+')';
+      ctx.fillRect(X+8+((i*11+t*22)%(w-16)),Y+14,2,2); }
+    ctx.fillStyle='rgba(216,162,74,.9)'; ctx.fillRect(X+6,Y+h+3,w-12,3);
+    break;}
+  case 'ski':{
+    ctx.save(); ctx.translate(X+16,Y+16); ctx.rotate(-0.5);
+    ctx.fillStyle='#7a5a30'; rr(-4,-16,8,32,4); ctx.fill();
+    ctx.fillStyle='#c0392b'; ctx.fillRect(-3,-4,6,3);
+    ctx.fillStyle='#3a2a1e'; ctx.fillRect(-4,2,8,4);
+    ctx.restore(); break;}
+  case 'hightable':{
+    ctx.fillStyle='rgba(0,0,0,.28)'; ctx.beginPath(); ctx.ellipse(X+w/2,Y+h/2+6,17,11,0,0,7); ctx.fill();
+    ctx.fillStyle='#241a12'; ctx.fillRect(X+w/2-4,Y+h/2,8,14);
+    ctx.fillStyle='#6b4526'; ctx.beginPath(); ctx.ellipse(X+w/2,Y+h/2,17,12,0,0,7); ctx.fill();
+    ctx.fillStyle='#7d5430'; ctx.beginPath(); ctx.ellipse(X+w/2,Y+h/2-2,14,9,0,0,7); ctx.fill();
+    break;}
+  case 'payphone':{
+    ctx.fillStyle='#1c2420'; rr(X+7,Y+4,18,24,3); ctx.fill();
+    ctx.fillStyle='#2e3a34'; ctx.fillRect(X+9,Y+7,14,10);
+    ctx.fillStyle='#0f1512'; ctx.fillRect(X+6,Y+9,6,12);
+    ctx.fillStyle='#8a8f88'; for(let i=0;i<3;i++)for(let j=0;j<3;j++) ctx.fillRect(X+11+i*4,Y+19+j*3,2,2);
+    break;}
+  case 'paddle':{
+    ctx.save(); ctx.translate(X+16,Y+16); ctx.rotate(0.6);
+    ctx.fillStyle='#8a6a3a'; rr(-3,-15,6,20,3); ctx.fill();
+    ctx.fillStyle='#a07d45'; ctx.beginPath(); ctx.ellipse(0,10,6,8,0,0,7); ctx.fill();
+    ctx.restore(); break;}
+  case 'rdoor': case 'closet':{
+    ctx.fillStyle='#241a12'; ctx.fillRect(X+2,Y+2,TS-4,TS-2);
+    ctx.fillStyle= o.k==='closet' ? '#4a3520' : '#5a3d22'; ctx.fillRect(X+4,Y+4,TS-8,TS-6);
+    ctx.fillStyle='rgba(0,0,0,.3)'; ctx.fillRect(X+7,Y+7,TS-14,12);
+    ctx.fillStyle='#d8a24a'; ctx.beginPath(); ctx.arc(X+TS-9,Y+18,2.2,0,7); ctx.fill();
+    if(o.k==='rdoor'){ ctx.fillStyle='#e8e2d4'; ctx.fillRect(X+13,Y+9,6,7); }
+    else { ctx.fillStyle='#c9c2b2'; ctx.font='6px '+MONO; ctx.textAlign='center'; ctx.fillText('STAFF',X+16,Y+13); }
+    break;}
+  case 'icemachine':{
+    ctx.fillStyle='rgba(0,0,0,.3)'; ctx.fillRect(X,Y+10,w,h-6);
+    ctx.fillStyle='#5e646a'; rr(X+2,Y+2,w-4,h-6,4); ctx.fill();
+    ctx.fillStyle='#7a838a'; rr(X+5,Y+6,w-10,h-18,3); ctx.fill();
+    ctx.fillStyle='#2a3036'; ctx.fillRect(X+9,Y+h-22,w-18,12);
+    ctx.fillStyle='rgba(190,225,245,.5)'; ctx.fillRect(X+13,Y+h-19,w-26,5);
+    ctx.fillStyle='#d8a24a'; ctx.beginPath(); ctx.arc(X+w-11,Y+11,2.5,0,7); ctx.fill();
+    break;}
+  case 'highchairs':{
+    ctx.fillStyle='rgba(0,0,0,.25)'; ctx.beginPath(); ctx.ellipse(X+16,Y+27,10,4,0,0,7); ctx.fill();
+    for(let i=0;i<3;i++){ ctx.fillStyle=i%2?'#6b4526':'#5a3d22';
+      rr(X+7,Y+18-i*6,18,9,3); ctx.fill();
+      ctx.fillStyle='rgba(255,255,255,.06)'; ctx.fillRect(X+9,Y+20-i*6,14,2); }
+    break;}
+  case 'schedule':{
+    ctx.fillStyle='#e8e2d4'; rr(X+5,Y+6,22,20,2); ctx.fill();
+    ctx.fillStyle='#c0392b'; ctx.fillRect(X+7,Y+8,18,3);
+    ctx.fillStyle='#8a8378'; for(let i=0;i<4;i++) ctx.fillRect(X+8,Y+13+i*3,16,1);
+    ctx.fillStyle='#d8a24a'; ctx.fillRect(X+18,Y+19,6,4);
+    break;}
+  case 'bustub':{
+    ctx.fillStyle='#4a4a52'; rr(X+5,Y+10,22,16,3); ctx.fill();
+    ctx.fillStyle='#5e5e68'; rr(X+7,Y+12,18,10,2); ctx.fill();
+    ctx.fillStyle='#8f8f66'; ctx.fillRect(X+10,Y+9,10,4);
+    break;}
+  case 'prep': case 'expo': case 'shelf': case 'dishpit':{
+    ctx.fillStyle='rgba(0,0,0,.3)'; ctx.fillRect(X,Y+6,w,h);
+    ctx.fillStyle='#7e8489'; rr(X,Y,w,h-2,3); ctx.fill();
+    ctx.fillStyle='#9aa1a6'; rr(X+2,Y+2,w-4,h-8,2); ctx.fill();
+    ctx.fillStyle='rgba(255,255,255,.16)'; ctx.fillRect(X+3,Y+3,w-6,2);
+    for(let i=0;i<w/26;i++){ ctx.fillStyle='rgba(0,0,0,.13)'; ctx.fillRect(X+13+i*26,Y+2,1,h-8); }
+    if(o.k==='expo'){ ctx.fillStyle='#d8a24a'; for(let i=0;i<w/40;i++) ctx.fillRect(X+10+i*40,Y+4,14,8);
+      ctx.fillStyle='#c0392b'; ctx.fillRect(X+w-16,Y+3,8,10); }
+    if(o.k==='dishpit'){ ctx.fillStyle='#5e6468'; rr(X+6,Y+8,w-12,h-20,3); ctx.fill();
+      ctx.fillStyle='#8a9098'; ctx.fillRect(X+w/2-2,Y+2,4,10); }
+    if(o.k==='shelf'){ const cc=['#c0392b','#d8a24a','#5f9b57','#8a5a2a'];
+      for(let i=0;i<w/16;i++){ ctx.fillStyle=cc[i%4]; ctx.fillRect(X+4+i*16,Y+1,10,10); } }
+    break;}
+  case 'fryer':{
+    ctx.fillStyle='rgba(0,0,0,.3)'; ctx.fillRect(X,Y+8,w,h-4);
+    ctx.fillStyle='#6e747a'; rr(X,Y,w,h-4,3); ctx.fill();
+    for(let v=0;v<3;v++){
+      const vx = X+6+v*Math.floor((w-12)/3), vw = Math.floor((w-12)/3)-6;
+      ctx.fillStyle='#33383d'; rr(vx,Y+6,vw,h-18,3); ctx.fill();
+      ctx.fillStyle='#c9a34e'; rr(vx+3,Y+9,vw-6,h-24,2); ctx.fill();
+      for(let i=0;i<4;i++){ ctx.fillStyle='rgba(255,255,255,'+(0.10+0.25*Math.abs(Math.sin(S.t*4+i+v))).toFixed(2)+')';
+        ctx.beginPath(); ctx.arc(vx+7+i*7, Y+15+Math.sin(S.t*5+i+v)*3, 1.7,0,7); ctx.fill(); }
+      ctx.fillStyle='#6e747a'; ctx.fillRect(vx+vw-4,Y+h-16,12,3);
+      ctx.fillStyle='#1f2327'; ctx.fillRect(vx+3,Y+h-14,vw-6,4);
+    }
+    ctx.fillStyle='#c0392b'; ctx.fillRect(X+w-12,Y+2,6,4);
+    ctx.fillStyle='#d8a24a'; ctx.font='7px '+MONO; ctx.textAlign='center';
+    ctx.fillText('0:'+String(30-Math.floor((S.t*1.4)%30)).padStart(2,'0'), X+w-22, Y+8);
+    break;}
+  case 'printer':{
+    ctx.fillStyle='#2c3238'; rr(X+5,Y+8,22,18,3); ctx.fill();
+    ctx.fillStyle='#454c54'; rr(X+7,Y+10,18,8,2); ctx.fill();
+    ctx.fillStyle= F('rollIn') ? '#e8e2d4' : '#1a1a1a'; ctx.fillRect(X+9,Y+18,14,4);
+    ctx.fillStyle= F('rollIn') ? '#5f9b57' : '#c0392b';
+    ctx.beginPath(); ctx.arc(X+23,Y+12,2,0,7); ctx.fill();
+    break;}
+  case 'catfish':{
+    ctx.fillStyle='#2a1a12'; rr(X+2,Y+8,28,18,3); ctx.fill();
+    ctx.fillStyle='#6b7a5a'; ctx.beginPath(); ctx.ellipse(X+15,Y+17,11,6,0,0,7); ctx.fill();
+    ctx.beginPath(); ctx.moveTo(X+26,Y+17); ctx.lineTo(X+30,Y+12); ctx.lineTo(X+30,Y+22); ctx.closePath(); ctx.fill();
+    ctx.fillStyle='#14100c'; ctx.fillRect(X+5,Y+14,9,4);
+    ctx.strokeStyle='#4a5540'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(X+6,Y+19); ctx.lineTo(X+2,Y+23); ctx.stroke();
+    break;}
+  case 'walkin':{
+    ctx.fillStyle='#5e6a70'; ctx.fillRect(X,Y+4,w,TS-4);
+    ctx.fillStyle='#78868e'; ctx.fillRect(X+3,Y+7,w-6,TS-12);
+    ctx.fillStyle='#3a4448'; ctx.fillRect(X+TS-2,Y+7,4,TS-12);
+    ctx.fillStyle='#c9c2b2'; ctx.font='7px '+MONO; ctx.textAlign='center';
+    ctx.fillText('WALK-IN',X+w/2,Y+20);
+    if(!F('pried')){ ctx.fillStyle='#1a1a1a'; ctx.fillRect(X+w/2+14,Y+14,6,6); }
+    break;}
+  case 'crates':{
+    ctx.fillStyle='#6b5a3a'; rr(X+2,Y+6,w-4,TS-8,3); ctx.fill();
+    ctx.fillStyle='#7d6a44'; rr(X+4,Y+8,w-8,TS-14,2); ctx.fill();
+    ctx.fillStyle='rgba(255,255,255,.25)'; ctx.fillRect(X+6,Y+10,w-12,2);
+    ctx.fillStyle='rgba(180,220,240,.35)'; ctx.fillRect(X+2,Y+6,w-4,3);
+    break;}
+  case 'roll':{
+    ctx.fillStyle='#e8e2d4'; ctx.beginPath(); ctx.arc(X+16,Y+14,8,0,7); ctx.fill();
+    ctx.fillStyle='#bdb6a6'; ctx.beginPath(); ctx.arc(X+16,Y+14,3,0,7); ctx.fill();
+    ctx.fillStyle='#f5f0e6'; ctx.fillRect(X+22,Y+12,7,4);
+    break;}
+  case 'icemachine':
+  say([["ICE MACHINE",rot('ice',[
+    "It shudders, drops a load of ice into itself, and goes quiet, like it just remembered something.",
+    "The only thing in this building that gets to make a loud noise whenever it wants.",
+    "You put your hand flat on the side of it. It is the coldest thing you have touched all day and you stand there longer than you meant to."])]]);
+  return;
+
+case 'schedule':
+  say([["THE SCHEDULE","A printed schedule under a red header, with three names crossed out and one written in over top in pen four separate times."],
+       ["DYLAN","Somebody's initials are on every single closing shift for three weeks. You look for a K. There it is. There it is over and over."]]);
+  return;
+
+case 'drinkstation':{
+    ctx.fillStyle='rgba(0,0,0,.3)'; ctx.fillRect(X,Y+8,w,TS);
+    ctx.fillStyle='#7e8489'; rr(X,Y,w,TS-2,3); ctx.fill();
+    ctx.fillStyle='#9aa1a6'; rr(X+2,Y+2,w-4,TS-8,2); ctx.fill();
+    ctx.fillStyle='#2b2f33'; ctx.fillRect(X+5,Y+4,10,12); ctx.fillRect(X+w-19,Y+4,10,12);
+    ctx.fillStyle='#c0392b'; ctx.fillRect(X+7,Y+16,6,3);
+    ctx.fillStyle='#3f77b5'; ctx.fillRect(X+w-17,Y+16,6,3);
+    ctx.fillStyle='#d8d2c4'; for(let i=0;i<3;i++) ctx.fillRect(X+22+i*7,Y+18,5,7);
+    break;}
+  case 'wetfloor':{
+    ctx.fillStyle='rgba(0,0,0,.28)'; ctx.beginPath(); ctx.ellipse(X+16,Y+26,10,4,0,0,7); ctx.fill();
+    ctx.fillStyle='#d8b400'; ctx.beginPath();
+    ctx.moveTo(X+16,Y+4); ctx.lineTo(X+25,Y+26); ctx.lineTo(X+7,Y+26); ctx.closePath(); ctx.fill();
+    ctx.fillStyle='#b89600'; ctx.beginPath();
+    ctx.moveTo(X+16,Y+4); ctx.lineTo(X+16,Y+26); ctx.lineTo(X+7,Y+26); ctx.closePath(); ctx.fill();
+    ctx.fillStyle='#1a1a1a'; ctx.fillRect(X+15,Y+13,2,7); ctx.fillRect(X+15,Y+22,2,2);
+    break;}
+  case 'chalkboard':{
+    ctx.fillStyle='#3a2a1e'; rr(X+2,Y+4,w-4,TS-4,3); ctx.fill();
+    ctx.fillStyle='#1e2622'; rr(X+5,Y+7,w-10,TS-12,2); ctx.fill();
+    ctx.fillStyle='rgba(240,235,220,.55)';
+    ctx.fillRect(X+9,Y+11,w-20,2); ctx.fillRect(X+9,Y+16,w-26,2); ctx.fillRect(X+9,Y+21,w-16,2);
+    break;}
+  case 'dartboard':{
+    ctx.fillStyle='#241a12'; rr(X+2,Y+2,TS-4,TS-4,4); ctx.fill();
+    const rs=[13,10,7,4], cs=['#e8e2d4','#2f6b3a','#e8e2d4','#c0392b'];
+    for(let i=0;i<4;i++){ ctx.fillStyle=cs[i]; ctx.beginPath(); ctx.arc(X+16,Y+16,rs[i],0,7); ctx.fill(); }
+    ctx.fillStyle='#d8a24a'; ctx.fillRect(X+18,Y+9,7,2); ctx.fillRect(X+19,Y+13,6,2);
+    break;}
+  case 'hatch':{
+    ctx.fillStyle='#3e4a50'; ctx.fillRect(X+4,Y+2,26,28);
+    ctx.fillStyle='#546268'; ctx.fillRect(X+6,Y+5,22,22);
+    ctx.fillStyle='#2a3236'; ctx.fillRect(X+8,Y+8,18,4); ctx.fillRect(X+8,Y+16,18,4);
+    ctx.fillStyle='#d8a24a'; ctx.beginPath(); ctx.arc(X+26,Y+16,3,0,7); ctx.fill();
+    ctx.fillStyle='rgba(160,200,230,.2)'; ctx.fillRect(X+4,Y+2,26,3);
+    break;}
+  }
+}
+
+/* --- people --- */
+const MONO = 'ui-monospace,Menlo,Consolas,monospace';
+function drawChar(x,y,o){
+  const s = o.small?0.78:1;
+  const bob = o.sit?0:Math.abs(Math.sin((o.walk||0)))*2;
+  const dir = o.dir||'d';
+  const hh = (o.sit?26:34)*s;
+  ctx.fillStyle='rgba(0,0,0,.30)';
+  ctx.beginPath(); ctx.ellipse(x,y,11*s,4.5*s,0,0,7); ctx.fill();
+  const top = y-hh-bob;
+  // legs
+  if(!o.sit){
+    ctx.fillStyle=o.pants||'#2f3a4a';
+    const sw = Math.sin(o.walk||0)*3*s;
+    ctx.fillRect(x-6*s, y-11*s, 5*s, 11*s+sw*0.2);
+    ctx.fillRect(x+1*s, y-11*s, 5*s, 11*s-sw*0.2);
+    ctx.fillStyle='#1a1a1a';
+    ctx.fillRect(x-7*s,y-2*s,6*s,3*s); ctx.fillRect(x+1*s,y-2*s,6*s,3*s);
+  }
+  // torso
+  ctx.fillStyle=o.shirt||'#555';
+  rr(x-9*s, top+11*s, 18*s, (o.sit?15:23)*s, 4*s); ctx.fill();
+  ctx.fillStyle='rgba(0,0,0,.18)'; ctx.fillRect(x-9*s, top+11*s, 18*s, 2*s);
+  if(o.apron){ ctx.fillStyle='#1e1e1e'; ctx.fillRect(x-7*s, top+17*s, 14*s, (o.sit?9:15)*s);
+    ctx.fillStyle='rgba(255,255,255,.10)'; ctx.fillRect(x-7*s, top+17*s, 14*s, 1.5*s); }
+  if(o.tie){ ctx.fillStyle='#c0392b'; ctx.fillRect(x-1.5*s, top+12*s, 3*s, 12*s); }
+  if(o.hoodie){ ctx.fillStyle='rgba(0,0,0,.25)'; rr(x-10*s, top+9*s, 20*s, 7*s, 3*s); ctx.fill();
+    ctx.fillStyle=o.shirt; ctx.fillRect(x-2*s,top+16*s,4*s,9*s); }
+  // arms
+  ctx.fillStyle=o.shirt||'#555';
+  ctx.fillRect(x-12*s, top+13*s, 4*s, 13*s); ctx.fillRect(x+8*s, top+13*s, 4*s, 13*s);
+  ctx.fillStyle=o.skin||'#d8a878';
+  ctx.fillRect(x-12*s, top+24*s, 4*s, 4*s); ctx.fillRect(x+8*s, top+24*s, 4*s, 4*s);
+  // head
+  ctx.fillStyle=o.skin||'#d8a878';
+  rr(x-7*s, top-1*s, 14*s, 14*s, 5*s); ctx.fill();
+  // hair
+  ctx.fillStyle=o.hair||'#3a2418';
+  rr(x-8*s, top-3*s, 16*s, (dir==='u'?11:7)*s, 4*s); ctx.fill();
+  if(dir!=='u'){ ctx.fillRect(x-8*s, top-1*s, 3*s, 6*s); ctx.fillRect(x+5*s, top-1*s, 3*s, 6*s); }
+  // face
+  if(dir!=='u'){
+    ctx.fillStyle='#221812';
+    const ex = dir==='l'?-2.5*s : dir==='r'?2.5*s : 0;
+    ctx.fillRect(x-4*s+ex, top+6*s, 2*s, 2.4*s);
+    ctx.fillRect(x+2*s+ex, top+6*s, 2*s, 2.4*s);
+    if(o.mouth!==0){ ctx.fillStyle='rgba(60,30,25,.6)'; ctx.fillRect(x-2*s+ex, top+10*s, 4*s, 1.2*s); }
+  }
+  if(o.phone && dir!=='u'){ ctx.fillStyle='#12161c'; ctx.fillRect(x+6*s, top+16*s, 6*s, 9*s);
+    ctx.fillStyle='rgba(150,200,255,.55)'; ctx.fillRect(x+7*s, top+17*s, 4*s, 7*s); }
+  if(o.headphones){ ctx.fillStyle='#1d1d1d';
+    ctx.fillRect(x-9*s, top+7*s, 3*s, 5*s); ctx.fillRect(x+6*s, top+7*s, 3*s, 5*s);
+    ctx.fillStyle='#2b2b2b'; ctx.fillRect(x-9*s, top+11*s, 18*s, 2.5*s); }
+  if(o.frost){ ctx.fillStyle='rgba(190,225,245,.17)'; rr(x-10*s, top-4*s, 20*s, hh+6*s, 6*s); ctx.fill();
+    ctx.fillStyle='rgba(255,255,255,.55)';
+    for(let i=0;i<5;i++) ctx.fillRect(x-8*s+i*4*s, top+(i%3)*7*s, 2,2); }
+}
+function drawNpc(n){
+  const bobT = Math.sin(S.t*1.6 + n.x)*1.2;
+  drawChar(n.x*TS+TS/2, n.y*TS+TS-4, Object.assign({},n,{walk:0, bob:bobT,
+    phone: n.id==='mom'||n.id==='wyatt', pants: n.id==='todd'?'#20262e':'#2f3a4a'}));
+}
+function drawPlayer(){
+  drawChar(S.px, S.py+9, {shirt:'#8e3b3b', hair:'#241812', skin:'#dcae82', pants:'#33405a',
+    dir:S.dir, walk:S.walk, hoodie:1, headphones:1});
+}
+
+/* --- speech / prompt bubble --- */
+function drawPrompt(){
+  if(dlg.open||S.mini) return;
+  const t = findTarget(); if(!t) return;
+  const x = t.cx, y = t.cy-30;
+  const label = t.label||'';
+  ctx.font = 'bold 10px '+MONO; ctx.textAlign='center';
+  const wdt = Math.max(26, ctx.measureText(label).width+16);
+  const yy = y + Math.sin(S.t*4)*2;
+  ctx.fillStyle='rgba(12,9,7,.9)'; rr(x-wdt/2, yy-13, wdt, 18, 5); ctx.fill();
+  ctx.strokeStyle='rgba(216,162,74,.7)'; ctx.lineWidth=1; ctx.stroke();
+  ctx.fillStyle='#f2e9d8'; ctx.fillText(label, x, yy);
+  ctx.fillStyle='#d8a24a'; ctx.font='bold 9px '+MONO;
+  ctx.fillText('▼', x, yy+11);
+}
+
+/* --- light --- */
+const LAMPS = {
+  dining:[[112,64],[240,64],[560,64],[688,64],[160,224],[320,224],[480,224],[640,224],[160,352],[480,352]],
+  lobby:[[368,272],[544,300],[192,340]],
+  bar:[[400,120],[400,220],[672,140],[192,352],[512,352]],
+  hall:[[208,64],[208,208],[208,432],[440,208],[680,208]],
+  kitchen:[[300,120],[600,200],[160,280]],
+  freezer:[[400,224],[400,416]]
+};
+function drawLight(){
+  const room = S.room;
+  ctx.save();
+  ctx.globalCompositeOperation='lighter';
+  for(const [lx,ly] of (LAMPS[room]||[])){
+    const g=ctx.createRadialGradient(lx,ly,4,lx,ly,120);
+    const warm = room==='freezer' ? 'rgba(150,200,230,' : 'rgba(255,186,104,';
+    g.addColorStop(0, warm+'0.13)'); g.addColorStop(1, warm+'0)');
+    ctx.fillStyle=g; ctx.fillRect(lx-130,ly-130,260,260);
+  }
+  ctx.restore();
+  const v=ctx.createRadialGradient(W/2,H/2,H*0.32,W/2,H/2,H*0.92);
+  v.addColorStop(0,'rgba(0,0,0,0)'); v.addColorStop(1, room==='freezer'?'rgba(10,25,40,.62)':'rgba(0,0,0,.55)');
+  ctx.fillStyle=v; ctx.fillRect(0,0,W,H);
+  if(room==='freezer'){ ctx.fillStyle='rgba(150,200,235,.13)'; ctx.fillRect(0,0,W,H); }
+  if(fade>0){ ctx.fillStyle='rgba(0,0,0,'+fade.toFixed(3)+')'; ctx.fillRect(0,0,W,H); }
+}
+
+function render(){
+  const R=ROOMS[S.room];
+  ctx.clearRect(0,0,W,H);
+  drawFloor(R.floor);
+  drawWalls();
+  const list=[];
+  for(const o of R.objs) list.push({y: o.z!==undefined ? o.z : (o.y+o.h)*TS, f:()=>drawObj(o)});
+  for(const n of R.npcs) list.push({y: n.z!==undefined ? n.z : n.y*TS+TS-2, f:()=>drawNpc(n)});
+  list.push({y:S.py+9, f:drawPlayer});
+  list.sort((a,b)=>a.y-b.y);
+  for(const d of list) d.f();
+  drawPrompt();
+  drawLight();
+  // room name, bottom-left
+  ctx.font='bold 10px '+MONO; ctx.textAlign='left';
+  ctx.fillStyle='rgba(242,233,216,.30)'; ctx.fillText(R.name, 10, H-10);
+}
+
+/* ============================================================
+   BOREDOM — the only real enemy
+   ============================================================ */
+const THOUGHTS = [
+ "You have read the dessert menu four times. It has not changed.",
+ "The song playing is the same song. It is not a loop. It is just the same song.",
+ "You could describe every square inch of this ceiling from memory now.",
+ "Somewhere out there, people your age are outside. Standing up. In weather.",
+ "You try to remember what you were going to do today. Nothing comes.",
+ "The ice in your water has melted, refrozen, and melted again. You saw it happen.",
+ "You have started assigning the booths personalities. Booth 6 is a liar.",
+ "A thought arrives: what if this is just what being a person is now.",
+ "You count the flair on the walls. The number is different every time.",
+ "Your phone is at 4%. There is no charger. There has never been a charger.",
+ "You consider crawling under the table. Not to hide. Just for a change of venue."
+];
+function boredUpdate(dt){
+  if(dlg.open||S.mini||!S.started||S.ended) return;
+  S.bored = clamp(S.bored + dt*2.1, 0, 100);
+  if(S.bored >= S.nextBored){
+    S.nextBored = Math.min(101, S.bored + 26);
+    toast(THOUGHTS[S.boredIdx % THOUGHTS.length]); S.boredIdx++;
+  }
+  $('#boredbar').style.width = S.bored+'%';
+}
+
+/* ============================================================
+   THE CLAW  (a minigame, and a metaphor, but mostly a minigame)
+   ============================================================ */
+const PRIZES = [
+  {x:190,w:54,c:'#d8a24a',n:"a keychain shaped like a riblet"},
+  {x:272,w:44,c:'#5f9b57',n:"a stress ball, logo half rubbed off"},
+  {x:352,w:66,c:'#c0392b',n:"THE PEN",pen:1},
+  {x:452,w:48,c:'#7a4f8c',n:"a plush that is legally not a minion"},
+  {x:534,w:56,c:'#3f77b5',n:"a shirt in a size that does not exist"}
+];
+const claw = {x:180,dir:1,phase:'move',y:96,tries:3,msg:'',hold:null,timer:0};
+function clawStart(){
+  S.mini='claw'; claw.x=180; claw.dir=1; claw.phase='move'; claw.y=96;
+  claw.tries=3; claw.hold=null; claw.msg="Line it up. Press E to drop.";
+}
+function clawPress(){ if(claw.phase==='move') claw.phase='drop'; }
+function clawEnd(win){
+  S.mini=null;
+  if(win){
+    give('pen'); flag('gotPen');
+    say([["THE CLAW","The claw closes on a two-foot novelty pen shaped like a rack of ribs. It comes up. It does not drop it."],
+         ["DYLAN","You have never won anything from one of these. Not once. Not ever."],
+         ["DYLAN","You feel, briefly, extremely dangerous."]]);
+  }
+}
+function clawUpdate(dt){
+  claw.timer+=dt;
+  if(claw.phase==='move'){
+    claw.x += claw.dir*(150+ (3-claw.tries)*40)*dt;
+    if(claw.x>640){claw.x=640;claw.dir=-1;} if(claw.x<160){claw.x=160;claw.dir=1;}
+  } else if(claw.phase==='drop'){
+    claw.y += 320*dt;
+    if(claw.y>=318){ claw.y=318;
+      claw.hold = PRIZES.find(p=> claw.x> p.x-4 && claw.x < p.x+p.w+4) || null;
+      claw.phase='lift'; }
+  } else if(claw.phase==='lift'){
+    claw.y -= 220*dt;
+    if(claw.hold && !claw.hold.pen && claw.y<250 && !claw.dropped){ claw.dropped=true; }
+    if(claw.y<=96){
+      claw.y=96;
+      if(claw.hold && claw.hold.pen){ claw.phase='won'; claw.timer=0; claw.msg="THE PEN. YOU GOT THE PEN."; }
+      else{
+        claw.tries--; claw.dropped=false;
+        if(claw.tries<=0){ claw.phase='pity'; claw.timer=0;
+          claw.msg="The machine hums. Something inside it gives up before you do."; }
+        else{
+          claw.msg = claw.hold ? "It slips out. Of course it does. "+claw.tries+" left."
+                               : "Nothing. The claw closes on air. "+claw.tries+" left.";
+          claw.phase='move'; claw.hold=null;
+        }
+      }
+    }
+  } else if(claw.phase==='won'){ if(claw.timer>1.5) clawEnd(true); }
+  else if(claw.phase==='pity'){ if(claw.timer>2.2) clawEnd(true); }
+}
+function clawDraw(){
+  ctx.fillStyle='rgba(6,4,3,.86)'; ctx.fillRect(0,0,W,H);
+  ctx.fillStyle='#1c1410'; rr(120,50,560,400,14); ctx.fill();
+  const g=ctx.createLinearGradient(0,60,0,440);
+  g.addColorStop(0,'rgba(130,200,230,.18)'); g.addColorStop(1,'rgba(60,90,120,.10)');
+  ctx.fillStyle=g; rr(140,70,520,330,8); ctx.fill();
+  // prize bed
+  ctx.fillStyle='#2a1f18'; ctx.fillRect(140,352,520,48);
+  for(const p of PRIZES){
+    const lifted = (claw.hold===p && claw.phase==='lift');
+    const py = lifted ? claw.y+34 : 356;
+    ctx.fillStyle=p.c; rr(p.x, py, p.w, 34, 7); ctx.fill();
+    ctx.fillStyle='rgba(255,255,255,.22)'; ctx.fillRect(p.x+5, py+5, p.w-10, 4);
+    if(p.pen){ ctx.fillStyle='#f2e9d8'; ctx.font='bold 9px '+MONO; ctx.textAlign='center';
+      ctx.fillText('PEN', p.x+p.w/2, py+22); }
+  }
+  // claw
+  ctx.strokeStyle='#8a8a92'; ctx.lineWidth=3;
+  ctx.beginPath(); ctx.moveTo(claw.x,72); ctx.lineTo(claw.x,claw.y); ctx.stroke();
+  ctx.fillStyle='#b0b4bc'; rr(claw.x-14,claw.y,28,10,3); ctx.fill();
+  const open = claw.phase==='lift'&&claw.hold ? 4 : 10;
+  ctx.strokeStyle='#c9ccd4'; ctx.lineWidth=4;
+  ctx.beginPath(); ctx.moveTo(claw.x-8,claw.y+10); ctx.lineTo(claw.x-open,claw.y+26); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(claw.x+8,claw.y+10); ctx.lineTo(claw.x+open,claw.y+26); ctx.stroke();
+  // rail
+  ctx.fillStyle='#3a3f46'; ctx.fillRect(140,64,520,8);
+  // text
+  ctx.textAlign='center'; ctx.fillStyle='#f2e9d8'; ctx.font='bold 15px '+MONO;
+  ctx.fillText(claw.msg, W/2, 428);
+  ctx.textAlign='left'; ctx.fillStyle='rgba(216,162,74,.85)'; ctx.font='bold 11px '+MONO;
+  ctx.fillText('TRIES', 152, 92);
+  for(let i=0;i<3;i++){ ctx.fillStyle = i<claw.tries ? '#d8a24a' : 'rgba(216,162,74,.22)';
+    ctx.beginPath(); ctx.arc(210+i*14, 88, 5, 0, 7); ctx.fill(); }
+  ctx.textAlign='center';
+}
+
+/* ============================================================
+   THE ENDINGS
+   ============================================================ */
+function endGame(kind){
+  S.ended = true; S.mini=null;
+  const mins = Math.max(1, Math.round((Date.now()-S.startTime)/60000));
+  const flairN = Object.keys(S.flair).length;
+  const et=$('#endtitle'), ex=$('#endtext');
+  if(kind==='front'){
+    et.innerHTML='YOU <span>LEFT</span>';
+    ex.textContent =
+      "The door gives. It was never locked; it was just a door.\n\n"+
+      "Outside it is 8:40 on a Tuesday and the parking lot smells like rain that hasn't started. The air is so cold and so large. You had forgotten there was an outside, and that it went on forever in every direction, for free.\n\n"+
+      "Mom hits the key fob. Wyatt is still on level 40. Behind you the sign glows like a small red planet, and inside it people are still ordering, and the platter is still coming, and it will always be coming.\n\n"+
+      "\"You okay, bud?\" she says.\n\nYou say yeah. You mean about sixty percent of it. That is the highest that number has been all day.";
+  } else {
+    et.innerHTML='<span>GONE</span>';
+    ex.textContent =
+      "The delivery hatch opens onto a loading dock, a dumpster, and the entire rest of the world.\n\n"+
+      "You climb out into the cold. Nobody stops you. Nobody was ever going to stop you — that was the part you got wrong.\n\n"+
+      "You are free. You are also nine miles from home, in a parking lot, at night, and your ride is currently inside an Applebee's waiting for a check that will never print, with your little brother.\n\n"+
+      "Freedom, you are learning, has logistics.";
+  }
+  const lines = [
+    "TIME SERVED: <b>"+mins+" minute"+(mins===1?'':'s')+"</b>",
+    "APPETIZERS EATEN: <b>"+S.apps+"</b>",
+    "FLAIR CATALOGUED: <b>"+flairN+"/5</b>"+(flairN===5?' — <b>WALL EXPERT</b>':''),
+    "PEAK BOREDOM: <b>"+Math.round(S.bored)+"%</b>"
+  ];
+  if(S.flags.cardText) lines.push("YOUR TESTIMONIAL: <b>&ldquo;"+S.flags.cardText+"&rdquo;</b>");
+  if(kind==='hatch') lines.push("<b>SECRET ENDING</b> — the walk-in remembers you");
+  if(has('knife')) lines.push("STILL IN YOUR POCKET: <b>a butter knife</b>");
+  $('#stats').innerHTML = lines.join('<br>');
+  $('#ending').classList.remove('off');
+  try{
+    const rec = JSON.parse(localStorage.getItem('ea_record')||'{}');
+    rec[kind]=(rec[kind]||0)+1; rec.bestFlair=Math.max(rec.bestFlair||0,flairN);
+    localStorage.setItem('ea_record',JSON.stringify(rec));
+  }catch(e){}
+}
+
+/* ============================================================
+   INTERACTIONS — everything anyone says, ever
+   ============================================================ */
+const rotIdx={};
+function rot(id,arr){ const i=(rotIdx[id]||0); rotIdx[id]=i+1; return arr[i%arr.length]; }
+function flairGet(id,who,text){
+  if(S.flair[id]){ say([[who,text]]); return; }
+  S.flair[id]=true;
+  const n=Object.keys(S.flair).length;
+  say([[who,text],["FLAIR "+n+"/5", n===5
+      ? "That is all five. You now know this wall better than the people who hung it. Nobody will ever ask you about this."
+      : "Logged. You are keeping a mental inventory of the wall. This is what you have become."]]);
+  refreshHud();
+}
+
+function interact(id){
+switch(id){
+
+/* ---------- family ---------- */
+case 'mom':
+  if(has('check')){
+    say([["MOM","Oh — oh, thank god. Okay. Okay."],
+         ["MOM","She reads the check. Her lips move at the total. She does the tip math twice, out loud, the way she always does, and you feel something unbearable and warm about it."],
+         ["MOM","Alright. Shoes on, Wyatt. Dylan, grab your hoodie."],
+         ["DYLAN","You have been holding your hoodie for two hours."]],
+      ()=>{ take('check'); flag('paid'); toast("Mom signs the check. You are free to go."); });
+    return;
+  }
+  if(F('paid')){ say([["MOM",rot('momdone',[
+      "Go, go — I'm coming. I'm getting my sunglasses. It's dark out, I know, don't start.",
+      "Wyatt, shoes. WYATT. Shoes.",
+      "Thank you for being patient today, bud. I know it wasn't much of a day."])]]); return; }
+  if(!F('talkedMom')){
+    say([["MOM","Hey. Sit down, you're hovering."],
+         ["DYLAN","Can we go?"],
+         ["MOM","Soon as the check comes, we go. Check comes, we go. That's the deal."],
+         ["DYLAN","That was fifty minutes ago."],
+         ["MOM","Time's a little soft in here, honey. Go ask Karla."],
+         ["DYLAN","She doesn't look up from her phone. She's not ignoring you. She's just... paused. Like the rest of it."]],
+      ()=>flag('talkedMom'));
+    return;
+  }
+  say([["MOM",rot('mom',[
+    "Ask the server, bud. She'll get it.",
+    "Have some more of the — there's still like nine of those things. Somebody has to eat them.",
+    "Your father's fine. He said hi. Well, he said 'k'. That's his hi.",
+    "You know I like this? Sitting? Nobody needs anything from me while I'm sitting.",
+    "You're sixteen. You'll have a whole life of leaving places. Let me have the booth."])]]);
+  return;
+
+case 'wyatt':
+  if(F('gotKnife')){ say([["WYATT",rot('wy2',[
+      "I already traded you. Trades are final. That's, like, the whole thing about trades.",
+      "I'm on level forty-one now. You wouldn't get it.",
+      "If you tell Mom about the mint I'll tell her about the knife."])]]); return; }
+  if(has('mint')){
+    say([{who:"WYATT", text:"...is that a mint.", choices:[
+      {label:"Trade you. Mint for the butter knife.", go:()=>{
+        say([["WYATT","Deal. Obviously deal. Why would you even — deal."],
+             ["DYLAN","He hands over a butter knife he has apparently been holding since we sat down."],
+             ["WYATT","It's not sharp. I checked. I checked a lot."]],
+          ()=>{ take('mint'); give('knife'); flag('gotKnife'); });
+      }},
+      {label:"No. It's my mint.", go:()=>say([["WYATT","Then why'd you bring it over here. Weirdo."]])}
+    ]}]);
+    return;
+  }
+  say([["WYATT",rot('wy',[
+    "Don't talk to me, I'm at a checkpoint.",
+    "I would trade a guy something good for a mint. Hypothetically. If a mint existed.",
+    "Do you think if we never leave we stop having birthdays? Because I have a birthday coming up.",
+    "There's a knife in my hoodie pocket and it's not a big deal so stop asking."])]]);
+  return;
+
+/* ---------- staff ---------- */
+case 'karla':
+  if(F('checkReady')||has('check')||F('paid')){
+    say([["KARLA",rot('kdone',["Y'all take care now! Come back and see us!",
+      "You did a good thing today. Don't ask me which part.",
+      "Careful going out. It's real out there."])]]); return; }
+  if(F('rollIn')){
+    say([["KARLA","Hold on. Hold on, do you hear that?"],
+         ["","*krrrrRRRRT*"],
+         ["KARLA","THE PRINTER. THE PRINTER IS PRINTING."],
+         ["DYLAN","Somewhere behind the wall a machine that has been silent for a long time begins, slowly, to say something."],
+         ["KARLA","She comes back holding it with both hands like it's a diploma."],
+         ["KARLA","Table forty-two. Your check, sweetheart. Nobody's gotten one of these in a while."]],
+      ()=>{ give('check'); flag('checkReady'); });
+    return;
+  }
+  if(F('karlaPrinter')){
+    say([["KARLA",rot('kp',[
+      "Still no paper, hon. I'd hand-write it but Todd says a hand-written check is 'not an experience.'",
+      "The roll's in the walk-in. I can't go in the walk-in. I have a thing about the walk-in.",
+      "You want more spinach dip while you wait? Say no. Please say no. I'll bring it either way."])]]);
+    return;
+  }
+  if(F('karlaAsk1')){
+    say([["DYLAN","Could we get the check?"],
+         ["KARLA","Yes. Okay. Here's the funny thing about the check."],
+         ["KARLA","The ticket printer in the kitchen is out of paper. Has been since Thursday. No paper, no check. No check, no leaving. That's just the physics of it."],
+         ["DYLAN","So put paper in it."],
+         ["KARLA","Baby, I'm not allowed in the kitchen right now. Long story. Short version: Todd."],
+         ["KARLA","She looks at your hoodie, then at the kitchen doors, then back at your hoodie, with real hope."]],
+      ()=>flag('karlaPrinter'));
+    return;
+  }
+  say([["KARLA","Hi! How is everything tasting?"],
+       ["DYLAN","Can we get the check?"],
+       ["KARLA","Absolutely! Yes! I will get that started for you right this second!"],
+       ["DYLAN","She turns, walks eleven steps, and comes back with more mozzarella sticks."],
+       ["KARLA","Fresh batch! On the house!"],
+       ["DYLAN","That is the fourth 'on the house.' You are beginning to suspect the house is not doing well."]],
+    ()=>{ flag('karlaAsk1'); toast("Karla brings another platter. It is somehow bigger."); });
+  return;
+
+case 'brayden':
+  if(has('card')&&!has('card2')&&has('pen')){
+    say([["BRAYDEN","Oh, you got a pen that works? From the claw? Nobody's ever gotten anything from the claw."],
+         ["BRAYDEN","He says it the way you'd talk about a comet."]]); return; }
+  say([["BRAYDEN",rot('bray',[
+    "Welcome to Applebee's! Sorry — you're already here. I have to say it. It's a whole thing.",
+    "I'm supposed to learn the seating chart but the seating chart changes. Not like, they change it. It changes.",
+    "One mint per guest. That's not me, that's corporate. I'd give you nine.",
+    "My shift ended at four. I'm still here for reasons I would describe as 'unclear but total.'",
+    "If you want a comment card they're right on the stand. Todd checks them. Todd really checks them."])]]);
+  return;
+
+case 'todd':
+  if(has('card2')){
+    say([["TODD","What's this? Is this — is this a guest comment card?"],
+         ["DYLAN","He reads it. He reads it again. He turns slightly away from you."],
+         ["TODD","Do you know how long it's been since somebody wrote something on one of these that wasn't about the bathroom."],
+         ["TODD","This goes on the WALL OF WOW. Top row. Center. I'm moving a Denise for this."],
+         ["TODD","You need something, chief? Anything. Name it."],
+         ["DYLAN","The mop closet."],
+         ["TODD","Ha! Yeah. Yeah, sure. Weird ask. Love the energy."],
+         ["","He unclips a small brass key from a ring of about forty and presses it into your hand like a medal."]],
+      ()=>{ take('card2'); give('key'); });
+    return;
+  }
+  if(!F('toddQuest')){
+    say([["TODD","TODD. General Manager. Eleven years. Don't do the math on that, I've done it."],
+         ["TODD","Great energy at your table today. Great energy. That's a table that's PRESENT."],
+         ["DYLAN","We've been here two hours and we can't get a check."],
+         ["TODD","Dwell time! We LOVE dwell time. That's a metric, chief."],
+         ["DYLAN","Can I get into the mop closet?"],
+         ["TODD","The mop closet key stays on my person. That's a trust thing. That's between me and the closet."],
+         ["TODD","Now — you want to move a mountain in my life? Get me a guest testimonial. A real one. For the WALL OF WOW. Cards are on the host stand."],
+         ["TODD","Nobody fills them out anymore. Nobody says anything nice out loud in a building like this."]],
+      ()=>flag('toddQuest'));
+    return;
+  }
+  say([["TODD",rot('todd',[
+    "Card's on the host stand, chief. Pens are... the pens are a known issue.",
+    "I'm not a boss. I'm a coach. A coach who can fire you.",
+    "Every guest is a guest. That's a Todd-ism. Write that down. Not on the card — the card's for nice stuff."])]]);
+  return;
+
+case 'renee':
+  say([["RENEE",rot('renee',[
+    "You're sixteen. I can tell because you keep checking if I can tell.",
+    "Shirley Temple? It's a Sprite with a lie in it.",
+    "The game on that TV finished in 2011. I've mentioned it. Doug prefers it this way.",
+    "Doug knows everything about this building. He also hasn't left it since the Obama administration. Both facts are load-bearing."])]]);
+  return;
+
+case 'doug':
+  if(!F('doug1')){
+    say([["DOUG","Sit. Don't sit. Doesn't matter to me. I've seen a lot of people sit."],
+         ["DOUG","Two thousand nine. Came in for the half-price apps. Never got a check. Never got upset about it either — that's the difference between you and me, and it's the only one."],
+         ["DYLAN","How do I get out?"],
+         ["DOUG","Front door works fine, kid. It's you that doesn't. You gotta be square with the house. House says you owe. So get the check."],
+         ["DOUG","Printer's dry. Paper's in the walk-in. Handle came off the walk-in in twenty-twenty-one and nobody's fixed it because the guy who fixes things is IN the walk-in."],
+         ["DOUG","Also. And I'm only saying this once. There's a pen in that claw machine out front worth more than my truck."]],
+      ()=>flag('doug1'));
+    return;
+  }
+  say([["DOUG",rot('doug',[
+    "You want the trick? There's no trick. You just have to want out more than the building wants you in. Takes some people fifteen years.",
+    "Todd's alright. Todd's got a wall he cares about. A man with a wall he cares about will hand you anything.",
+    "Marcus is in the walk-in. Has been. Say hi. He's good people, he's just cold.",
+    "Half-price apps ended in 2018. I want you to sit with that."])]]);
+  return;
+
+case 'ramon':
+  if(has('roll')&&!F('rollIn')){
+    say([["RAMON","You got it. You actually got it. Put it in the printer, kid — the little grey one on the wall. Then get out of my kitchen and out of my restaurant and, I don't know, go be sixteen somewhere."]]); return; }
+  if(F('rollIn')){ say([["RAMON","Hear that? That's the sound of somebody leaving. Good. Somebody should."]]); return; }
+  say([["RAMON",rot('ramon',[
+    "That apron doesn't fool me. It fools the door, and the door's the one with opinions.",
+    "Printer's out of paper. Last roll's in the walk-in, second shelf. Handle's broke. Bring something you can jam in the hole and pull.",
+    "You want the truth? The mozzarella sticks are infinite. I stopped asking in March.",
+    "Careful in there. Marcus is on break."])]]);
+  return;
+
+case 'marcus':
+  if(!F('marcus1')){
+    say([["MARCUS","Hey. Hey! Close it, close it — you're letting the warm in."],
+         ["DYLAN","How long have you been in here?"],
+         ["MARCUS","I'm on break."],
+         ["DYLAN","How long have you been on break?"],
+         ["MARCUS","...Twenty-nineteen."],
+         ["MARCUS","Look, it's quiet. Nobody asks me for ranch. You take what you need, man. Second shelf. It's not mine, it's not anybody's."],
+         ["MARCUS","And hey — that hatch behind me goes out to the loading dock. Straight outside. I've never used it. Never really came up."]],
+      ()=>flag('marcus1'));
+    return;
+  }
+  say([["MARCUS",rot('marcus',[
+    "Second shelf. Take the roll. I'm not stopping you, I'm just not standing up.",
+    "That hatch goes outside. I'm just saying it exists. I say it to everybody. Nobody ever uses it.",
+    "You get used to it. That's the scary part and also, honestly, the good part."])]]);
+  return;
+
+/* ---------- objects ---------- */
+case 'platter':
+  S.apps++; S.bored = clamp(S.bored-46,0,100); refreshHud();
+  toast(rot('eat',[
+    "You eat a mozzarella stick. It is exactly as warm as the last one.",
+    "You eat a boneless wing. Time briefly stops being a problem.",
+    "You eat something you cannot identify. It is fine. Everything here is fine.",
+    "You eat a mozzarella stick. The platter does not get smaller.",
+    "You dip a thing in a sauce and eat the thing. Total appetizers: "+S.apps+".",
+    "You eat, and for eleven seconds you are not bored, and that is the whole deal."]));
+  return;
+
+case 'jukebox':
+  if(has('quarter')||F('gotQuarter')){
+    say([["JUKEBOX",rot('juke',[
+      "You press a button. The song that plays is the song that was already playing.",
+      "Track listing: four songs. All four are the same length. You have checked.",
+      "There is no coin slot. There is only a coin return. You have thought about this a lot."])]]);
+    return; }
+  if(has('knife')){
+    say([["DYLAN","There is a quarter wedged in the coin return. It has been there for years. It has a personality."],
+         ["DYLAN","You slide the butter knife in and lever it out with the calm of someone who has nowhere to be."],
+         ["","*clink*"]],
+      ()=>{ give('quarter'); flag('gotQuarter'); });
+    return; }
+  say([["JUKEBOX","Something metal glints in the coin return. A quarter, wedged in tight and sideways."],
+       ["DYLAN","Your fingers are too big. You need something thin and flat and stupid."]]);
+  return;
+
+case 'stain':
+  say([["THE FLOOR","A sticky patch, roughly the shape of Ohio. Your shoe makes a small sound of commitment every time you cross it."],
+       ["DYLAN","It was here when you came in. It will be here after. You respect it."]]);
+  return;
+
+case 'hoststand':
+  if(has('card')||has('card2')){ say([["HOST STAND","A stack of comment cards. You already took one. Taking two would be greedy and, weirdly, illegal-feeling."]]); return; }
+  say([["HOST STAND","A stack of guest comment cards and a coffee mug full of pens."],
+       ["DYLAN","You test the pens. All eleven are dead, chewed, or dead AND chewed. One of them is a straw."],
+       ["DYLAN","You take a card anyway."]],
+    ()=>give('card'));
+  return;
+
+case 'mints':
+  if(has('mint')||F('gotMint')){ say([["BRAYDEN","One mint per guest! Sorry! It's not me, it's — yeah."]]); return; }
+  say([["DYLAN","A bowl of mints in cloudy wrappers. They taste like the inside of a purse."],
+       ["DYLAN","You take exactly one, because Brayden is watching, and because you are, fundamentally, a coward."]],
+    ()=>{ give('mint'); flag('gotMint'); });
+  return;
+
+case 'claw':
+  if(has('pen')||F('gotPen')){ say([["THE CLAW","It has nothing left for you. You have taken the only thing in it that mattered."]]); return; }
+  if(!has('quarter')){
+    say([["THE CLAW","A glass box of prizes lit like a small aquarium. Inside, among the junk, is a two-foot novelty pen shaped like a rack of ribs."],
+         ["DYLAN","It is the single most beautiful object you have ever seen. It costs one quarter. You do not have a quarter."]]);
+    return; }
+  say([["THE CLAW","You feed it the quarter. The machine wakes up like it's been waiting."]],
+    ()=>{ take('quarter'); clawStart(); });
+  return;
+
+case 'wallofwow':
+  if(!has('card')||!has('pen')||has('card2')){
+    say([["WALL OF WOW","A corkboard of guest comment cards, thumbtacked at angles. You read a few."],
+         ["","'Bathroom.' — Denise\n'Bathroom!!' — Denise\n'Ask for Karla, she is the only one keeping this place standing.' — no name\n'my son turned 16 here' — no name"],
+         ["DYLAN","Somebody wrote these. Somebody meant them. That's the part that gets you."]]);
+    return; }
+  say([{who:"THE CARD", text:"You have a card. You have a pen the size of your forearm. There is a blank line that says TELL US ABOUT YOUR VISIT.\n\nWhat do you write?", choices:[
+    {label:'"Ask for Karla. She is the only one keeping this place standing."', go:()=>writeCard("Ask for Karla. She is the only one keeping this place standing.")},
+    {label:'"Brayden is 17 and doing his best and someone should tell him."', go:()=>writeCard("Brayden is 17 and doing his best and someone should tell him.")},
+    {label:'"My mom needed to sit down for two hours and you let her."', go:()=>writeCard("My mom needed to sit down for two hours and you let her.")}
+  ]}]);
+  return;
+
+case 'tv1': case 'tv2':
+  say([["TELEVISION",rot('tv',[
+    "A game is on. It is 24-17. It has been 24-17 for as long as you have been able to see the screen.",
+    "Closed captions, no sound. A man is being interviewed about something that already happened.",
+    "The score changes when you look away. It changes back when you look at it."])]]);
+  return;
+
+case 'payphone':
+  say([["PAYPHONE","A payphone. In this year. Bolted to the wall like it's holding it up."],
+       ["DYLAN","You lift the receiver out of pure sixteen-year-old curiosity. There's a dial tone. There's absolutely a dial tone."],
+       ["DYLAN","You have nobody to call who could come get you. You hang up gently, like you're putting something back to sleep."]]);
+  return;
+
+case 'restroom_a':
+  say([["RESTROOM","Occupied. It has been occupied. You have made peace with it."]]); return;
+case 'restroom_b':
+  say([["RESTROOM","You go in. You look at yourself in the mirror for a while, which is a thing you have started doing lately, and you don't like it, and you keep doing it."],
+       ["DYLAN","There's a poster above the hand dryer of a man laughing at a plate of ribs. He is having the best day of his life. You come out."]]); return;
+
+case 'mopcloset':
+  if(F('gotApron')){ say([["CLOSET","Mops, a bucket, a shelf of things nobody has needed since 2014."]]); return; }
+  if(has('key')){
+    say([["DYLAN","The brass key turns. The closet smells like lemon chemicals and old rope."],
+         ["DYLAN","Mops. A bucket. A shelf of shift-drink glassware. And on a hook, clean and folded and slightly too big: a spare apron."],
+         ["DYLAN","You put it on. Something in the building relaxes."]],
+      ()=>{ take('key'); give('apron'); flag('gotApron'); });
+    return; }
+  say([["CLOSET","Locked. A small brass keyhole. The kind of lock that exists to be a personality trait for whoever has the key."]]);
+  return;
+
+case 'fryer':
+  say([["FRY STATION",rot('fry',[
+    "A basket of something goes down. A timer starts. The timer will end, and the basket will go down again, and this is the closest thing this building has to a heartbeat.",
+    "The oil is the oldest thing in the room and it knows it.",
+    "A ticket rail with no tickets on it. Ramon looks at it anyway. Habit is a kind of hope."])]]);
+  return;
+
+case 'printer':
+  if(F('rollIn')){ say([["PRINTER","Green light. Loaded. Ready. Somewhere out front, a server is about to have the best moment of her week."]]); return; }
+  if(has('roll')){
+    say([["DYLAN","The printer is a small grey box with a red light and a great deal of power over your life."],
+         ["DYLAN","You pop the lid, drop the roll in, thread the paper, and close it."],
+         ["","*click*"],
+         ["DYLAN","The red light turns green. It is the most satisfying thing that has ever happened to anyone."]],
+      ()=>{ take('roll'); flag('rollIn'); toast("Go tell Karla."); });
+    return; }
+  say([["PRINTER","Red light. Empty. A little paper icon blinks at you with real contempt."]]);
+  return;
+
+case 'roll':
+  if(has('roll')||F('rollIn')){ say([["SHELF","Empty space where a roll of paper used to be. You did that."]]); return; }
+  say([["DYLAN","Second shelf, behind a case of frozen riblets: one roll of receipt paper, shrink-wrapped, perfect, untouched."],
+       ["DYLAN","You hold it like it's a passport. In every way that matters, it is."]],
+    ()=>give('roll'));
+  return;
+
+case 'hatch':
+  say([{who:"DELIVERY HATCH", text:"A steel hatch at the back of the walk-in. Cold air moves the wrong way through the seam, which means the other side of it is outside.\n\nYou could just go. Right now. Nobody would stop you. Nobody has ever stopped you.", choices:[
+    {label:"Open it. Leave.", go:()=>say([
+        ["DYLAN","You put both hands on the cold steel."],
+        ["MARCUS","...Yeah. Yeah, alright. Go on."]], ()=>endGame('hatch'))},
+    {label:"Not like this.", go:()=>say([["DYLAN","You take your hands off it. She'd wait for you. That's the whole problem with her — she'd wait for you all night."]])}
+  ]}]);
+  return;
+
+case 'drinkstation':
+  say([["DRINK STATION",rot('drink',[
+    "The soda gun. Behind it, a sticky tray of lemon wedges that has seen things.",
+    "You refill your water. It is the only thing in this building you are allowed to do infinitely and for free, and you have done it eleven times.",
+    "There is a laminated card taped here that says SMILE — IT'S SHOWTIME. It is peeling."])]]);
+  return;
+
+case 'wetfloor':
+  say([["CAUTION","A yellow folding sign next to a floor that is not wet and has never been wet."],
+       ["DYLAN","It is here because of the sticky patch. It has been here since the sticky patch. It is not a warning anymore, it is a monument."]]);
+  return;
+
+case 'chalkboard':
+  say([["CHALKBOARD","HALF-PRICE APPS 3-6 & 9-CLOSE — written in a hand so confident it must have been years ago."],
+       ["DOUG","Ended in twenty-eighteen."]]);
+  return;
+
+case 'dartboard':
+  say([["DARTBOARD",rot('darts',[
+    "A dartboard with no darts anywhere near it. The darts are gone. The board remains.",
+    "Somebody has scored this game in chalk and then stopped scoring it mid-round. Nobody won.",
+    "You throw an imaginary dart. Bullseye. Nobody sees."])]]);
+  return;
+
+case 'diner1':
+  say([["A REGULAR",rot('d1',[
+    "We come every Tuesday.",
+    "Been coming every Tuesday since the one on Route 9 closed.",
+    "You waiting on your check? Ha. Yeah. Sure."])]]);
+  return;
+
+case 'diner2':
+  say([["HIS WIFE",rot('d2',[
+    "He proposed to me in booth eleven. Twenty-two years ago this March.",
+    "We sit at the table now. He says the booths are for young people. He's the one who picked the booth.",
+    "You've got somewhere to be, don't you. Good. Go be there."])]]);
+  return;
+
+/* ---------- the wall ---------- */
+case 'flair_trumpet':
+  flairGet(id,"THE WALL","A brass trumpet, mounted, dented, with somebody's name scratched into the bell. Nobody who works here can tell you whose it was."); return;
+case 'flair_bike':
+  flairGet(id,"THE WALL","A penny-farthing bicycle bolted eight feet up. It has been in the air longer than you have been alive."); return;
+case 'flair_ski':
+  flairGet(id,"THE WALL","One wooden ski. Not a pair. One. Somewhere there is a person with the other one and no way to prove it."); return;
+case 'flair_paddle':
+  flairGet(id,"THE WALL","A canoe paddle signed by absolutely nobody. Blank. Waiting. Ready."); return;
+case 'flair_catfish':
+  flairGet(id,"THE WALL","A taxidermied catfish wearing tiny sunglasses, hung in the KITCHEN, where no guest will ever see it. Somebody did that for the staff. Somebody was thinking of them."); return;
+
+default:
+  say([["","Nothing happens. This building is extremely good at nothing happening."]]);
+}
+}
+function writeCard(text){
+  flag('cardText', text);
+  say([["DYLAN","You write it out in enormous novelty-pen letters. It takes up the whole card and then some."],
+       ["DYLAN","“"+text+"”"],
+       ["DYLAN","You look at it for a second longer than you meant to."]],
+    ()=>{ take('card'); give('card2'); toast("Take it to Todd."); });
+}
+
+/* ============================================================
+   BOOT
+   ============================================================ */
+let last = performance.now();
+function loop(now){
+  const dt = Math.min(0.05,(now-last)/1000); last=now; S.t+=dt;
+  if(fade>0) fade = Math.max(0, fade-dt*2.4);
+  moveUpdate(dt); dlgUpdate(dt); boredUpdate(dt);
+  if(S.mini==='claw') clawUpdate(dt);
+  render();
+  if(S.mini==='claw') clawDraw();
+  requestAnimationFrame(loop);
+}
+$('#startbtn').onclick = ()=>{
+  $('#title').classList.add('off');
+  S.started=true; S.startTime=Date.now(); refreshHud();
+  toast("APPLEBEE'S — TUESDAY — 6:41 PM");
+  setTimeout(()=>toast(document.body.classList.contains('touch')
+    ? "Walk over to Mom and tap A." : "Walk over to Mom and press E."),1500);
+};
+$('#againbtn').onclick = ()=>location.reload();
+buildSolids(); drawInv(); refreshHud(); fade=1;
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
