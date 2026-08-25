@@ -68,6 +68,20 @@ Clone the repo and open `index.html` in a browser. There is no build step.
 
 ---
 
+## 🎮 Also in this repo: *Endless Appetizers*
+
+A small adventure game about a 16-year-old who cannot leave an Applebee's.
+
+### **[Play it here](https://jukes31ryan.github.io/Family-Meeting-Hub/endless-appetizers/)**
+
+![Endless Appetizers](endless-appetizers/screenshot.png)
+
+You are sixteen. It is a Tuesday. Mom says you can go as soon as the check comes, and the check is not coming. Six rooms to explore — dining room, lobby, bar, back hallway, kitchen, walk-in freezer — eleven people to talk to, an inventory to fill, a claw machine to beat, five pieces of wall flair to catalogue, and two ways out (only one of them leaves with your mother).
+
+Arrow keys or WASD to move, `E` or `Space` to talk and use things. Works on phones too — there's a d-pad. Same tech as the rest of the repo: one self-contained `index.html`, vanilla JavaScript, canvas, no dependencies, no build step, fully offline.
+
+---
+
 ## 💬 Feedback & Contributions
 
 This is a personal project built with love. If you have feedback, feature ideas, or suggestions for prompts, please open an Issue.
