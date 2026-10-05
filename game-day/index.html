@@ -36,7 +36,7 @@
 --cloud:rgba(255,252,244,0.42);--fx-op:0.8;
 --cell:#f7f2e9;--cell-hl:rgba(159,68,23,0.13);--grain:0.055;
 --cool:#3b6672;
---s1:#785c1c;--s2:#a54218;--s3:#4f5f92;--s4:#296b62;--s5:#844d89;--s6:#58663d;--s7:#935125;--s14:#3d6b4f;--s15:#1f5f8b;
+--s1:#785c1c;--s2:#a54218;--s3:#4f5f92;--s4:#296b62;--s5:#844d89;--s6:#58663d;--s7:#935125;--s14:#3d6b4f;--s15:#1f5f8b;--s16:#8a4b2a;--s17:#2f6b45;--s18:#6b4f8f;
 --band:linear-gradient(180deg,#f7c98d 0%,#f4d5a5 34%,#eddcc3 68%,#e8dfd0 100%);
 --band-h:rgba(36,29,22,0.14);
 --theme-meta:#e8dfd0;
@@ -55,7 +55,7 @@ body[data-theme="dusk"]{
 --cloud:rgba(255,244,230,0.045);--fx-op:1;
 --cell:#251f19;--cell-hl:rgba(217,138,78,0.16);--grain:0.05;
 --cool:#5797a8;
---s1:#cf9f30;--s2:#df5920;--s3:#6d7eb0;--s4:#46b9aa;--s5:#a76cac;--s6:#8a9f60;--s7:#cc7033;--s14:#6fbf8c;--s15:#5aa8e0;
+--s1:#cf9f30;--s2:#df5920;--s3:#6d7eb0;--s4:#46b9aa;--s5:#a76cac;--s6:#8a9f60;--s7:#cc7033;--s14:#6fbf8c;--s15:#5aa8e0;--s16:#e0915e;--s17:#74c894;--s18:#b297dc;
 --band:linear-gradient(180deg,#3d2a1c 0%,#2e2118 42%,#221a13 74%,#17130f 100%);
 --band-h:rgba(239,231,218,0.16);
 --theme-meta:#17130f;
@@ -611,6 +611,57 @@ color:var(--ink3);cursor:pointer}
 .set-lbl{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3);margin:34px 0 12px}
 .set-note{font-size:12px;color:var(--ink3);line-height:1.6;margin-top:12px}
 .divider{height:1px;background:var(--rule);margin:34px 0 0}
+
+/* ── Game Day's own cards ── */
+.gd-name{font-size:27px;line-height:1.2;letter-spacing:-.015em;margin-bottom:8px}
+.gd-what{font-size:16px;line-height:1.5;color:var(--ink2)}
+.gd-l{font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:22px 0 10px}
+.gd-steps{list-style:none;counter-reset:gd;display:flex;flex-direction:column;gap:10px}
+.gd-steps li{counter-increment:gd;display:flex;gap:12px;font-size:15px;line-height:1.5}
+.gd-steps li::before{content:counter(gd);flex:0 0 24px;height:24px;border-radius:50%;background:var(--accent);color:var(--btn-text);
+font-size:12px;font-weight:600;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.gd-box{margin-top:18px;padding:14px 16px;border-left:3px solid var(--accent);background:var(--accent-q);font-size:15px;line-height:1.5}
+.gd-box b{display:block;font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:5px}
+.gd-row{display:flex;gap:10px;align-items:center;margin-top:12px}
+.gd-row .input{flex:1;min-width:0}
+.gd-best{font-size:13px;color:var(--ink2);margin-top:10px;font-variant-numeric:tabular-nums;min-height:18px}
+/* the play diagram: drawn from data, coloured from the theme */
+.pb-wrap{margin:16px 0 4px}
+.pb-svg{display:block;width:100%;height:auto;border-radius:4px}
+.pb-grass{fill:color-mix(in srgb,var(--done) 22%,var(--sheet))}
+.pb-line{fill:none;stroke:color-mix(in srgb,var(--ink) 30%,transparent);stroke-width:.45}
+.pb-zone{fill:color-mix(in srgb,var(--done) 34%,var(--sheet))}
+.pb-u{fill:var(--s15);stroke:var(--sheet);stroke-width:.6}
+.pb-t{fill:var(--s2);stroke:var(--sheet);stroke-width:.6}
+.pb-ball{fill:#fff;stroke:#222;stroke-width:.45}
+.pb-a{fill:none;stroke:var(--ink);stroke-width:.75;stroke-linecap:round}
+.pb-a.pass{stroke-dasharray:2.2 1.6}
+.pb-a.dribble{stroke-dasharray:.1 1.4;stroke-width:1.05}
+.pb-head{fill:var(--ink)}
+.pb-key{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12px;color:var(--ink2);margin-top:8px}
+.pb-key span{display:inline-flex;align-items:center;gap:6px}
+.pb-key i{display:inline-block;width:10px;height:10px;border-radius:50%}
+.pb-key svg{width:22px;height:8px}
+/* Who Am I? */
+.who-clues{display:flex;flex-direction:column;gap:10px;margin-bottom:18px}
+.who-clue{display:flex;gap:12px;font-size:17px;line-height:1.45;animation:whoIn .35s ease both}
+.who-clue b{flex:0 0 auto;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);padding-top:5px;width:46px}
+.who-clue.locked{color:var(--ink3);font-style:italic;animation:none}
+@keyframes whoIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.who-bar{display:flex;align-items:center;flex-wrap:wrap;gap:8px 16px;margin:0 0 18px}
+.who-bar .joke-tell{margin-top:0}
+.who-pts{font-size:14px;color:var(--ink2)}
+/* the Locker Room's daily rule */
+.lr-rule{margin-top:26px}
+.lr-txt{font-size:21px;line-height:1.4;letter-spacing:-.01em}
+/* home: today's play and skill */
+.today-row{display:flex;align-items:baseline;gap:12px;width:100%;padding:14px 0;border:none;border-bottom:1px solid var(--rule);
+background:none;color:var(--ink);font-family:inherit;text-align:left;cursor:pointer}
+.today-row:last-child{border-bottom:none}
+.today-k{flex:0 0 52px;font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.today-b{flex:1;min-width:0}
+.today-t{display:block;font-size:19px;line-height:1.3}
+.today-s{display:block;font-size:13px;color:var(--ink3);margin-top:3px;line-height:1.4}
 /* Liam's edition: pitch green instead of sunrise orange. */
 :root,body[data-theme="dawn"]{--accent:#2e6b3c;--accent-q:rgba(46,107,60,0.10);
 --band:linear-gradient(180deg,#c6e2b1 0%,#d6e6c0 34%,#e4e2cc 68%,#e8dfd0 100%);
@@ -639,7 +690,7 @@ body[data-theme="dusk"]{--accent:#6fc486;--accent-q:rgba(111,196,134,0.13);
 </div>
 
 <div class="mark" aria-hidden="true"><svg viewBox="0 0 200 26"><path d="M2 22h78"/><path d="M120 22h78"/><path d="M89 22a11 11 0 0 1 22 0"/><path d="M100 3v5"/><path d="M83 8l3 3.5"/><path d="M117 8l-3 3.5"/></svg></div>
-<div class="p" id="firstRun" style="display:none;margin-top:22px;font-size:13px;padding-left:14px;border-left:2px solid var(--accent)">Your pre-game for the day: a warm-up, sports trivia, a quote, a crossword and a joke. Tap the big button and go step by step, or tap any step to jump to it.</div>
+<div class="p" id="firstRun" style="display:none;margin-top:22px;font-size:13px;padding-left:14px;border-left:2px solid var(--accent)">Your pre-game for the day is below. Tap the big button to go step by step, or tap any card to jump in.</div>
 <div id="nudge" style="display:none"></div>
 
 <!-- The call to action and the sequence come first, above the fold on every
@@ -653,13 +704,10 @@ body[data-theme="dusk"]{--accent:#6fc486;--accent-q:rgba(111,196,134,0.13);
 <div class="idx" id="idx"></div>
 </div>
 
-<div class="sect" id="focusSect" onclick="go(6)">
-<div class="sect-l"><span id="focusL">Today&#8217;s big goal</span><span id="focusMark"></span></div>
-<div class="win-frame" id="winFrame">
-<span class="win-star"><svg viewBox="0 0 24 24"><path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3-5.8 3 1.1-6.5L2.6 9.4l6.5-.9z"/></svg></span>
-<div class="win-t disp" id="winT"></div>
-</div>
-<div class="win-list" id="winList"></div>
+<div class="sect" id="focusSect">
+<div class="sect-l"><span id="focusL">Today&#8217;s play and skill</span><span id="focusMark"></span></div>
+<button class="today-row" id="todayPlay" type="button" onclick="go(17)"><span class="today-k">Play</span><span class="today-b"><span class="today-t disp" id="todayPlayT"></span><span class="today-s" id="todayPlayS"></span></span></button>
+<button class="today-row" id="todaySkill" type="button" onclick="go(18)"><span class="today-k">Skill</span><span class="today-b"><span class="today-t disp" id="todaySkillT"></span><span class="today-s" id="todaySkillS"></span></span></button>
 </div>
 
 <div class="sect hero" onclick="go(1)">
@@ -699,6 +747,10 @@ body[data-theme="dusk"]{--accent:#6fc486;--accent-q:rgba(111,196,134,0.13);
 <div class="note-m disp" id="sparkNoteM"></div>
 <div class="note-q disp"><div class="note-ql">Sit with it</div><span id="sparkNoteQ"></span></div>
 </div></div>
+<div class="sheet lr-rule" id="lrRule">
+<div class="soft-cat" id="lrCat" style="margin-bottom:12px">Today&#8217;s rule</div>
+<div class="lr-txt disp" id="lrTxt"></div>
+</div>
 </div>
 <div class="foot"><div class="foot-row"><button class="btn-skip" onclick="mark(1,'skip');flowNext(1)">Skip</button><button class="btn-go" onclick="mark(1,'done');flowNext(1)">Continue</button></div></div>
 </div>
@@ -894,7 +946,7 @@ body[data-theme="dusk"]{--accent:#6fc486;--accent-q:rgba(111,196,134,0.13);
 <div class="btn-row" style="margin-top:10px"><button class="btn-sec" onclick="openOnboard()">Rebuild my morning &#8594;</button></div>
 <div class="set-note">Which modules, in what order, and what kind of quotes and fables.</div>
 <div class="divider"></div>
-<div class="set-lbl">Your Coach&#8217;s Cards</div>
+<div class="set-lbl">Your locker-room rules</div>
 <div class="btn-row" style="justify-content:flex-start;margin-bottom:10px">
 <button class="btn-sec" onclick="loadCards('sharp')">Load the game rules</button>
 <button class="btn-sec" onclick="loadCards('broad')">Load the starter set</button>
@@ -1011,6 +1063,72 @@ body[data-theme="dusk"]{--accent:#6fc486;--accent-q:rgba(111,196,134,0.13);
 <div class="foot"><div class="foot-row"><button class="btn-skip" onclick="mark(15,'skip');flowNext(15)">Skip</button><button class="btn-go" onclick="mark(15,'done');flowNext(15)">Continue</button></div></div>
 </div>
 
+<!-- 16 WHO AM I? -->
+<div class="scr" id="s16">
+<div class="nav"><button class="nav-btn nav-back" onclick="flowBack(16)" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg><span class="nav-lbl">Back</span></button><div class="nav-step" id="nav16"></div><button class="nav-btn nav-home" onclick="go(0)" aria-label="Home"><svg viewBox="0 0 24 24"><path d="M4 11l8-6.5 8 6.5"/><path d="M6 9.5V20h12V9.5"/></svg><span class="nav-lbl">Home</span></button></div>
+<div class="prog" id="p16"></div><div class="prog-cap" id="cap16"></div>
+<div class="main">
+<div class="h1 disp">Who Am I?</div>
+<div class="p">Guess from as few clues as you can.</div>
+<div class="trv-meta"><span id="whoCount"></span><span id="whoScore"></span></div>
+<div class="sheet trv-card" id="whoCard">
+<div class="joke-kind" id="whoSport"></div>
+<div class="who-clues" id="whoClues"></div>
+<div class="who-bar"><button class="joke-tell" id="whoMoreClue" type="button" onclick="whoClue()">Show clue 2</button><span class="who-pts" id="whoPts"></span></div>
+<div class="trv-choices" id="whoChoices"></div>
+<div class="trv-fact" id="whoFact" aria-live="polite"></div>
+<div class="btn-row" id="whoAgainRow" style="justify-content:center;display:none"><button class="btn-sec" onclick="whoAgain()">Play another &#8635;</button></div>
+</div>
+</div>
+<div class="foot"><div class="foot-row"><button class="btn-skip" onclick="mark(16,'skip');flowNext(16)">Skip</button><button class="btn-go" onclick="mark(16,'done');flowNext(16)">Continue</button></div></div>
+</div>
+
+<!-- 17 THE PLAYBOOK -->
+<div class="scr" id="s17">
+<div class="nav"><button class="nav-btn nav-back" onclick="flowBack(17)" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg><span class="nav-lbl">Back</span></button><div class="nav-step" id="nav17"></div><button class="nav-btn nav-home" onclick="go(0)" aria-label="Home"><svg viewBox="0 0 24 24"><path d="M4 11l8-6.5 8 6.5"/><path d="M6 9.5V20h12V9.5"/></svg><span class="nav-lbl">Home</span></button></div>
+<div class="prog" id="p17"></div><div class="prog-cap" id="cap17"></div>
+<div class="main">
+<div class="h1 disp">The Playbook</div>
+<div class="p">One play a day. Learn it, then watch for it.</div>
+<div class="sheet" id="pbCard">
+<div class="joke-kind" id="pbSport"></div>
+<div class="gd-name disp" id="pbName"></div>
+<div class="gd-what" id="pbWhat"></div>
+<div class="pb-wrap" id="pbDiagram"></div>
+<div class="gd-l">How it works</div>
+<ol class="gd-steps" id="pbHow"></ol>
+<div class="gd-box"><b>Why it works</b><span id="pbWhy"></span></div>
+<div class="gd-box"><b>Look for it</b><span id="pbLook"></span></div>
+</div>
+<div class="btn-row"><button class="btn-sec" onclick="pbAnother()">Another play &#8635;</button></div>
+</div>
+<div class="foot"><div class="foot-row"><button class="btn-skip" onclick="mark(17,'skip');flowNext(17)">Skip</button><button class="btn-go" onclick="mark(17,'done');flowNext(17)">Continue</button></div></div>
+</div>
+
+<!-- 18 SKILL OF THE DAY -->
+<div class="scr" id="s18">
+<div class="nav"><button class="nav-btn nav-back" onclick="flowBack(18)" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg><span class="nav-lbl">Back</span></button><div class="nav-step" id="nav18"></div><button class="nav-btn nav-home" onclick="go(0)" aria-label="Home"><svg viewBox="0 0 24 24"><path d="M4 11l8-6.5 8 6.5"/><path d="M6 9.5V20h12V9.5"/></svg><span class="nav-lbl">Home</span></button></div>
+<div class="prog" id="p18"></div><div class="prog-cap" id="cap18"></div>
+<div class="main">
+<div class="h1 disp">Skill of the Day</div>
+<div class="p">Something to try at recess or practice today.</div>
+<div class="sheet" id="skCard">
+<div class="joke-kind" id="skSport"></div>
+<div class="gd-name disp" id="skName"></div>
+<div class="gd-what" id="skWhat"></div>
+<div class="gd-l">How to do it</div>
+<ol class="gd-steps" id="skSteps"></ol>
+<div class="gd-box"><b>Today&#8217;s goal</b><span id="skGoal"></span></div>
+<div class="gd-box"><b>Coach&#8217;s tip</b><span id="skTip"></span></div>
+<div class="gd-l">Tried it? How many did you get?</div>
+<div class="gd-row"><input class="input" id="skCount" type="number" inputmode="numeric" min="0" max="9999" placeholder="Your number" enterkeyhint="done"><button class="add-btn" id="skSave" type="button" onclick="skSave()">Save</button></div>
+<div class="gd-best" id="skBest" aria-live="polite"></div>
+</div>
+<div class="btn-row"><button class="btn-sec" onclick="skAnother()">Another skill &#8635;</button></div>
+</div>
+<div class="foot"><div class="foot-row"><button class="btn-skip" onclick="mark(18,'skip');flowNext(18)">Skip</button><button class="btn-go" onclick="mark(18,'done');flowNext(18)">Continue</button></div></div>
+</div>
+
 
 <!-- 10 EVENING -->
 <div class="scr" id="s10">
@@ -1019,13 +1137,15 @@ body[data-theme="dusk"]{--accent:#6fc486;--accent-q:rgba(111,196,134,0.13);
 <div class="h1 disp">Post-match.</div>
 <div class="p">How did today go? Fifteen seconds.</div>
 <div class="sheet">
-<div class="eve-q disp">Did you hit your big goal?</div>
-<div class="eve-sub" id="eveWin">No big goal was set this morning.</div>
+<div class="eve-q disp">Did you try today&#8217;s skill?</div>
+<div class="eve-sub" id="eveWin"></div>
 <div class="seg" id="eveSeg">
 <button onclick="eveHit('yes',this)">Yes</button>
 <button onclick="eveHit('almost',this)">Almost</button>
 <button onclick="eveHit('no',this)">No</button>
 </div>
+<div class="eve-sub" style="margin:18px 0 0">How many did you get? (optional)</div>
+<div class="gd-row" id="eveCountRow" style="margin-top:4px"><input class="input" id="eveCount" type="number" inputmode="numeric" min="0" max="9999" placeholder="Your number"></div>
 </div>
 <div class="lbl">What are you grateful for?</div>
 <input class="input" id="eveGrateful" placeholder="One line is enough">
@@ -1039,7 +1159,7 @@ body[data-theme="dusk"]{--accent:#6fc486;--accent-q:rgba(111,196,134,0.13);
 <script>
 /* Which app this is. Editions (tools/build_edition.py) replace this block, and
    KP is the storage prefix: two editions on one device never share a key. */
-const APP={"id": "game-day", "name": "Game Day", "short": "Game Day", "tag": "Liam's morning warm-up", "backup": "game-day", "description": "Liam's morning warm-up: sports trivia, a soccer warm-up, a quote, a crossword, a joke and a plan for the day."};
+const APP={"id": "game-day", "name": "Game Day", "short": "Game Day", "tag": "Liam's morning warm-up", "backup": "game-day", "description": "Liam's morning warm-up: sports trivia, Who Am I?, a crossword, a play to learn, a skill to try and a joke."};
 const KP="gd";
 /* ============================= DATA ============================= */
 
@@ -1734,15 +1854,16 @@ function prog(step){Object.keys(STEPS).forEach(i=>{const el=$('p'+i);if(!el)retu
    DAY.status on every day ever saved — so a module is added by giving it a new
    id, never by renumbering. `blurb` is the one-liner shown when choosing. */
 const STEPS={
-"1":{"name":"Quote","plain":"Quote","t":"The Quote","s":"Words from the greats","blurb":"A quote from a soccer or football great, and what it means.","h1":"The Quote","lead":"Words from soccer and football greats. Read it twice."},
+"1":{"name":"Locker Room","plain":"Locker Room","t":"Locker Room","s":"A word from the greats, and today's rule","blurb":"A quote from a soccer or football great, what it means, and one of your rules for the day.","h1":"Locker Room","lead":"A word from the greats, and today's rule. Read them twice."},
 "2":{"name":"Joke","plain":"Joke","t":"The Joke","s":"Something to laugh at","blurb":"Sports jokes, knock-knocks, riddles and dad jokes.","h1":"The Joke","lead":"Start the day laughing."},
 "3":{"name":"Story","plain":"Story","t":"The Story","s":"A one-minute story","blurb":"True soccer and football stories, plus a few fables. About a minute each."},
 "4":{"name":"Zone","plain":"Breathing","t":"Get in the Zone","s":"Breathe like a pro before a big moment","blurb":"Slow breathing, the way players calm down before a penalty kick.","h1":"Get in the zone","lead":"Players breathe slow before a penalty kick. It calms you down and sharpens you up."},
-"5":{"name":"Coach","plain":"Coach's card","t":"Coach's Card","s":"One rule to play by today","blurb":"One rule from your coach's cards, a different one each day.","h1":"Coach's card","lead":"Today's rule. Say it out loud."},
-"6":{"name":"Plan","plain":"Game plan","t":"Game Plan","s":"What's on, top three, big goal","blurb":"Write down what's happening today, pick your top three, and choose one big goal.","core":true},
 "7":{"name":"Cross","plain":"Crossword","t":"The Crossword","s":"A quick sports crossword","blurb":"A small crossword with soccer and football words and easy clues.","h1":"The Crossword","lead":"Soccer and football words. Tap a square, type a letter. Stuck? Try the other direction."},
 "14":{"name":"Warm-up","plain":"Warm-up","t":"Warm-up","s":"Two easy minutes","blurb":"Two easy minutes to wake your body up.","h1":"Warm-up","lead":"Two easy minutes to wake up. Stop if anything hurts."},
-"15":{"name":"Trivia","plain":"Trivia","t":"Sports Trivia","s":"Five questions a day","blurb":"Five soccer and football questions a day, with a fun fact after each answer.","h1":"Sports trivia","lead":"Five questions. Take your best guess."}
+"15":{"name":"Trivia","plain":"Trivia","t":"Sports Trivia","s":"Five questions a day","blurb":"Five soccer and football questions a day, with a fun fact after each answer.","h1":"Sports trivia","lead":"Five questions. Take your best guess."},
+"16":{"name":"Who Am I?","plain":"Who Am I?","t":"Who Am I?","s":"Guess the player or team","blurb":"Guess a player or team from three clues. The fewer clues you need, the more points you get.","h1":"Who Am I?","lead":"Guess from as few clues as you can. Fewer clues, more points."},
+"17":{"name":"Playbook","plain":"Playbook","t":"The Playbook","s":"One play to learn today","blurb":"One soccer or football play a day: what it is, how it works and why it's smart.","h1":"The Playbook","lead":"One play a day. Learn it, then watch for it."},
+"18":{"name":"Skill","plain":"Skill","t":"Skill of the Day","s":"Something to try at recess","blurb":"One ball skill to try at recess, in the yard or at practice.","h1":"Skill of the Day","lead":"Something to try at recess or practice today."}
 };
 if(!TRIVIA.length)delete STEPS[15];      // an edition without a bank has no trivia step
 const stepName=n=>(STEPS[n]||{}).name||('Step '+n);
@@ -1756,10 +1877,11 @@ const STEP_NAMES=Object.keys(STEPS).map(Number).sort((a,b)=>a-b).map(n=>STEPS[n]
 const DEFAULT_FLOW=[
 14,
 15,
-1,
+16,
 7,
-5,
-6,
+17,
+18,
+1,
 2
 ];   // Spark, Story, Mini, Software, Breathe, Today, Laugh
 let FLOW=DEFAULT_FLOW.slice();
@@ -1768,7 +1890,22 @@ function validFlow(f){
   (Array.isArray(f)?f:[]).forEach(n=>{n=+n;if(STEPS[n]&&seen.indexOf(n)<0)seen.push(n)});
   return seen.length?seen:DEFAULT_FLOW.slice();   // never leave someone a blank app
 }
-function setFlow(f){FLOW=validFlow(f);S.flow=FLOW.slice();saveS()}
+function setFlow(f){FLOW=validFlow(f);S.flow=FLOW.slice();S.flowV=3;saveS()}
+/* Version 3 retired the to-do list (6) and the separate coach's card (5) and
+   brought in Who Am I? (16), the Playbook (17) and Skill of the Day (18). A
+   morning saved before then would otherwise just lose two cards and never
+   see the new ones, so it gets the new default order, keeping anything
+   optional it had switched on (just before the joke) and leaving out any
+   of the old cards it had switched off. */
+const NEW_IN_V3=[16,17,18];
+function upgradeFlow(f){
+  if(!Array.isArray(f)||!f.length||S.flowV>=3)return f;
+  const had=f.map(Number);
+  const out=DEFAULT_FLOW.filter(n=>had.indexOf(n)>=0||NEW_IN_V3.indexOf(n)>=0);
+  had.forEach(n=>{if(STEPS[n]&&out.indexOf(n)<0){const j=out.indexOf(2);out.splice(j<0?out.length:j,0,n)}});
+  S.flow=out;S.flowV=3;saveS();
+  return out;
+}
 const flowPos=n=>FLOW.indexOf(n);  // 0-based position of a step
 function flowNext(n){const i=flowPos(n);return go(i<0||i>=FLOW.length-1?8:FLOW[i+1])}
 function flowBack(n){const i=flowPos(n);return go(i<=0?0:FLOW[i-1])}
@@ -1867,6 +2004,9 @@ function go(n){
   if(n===7)cwOpen();
   if(n===14)strOpen();
   if(n===15)trvOpen();
+  if(n===16)whoOpen();
+  if(n===17)pbOpen();
+  if(n===18)skOpen();
   if(n===8)renderRecap();
 }
 
@@ -1895,16 +2035,16 @@ function syncDash(){
   $('heroQ').textContent='\u201C'+sq+'\u201D';
   $('heroA').textContent=sa;
 
-  // focus
-  const t3=[DAY.t1,DAY.t2,DAY.t3].filter(Boolean);
-  const win=(DAY.win||'').trim();
-  $('winT').textContent=win||'Pick your big goal.';
-  $('winT').className='win-t disp'+(win?'':' empty');
-  $('winFrame').className='win-frame'+(win?'':' empty');
-  $('winFrame').onclick=()=>go(6);
-  $('focusMark').textContent=statusOf(6)==='done'?'Set':'';
+  // today's play and skill: the two things to carry out of the house
+  const pl=PLAYS[pbIndex()],sk=SKILLS[skIndex()];
+  $('todayPlayT').textContent=pl?pl.name:'';
+  $('todayPlayS').textContent=pl?pl.what:'';
+  $('todaySkillT').textContent=sk?sk.name:'';
+  $('todaySkillS').textContent=sk?'Goal: '+sk.goal:'';
+  $('focusSect').style.display=(pl||sk)?'':'none';
+  const best=sk?skBestFor(sk.name):0;
+  $('focusMark').textContent=DAY.skillN!=null?'Skill: '+DAY.skillN+(best&&DAY.skillN>=best?' (best!)':''):'';
   $('focusMark').style.color='var(--done)';
-  $('winList').innerHTML=t3.map((x,i)=>'<div class="win-item"><i>'+(i+1)+'</i><span>'+esc(x)+'</span></div>').join('');
 
   /* The sunrise band ends just under the call to action. It used to be anchored
      to the hero quote, which now sits far down the page — following it there
@@ -1944,7 +2084,10 @@ function syncDash(){
     if(c.n===3&&storyI!==null&&st==='done')sub=STORIES[storyI].t;
     if(c.n===7)sub=cwIsWeekend()?'The bigger weekend crossword':'A daily mini crossword';   // the weekend puzzle is bigger
     if(c.n===7&&DAY.cwSolved)sub='Solved';
-    if(c.n===6&&(DAY.win||'').trim())sub=DAY.win;
+    if(c.n===17&&PLAYS.length)sub=PLAYS[pbIndex()].name;
+    if(c.n===18&&SKILLS.length)sub=SKILLS[skIndex()].name;
+    if(c.n===16&&DAY.who&&(DAY.who.first||DAY.who.pick!=null))sub=whoLine(DAY.who.first||DAY.who);
+    if(c.n===15&&DAY.triv&&DAY.triv.n)sub=DAY.triv.right+' out of '+DAY.triv.n+' right';
     if(justDone===c.n)r.classList.add('pop');
     r.innerHTML='<div class="idx-n">'+String(flowPos(c.n)+1).padStart(2,'0')+'</div>'+
       '<div class="idx-b"><div class="idx-t disp">'+c.t+'</div><div class="idx-s">'+esc(sub)+'</div></div>'+
@@ -1966,6 +2109,14 @@ function syncDash(){
   justDone=null;
 }
 
+/* The evening asks whether he tried the skill. Days from before the Playbook
+   asked about a big goal, and the same three answers read fine for both. */
+function hitLabel(hit,cls){
+  const c=cls?' class="'+cls+'"':'';
+  return hit==='yes'?'<span'+c+' style="color:var(--done)">Tried it</span>'
+    :hit==='almost'?'<span'+c+' style="color:var(--skip)">Almost</span>'
+    :hit==='no'?'<span'+c+' style="color:var(--ink3)">Not today</span>':'';
+}
 /* the streak as a shape, not just a number */
 function renderMonth(){
   const box=$('month');if(!box)return;
@@ -2003,13 +2154,14 @@ function renderLook(){
     const hit=eve.hit;
     const el=document.createElement('div');el.className='look-day';
     const nice=new Date(k+'T12:00:00').toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'});
-    const hitTxt=hit==='yes'?'<span class="look-hit" style="color:var(--done)">Hit it</span>'
-      :hit==='almost'?'<span class="look-hit" style="color:var(--skip)">Almost</span>'
-      :hit==='no'?'<span class="look-hit" style="color:var(--ink3)">Missed</span>':'';
+    const hitTxt=hitLabel(hit,'look-hit');
+    /* Days from before the Playbook have a big goal instead of a play. */
+    const head=d.play||d.win;
     el.innerHTML='<div class="look-date"><span>'+nice+'</span>'+hitTxt+'</div>'+
-      (d.win?'<div class="look-win disp">'+esc(d.win)+'</div>':'<div class="look-win disp" style="color:var(--ink3)">No big goal set</div>')+
+      (head?'<div class="look-win disp">'+esc(head)+'</div>':'<div class="look-win disp" style="color:var(--ink3)">Morning done</div>')+
+      (d.skill?'<div class="look-sub"><b>Skill</b>'+esc(d.skill)+(d.skillN!=null?' · '+d.skillN:'')+'</div>':'')+
       (eve.grateful?'<div class="look-sub"><b>Grateful for</b>'+esc(eve.grateful)+'</div>':'')+
-      (eve.win?'<div class="look-sub"><b>Win of the day</b>'+esc(eve.win)+'</div>':'')+
+      (eve.win?'<div class="look-sub"><b>Best play of the day</b>'+esc(eve.win)+'</div>':'')+
       (d.note?'<div class="look-sub"><b>Note</b>'+esc(d.note)+'</div>':'')+
       '<div class="look-more">Read the day &#8594;</div>';
     el.onclick=()=>openJournal(k);
@@ -2030,6 +2182,7 @@ function dayHasContent(d){
   if(!d)return false;
   const e=d.eve||{};
   return !!((d.items&&d.items.length)||d.win||d.note||d.quote||d.story||d.joke||(d.triv&&d.triv.n)||
+    d.play||d.skill||(d.who&&(d.who.first||d.who.pick!=null))||
     d.cwSolved||d.med||(d.status&&Object.keys(d.status).length)||
     e.grateful||e.win||e.hit);
 }
@@ -2064,12 +2217,14 @@ function renderJournal(){
     dt.toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'})+'</div>'+
     '<div class="jr-meta">'+dt.getFullYear()+'</div></div>');
 
-  // ── the WIN, and whether it landed ──
+  // ── the play and the skill, and whether he tried it ──
   const hit=eve.hit;
-  const hitTxt=hit==='yes'?'<span style="color:var(--done)">Hit it</span>'
-    :hit==='almost'?'<span style="color:var(--skip)">Almost</span>'
-    :hit==='no'?'<span style="color:var(--ink3)">Missed</span>':'';
-  if(d.win)out.push(sect('What mattered',hitTxt,'<div class="jr-win disp">'+esc(d.win)+'</div>'));
+  const hitTxt=hitLabel(hit,'');
+  if(d.play)out.push(sect("Today's play",'','<div class="jr-win disp">'+esc(d.play)+'</div>'));
+  if(d.skill)out.push(sect("Today's skill",hitTxt,'<div class="jr-win disp">'+esc(d.skill)+'</div>'+
+    (d.skillN!=null?'<div class="jr-row"><i>#</i><span>He got '+esc(String(d.skillN))+'</span></div>':'')));
+  // days from before the Playbook: the big goal they set
+  if(d.win)out.push(sect('What mattered',d.skill?'':hitTxt,'<div class="jr-win disp">'+esc(d.win)+'</div>'));
 
   // ── the Top 3 (resolved through items; t1..t3 for records that predate them) ──
   const byId=id=>((d.items||[]).find(x=>x.id===id)||{}).text||'';
@@ -2092,7 +2247,7 @@ function renderJournal(){
   const w=[];
   if(d.note)w.push('<div class="jr-wl">Note to self</div><div class="jr-write disp">'+esc(d.note)+'</div>');
   if(eve.grateful)w.push('<div class="jr-wl">Grateful for</div><div class="jr-write disp">'+esc(eve.grateful)+'</div>');
-  if(eve.win)w.push('<div class="jr-wl">Win of the day</div><div class="jr-write disp">'+esc(eve.win)+'</div>');
+  if(eve.win)w.push('<div class="jr-wl">Best play of the day</div><div class="jr-write disp">'+esc(eve.win)+'</div>');
   if(w.length)out.push(sect('In your words','',w.join('')));
 
   // ── how the morning went ──
@@ -2108,14 +2263,15 @@ function renderJournal(){
   if(dayStepIds.length)facts.push('<div class="jr-steps">'+
     dayStepIds.map(n=>'<span class="jr-chip '+(st[n]||'')+'">'+stepName(n)+'</span>').join('')+'</div>');
   if(d.quote){const [q,a]=splitLine(d.quote);
-    facts.push('<div class="jr-fact"><b>The spark</b>“'+esc(q)+'”'+(a?' — '+esc(a):'')+'</div>')}
+    facts.push('<div class="jr-fact"><b>Locker Room</b>“'+esc(q)+'”'+(a?' — '+esc(a):'')+'</div>')}
   if(d.story)facts.push('<div class="jr-fact"><b>The story</b>'+esc(d.story)+'</div>');
   if(d.software){const [sc,st]=splitLine(d.software);
-    facts.push('<div class="jr-fact"><b>Your software</b>'+esc(st||d.software)+(sc?' \u2014 '+esc(sc):'')+'</div>')}
+    facts.push('<div class="jr-fact"><b>Today\u2019s rule</b>'+esc(st||d.software)+(sc?' \u2014 '+esc(sc):'')+'</div>')}
   if(d.joke){const [jl,jw]=splitLine(d.joke);
     facts.push('<div class="jr-fact"><b>The laugh</b>'+esc(jl)+(jw?' \u2014 '+esc(jw):'')+'</div>')}
   if(d.triv&&d.triv.n)facts.push('<div class="jr-fact"><b>Trivia</b>'+d.triv.right+' out of '+d.triv.n+' right</div>');
-  if(d.cwSolved)facts.push('<div class="jr-fact"><b>The mini</b>Solved'+(d.cwTime?' in '+fmt(d.cwTime):'')+'</div>');
+  if(d.who&&(d.who.first||d.who.pick!=null))facts.push('<div class="jr-fact"><b>Who Am I?</b>'+esc(whoLine(d.who.first||d.who))+'</div>');
+  if(d.cwSolved)facts.push('<div class="jr-fact"><b>Crossword</b>Solved'+(d.cwTime?' in '+fmt(d.cwTime):'')+'</div>');
   if(d.med)facts.push('<div class="jr-fact"><b>Breathe</b>You sat with it.</div>');
   if(facts.length)out.push(sect('The morning','',facts.join('')));
 
@@ -2206,7 +2362,23 @@ function toggleNote(kind){
 function paintSpark(){const [q,a]=splitLine(S.quotes[sparkI]);
   if($('sparkQ')){$('sparkQ').textContent='\u201C'+q+'\u201D';$('sparkA').textContent=a}
   if(DAY.quote!==S.quotes[sparkI]){DAY.quote=S.quotes[sparkI];saveDay()}
-  paintNote('spark');poolNote('quote')}
+  paintNote('spark');poolNote('quote');paintRule()}
+/* The Locker Room's second half: one of his rules, a different one each day,
+   on the same rotation the old coach's card used. */
+function paintRule(){
+  const box=$('lrRule');if(!box)return;
+  const list=S.affirms;
+  box.style.display=list.length?'':'none';
+  if(!list.length)return;
+  const card=list[softToday()];
+  const [cat,txt]=splitLine(card);
+  /* Game rules read "When you lose the ball | Win it back." The When-part
+     is the label; a plain card's category isn't worth a label of its own. */
+  const when=/^when /i.test(cat||'');
+  $('lrCat').textContent=when?cat:'Today\u2019s rule';
+  $('lrTxt').textContent=txt||card;
+  if(DAY.software!==card){DAY.software=card;saveDay()}
+}
 function newSpark(){sparkI=pick('quote',sparkI);paintSpark()}
 /* Six kinds of joke, because one register gets old by Wednesday. Jokes with a
    setup hold the punchline back for a tap — timing is most of a dad joke. */
@@ -2598,7 +2770,7 @@ function renderOnboard(){
       r.innerHTML='<div class="ob-box">'+OB_TICK+'</div><div class="ob-b">'+
         '<div class="ob-t disp">'+esc(st.t)+'</div>'+
         '<div class="ob-s">'+esc(st.blurb)+'</div>'+
-        (st.core&&!on?'<div class="ob-warn">Without this there&#39;s no top three or big goal for the day.</div>':'')+
+        
         '</div>';
       r.onclick=()=>{
         const i=obPick.indexOf(n);
@@ -2619,7 +2791,7 @@ function renderOnboard(){
 
   if(obPage===1){
     $('obTitle').textContent='What order?';
-    $('obLead').textContent='This order works well: warm up, wake your brain up, make a plan, then laugh on the way out.';
+    $('obLead').textContent='This order works well: warm up, wake your brain up, learn something about the game, then laugh on the way out.';
     obPick.forEach((n,i)=>{
       const r=document.createElement('div');r.className='ob-ord';
       r.innerHTML='<div class="ob-n">'+String(i+1).padStart(2,'0')+'</div>'+
@@ -2655,8 +2827,8 @@ function renderOnboard(){
     return;
   }
 
-  $('obTitle').textContent='Your coach’s cards.';
-  $('obLead').textContent='Rules to play by. You get one each day. Tap the ones you like, or start from a set.';
+  $('obTitle').textContent='Your locker-room rules.';
+  $('obLead').textContent='Rules to play by. One shows up in the Locker Room each day. Tap the ones you like, or start from a set.';
 
   /* Forty cards is a lot to read at 6am on day one. Two ready-made sets take
      the decision away for anyone who would rather just start. */
@@ -2817,6 +2989,301 @@ function trvSummary(){
     '<div class="p" style="font-size:13px">All time: '+s.right+' right out of '+s.n+(s.perfect?' · '+s.perfect+' perfect round'+(s.perfect===1?'':'s'):'')+'</div>'+
     '<div class="btn-row" style="justify-content:center"><button class="btn-sec" onclick="trvMore()">Play 5 more &#8635;</button></div>';
   if(statusOf(15)!=='done')mark(15,'done');
+}
+/* ============================= GAME DAY'S OWN CARDS =============================
+   Who Am I? (16), the Playbook (17) and Skill of the Day (18). Their words live
+   in content/whoami.py, plays.py and skills.py; make_pack.py writes them here. */
+const WHOAMI=[
+{"s":"soccer","clues":["I was born in Rosario, Argentina, in 1987.","I played for Barcelona for 17 seasons, then joined Inter Miami in 2023.","I captained Argentina to win the 2022 World Cup."],"c":["Lionel Messi","Cristiano Ronaldo","Neymar","Kylian Mbappé"],"f":"By 2023 Messi had won the Ballon d'Or, the award for the world's best player, 8 times. Nobody else has won it more than 5."},
+{"s":"soccer","clues":["I was born on the island of Madeira, in Portugal.","I've played for Manchester United, Real Madrid and Juventus.","When I score, I jump, spin and shout \"Siuuu!\""],"c":["Cristiano Ronaldo","Lionel Messi","Kylian Mbappé","Mohamed Salah"],"f":"He has scored more goals for his country than any other man in history."},
+{"s":"soccer","clues":["I grew up in Bondy, just outside Paris.","I scored a hat-trick in the 2022 World Cup final, and my team still lost.","I won the World Cup with France in 2018, when I was only 19."],"c":["Kylian Mbappé","Antoine Griezmann","Erling Haaland","Vinícius Júnior"],"f":"In 2018 he became the second teenager to score in a World Cup final. The first was Pelé, in 1958."},
+{"s":"soccer","clues":["My dad, Alf-Inge, also played in England's Premier League.","Before Manchester City, I scored lots of goals for Borussia Dortmund in Germany.","I'm a giant striker from Norway."],"c":["Erling Haaland","Harry Kane","Kevin De Bruyne","Martin Ødegaard"],"f":"He scored 36 goals in his first Premier League season, 2022-23, a record for one season."},
+{"s":"soccer","clues":["I grew up in a small village in Egypt.","I played in Italy for Fiorentina and Roma.","I joined Liverpool in 2017, and fans call me the Egyptian King."],"c":["Mohamed Salah","Sadio Mané","Riyad Mahrez","Son Heung-min"],"f":"He scored 32 Premier League goals in his first season at Liverpool, a record at the time."},
+{"s":"soccer","clues":["I came through the youth team at Tottenham Hotspur.","In 2023 I moved to Bayern Munich in Germany.","I'm the all-time top goal scorer for England's men."],"c":["Harry Kane","Jude Bellingham","Wayne Rooney","Bukayo Saka"],"f":"He passed Wayne Rooney to become England's top scorer in March 2023."},
+{"s":"soccer","clues":["I was born in Hershey, Pennsylvania, the chocolate town.","I played for Dortmund and Chelsea, then joined AC Milan in 2023.","I'm a USA star, and fans call me Captain America."],"c":["Christian Pulisic","Weston McKennie","Tyler Adams","Landon Donovan"],"f":"In 2021 he became the first American man to play in a Champions League final, and he won it with Chelsea."},
+{"s":"soccer","clues":["My real name is Edson Arantes do Nascimento.","I played most of my career for Santos, then finished with the New York Cosmos.","I'm the only player to win three World Cups, for Brazil."],"c":["Pelé","Diego Maradona","Ronaldinho","Garrincha"],"f":"He was only 17 when he won his first World Cup, in 1958."},
+{"s":"soccer","clues":["I wore number 7 for Manchester United.","I joined LA Galaxy in 2007, and later became an owner of Inter Miami.","A movie was named after the way I curved my free kicks."],"c":["David Beckham","Wayne Rooney","Steven Gerrard","Frank Lampard"],"f":"The movie is \"Bend It Like Beckham\", from 2002."},
+{"s":"soccer","clues":["I won four college championships with North Carolina.","I won the World Cup with the USA in 1991 and 1999.","When I retired in 2004, I had scored more international goals than any player ever, man or woman."],"c":["Mia Hamm","Abby Wambach","Alex Morgan","Megan Rapinoe"],"f":"She scored 158 goals for the USA."},
+{"s":"soccer","clues":["I started at Santos, the same club as Pelé.","In 2017 I moved from Barcelona to Paris Saint-Germain for a world-record fee.","In 2023 I passed Pelé to become Brazil's all-time top scorer."],"c":["Neymar","Vinícius Júnior","Ronaldinho","Kaká"],"f":"His move to PSG cost about 222 million euros, more than double the record at the time."},
+{"s":"soccer","clues":["I grew up in a poor neighbourhood near Buenos Aires.","I led Napoli to their first Italian league title, in 1987.","I captained Argentina to win the 1986 World Cup, and scored the \"Hand of God\" goal."],"c":["Diego Maradona","Lionel Messi","Pelé","Gabriel Batistuta"],"f":"Four minutes after the \"Hand of God\", he dribbled past five England players to score a goal later voted the Goal of the Century."},
+{"s":"soccer","clues":["I started at Birmingham City, and they retired my number 22 when I was 17.","I played for Borussia Dortmund in Germany.","I joined Real Madrid in 2023, and I play in England's midfield."],"c":["Jude Bellingham","Phil Foden","Bukayo Saka","Declan Rice"],"f":"He played his first game for England in 2020, when he was 17."},
+{"s":"soccer","clues":["I was born in Spain in 2007.","I came through La Masia, Barcelona's famous academy.","At 16, I became the youngest player ever to score at a European Championship."],"c":["Lamine Yamal","Pedri","Gavi","Nico Williams"],"f":"Spain won that tournament, Euro 2024. He turned 17 the day before the final."},
+{"s":"football","clues":["My dad was a Major League Baseball pitcher.","I played college football at Texas Tech.","I'm the Kansas City Chiefs quarterback, famous for no-look passes."],"c":["Patrick Mahomes","Josh Allen","Joe Burrow","Lamar Jackson"],"f":"He won three Super Bowls in five seasons: after the 2019, 2022 and 2023 seasons."},
+{"s":"football","clues":["I was the 199th pick in the 2000 NFL Draft.","I played college football at Michigan.","I won six Super Bowls with the Patriots and one with the Buccaneers."],"c":["Tom Brady","Peyton Manning","Aaron Rodgers","Drew Brees"],"f":"When he retired in 2023, his seven Super Bowl wins were more than any NFL team had."},
+{"s":"football","clues":["I played college football at Cincinnati.","My brother Jason was a center for the Philadelphia Eagles.","I'm a tight end who catches passes from Patrick Mahomes."],"c":["Travis Kelce","George Kittle","Rob Gronkowski","Tyreek Hill"],"f":"In February 2023 he and Jason became the first brothers to play against each other in a Super Bowl."},
+{"s":"football","clues":["I played college football at Tennessee.","My dad Archie and my brother Eli were NFL quarterbacks too.","I won Super Bowls with the Indianapolis Colts and the Denver Broncos."],"c":["Peyton Manning","Eli Manning","Tom Brady","Drew Brees"],"f":"He threw 55 touchdown passes in 2013, the most ever in one season."},
+{"s":"football","clues":["I played college football at Mississippi Valley State.","I won three Super Bowls with the San Francisco 49ers.","Lots of people call me the greatest wide receiver ever."],"c":["Jerry Rice","Randy Moss","Larry Fitzgerald","Calvin Johnson"],"f":"He holds the NFL records for most career catches, receiving yards and receiving touchdowns."},
+{"s":"football","clues":["I won the Heisman Trophy at Louisville in 2016.","I was the last pick of the first round in the 2018 draft.","I'm the Baltimore Ravens quarterback, and one of the fastest runners ever at my position."],"c":["Lamar Jackson","Jalen Hurts","Josh Allen","Kyler Murray"],"f":"In 2019 he became only the second player ever voted MVP by every single voter."},
+{"s":"football","clues":["I played college football at Wyoming.","I'm 6 feet 5 inches tall and famous for hurdling over defenders.","I'm the quarterback of the Buffalo Bills."],"c":["Josh Allen","Patrick Mahomes","Joe Burrow","Justin Herbert"],"f":"He was voted the NFL's Most Valuable Player for the 2024 season."},
+{"s":"football","clues":["I won a college national championship at LSU in 2019.","My touchdown dance, the Griddy, got copied all over the world.","I'm a wide receiver for the Minnesota Vikings."],"c":["Justin Jefferson","Ja'Marr Chase","CeeDee Lamb","Tyreek Hill"],"f":"In 2022 he led the NFL with 1,809 receiving yards and was named Offensive Player of the Year."},
+{"s":"football","clues":["I played college football at Penn State.","I started my NFL career with the New York Giants.","In 2024 I ran for over 2,000 yards for the Philadelphia Eagles."],"c":["Saquon Barkley","Derrick Henry","Christian McCaffrey","Jalen Hurts"],"f":"The Eagles won the Super Bowl at the end of that 2024 season."},
+{"s":"football","clues":["We won the first two Super Bowls ever played.","Our fans wear foam cheese on their heads.","We play at Lambeau Field in Green Bay, Wisconsin."],"c":["Green Bay Packers","Chicago Bears","Minnesota Vikings","Detroit Lions"],"f":"The Packers are the only NFL team owned by their fans, not by one rich owner."},
+{"s":"football","clues":["We play in Arlington, Texas, under a giant video board.","We have a blue star on our helmets.","People call us \"America's Team\"."],"c":["Dallas Cowboys","Houston Texans","Philadelphia Eagles","New York Giants"],"f":"The nickname \"America's Team\" came from a team highlight film in 1979."},
+{"s":"football","clues":["Our logo comes from a symbol used by the steel industry.","Our fans wave the Terrible Towel.","We play in Pittsburgh, in black and gold."],"c":["Pittsburgh Steelers","Baltimore Ravens","Cleveland Browns","Cincinnati Bengals"],"f":"The Steelers are the only NFL team with their logo on just one side of the helmet."},
+{"s":"football","clues":["We started out in Dallas, as the Dallas Texans.","Our stadium, Arrowhead, is one of the loudest in the world.","Patrick Mahomes is our quarterback."],"c":["Kansas City Chiefs","Las Vegas Raiders","Denver Broncos","Los Angeles Chargers"],"f":"In 2014 Chiefs fans set a world record for the loudest crowd roar at an outdoor stadium."},
+{"s":"football","clues":["Our fans call themselves the 12th Man.","In 2011 our crowd cheered so hard for a touchdown run that it showed up on an earthquake sensor.","We play in Seattle, in blue and bright green."],"c":["Seattle Seahawks","San Francisco 49ers","Los Angeles Rams","Arizona Cardinals"],"f":"That run, by Marshawn Lynch, is called the \"Beast Quake\"."},
+{"s":"football","clues":["We play in Foxborough, Massachusetts.","Bill Belichick coached us for 24 seasons.","Tom Brady won six Super Bowls with us."],"c":["New England Patriots","New York Jets","New York Giants","Buffalo Bills"],"f":"With Belichick as coach, the Patriots played in nine Super Bowls."},
+{"s":"football","clues":["Our fans call themselves Bills Mafia.","Our stadium gets some of the most snow in the NFL.","Josh Allen is our quarterback."],"c":["Buffalo Bills","Miami Dolphins","New York Jets","Green Bay Packers"],"f":"In the early 1990s they played in four Super Bowls in a row, the only team ever to do it."},
+{"s":"football","clues":["Our stadium has a pirate ship in it that fires cannons when we score.","We were the first team to win a Super Bowl in our own stadium, in 2021.","Tom Brady won his seventh Super Bowl with us."],"c":["Tampa Bay Buccaneers","Miami Dolphins","Jacksonville Jaguars","Carolina Panthers"],"f":"That Super Bowl win was Tom Brady's first season in Tampa."},
+{"s":"soccer","clues":["We started playing in MLS in 2020.","David Beckham is one of our owners.","Lionel Messi joined us in 2023."],"c":["Inter Miami","LA Galaxy","Orlando City","Atlanta United"],"f":"Weeks after Messi arrived in 2023, they won the Leagues Cup, the club's first trophy."},
+{"s":"soccer","clues":["Our motto is \"More than a club\".","Our stadium is the Camp Nou.","We play in red and blue stripes, and Messi spent 17 seasons with us."],"c":["Barcelona","Real Madrid","Atlético Madrid","Sevilla"],"f":"Their academy, La Masia, produced Messi, Xavi, Iniesta and Lamine Yamal."},
+{"s":"soccer","clues":["Our stadium is the Santiago Bernabéu.","We play in all white and are nicknamed Los Blancos.","We've won the Champions League more times than any other club."],"c":["Real Madrid","Barcelona","Bayern Munich","Juventus"],"f":"They won the first five European Cups in a row, from 1956 to 1960."},
+{"s":"soccer","clues":["Our stadium is Anfield.","Our anthem is \"You'll Never Walk Alone\".","We play in red, in the English city where the Beatles came from."],"c":["Liverpool","Everton","Manchester United","Chelsea"],"f":"Fans have sung \"You'll Never Walk Alone\" before home games since the 1960s."},
+{"s":"soccer","clues":["Sir Alex Ferguson managed us for 26 years.","Our stadium, Old Trafford, is nicknamed the Theatre of Dreams.","We're the Red Devils."],"c":["Manchester United","Manchester City","Liverpool","Arsenal"],"f":"Under Ferguson they won 13 Premier League titles."},
+{"s":"soccer","clues":["We're nicknamed the Gunners.","We play at the Emirates Stadium in north London.","In 2003-04 we went a whole Premier League season without losing."],"c":["Arsenal","Chelsea","Tottenham Hotspur","West Ham United"],"f":"That team is called the Invincibles: 26 wins, 12 draws, no losses."},
+{"s":"soccer","clues":["We have played in every men's World Cup ever held.","We wear yellow shirts and blue shorts.","Pelé won three World Cups with us."],"c":["Brazil","Argentina","Portugal","Colombia"],"f":"Pelé, Ronaldo, Ronaldinho and Neymar all played for Brazil."},
+{"s":"soccer","clues":["We wear light blue and white stripes.","Diego Maradona led us to the 1986 World Cup.","Messi captained us to the 2022 World Cup."],"c":["Argentina","Uruguay","Brazil","Spain"],"f":"The 2022 final against France ended 3-3, and Argentina won on penalties. Many call it the best final ever."}
+];
+const PLAYS=[
+{"s":"soccer","name":"The give-and-go","what":"Pass to a teammate, sprint past your defender, and get the ball straight back.","how":["Pass the ball to a teammate.","Sprint past the defender the moment you let it go.","Your teammate passes it right back into the space in front of you."],"why":"One defender can't follow the ball and you at the same time. Two quick passes beat him without any dribbling.","look":"Watch for it near the penalty box. It's also called a one-two, and you can use it in any small-sided game.","d":{"p":[["u",40,32],["t",52,32],["u",56,18]],"b":[40,32],"a":[["pass",40,32,55,19],["run",41,34,70,34],["pass",56,19,69,32]]}},
+{"s":"soccer","name":"The overlap","what":"A teammate runs around the outside of the player with the ball.","how":["The winger has the ball near the sideline, with a defender in front.","A teammate sprints past on the outside.","The winger slides the ball into that teammate's path."],"why":"The defender has to choose: stay with the winger or chase the runner. Either way, someone gets free.","look":"Full-backs do this all the time. Look for a defender suddenly appearing in a wide attack.","d":{"p":[["u",60,16],["t",67,18],["u",44,8]],"b":[60,16],"a":[["run",45,7,80,5],["pass",61,15,78,6]]}},
+{"s":"soccer","name":"Switching the play","what":"A long pass from the crowded side of the field to the empty side.","how":["Your team has the ball on one side, and lots of defenders have moved over.","Look across the field for a teammate in space.","Play a long pass over to them."],"why":"Defenders slide toward the ball. Switching it fast catches them out, with lots of room on the other side.","look":"Look for a long diagonal pass across the field, then a player with time to run forward.","d":{"p":[["u",40,14],["t",48,9],["t",50,20],["t",56,13],["u",62,50]],"b":[40,14],"a":[["pass",41,16,61,48]]}},
+{"s":"soccer","name":"The through ball","what":"A pass into the space behind the defenders, for a teammate to run onto.","how":["A striker starts level with the last defender.","As the striker starts running, the passer plays the ball into the gap behind the defense.","The striker gets there first and is through on goal."],"why":"Defenders are facing the wrong way. The striker is already running toward goal, so they can't catch up.","look":"Watch strikers like Haaland time their runs. If they go too early, they're offside.","d":{"p":[["u",44,30],["t",64,20],["t",64,40],["u",58,36]],"b":[44,30],"a":[["run",59,36,81,27],["pass",45,30,80,27]]}},
+{"s":"soccer","name":"The press","what":"Chase the ball as a team the moment you lose it, to win it back near their goal.","how":["As soon as the other team gets the ball, the closest player rushes them.","Teammates close down the easy passes.","The player with the ball runs out of time and makes a mistake."],"why":"Winning the ball near their goal means you only have a short way to go to score.","look":"Teams like Liverpool and Barcelona are famous for it. Look for three players swarming the ball at once.","d":{"p":[["t",80,30],["t",88,18],["t",88,44],["u",68,30],["u",74,16],["u",74,46]],"b":[80,30],"a":[["run",69,30,78,30],["run",75,17,85,20],["run",75,45,85,42]]}},
+{"s":"soccer","name":"Staying compact","what":"When defending, the whole team stays close together.","how":["Defenders and midfielders form two lines.","Keep the lines close together, and move left and right as the ball moves.","Leave no big gaps for the other team to pass through."],"why":"If there are no gaps, the other team has to pass around you instead of through you, which is much harder.","look":"Watch a team defending a lead late in a game. Everyone is packed in front of their own goal.","d":{"p":[["u",22,18],["u",22,26],["u",22,34],["u",22,42],["u",32,20],["u",32,30],["u",32,40],["t",50,30]],"b":[50,30],"a":[]}},
+{"s":"soccer","name":"The offside trap","what":"Defenders step forward together just before a pass, leaving an attacker offside.","how":["The defenders stand in a straight line.","Just as the other team is about to pass, they all step up together.","The attacker is suddenly behind them, and the flag goes up for offside."],"why":"It wins the ball back without a tackle. But if one defender doesn't step up, the trick fails.","look":"Look for a line of defenders moving forward at the same moment, with their arms up appealing.","d":{"p":[["u",28,16],["u",28,26],["u",28,36],["u",28,46],["t",32,31],["t",46,28]],"b":[46,28],"a":[["run",29,16,37,16],["run",29,26,37,26],["run",29,36,37,36],["run",29,46,37,46]]}},
+{"s":"soccer","name":"Using the width","what":"Keep players near both sidelines to stretch the other team out.","how":["Two players stay very wide, near the sidelines.","Defenders have to spread out to watch them.","That opens gaps in the middle for passes and runs."],"why":"A spread-out defense has holes. A bunched-up attack is easy to defend.","look":"When a coach shouts \"Get wide!\", this is why.","d":{"p":[["u",60,4],["u",60,56],["u",48,30],["t",64,16],["t",64,44],["u",70,30]],"b":[48,30],"a":[["pass",49,29,69,30]]}},
+{"s":"soccer","name":"The third-man run","what":"Player one passes to player two, who flicks it on for player three, who was already running.","how":["Player one passes to player two.","Player three starts running before that pass even arrives.","Player two passes first time into player three's path."],"why":"Defenders watch the ball and the player near it. The third player's run is the one nobody is watching.","look":"It's a move top teams practise over and over. It looks like magic when it works.","d":{"p":[["u",36,40],["u",52,30],["u",46,50],["t",56,38]],"b":[36,40],"a":[["pass",37,39,51,31],["run",47,50,72,46],["pass",53,31,71,45]]}},
+{"s":"soccer","name":"The near-post run","what":"On a cross, an attacker sprints to the post closest to the ball.","how":["A winger gets ready to cross from near the end line.","An attacker sprints toward the near post.","The cross is whipped in low and hard, and the attacker gets there first."],"why":"Defenders and goalkeepers expect the ball to come to the middle. A quick run to the near post gets there before them.","look":"Watch corner kicks and crosses: one player always darts to the front post.","d":{"p":[["u",88,8],["u",74,30],["t",84,37],["t",97,30]],"b":[88,8],"a":[["run",75,30,92,24],["pass",88,9,93,23]]}},
+{"s":"soccer","name":"Shielding the ball","what":"Use your body to keep a defender away from the ball.","how":["Stand sideways between the defender and the ball.","Keep the ball on your far foot, away from them.","Use your arm for balance, not to push, and wait for help or a gap."],"why":"The defender can't reach the ball without going through you, which is a foul.","look":"Big strikers do this with their back to goal to hold the ball until teammates arrive.","d":{"p":[["u",50,30],["t",44,30],["u",64,20]],"b":[53,30],"a":[["pass",54,29,63,21]]}},
+{"s":"soccer","name":"The counter-attack","what":"Win the ball and attack fast, before the other team gets back.","how":["Your team wins the ball in its own half.","Pass forward quickly, as early as you can.","Teammates sprint forward to join in while the other team is out of position."],"why":"When a team attacks, its defenders move up. Win the ball then, and there's lots of space behind them.","look":"Some of the best goals happen 10 seconds after a team was defending.","d":{"p":[["u",28,30],["u",50,32],["u",40,14],["u",40,46],["t",33,39],["t",74,30]],"b":[28,30],"a":[["pass",29,30,48,32],["dribble",52,32,64,32],["run",41,14,74,20],["run",41,46,74,42]]}},
+{"s":"soccer","name":"First touch away from pressure","what":"Control the ball into open space, away from the defender.","how":["Before the ball arrives, look over your shoulder to see where the defender is.","Use your first touch to push the ball away from them.","Now you have time to pass, shoot or dribble."],"why":"A great first touch buys you time. A bad one gives the ball away.","look":"Watch midfielders take a quick look before the ball comes. That's how they know where to touch it.","d":{"p":[["u",48,30],["t",55,26],["u",34,30]],"b":[48,30],"a":[["pass",35,30,47,30],["dribble",49,31,52,42]]}},
+{"s":"soccer","name":"The pass back to reset","what":"When everything is blocked, pass backwards and start again.","how":["You have the ball but defenders block every pass forward.","Instead of forcing it, pass back to a teammate.","They can switch the play or find a new way forward."],"why":"Keeping the ball is better than losing it. A pass back isn't giving up, it's choosing a better moment.","look":"Top teams pass backward a lot. They're waiting for the defense to make a mistake.","d":{"p":[["u",60,30],["t",68,21],["t",68,39],["t",67,30],["u",44,30]],"b":[60,30],"a":[["pass",59,30,45,30]]}},
+{"s":"soccer","name":"Playing out from the back","what":"The goalkeeper and defenders start attacks with short passes, not long kicks.","how":["The goalkeeper rolls or passes the ball to a defender.","The defenders pass between each other to find a free player.","The ball moves up the field one pass at a time."],"why":"A long kick is often lost. Short passes keep the ball and pull the other team out of shape.","look":"Watch the start of a goal kick: defenders spread wide and the keeper passes short.","d":{"p":[["u",4,30],["u",16,14],["u",16,46],["u",30,30],["t",24,20]],"b":[4,30],"a":[["pass",5,31,15,45],["pass",17,45,29,31]]}},
+{"s":"football","name":"The screen pass","what":"Let the rushers through, then throw a short pass to a player behind a wall of blockers.","how":["The offensive line lets the defenders rush past toward the quarterback.","Some linemen slip out to the side and set up in front of the running back.","The quarterback flips a short pass to the running back behind those blockers."],"why":"The defenders who rushed are now behind the play, and the blockers clear the way.","look":"Look for a pass that goes backward or sideways, then a running back with blockers in front.","d":{"p":[["u",34,30],["u",46,26],["u",46,34],["u",38,42],["t",54,26],["t",54,34]],"b":[34,30],"a":[["run",53,26,40,27],["run",53,34,41,33],["run",47,35,58,48],["run",39,43,52,52],["pass",35,31,51,51]]}},
+{"s":"football","name":"Play-action","what":"The quarterback fakes a handoff, then throws deep.","how":["The quarterback pretends to hand the ball to the running back.","The defense moves up to stop the run.","The quarterback pulls the ball back and throws over their heads."],"why":"If the defense believes it's a run, the receivers get open behind them.","look":"Look for the running back diving into the line without the ball, then a long pass.","d":{"p":[["u",40,30],["u",36,38],["u",46,8],["t",62,28]],"b":[40,30],"a":[["run",37,38,47,35],["run",61,28,55,30],["run",47,8,84,10],["pass",41,29,82,11]]}},
+{"s":"football","name":"The blitz","what":"The defense sends extra players to rush the quarterback.","how":["Usually only the defensive linemen rush the quarterback.","On a blitz, linebackers or defensive backs rush too.","There are more rushers than blockers, so someone gets a free run."],"why":"It can lead to a sack. But fewer players are left to cover receivers, so it's risky.","look":"Look for a defender sprinting through the line the moment the ball is snapped.","d":{"p":[["u",38,30],["u",46,25],["u",46,35],["t",54,25],["t",54,35],["t",60,12],["t",60,48]],"b":[38,30],"a":[["run",59,13,41,27],["run",59,47,41,33]]}},
+{"s":"football","name":"Man or zone coverage","what":"Two ways to guard receivers: follow one player, or guard an area.","how":["In man coverage, each defender sticks to one receiver wherever they go.","In zone coverage, each defender guards a patch of the field.","Quarterbacks look at the defense before the snap to figure out which it is."],"why":"Man coverage is tight but can be beaten by a fast player. Zone leaves gaps between the areas.","look":"If a defender follows a receiver all the way across the field, that's man coverage.","d":{"p":[["u",50,10],["u",50,50],["t",58,10],["t",58,50],["u",40,30]],"b":[40,30],"a":[["run",51,10,80,26],["run",59,11,78,25],["run",51,50,80,50],["run",59,50,78,50]]}},
+{"s":"football","name":"The slant","what":"A receiver takes a few steps, then cuts sharply toward the middle.","how":["The receiver runs straight for three steps.","He plants his outside foot and cuts in at an angle.","The quarterback throws it quickly, before the defender can react."],"why":"It's fast and hard to stop. The receiver's body shields the ball from the defender.","look":"It's one of the most common passes in the NFL, often on third and short.","d":{"p":[["u",50,12],["t",56,12],["u",42,30]],"b":[42,30],"a":[["run",51,12,58,12],["run",58,13,72,26],["pass",43,29,70,25]]}},
+{"s":"football","name":"The option","what":"The quarterback watches one defender, then decides to keep the ball or pitch it.","how":["The quarterback runs toward the edge with the running back behind him.","He watches the defender on the end.","If the defender comes at him, he pitches to the running back. If not, he keeps it and runs."],"why":"Whatever the defender does is wrong. He can't stop two players at once.","look":"Running quarterbacks love it. Look for a quick sideways toss right before a tackle.","d":{"p":[["u",40,26],["u",36,34],["t",60,38]],"b":[40,26],"a":[["run",41,27,54,38],["run",59,38,56,38],["run",37,35,58,54],["pass",54,39,56,52]]}},
+{"s":"football","name":"The draw","what":"It looks like a pass, but it's a run up the middle.","how":["The quarterback drops back like he's going to throw.","The pass rushers charge upfield toward him.","Then he hands the ball to the running back, who runs right through the gap they left."],"why":"Rushers who are chasing the quarterback are out of position to stop a run.","look":"Look for a late handoff after the quarterback has already dropped back.","d":{"p":[["u",40,30],["u",40,36],["u",46,26],["u",46,34],["t",54,24],["t",54,36],["t",64,22]],"b":[40,30],"a":[["run",39,30,34,30],["run",53,23,38,20],["run",53,37,38,42],["run",41,35,62,33]]}},
+{"s":"football","name":"The QB sneak","what":"On a very short distance, the quarterback takes the snap and pushes straight ahead.","how":["The offense needs only a yard or less.","The quarterback takes the snap from under center.","He lowers his shoulders and pushes straight forward behind the center."],"why":"It's the fastest way to gain a tiny bit of ground. The ball is across the line before the defense can react.","look":"Look for it on fourth and inches, often near the goal line.","d":{"p":[["u",43,30],["u",47,30],["u",47,23],["u",47,37],["t",53,26],["t",53,34]],"b":[43,30],"a":[["run",44,30,60,30]]}},
+{"s":"football","name":"The two-minute drill","what":"A hurry-up offense at the end of a half, racing the clock.","how":["The offense skips the huddle and plays fast.","Receivers catch the ball and step out of bounds to stop the clock.","The quarterback can spike the ball into the ground to stop the clock too."],"why":"Every second counts. A team can go the length of the field in under two minutes.","look":"Watch the last two minutes of a close game. It's when the best quarterbacks shine.","d":{"p":[["u",42,30],["u",50,10],["t",58,10]],"b":[42,30],"a":[["run",51,10,66,10],["run",66,10,72,3],["pass",43,29,71,4]]}},
+{"s":"football","name":"The onside kick","what":"A short kickoff the kicking team tries to get back.","how":["The kicker sends the ball bouncing along the ground.","It has to go at least 10 yards before the kicking team can touch it.","The kicking team races to grab it and keep the ball."],"why":"If it works, they get the ball back right after scoring. It's a big risk, so it's mostly used by a team that's losing.","look":"You'll see it when a team is behind late in the game and needs more time with the ball.","d":{"p":[["u",38,30],["u",40,14],["u",40,46],["t",56,20],["t",56,40]],"b":[38,30],"a":[["dribble",39,29,50,25],["run",41,14,50,21],["run",41,46,50,29]]}},
+{"s":"football","name":"Double coverage","what":"Two defenders guard one dangerous receiver.","how":["One defender stays close to the receiver underneath.","A second defender stays deeper, over the top.","The receiver has nowhere to go, short or long."],"why":"It takes away the other team's best player. But it leaves someone else with only one defender.","look":"Look at where the defense puts two players. That's who they're most afraid of.","d":{"p":[["u",50,12],["t",57,17],["t",76,6],["u",40,30]],"b":[40,30],"a":[["run",51,12,80,13],["run",58,17,78,17],["run",77,6,82,9]]}},
+{"s":"football","name":"The red zone","what":"The area inside the other team's 20-yard line, close to scoring.","how":["The field gets short, so there's less room for long passes.","Teams use quick, accurate passes and strong runs.","A field goal is good, but a touchdown is the real goal."],"why":"Teams that score touchdowns in the red zone, instead of settling for field goals, win more games.","look":"TV graphics often shade the last 20 yards red.","d":{"p":[["u",74,30],["u",86,14],["t",90,18],["t",88,36]],"b":[74,30],"a":[["run",87,14,94,22],["pass",75,29,93,23]]}},
+{"s":"football","name":"The prevent defense","what":"Late in a game, the winning team plays deep to stop long passes.","how":["Defenders back up far from the line.","They let the offense complete short passes.","They stop anything deep, so the clock keeps running."],"why":"If you're ahead, giving up 5 yards is fine. Giving up a touchdown is not.","look":"Look for defenders standing very far back in the last minute of a close game.","d":{"p":[["u",42,30],["u",50,12],["u",50,48],["t",82,12],["t",84,30],["t",82,48]],"b":[42,30],"a":[["run",51,12,60,14],["pass",43,29,59,15]]}},
+{"s":"football","name":"The hard count","what":"The quarterback changes the rhythm of his call to trick the defense into jumping early.","how":["The quarterback shouts the snap count with a sudden loud change in his voice.","A defender thinks the ball is about to be snapped and jumps across the line.","That's a penalty, and the offense gets five free yards."],"why":"Free yards without even running a play.","look":"Listen to the quarterback before the snap. Sometimes he yells \"Hut!\" extra loud on purpose.","d":{"p":[["u",40,30],["u",46,24],["u",46,30],["u",46,36],["t",54,24],["t",54,34]],"b":[46,30],"a":[["run",53,24,48,19]]}},
+{"s":"football","name":"The fake punt","what":"On fourth down, the team lines up to punt, then runs or passes instead.","how":["The team lines up like it's going to punt the ball away.","The defense drops back to catch the punt.","Instead, the punter or another player runs or throws for the first down."],"why":"The defense is set up for a kick, not a play, so there's lots of space.","look":"It's rare and risky, which is exactly why it surprises people.","d":{"p":[["u",30,30],["u",46,26],["u",46,34],["u",48,8],["t",88,30],["t",56,24]],"b":[30,30],"a":[["run",49,8,68,10],["pass",31,29,66,11]]}}
+];
+const SKILLS=[
+{"s":"soccer","name":"Toe taps","what":"Quick touches on top of the ball. They make your feet fast and light.","steps":["Stand with the ball in front of you.","Tap the top of the ball with the toes of one foot, then the other, like running in place.","Stay on your toes and keep the ball still."],"goal":"30 taps without the ball rolling away.","tip":"Look up every few taps. In a game you can't stare at the ball."},
+{"s":"soccer","name":"Inside-outside dribble","what":"Move the ball with the inside, then the outside, of the same foot. It keeps the ball close.","steps":["Push the ball sideways with the inside of your foot.","Push it back with the outside of the same foot.","Keep going while you walk forward, then try it jogging."],"goal":"Across the yard and back with your right foot only, then your left.","tip":"Small touches. The ball should never be more than a step away."},
+{"s":"soccer","name":"Juggling","what":"Keep the ball in the air with your feet. Every touch teaches you control.","steps":["Drop the ball onto your laces.","Kick it gently straight up. Let it bounce once if you need to.","Try two touches in a row, then three."],"goal":"Beat your record. Put your best below.","tip":"Lock your ankle and point your toes a little. A floppy foot sends the ball flying."},
+{"s":"soccer","name":"The Cruyff turn","what":"A fake kick that turns you the other way. Johan Cruyff made it famous at the 1974 World Cup.","steps":["Act like you're about to pass or shoot.","Instead, drag the ball behind your standing leg with the inside of your kicking foot.","Turn and go the other way."],"goal":"5 with each foot.","tip":"Sell the fake. The bigger your pretend kick, the better it works."},
+{"s":"soccer","name":"The step-over","what":"Swing your foot around the ball without touching it, to fool a defender.","steps":["Dribble toward a shoe or a cone.","Swing your right foot around the front of the ball, from the inside out, without touching it.","Push the ball away with the outside of your left foot."],"goal":"10 step-overs, 5 each way.","tip":"Drop your shoulder the same way as the fake. Defenders watch your body, not your feet."},
+{"s":"soccer","name":"The pull-back","what":"Stop the ball with the bottom of your foot and roll it back, to change direction fast.","steps":["Dribble forward.","Put the sole of your foot on top of the ball and pull it back toward you.","Turn and push it off in a new direction."],"goal":"10 pull-backs, using both feet.","tip":"Keep your weight on your standing leg so you don't slip."},
+{"s":"soccer","name":"Sole rolls","what":"Roll the ball side to side under the bottom of your foot. Great for close control.","steps":["Put the sole of your foot on top of the ball.","Roll it across in front of you.","Stop it with your other foot and roll it back."],"goal":"20 rolls without losing the ball.","tip":"Stay light on your toes, like a boxer."},
+{"s":"soccer","name":"Wall passes","what":"Pass against a wall and control the rebound. It's like having a teammate who never gets tired.","steps":["Stand a few big steps from a wall.","Pass with the inside of your foot.","Control it as it comes back, then pass again."],"goal":"20 passes in a row without missing.","tip":"Use the inside of your foot. It's the biggest, flattest part."},
+{"s":"soccer","name":"First touch","what":"Control a pass so it stops a step in front of you, ready for your next move.","steps":["Pass hard against a wall, or ask someone to roll you the ball.","As it arrives, let your foot give a little, like catching an egg.","Push it a step to one side, away from an imaginary defender."],"goal":"10 good first touches in a row.","tip":"Look over your shoulder before the ball arrives, so you know which way to go."},
+{"s":"soccer","name":"Shooting with your laces","what":"The most powerful way to shoot.","steps":["Plant your standing foot beside the ball, pointing at the target.","Point your toes down and lock your ankle.","Strike the middle of the ball with your laces and follow through."],"goal":"Hit a target, like a gap between two shoes, 5 times out of 10.","tip":"Lean over the ball to keep your shot low. Leaning back sends it over the bar."},
+{"s":"soccer","name":"The chip","what":"A soft kick that lifts the ball over a defender or a goalkeeper.","steps":["Plant your foot next to the ball.","Jab your toes under the bottom of the ball.","Stop your foot quickly, with almost no follow-through."],"goal":"Chip the ball over a backpack 5 times.","tip":"Lean back a little. It's the opposite of a laces shot."},
+{"s":"soccer","name":"The throw-in","what":"The legal way to put the ball back into play from the sideline.","steps":["Face the field, with both feet on the ground, on or behind the line.","Hold the ball in both hands and take it all the way behind your head.","Throw in one smooth motion, keeping both feet on the ground."],"goal":"10 legal throws to a target.","tip":"If a foot comes off the ground, it's a foul throw and the other team gets the ball."},
+{"s":"soccer","name":"Goalkeeper's ready stance","what":"How keepers stand so they can dive either way.","steps":["Feet shoulder-width apart, knees bent, weight on the front of your feet.","Hands out in front at waist height, palms facing forward.","Shuffle side to side without crossing your feet."],"goal":"Have someone toss 10 balls to either side, and catch them.","tip":"For a high ball, make a W shape with your thumbs and fingers behind it."},
+{"s":"soccer","name":"Weak-foot passing","what":"Practise with your other foot. Players who can use both feet are much harder to stop.","steps":["Find a wall.","Pass with the inside of your weaker foot only.","Control it with that same foot too."],"goal":"20 passes with your weaker foot.","tip":"It will feel clumsy at first. That's how you know it's working."},
+{"s":"football","name":"Throwing a spiral","what":"A tight spiral flies further and is easier to catch.","steps":["Grip with your fingers on the laces, leaving a little gap between your palm and the ball.","Step toward your target with your opposite foot and bring the ball up by your ear.","Throw and snap your wrist down, so your thumb finishes pointing at the ground."],"goal":"10 spirals to a partner.","tip":"Point your front shoulder at your target before you throw."},
+{"s":"football","name":"The diamond catch","what":"Catch with your hands, not your body. Hands are softer and surer.","steps":["Make a diamond shape with your thumbs and pointer fingers.","Reach out to meet the ball, and watch it right into your hands.","Squeeze, then pull it in to your chest."],"goal":"20 catches without trapping it against your body.","tip":"For a ball below your waist, flip your hands so your pinkies touch."},
+{"s":"football","name":"High-pointing the ball","what":"Catch the ball at the highest point you can reach, before a defender can.","steps":["Watch the ball as it comes down.","Jump early and reach up with both arms.","Catch it at the top of your jump, then tuck it away as you land."],"goal":"10 jumping catches.","tip":"Time your jump. Going up too late is the most common mistake."},
+{"s":"football","name":"High and tight","what":"Carry the ball so nobody can knock it loose.","steps":["Wrap your fingers over the front point of the ball.","Tuck the back end into your armpit.","Squeeze it against your ribs with your forearm."],"goal":"Run 10 sprints while someone tries to poke it out.","tip":"Carry it in the arm furthest from the defender."},
+{"s":"football","name":"The backpedal","what":"How defensive backs run backwards while still watching the play.","steps":["Lean forward a little, shoulders over your toes.","Take quick, short steps backward, pumping your arms.","Keep your eyes forward the whole time."],"goal":"Backpedal 10 big steps and back again, 5 times, without stumbling.","tip":"If you lean back, you'll fall over. Stay low and forward."},
+{"s":"football","name":"Quick feet","what":"Fast little steps, the footwork every player needs.","steps":["Lay out a line of sticks, shoes or chalk marks, about a foot apart.","Run through, stepping once in each gap.","Then try two feet in each gap."],"goal":"Count how many times your feet touch the ground in 10 seconds.","tip":"Stay on the balls of your feet. Heels make you slow."},
+{"s":"football","name":"The slant route","what":"Three steps up, then a sharp cut toward the middle.","steps":["Run straight for three steps.","Plant hard on your outside foot.","Cut in at an angle, with your hands ready for the ball."],"goal":"Run it 5 times to each side, then try catching a pass on it.","tip":"Make the cut sharp, like a letter V, not a curve."},
+{"s":"football","name":"The juke","what":"A quick fake that sends a defender the wrong way.","steps":["Run toward a defender or a cone.","Plant on one foot and lean your body that way.","Push off hard and burst the other way."],"goal":"5 jukes in each direction.","tip":"Your head and shoulders sell the fake. Your feet just follow."},
+{"s":"football","name":"The three-step drop","what":"How quarterbacks back away from the line to make a quick throw.","steps":["Hold the ball at your chest.","Take three steps back: a big one, then two shorter ones.","Plant on the third step and throw."],"goal":"10 drops and throws.","tip":"Keep the ball up at your chest the whole time, ready to throw."},
+{"s":"football","name":"Punting","what":"Kicking the ball out of your hands, to send it far down the field.","steps":["Hold the ball out in front of you, laces up.","Take two steps and drop the ball. Don't toss it up.","Kick it with your laces, toes pointed, and follow through high."],"goal":"5 punts that go further than your last one.","tip":"A good drop makes a good punt. Practise just dropping it flat."}
+];
+
+/* Day-by-day order for a bank: shuffled once, walked a step a day, so nothing
+   repeats until the whole bank has had its turn. Sport picks narrow it. */
+function gdPool(bank){
+  const tags=activeTags().filter(t=>t==='soccer'||t==='football');
+  const all=bank.map((x,i)=>i);
+  if(!tags.length)return all;
+  const hit=all.filter(i=>tags.indexOf(bank[i].s)>=0);
+  return hit.length>=MIN_POOL?hit:all;
+}
+/* "Another" jumps halfway round the cycle rather than one step, or it would
+   just show tomorrow's early and tomorrow would be a repeat. */
+function gdDaily(bank,seed,extra,day){       // day: a date key, today if left out
+  const order=shuffled(gdPool(bank),KP+seed);
+  if(!order.length)return 0;
+  const i=dayNumber(day)+(extra?Math.floor(order.length/2)+extra:0);
+  return order[i%order.length];
+}
+const SPORT_LABEL={soccer:'Soccer',football:'Football'};
+
+/* ── the Playbook (17) ── */
+function pbIndex(){return gdDaily(PLAYS,'plays',DAY.pbOff||0)}
+function pbOpen(){pbPaint()}
+function pbAnother(){DAY.pbOff=(DAY.pbOff||0)+1;haptic(8);pbPaint();
+  const c=$('pbCard');if(c)c.scrollIntoView({behavior:REDUCED?'auto':'smooth',block:'start'})}
+function pbPaint(){
+  const p=PLAYS[pbIndex()];if(!p)return;
+  $('pbSport').textContent=SPORT_LABEL[p.s]||'';
+  $('pbName').textContent=p.name;
+  $('pbWhat').textContent=p.what;
+  $('pbDiagram').innerHTML=pbSvg(p);
+  $('pbHow').innerHTML=p.how.map(x=>'<li><span>'+esc(x)+'</span></li>').join('');
+  $('pbWhy').textContent=p.why;
+  $('pbLook').textContent=p.look;
+  if(DAY.play!==p.name){DAY.play=p.name;saveDay()}
+}
+/* The diagram is data: dots, a ball and arrows on a 100 by 60 field, his team
+   attacking to the right. Colours come from the theme, so dusk needs nothing. */
+function pbSvg(p){
+  const d=p.d,soccer=p.s==='soccer',o=[];
+  o.push('<svg class="pb-svg" viewBox="-2 -2 104 64" role="img" aria-label="Diagram: '+esc(p.name)+'">');
+  o.push('<defs><marker id="pbHead" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="4.2" markerHeight="4.2" orient="auto-start-reverse">'+
+    '<path class="pb-head" d="M0 0L6 3L0 6z"/></marker></defs>');
+  o.push('<rect class="pb-grass" x="-2" y="-2" width="104" height="64" rx="2"/>');
+  if(soccer){
+    o.push('<rect class="pb-line" x="0" y="0" width="100" height="60"/><path class="pb-line" d="M50 0V60"/>'+
+      '<circle class="pb-line" cx="50" cy="30" r="8"/>'+
+      '<rect class="pb-line" x="0" y="14" width="15" height="32"/><rect class="pb-line" x="85" y="14" width="15" height="32"/>'+
+      '<rect class="pb-line" x="0" y="23" width="5" height="14"/><rect class="pb-line" x="95" y="23" width="5" height="14"/>'+
+      '<path class="pb-line" d="M0 26.5V33.5M100 26.5V33.5" style="stroke-width:1.6"/>');
+  }else{
+    o.push('<rect class="pb-zone" x="0" y="0" width="8" height="60"/><rect class="pb-zone" x="92" y="0" width="8" height="60"/>');
+    let lines='';for(let x=8;x<=92;x+=8.4)lines+='M'+x.toFixed(1)+' 0V60';
+    o.push('<path class="pb-line" d="'+lines+'"/><rect class="pb-line" x="0" y="0" width="100" height="60"/>');
+  }
+  d.a.forEach(([k,x1,y1,x2,y2])=>{
+    if(k==='dribble'){                       // a gentle wave, like the ball at his feet
+      const dx=x2-x1,dy=y2-y1,len=Math.hypot(dx,dy)||1,nx=-dy/len,ny=dx/len,steps=Math.max(2,Math.round(len/4));
+      let path='M'+x1+' '+y1;
+      for(let i=1;i<=steps;i++){const t=i/steps,w=(i===steps?0:(i%2?1.2:-1.2));
+        path+='L'+(x1+dx*t+nx*w).toFixed(2)+' '+(y1+dy*t+ny*w).toFixed(2)}
+      o.push('<path class="pb-a dribble" d="'+path+'" marker-end="url(#pbHead)"/>');
+    }else o.push('<path class="pb-a '+k+'" d="M'+x1+' '+y1+'L'+x2+' '+y2+'" marker-end="url(#pbHead)"/>');
+  });
+  d.p.forEach(([t,x,y])=>o.push('<circle class="pb-'+(t==='u'?'u':'t')+'" cx="'+x+'" cy="'+y+'" r="2.7"/>'));
+  o.push('<circle class="pb-ball" cx="'+d.b[0]+'" cy="'+(d.b[1]-0.1)+'" r="1.4"/>');
+  o.push('</svg>');
+  const kinds=[...new Set(d.a.map(a=>a[0]))];
+  const line=k=>'<svg viewBox="0 0 22 8"><path class="pb-a '+k+'" d="M1 4H17" style="stroke-width:1.4"/><path class="pb-head" d="M16 1L21 4L16 7z"/></svg>';
+  const key='<div class="pb-key"><span><i style="background:var(--s15)"></i>Your team</span>'+
+    (d.p.some(x=>x[0]==='t')?'<span><i style="background:var(--s2)"></i>Other team</span>':'')+
+    (kinds.indexOf('run')>=0?'<span>'+line('run')+'Run</span>':'')+
+    (kinds.indexOf('pass')>=0?'<span>'+line('pass')+'Pass</span>':'')+
+    (kinds.indexOf('dribble')>=0?'<span>'+line('dribble')+'Dribble</span>':'')+'</div>';
+  return o.join('')+key;
+}
+
+/* ── Skill of the Day (18) ── */
+function skIndex(){return gdDaily(SKILLS,'skills',DAY.skOff||0)}
+function skBests(){return readJSON(KP+'Skill',{})}
+function skBestFor(name){return +(skBests()[name]||0)}
+function skOpen(){skPaint()}
+function skAnother(){DAY.skOff=(DAY.skOff||0)+1;delete DAY.skillN;haptic(8);skPaint();
+  const c=$('skCard');if(c)c.scrollIntoView({behavior:REDUCED?'auto':'smooth',block:'start'})}
+function skPaint(){
+  const k=SKILLS[skIndex()];if(!k)return;
+  $('skSport').textContent=SPORT_LABEL[k.s]||'';
+  $('skName').textContent=k.name;
+  $('skWhat').textContent=k.what;
+  $('skSteps').innerHTML=k.steps.map(x=>'<li><span>'+esc(x)+'</span></li>').join('');
+  $('skGoal').textContent=k.goal;
+  $('skTip').textContent=k.tip;
+  $('skCount').value=DAY.skillN!=null?DAY.skillN:'';
+  skBestPaint();
+  if(DAY.skill!==k.name){DAY.skill=k.name;saveDay()}
+}
+function skBestPaint(msg){
+  const k=SKILLS[skIndex()];if(!k)return;
+  const b=skBestFor(k.name);
+  $('skBest').textContent=msg||(b?'Your best: '+b:'');
+}
+/* A count is today's number for today's skill; the best is kept per skill, so
+   when toe taps come round again in a month there's a number to beat. */
+function skRecord(n){
+  const k=SKILLS[skIndex()];if(!k||!(n>=0))return false;
+  n=Math.min(9999,Math.floor(n));
+  DAY.skillN=n;DAY.skill=k.name;saveDay();
+  const all=skBests(),was=+(all[k.name]||0);
+  const best=n>was;
+  if(best){all[k.name]=n;try{localStorage.setItem(KP+'Skill',JSON.stringify(all))}catch(e){}}
+  return {best:best,was:was};
+}
+function skSave(){
+  const n=parseInt($('skCount').value,10);
+  if(!(n>=0)){$('skBest').textContent='Type a number first.';return}
+  const r=skRecord(n);
+  if(r.best&&r.was){burst();haptic([14,40,24]);skBestPaint('New best! '+n+', up from '+r.was+'.')}
+  else if(r.best){haptic([12,30,14]);skBestPaint('Saved. Your best: '+n+'. Beat it next time.')}
+  else{haptic(10);skBestPaint('Saved '+n+'. Your best is still '+r.was+'.')}
+  tick(660);
+  if(statusOf(18)!=='done')mark(18,'done');
+}
+
+/* ── Who Am I? (16) ──
+   Three clues, hardest first, and all four choices from the start. Each clue
+   he asks for costs a point: right on clue 1 is 3 points, on clue 3 is 1. */
+function whoState(){DAY.who=DAY.who||{r:0,clues:1,pts:0};return DAY.who}
+function whoIdx(r){return gdDaily(WHOAMI,'who',r||0)}
+function whoStats(){return readJSON(KP+'Who',{played:0,right:0,pts:0})}
+function whoLine(w){
+  const e=WHOAMI[w.idx!=null?w.idx:whoIdx(w.r)];if(!e)return '';
+  return w.pick===0?('Got '+e.c[0]+' on clue '+w.clues+' ('+w.got+' point'+(w.got===1?'':'s')+')')
+                   :('It was '+e.c[0]);
+}
+function whoOpen(){whoState();whoPaint()}
+function whoPaint(){
+  const st=whoState(),idx=whoIdx(st.r),e=WHOAMI[idx];if(!e)return;
+  const done=st.pick!=null;
+  const shown=done?3:st.clues;
+  $('whoSport').textContent=SPORT_LABEL[e.s]||'';
+  $('whoCount').textContent=st.r?'Bonus round '+st.r:'Today’s mystery';
+  const s=whoStats();
+  $('whoScore').textContent=s.played?('All time: '+s.pts+' point'+(s.pts===1?'':'s')):'';
+  $('whoClues').innerHTML=e.clues.map((c,i)=>i<shown
+    ?'<div class="who-clue"><b>Clue '+(i+1)+'</b><span>'+esc(c)+'</span></div>'
+    :'<div class="who-clue locked"><b>Clue '+(i+1)+'</b><span>Locked</span></div>').join('');
+  const order=shuffled(e.c.map((c,i)=>i),todayKey()+':who:'+idx);
+  const box=$('whoChoices');box.innerHTML='';
+  order.forEach((ci,k)=>{
+    const b=document.createElement('button');b.className='trv-choice';b.type='button';
+    b.innerHTML='<b>'+'ABCD'[k]+'</b><span>'+esc(e.c[ci])+'</span>';
+    if(done){b.disabled=true;
+      if(ci===0)b.classList.add('right');else if(ci===st.pick)b.classList.add('wrong');else b.classList.add('dim');
+    }else b.onclick=()=>whoAnswer(ci);
+    box.appendChild(b);
+  });
+  const more=$('whoMoreClue');
+  more.style.display=done||st.clues>=3?'none':'';
+  more.textContent='Show clue '+(st.clues+1);
+  const f=$('whoFact');
+  if(done){
+    const ok=st.pick===0;
+    f.innerHTML='<strong>'+esc(ok?TRV_CHEER[(idx+st.r)%TRV_CHEER.length]:TRV_OOPS[(idx+st.r)%TRV_OOPS.length]+' It’s '+e.c[0]+'.')+'</strong>'+esc(e.f);
+    f.classList.add('on');
+    $('whoPts').textContent=ok?('+'+st.got+' point'+(st.got===1?'':'s')+(st.clues===1?' on the first clue!':'')):'No points this time.';
+    $('whoAgainRow').style.display='';
+  }else{
+    f.classList.remove('on');f.innerHTML='';
+    $('whoPts').textContent='Guess now for '+(4-st.clues)+' point'+(st.clues===3?'':'s')+'.';
+    $('whoAgainRow').style.display='none';
+  }
+}
+function whoClue(){const st=whoState();if(st.pick!=null||st.clues>=3)return;st.clues++;saveDay();haptic(8);whoPaint()}
+function whoAnswer(ci){
+  const st=whoState();if(st.pick!=null)return;
+  st.pick=ci;st.idx=whoIdx(st.r);
+  const ok=ci===0;st.got=ok?4-st.clues:0;st.pts+=st.got;
+  const s=whoStats();s.played++;if(ok)s.right++;s.pts+=st.got;
+  try{localStorage.setItem(KP+'Who',JSON.stringify(s))}catch(e){}
+  saveDay();
+  haptic(ok?[14,40,24]:[30]);if(ok)tick();
+  if(ok&&st.clues===1)burst();
+  if(statusOf(16)!=='done')mark(16,'done');
+  whoPaint();
+}
+/* Another round keeps today's first answer for the home screen and journal. */
+function whoAgain(){
+  const st=whoState();
+  if(!st.first)st.first={idx:st.idx,pick:st.pick,clues:st.clues,got:st.got,r:0};
+  st.r++;st.clues=1;delete st.pick;delete st.idx;delete st.got;
+  saveDay();haptic(8);whoPaint();
+  const c=$('whoCard');if(c)c.scrollIntoView({behavior:REDUCED?'auto':'smooth',block:'start'});
 }
 function trvMore(){const st=trvState();st.r++;st.i=0;st.picks=[];st.counted=false;saveDay();haptic(8);trvPaint()}
 function strRoutine(){return ROUTINES[strKey]||ROUTINES[STR_FIRST]}
@@ -3159,7 +3626,7 @@ function currentNudge(){
   const days=Object.keys(dayHistory()).length;
   if(offerSetup()&&!nudgeOff('setup'))return{
     id:'setup',
-    text:'You have seen how it runs. Want to build your own version — which modules, in what order, and what kind of quotes and fables?',
+    text:'You’ve played a whole morning. Want to make it yours? Pick your cards, put them in your order, and choose your favorite sports.',
     cta:'Build my morning',
     act:'openOnboard()'};
   if(days>=2&&isIOS()&&!isInstalled()&&!nudgeOff('install'))return{
@@ -3202,10 +3669,10 @@ function applyEmptyState(){
 const LAUNCH_LINES=[
 "Kickoff. Go get it.",
 "Warmed up and ready. Go have a great day.",
-"You've got a plan. Now go play it.",
+"You learned a new play. Watch for it.",
 "Game face on. Let's go.",
 "That's the pre-game done. Time for the real thing.",
-"Big goal picked. Go score it.",
+"Go try today's skill at recess.",
 "Ready. Set. Go!",
 "Coach says: you've got this.",
 "Brain on, body on. See you at the final whistle.",
@@ -3218,15 +3685,17 @@ function renderRecap(){
   const rows=[];
   const add=(l,t)=>{if(t&&String(t).trim())rows.push('<div class="recap-item"><div class="recap-l">'+l+
     '</div><div class="recap-t">'+esc(t)+'</div></div>')};
-  add("Today's big goal",DAY.win);
-  add('Top 3',[DAY.t1,DAY.t2,DAY.t3].filter(Boolean).map((x,i)=>(i+1)+'. '+x).join('\n'));
-  const rest=liveItems().filter(i=>ppPicks().indexOf(i.id)<0);
-  add('Also on the list',rest.map(i=>'· '+i.text).join('\n'));
+  const pl=PLAYS[pbIndex()],sk=SKILLS[skIndex()];
+  if(pl)add("Today's play",pl.name+'\n'+pl.what);
+  if(sk)add("Today's skill",sk.name+'\nGoal: '+sk.goal+(DAY.skillN!=null?'\nYou got: '+DAY.skillN:''));
+  if(DAY.triv&&DAY.triv.n)add('Trivia',DAY.triv.right+' out of '+DAY.triv.n+' right');
+  if(DAY.who&&(DAY.who.first||DAY.who.pick!=null))add('Who Am I?',whoLine(DAY.who.first||DAY.who));
+  if(DAY.software)add("Today's rule",splitLine(DAY.software)[1]||DAY.software);
   const openIds=FLOW.filter(i=>statusOf(i)!=='done');
   $('recapBox').innerHTML=(openIds.length?'<div class="open-warn">Not done yet &mdash; tap one to go back to it.'+
     '<div class="open-chips">'+openIds.map(i=>'<button class="open-chip" onclick="go('+i+')">'+
     esc(plainName(i))+'</button>').join('')+'</div></div>':'')+
-    (rows.length?rows.join(''):'<div class="p">Nothing entered yet — go back and fill in your plan.</div>');
+    (rows.length?rows.join(''):'<div class="p">Nothing here yet. Go back and try a card.</div>');
   const y=new Date();y.setDate(y.getDate()-1);
   const yd=readJSON(KP+'Day-'+dateKey(y),{});
   const bits=[];
@@ -3299,7 +3768,9 @@ function finishDay(){
 /* ============================= EVENING BOOKEND ============================= */
 function renderEvening(){
   DAY.eve=DAY.eve||{};
-  $('eveWin').textContent=DAY.win?('This morning you said: '+DAY.win):'No big goal was set this morning.';
+  const sk=SKILLS[skIndex()];
+  $('eveWin').textContent=sk?('Today\u2019s skill: '+sk.name+'. Goal: '+sk.goal):'';
+  $('eveCount').value=DAY.skillN!=null?DAY.skillN:'';
   document.querySelectorAll('#eveSeg button').forEach(b=>b.classList.remove('on'));
   const map={yes:0,almost:1,no:2};
   if(DAY.eve.hit!=null&&map[DAY.eve.hit]!=null)
@@ -3319,6 +3790,8 @@ function saveEvening(){
   DAY.eve=DAY.eve||{};
   DAY.eve.grateful=$('eveGrateful').value.trim();
   DAY.eve.win=$('eveWinNote').value.trim();
+  const n=parseInt($('eveCount').value,10);
+  if(n>=0)skRecord(n);
   DAY.eve.saved=true;DAY.eve.at=new Date().toISOString();
   saveDay();
   try{localStorage.setItem(KP+'Eve',todayKey())}catch(e){}
@@ -3418,7 +3891,7 @@ function applyImport(text){
 }
 
 /* ============================= PWA ============================= */
-const APP_VERSION='v1.5 · 2026-08-25';
+const APP_VERSION='v3 · 2026-10-05';
 let deferredPrompt=null,swReg=null;
 /* a stuck install should never need devtools to escape */
 function checkUpdates(){
@@ -3485,7 +3958,7 @@ function showUpdate(){
 FIELDS.forEach(k=>{const el=$(k);if(el)el.addEventListener('input',()=>{DAY[k]=el.value;saveDay()})});
 loadDayFields();
 migrateSettings();  // protect an existing user's cards before defaults change
-FLOW=validFlow(S.flow);
+FLOW=validFlow(upgradeFlow(S.flow));
 migrateItems();
 carryOver();        // yesterday's unfinished items are waiting this morning
 paintFeel();

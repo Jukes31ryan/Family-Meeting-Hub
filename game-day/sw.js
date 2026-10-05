@@ -1,7 +1,7 @@
 /* Game Day service worker — offline app shell.
    Bump CACHE on every release: the name is the version, and a new name is
    what evicts the old files and tells open tabs an update is waiting. */
-const CACHE = 'game-day-v2';
+const CACHE = 'game-day-v3';
 const SHELL = [
   './',
   './index.html',

@@ -1,7 +1,7 @@
 {
   "name": "Game Day",
   "short_name": "Game Day",
-  "description": "Liam's morning warm-up: sports trivia, a soccer warm-up, a quote, a crossword, a joke and a plan for the day.",
+  "description": "Liam's morning warm-up: sports trivia, Who Am I?, a crossword, a play to learn, a skill to try and a joke.",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",
