@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
 <title>Game Day</title>
-<meta name="description" content="Liam's game day: warm up, fuel up, train your sports brain, captain your day, and recover like a pro.">
+<meta name="description" content="A game-day plan for kids who love sports: warm up, fuel up, train your sports brain, captain your day, and recover like a pro.">
 <meta name="theme-color" content="#5CC6FF">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -383,8 +383,21 @@ background:var(--card2);color:var(--ink);outline:none}
 background:var(--board);color:var(--gold);font-family:var(--fd);font-size:20px;padding:12px 20px;border-radius:18px;
 box-shadow:0 6px 0 rgba(0,0,0,.3);transition:transform .45s var(--spring);white-space:nowrap}
 .toast.on{transform:translate(-50%,0)}
-.hi{margin:0 0 14px;text-align:center}.hi-t{font-family:var(--fd);font-size:24px}.hi-p{color:var(--ink3);font-weight:700;margin:2px 0 12px}
-.hi-b{display:flex;gap:12px;justify-content:center;align-items:center}.hi-b .btn3d{width:auto;padding:12px 22px}
+/* first-use setup */
+.su-top{display:flex;align-items:center;justify-content:space-between;min-height:42px;margin-bottom:6px}
+.su-dots{display:flex;gap:8px}.su-dots i{width:34px;height:10px;border-radius:6px;background:rgba(255,255,255,.55)}
+.su-dots i.on{background:var(--cap)}.su-dots i.seen{background:var(--eat)}
+.su-h{font-family:var(--fd);font-size:38px;line-height:1.05;color:#fff;text-shadow:0 3px 0 rgba(22,58,99,.35);margin:6px 2px 4px}
+.su-p{font-weight:900;font-size:17px;color:#163A63;margin:0 2px 14px}
+.su-jersey{display:flex;align-items:center;gap:16px}.su-jersey .jersey{width:96px;height:90px;flex:none}
+.sports{display:grid;gap:12px}
+.sport-b{display:flex;align-items:center;gap:16px;border:none;border-radius:22px;padding:18px 20px;background:var(--card);
+color:var(--ink);font-family:var(--fd);font-size:28px;box-shadow:0 6px 0 var(--line);border:4px solid transparent;text-align:left}
+.sport-b span{font-size:40px}.sport-b.on{border-color:var(--edu);box-shadow:0 6px 0 var(--edu-d)}
+.ages{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.ages button{border:none;border-radius:14px;padding:12px 0;font-family:var(--fd);font-size:24px;background:var(--card2);color:var(--ink);border:3px solid transparent}
+.ages button.on{background:var(--edu);color:#fff;border-color:var(--edu-d)}
+#setup .foot .btn3d:disabled{opacity:.45;filter:grayscale(.4)}
 #updateBar{position:fixed;left:16px;right:16px;bottom:calc(env(safe-area-inset-bottom) + 90px);z-index:40;border:none}
 @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -397,9 +410,6 @@ box-shadow:0 6px 0 rgba(0,0,0,.3);transition:transform .45s var(--spring);white-
 <div class="hello" id="hello"></div>
 <button class="icon-btn" onclick="go('settings')" aria-label="Settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-2.9 1.2v.2a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-2.9-1.2l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0-1.2-2.9H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.2-2.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 2.9-1.2V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 2.9 1.2l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0 1.2 2.9H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
 </div>
-
-<div class="stk hi" id="jerseyHi" hidden><div class="hi-t">Make it your jersey!</div><div class="hi-p">Pick your name, number and color.</div>
-<div class="hi-b"><button class="btn3d" style="--c:var(--edu);--cd:var(--edu-d)" onclick="jerseyHi(true)">Pick mine</button><button class="skip-link" style="margin:0" onclick="jerseyHi(false)">Later</button></div></div>
 
 <div class="board" id="board">
 <div class="board-top">
@@ -434,6 +444,14 @@ box-shadow:0 6px 0 rgba(0,0,0,.3);transition:transform .45s var(--spring);white-
 <div class="foot"><button class="btn3d" style="--c:var(--edu);--cd:var(--edu-d)" onclick="go('home')">Back to the scoreboard</button></div>
 </div>
 
+<!-- ═══════════ FIRST USE: MAKE IT YOURS ═══════════ -->
+<div class="scr" id="setup"><div class="wrap">
+<div class="su-top"><button class="back" id="suBack" onclick="suGo(-1)" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>Back</button><div class="su-dots" id="suDots"></div></div>
+<div id="suBody"></div>
+</div>
+<div class="foot"><button class="btn3d" id="suNext" onclick="suGo(1)"></button></div>
+</div>
+
 <!-- ═══════════ SETTINGS ═══════════ -->
 <div class="scr" id="settings"><div class="wrap">
 <div class="cbar"><button class="back" onclick="navBack()" aria-label="Back to home"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>Home</button></div>
@@ -450,7 +468,7 @@ box-shadow:0 6px 0 rgba(0,0,0,.3);transition:transform .45s var(--spring);white-
    another app's on the same site. */
 const APP={"id":"game-day","name":"Game Day","backup":"game-day"};
 const KP="gd";
-const APP_VERSION='v4';
+const APP_VERSION='v4.1';
 
 /* ═══════════ CONTENT (written by tools/make_pack.py from content/) ═══════════ */
 const DEF_QUOTES=[
@@ -1025,15 +1043,15 @@ const SLEEP_SRC={
 "nhlbi_guide":["NIH NHLBI: Your Guide to Healthy Sleep","https://www.nhlbi.nih.gov/files/docs/public/sleep/healthy_sleep.pdf"],
 "cdc":["CDC: About Sleep","https://cdc.gov/sleep/about_sleep/sleep_hygiene.html"]
 };
-const KID_HOURS=[
-9,
-12
+const KID_HOURS_BY_AGE=[
+[6,12,[9,12]],
+[13,18,[8,10]]
 ];
 const MIND=[
 ["Replay your best play","🎬",["Get comfortable and let your body go heavy.","Think of the best thing you did today. Big or small.","Now play it back in slow motion, like a highlight.","Notice where you were and what you did.","Hear the cheer. Feel how good it felt.","Keep that feeling and let your eyes get sleepy."]],
 ["The perfect free kick","⚽",["Picture the ball sitting still on the grass.","You take a few steps back. The stadium goes quiet.","You breathe in. You feel calm and ready.","You run up and strike it clean.","Watch it curl over the wall and into the corner.","Goal. Let the cheer fade away into quiet."]],
 ["The perfect spiral","🏈",["Picture the football in your hand, fingers on the laces.","You drop back. Everything slows down.","You see your receiver break open.","You step and throw. The ball spins in a perfect spiral.","It drops right into their hands. Touchdown.","Let the stadium lights dim, one by one."]],
-["Locker room body scan","🧘",["Lie still, like you're resting after a big game.","Let your feet and legs get heavy. They worked hard today.","Let your belly rise and fall slowly.","Let your shoulders drop and your arms go loose.","Let your face relax, even your eyebrows.","Your whole body is resting now. Good game."]],
+["Rest after the big game","🛌",["Lie still, like you're resting after a big game.","Let your feet and legs get heavy. They worked hard today.","Let your belly rise and fall slowly.","Let your shoulders drop and your arms go loose.","Let your face relax, even your eyebrows.","Your whole body is resting now. Good game."]],
 ["Calm at the penalty spot","🥅",["Picture yourself walking up to the penalty spot.","Your heart is beating fast. That's okay.","You take one slow breath in, and a long breath out.","You pick your spot and you trust it.","Your body feels calm and steady.","Bring that calm with you into sleep."]],
 ["The diving catch","🧤",["Picture a long pass flying through the night sky.","You're running, and everything feels easy.","You stretch out, eyes on the ball.","It lands softly in your hands.","You roll on the grass and hold on tight.","Feel how proud you are, and let your body rest."]],
 ["Game film","📼",["Pretend you're watching film of your day.","Fast-forward to something that went well.","Pause there. What did you do right?","Now think of one thing you'll try tomorrow.","Picture yourself doing it well.","Turn off the screen. The film can wait until morning."]],
@@ -1146,7 +1164,7 @@ function daily(n,seed,day){
 }
 
 /* settings and today's record */
-const S=Object.assign({name:'Liam',num:10,color:'#2F7BF0',sound:true,haptics:true,
+const S=Object.assign({name:'',num:10,color:'#2F7BF0',age:10,sound:true,haptics:true,
   wake:'06:45',bed:'20:45',sport:'both'},readJSON(KP+'Kid',{}));
 function saveS(){writeJSON(KP+'Kid',S)}
 /* Coming from v3: his streak, wins, trivia, Who Am I? and skill bests already
@@ -1155,9 +1173,15 @@ function saveS(){writeJSON(KP+'Kid',S)}
 if(localStorage.getItem(KP+'Kid')==null){
   const old=readJSON(KP+'Settings',null),t=old&&Array.isArray(old.tags)?old.tags:[];
   if(t.length){const so=t.indexOf('soccer')>=0,fo=t.indexOf('football')>=0;S.sport=so&&!fo?'soccer':fo&&!so?'football':'both'}
-  if(old||localStorage.getItem(KP+'Done'))S.picked=true;   /* not a brand-new player: skip the jersey hello */
   saveS();
 }
+/* v4 saved its default name, "Liam", for everyone, and it isn't even spelled
+   right for the boy it was built for. A name nobody chose is no name: the
+   first-use setup asks for it. */
+if(!S.setup&&S.name==='Liam')S.name='';
+delete S.picked;
+/* What we call him on screen when there's no name yet. */
+const nm=()=>S.name||'Champ';
 let DAY=readJSON(KP+'Day-'+todayKey(),{});
 DAY.done=DAY.done||{};
 function saveDay(){writeJSON(KP+'Day-'+todayKey(),DAY)}
@@ -1275,10 +1299,9 @@ function jerseySvg(color,num,size){
 function renderHome(){
   applyTheme();
   const d=new Date();
-  $('hello').textContent=(d.getHours()<12?'Morning':d.getHours()<17?'Hey':'Evening')+', '+S.name+'!';
-  $('boardDate').textContent=d.toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'})+' · '+S.name+' #'+S.num;
+  $('hello').textContent=(d.getHours()<12?'Morning':d.getHours()<17?'Hey':'Evening')+', '+nm()+'!';
+  $('boardDate').textContent=d.toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'})+' · '+nm()+' #'+S.num;
   $('jersey').innerHTML=jerseySvg(S.color,S.num);
-  $('jerseyHi').hidden=!!S.picked;
   /* the scoreboard: M E E E S, then the captain's armband */
   $('tiles').innerHTML=TILES.map(T=>{
     const cls=T.cap?(isDone('captain')&&isDone('checkin')?' lit':isDone('captain')?' half':''):(isDone(T.card)?' lit':'');
@@ -1312,7 +1335,6 @@ function nextCard(){
   if(evening())return h2||h1;
   return h1||h2;
 }
-function jerseyHi(pick){S.picked=true;saveS();haptic(8);if(pick)go('settings');else renderHome()}
 function ctaGo(){const n=nextCard();if(!n){confetti(40);return}openCard(n.id)}
 
 /* ═══════════ A CARD ═══════════ */
@@ -1370,9 +1392,9 @@ function showFinal(h){
   const b=$('finalBody');
   if(h===1){
     b.innerHTML='<div class="big-emo">📣</div><div class="final-h">Kickoff!</div>'+
-      '<div class="final-p">Pre-Game done. Go have a great day, '+esc(S.name)+'. See you at Post-Game tonight!</div>'+jokeHtml();
+      '<div class="final-p">Pre-Game done. Go have a great day, '+esc(nm())+'. See you at Post-Game tonight!</div>'+jokeHtml();
   }else{
-    b.innerHTML='<div class="big-emo">🌙</div><div class="final-h">Goodnight, '+esc(S.name)+'</div>'+
+    b.innerHTML='<div class="big-emo">🌙</div><div class="final-h">Goodnight, '+esc(nm())+'</div>'+
       '<div class="final-p">'+(isWin()?'You won the day. ':'')+'Rest up. Big game tomorrow.</div>';
   }
   fanfare();confetti();go('final');
@@ -1848,12 +1870,15 @@ RENDER.checkin=function(body){
    tonight's plan, and a one-minute cool-down. */
 const toMin=t=>{const m=/^(\d{1,2}):(\d{2})$/.exec(t||'');return m?(+m[1])*60+(+m[2]):null};
 const clock=m=>{m=((m%1440)+1440)%1440;const h=Math.floor(m/60),mm=m%60;return ((h+11)%12+1)+':'+String(mm).padStart(2,'0')+(h<12?' AM':' PM')};
+/* AASM: 9 to 12 hours for ages 6 to 12, 8 to 10 for 13 to 18 */
+function kidHours(){const a=+S.age||10,r=KID_HOURS_BY_AGE.find(([f,t])=>a>=f&&a<=t);return r?r[2]:KID_HOURS_BY_AGE[0][2]}
+const hrsLabel=h=>h==null?'':(Math.round(h*4)/4).toString().replace('.25','¼').replace('.5','½').replace('.75','¾');
 function sleepHours(){const b=toMin(S.bed),w=toMin(S.wake);if(b==null||w==null)return null;return (((w-b)%1440)+1440)%1440/60}
 function sleepState(){DAY.sleep=DAY.sleep||{plan:[]};return DAY.sleep}
 RENDER.recovery=function(body){
   const st=sleepState(),f=SLEEP_FACTS[daily(SLEEP_FACTS.length,'sleep')],h=sleepHours();
-  const [lo,hi]=KID_HOURS;
-  const hrs=h==null?'':(Math.round(h*4)/4).toString().replace('.25','¼').replace('.5','½').replace('.75','¾');
+  const [lo,hi]=kidHours();
+  const hrs=hrsLabel(h);
   const verdict=h==null?'':h>=lo&&h<=hi?'✅ That’s right in the '+lo+' to '+hi+' hours kids your age need.'
     :h<lo?'⚠️ That’s less than the '+lo+' to '+hi+' hours kids your age need. Ask a grown-up about an earlier bedtime.'
     :'That’s more than '+hi+' hours. Check your times in Settings.';
@@ -1890,7 +1915,7 @@ function loStep(){
   lo.i++;
   if(lo.i>=lo.sc[2].length){
     stopTimers();lo.run=false;$('ball').classList.remove('in');$('bCue').textContent='';
-    $('loLine').textContent='Goodnight, '+S.name+'. Great game today. 🌙';$('loBtn').style.display='none';loDots();
+    $('loLine').textContent='Goodnight, '+nm()+'. Great game today. 🌙';$('loBtn').style.display='none';loDots();
     markDone('lights');paintNext();return;
   }
   const [inS,outS]=BREATH,ball=$('ball'),line=$('loLine');
@@ -1901,9 +1926,67 @@ function loStep(){
   TIMERS.add(setTimeout(loStep,(inS+outS)*1000));
 }
 
+/* ═══════════ FIRST USE: MAKE IT YOURS ═══════════
+   Three quick steps before the first game: name and jersey, favorite sport,
+   age and bedtime (the age picks the sleep hours that apply). Everything can
+   be changed later in Settings. A player coming from an older version keeps
+   their streak and scores and sees this once, filled in with what they had. */
+let suStep=0;
+function openSetup(){suStep=0;show('setup');suPaint()}
+function suPaint(){
+  $('suDots').innerHTML=[0,1,2].map(i=>'<i class="'+(i<suStep?'seen':i===suStep?'on':'')+'"></i>').join('');
+  $('suBack').style.visibility=suStep?'visible':'hidden';
+  const b=$('suBody');
+  if(suStep===0){
+    b.innerHTML='<div class="su-h">Welcome to Game Day</div><div class="su-p">Let’s make it yours.</div>'+
+      '<div class="stk"><div class="sec-l">What’s your name?</div><input class="txt-in" id="suName" maxlength="16" autocomplete="off" placeholder="Your name" value="'+esc(S.name)+'"></div>'+
+      '<div class="stk"><div class="sec-l">Pick your jersey</div><div class="su-jersey"><div class="jersey" id="suJersey">'+jerseySvg(S.color,S.num)+'</div>'+
+      '<div style="flex:1"><div class="bed-p" style="margin:0 0 6px">Number</div><input class="num-in" id="suNum" type="number" inputmode="numeric" min="0" max="99" value="'+esc(String(S.num))+'"></div></div>'+
+      '<div class="swatches" id="suColors" style="margin-top:14px">'+JERSEY_COLORS.map(c=>'<button class="sw'+(c===S.color?' on':'')+'" style="background:'+c+'" data-c="'+c+'" aria-label="Jersey color"></button>').join('')+'</div></div>';
+    $('suName').oninput=e=>{S.name=e.target.value.trim();saveS();suFoot()};
+    $('suName').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();e.target.blur()}};
+    $('suNum').oninput=e=>{S.num=Math.max(0,Math.min(99,parseInt(e.target.value,10)||0));saveS();$('suJersey').innerHTML=jerseySvg(S.color,S.num)};
+    $('suColors').onclick=e=>{const c=e.target.closest('.sw');if(!c)return;S.color=c.dataset.c;saveS();haptic(8);
+      $('suColors').querySelectorAll('.sw').forEach(x=>x.classList.toggle('on',x===c));$('suJersey').innerHTML=jerseySvg(S.color,S.num)};
+  }else if(suStep===1){
+    b.innerHTML='<div class="su-h">What do you love to play?</div><div class="su-p">Your trivia, plays and skills will match.</div>'+
+      '<div class="sports" id="suSport">'+[['soccer','⚽','Soccer'],['football','🏈','Football'],['both','⚽🏈','Both']].map(([k,e,l])=>
+        '<button class="sport-b'+(S.sport===k?' on':'')+'" data-v="'+k+'"><span>'+e+'</span>'+l+'</button>').join('')+'</div>';
+    $('suSport').onclick=e=>{const x=e.target.closest('button');if(!x)return;S.sport=x.dataset.v;saveS();haptic(8);tick(700);
+      $('suSport').querySelectorAll('button').forEach(y=>y.classList.toggle('on',y===x))};
+  }else{
+    b.innerHTML='<div class="su-h">How old are you?</div><div class="su-p">So we know how much sleep you need to recover.</div>'+
+      '<div class="stk">'+ageGrid('suAge')+'</div>'+
+      '<div class="stk"><div class="sec-l">Bedtime and wake-up</div><div class="row">'+
+      '<label style="flex:1;font-weight:900;font-size:14px;color:var(--ink2)">Lights out<input class="txt-in" id="suBed" type="time" value="'+esc(S.bed)+'"></label>'+
+      '<label style="flex:1;font-weight:900;font-size:14px;color:var(--ink2)">Wake up<input class="txt-in" id="suWake" type="time" value="'+esc(S.wake)+'"></label></div>'+
+      '<div class="bed-p" id="suHours" style="margin-top:12px"></div></div>';
+    const hours=()=>{const h=sleepHours(),[lo,hi]=kidHours();
+      $('suHours').textContent=h==null?'':(h>=lo&&h<=hi?'✅ ':'⚠️ ')+'That’s '+hrsLabel(h)+' hours of sleep. Kids your age need '+lo+' to '+hi+'.'};
+    hours();
+    $('suAge').onclick=e=>{const x=e.target.closest('button');if(!x)return;S.age=+x.dataset.v;saveS();haptic(6);
+      $('suAge').querySelectorAll('button').forEach(y=>y.classList.toggle('on',y===x));hours()};
+    $('suBed').onchange=e=>{if(toMin(e.target.value)!=null){S.bed=e.target.value;saveS();hours()}};
+    $('suWake').onchange=e=>{if(toMin(e.target.value)!=null){S.wake=e.target.value;saveS();hours()}};
+  }
+  suFoot();
+}
+function suFoot(){
+  const n=$('suNext');n.disabled=suStep===0&&!S.name;
+  n.textContent=suStep<2?'Next ▶':'Let’s play ▶';
+  n.style.cssText=colorOf(suStep<2?'edu':'eat');
+}
+function suGo(d){
+  if(d>0&&suStep===0&&!S.name){$('suName').focus();return}
+  if(d>0&&suStep===2){S.setup=true;saveS();fanfare();confetti(60);go('home');return}
+  suStep=Math.max(0,suStep+d);haptic(8);suPaint();$('setup').scrollTop=0;
+}
+
 /* ═══════════ SETTINGS ═══════════ */
 const JERSEY_COLORS=['#2F7BF0','#E53935','#1FB45A','#FFB300','#7C5CFF','#FF7A1A','#111827','#12B5A6'];
 function seg(id,opts,cur){return '<div class="seg" id="'+id+'">'+opts.map(([k,l])=>'<button data-v="'+k+'" class="'+(cur===k?'on':'')+'">'+l+'</button>').join('')+'</div>'}
+const AGES=[6,7,8,9,10,11,12,13,14,15];
+function ageGrid(id){return '<div class="ages" id="'+id+'">'+AGES.map(a=>'<button data-v="'+a+'" class="'+(+S.age===a?'on':'')+'">'+a+(a===15?'+':'')+'</button>').join('')+'</div>'}
 function renderSettings(){
   const srcs=Object.values(FOOD_SRC).concat(Object.values(SLEEP_SRC));
   $('setBody').innerHTML=
@@ -1912,11 +1995,12 @@ function renderSettings(){
     '<input class="num-in" id="setNum" type="number" inputmode="numeric" min="0" max="99" value="'+esc(String(S.num))+'" style="width:110px"></div>'+
     '<div class="swatches" style="margin-top:14px">'+JERSEY_COLORS.map(c=>'<button class="sw'+(c===S.color?' on':'')+'" style="background:'+c+'" data-c="'+c+'" aria-label="Jersey color"></button>').join('')+'</div></div>'+
     '<div class="stk"><div class="sec-l">Favorite sport</div>'+seg('setSport',[['both','Both'],['soccer','⚽ Soccer'],['football','🏈 Football']],S.sport)+'</div>'+
+    '<div class="stk"><div class="sec-l">Your age</div>'+ageGrid('setAge')+'</div>'+
     '<div class="stk"><div class="sec-l">Bedtime and wake-up</div><div class="row">'+
       '<label style="flex:1;font-weight:900;font-size:14px;color:var(--ink2)">Lights out<input class="txt-in" id="setBed" type="time" value="'+esc(S.bed)+'"></label>'+
       '<label style="flex:1;font-weight:900;font-size:14px;color:var(--ink2)">Wake up<input class="txt-in" id="setWake" type="time" value="'+esc(S.wake)+'"></label></div></div>'+
     '<div class="stk"><div class="sec-l">Sounds and buzz</div>'+seg('setSound',[['on','On'],['off','Off']],S.sound?'on':'off')+'</div>'+
-    '<div class="stk"><div class="sec-l">For grown-ups: backup</div><div class="bed-p" style="margin:0 0 10px">Everything is saved on this device only. Save a backup file now and then, so a lost or reset phone doesn’t lose his streak.</div>'+
+    '<div class="stk"><div class="sec-l">For grown-ups: backup</div><div class="bed-p" style="margin:0 0 10px">Everything is saved on this device only. Save a backup file now and then, so a lost or reset phone doesn’t lose the streak.</div>'+
       '<div class="row"><button class="btn3d small ghost" onclick="exportData()">Save backup</button><label class="btn3d small ghost" style="cursor:pointer">Restore<input type="file" accept="application/json,.json" style="display:none" onchange="importFile(this)"></label></div>'+
       '<div class="bed-p" id="backupMsg" style="margin-top:8px"></div></div>'+
     '<div class="stk"><div class="sec-l">For grown-ups: where our facts come from</div><div class="srcs">'+
@@ -1924,7 +2008,8 @@ function renderSettings(){
       '<a href="sources.html" target="_blank" rel="noopener"><b>See every fact and its source</b></a>'+
       srcs.map(([n,u])=>'<a href="'+esc(u)+'" target="_blank" rel="noopener">'+esc(n)+'</a>').join('')+'</div></div>'+
     '<div class="bed-p" style="text-align:center;margin:6px 0">Game Day '+esc(APP_VERSION)+'</div>';
-  $('setName').oninput=e=>{S.name=e.target.value.trim()||'Liam';saveS()};
+  $('setName').oninput=e=>{S.name=e.target.value.trim();saveS()};
+  $('setAge').onclick=e=>{const b=e.target.closest('button');if(!b)return;S.age=+b.dataset.v;saveS();haptic(6);renderSettings()};
   $('setNum').oninput=e=>{S.num=Math.max(0,Math.min(99,parseInt(e.target.value,10)||0));saveS();renderSettingsJersey()};
   $('setBody').querySelectorAll('.sw').forEach(b=>b.onclick=()=>{S.color=b.dataset.c;saveS();haptic(8);renderSettings()});
   const onSeg=(id,fn)=>{$(id).onclick=e=>{const b=e.target.closest('button');if(!b)return;fn(b.dataset.v);saveS();haptic(6);renderSettings()}};
@@ -1991,7 +2076,7 @@ function showUpdate(){
 
 /* ═══════════ BOOT ═══════════ */
 applyTheme();
-renderHome();
+if(S.setup)renderHome();else openSetup();
 askPersist();
 document.addEventListener('pointerdown',()=>audio(),{once:true});
 let openedOn=todayKey();
