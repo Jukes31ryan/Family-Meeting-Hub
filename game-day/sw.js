@@ -1,7 +1,7 @@
 /* Game Day service worker — offline app shell.
    Bump CACHE on every release: the name is the version, and a new name is
    what evicts the old files and tells open tabs an update is waiting. */
-const CACHE = 'game-day-v6';
+const CACHE = 'game-day-v7';
 const SHELL = [
   './',
   './index.html',
@@ -54,6 +54,8 @@ self.addEventListener('fetch', e => {
   // Navigations: network first, fall back to the cached shell so it opens offline.
   // The manifest is the app's identity for installing: always ask the network
   // first, so a changed manifest reaches the phone without waiting for an update.
+  // (The page also links it with a version query, so even an older worker that
+  // served it cache-first misses its cache and fetches the current one.)
   if (new URL(req.url).pathname.slice(HOME.length) === 'manifest.webmanifest') {
     e.respondWith(
       fetch(req)
