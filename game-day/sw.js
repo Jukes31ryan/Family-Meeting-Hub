@@ -1,14 +1,15 @@
 /* Game Day service worker — offline app shell.
    Bump CACHE on every release: the name is the version, and a new name is
    what evicts the old files and tells open tabs an update is waiting. */
-const CACHE = 'game-day-v3';
+const CACHE = 'game-day-v4';
 const SHELL = [
   './',
   './index.html',
   './manifest.webmanifest',
   './icon-192.png',
   './icon-512.png',
-  './icon-180.png'
+  './icon-180.png',
+  './sources.html'
 ];
 
 /* Other apps live on this same origin (jukes31ryan.github.io), and cache
@@ -51,15 +52,21 @@ self.addEventListener('fetch', e => {
   if (req.method !== 'GET' || !mine(req.url)) return;
 
   // Navigations: network first, fall back to the cached shell so it opens offline.
+  // Only the app itself is stored as the shell; another page (sources.html)
+  // is stored under its own name, so opening it can't replace the app.
   if (req.mode === 'navigate') {
+    const rest = new URL(req.url).pathname.slice(HOME.length);
+    const key = (rest === '' || rest === 'index.html') ? './index.html' : req;
     e.respondWith(
       fetch(req)
         .then(res => {
-          const copy = res.clone();
-          caches.open(CACHE).then(c => c.put('./index.html', copy)).catch(() => {});
+          if (res && res.ok) {
+            const copy = res.clone();
+            caches.open(CACHE).then(c => c.put(key, copy)).catch(() => {});
+          }
           return res;
         })
-        .catch(() => caches.open(CACHE).then(c => c.match('./index.html').then(r => r || c.match('./'))))
+        .catch(() => caches.open(CACHE).then(c => c.match(key).then(r => r || c.match('./index.html')).then(r => r || c.match('./'))))
     );
     return;
   }

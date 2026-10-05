@@ -1,13 +1,13 @@
 {
   "name": "Game Day",
   "short_name": "Game Day",
-  "description": "Liam's morning warm-up: sports trivia, Who Am I?, a crossword, a play to learn, a skill to try and a joke.",
+  "description": "A game-day plan for a kid who loves sports: warm up, learn the food groups, train your sports brain and lead yourself in the morning; check in, recover and wind down at night.",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#17130f",
-  "theme_color": "#17130f",
+  "background_color": "#4FC0FF",
+  "theme_color": "#5CC6FF",
   "icons": [
     {
       "src": "icon-192.png",
