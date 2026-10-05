@@ -1,7 +1,7 @@
 /* Game Day service worker — offline app shell.
    Bump CACHE on every release: the name is the version, and a new name is
    what evicts the old files and tells open tabs an update is waiting. */
-const CACHE = 'game-day-v5';
+const CACHE = 'game-day-v6';
 const SHELL = [
   './',
   './index.html',
@@ -52,6 +52,20 @@ self.addEventListener('fetch', e => {
   if (req.method !== 'GET' || !mine(req.url)) return;
 
   // Navigations: network first, fall back to the cached shell so it opens offline.
+  // The manifest is the app's identity for installing: always ask the network
+  // first, so a changed manifest reaches the phone without waiting for an update.
+  if (new URL(req.url).pathname.slice(HOME.length) === 'manifest.webmanifest') {
+    e.respondWith(
+      fetch(req)
+        .then(res => {
+          if (res && res.ok) { const copy = res.clone(); caches.open(CACHE).then(c => c.put('./manifest.webmanifest', copy)).catch(() => {}) }
+          return res;
+        })
+        .catch(() => caches.open(CACHE).then(c => c.match('./manifest.webmanifest')))
+    );
+    return;
+  }
+
   // Only the app itself is stored as the shell; another page (sources.html)
   // is stored under its own name, so opening it can't replace the app.
   if (req.mode === 'navigate') {

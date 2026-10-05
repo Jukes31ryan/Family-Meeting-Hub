@@ -468,7 +468,7 @@ color:var(--ink);font-family:var(--fd);font-size:28px;box-shadow:0 6px 0 var(--l
    another app's on the same site. */
 const APP={"id":"game-day","name":"Game Day","backup":"game-day"};
 const KP="gd";
-const APP_VERSION='v4.1';
+const APP_VERSION='v4.2';
 
 /* ═══════════ CONTENT (written by tools/make_pack.py from content/) ═══════════ */
 const DEF_QUOTES=[
@@ -2000,6 +2000,10 @@ function renderSettings(){
       '<label style="flex:1;font-weight:900;font-size:14px;color:var(--ink2)">Lights out<input class="txt-in" id="setBed" type="time" value="'+esc(S.bed)+'"></label>'+
       '<label style="flex:1;font-weight:900;font-size:14px;color:var(--ink2)">Wake up<input class="txt-in" id="setWake" type="time" value="'+esc(S.wake)+'"></label></div></div>'+
     '<div class="stk"><div class="sec-l">Sounds and buzz</div>'+seg('setSound',[['on','On'],['off','Off']],S.sound?'on':'off')+'</div>'+
+    '<div class="stk"><div class="sec-l">For grown-ups: put it on the home screen</div><div class="bed-p" style="margin:0">'+
+      '<b>Android (Chrome):</b> tap ⋮, then <i>Add to Home screen</i>, then <i>Install</i>. If it only offers a shortcut, remove any older Game Day icon first (press and hold it, then Uninstall), reopen this page and try again.<br><br>'+
+      '<b>iPhone or iPad (Safari):</b> tap Share, then <i>Add to Home Screen</i>.<br><br>'+
+      'Game Day is its own app, separate from any other app on this site, so both can be installed.</div></div>'+
     '<div class="stk"><div class="sec-l">For grown-ups: backup</div><div class="bed-p" style="margin:0 0 10px">Everything is saved on this device only. Save a backup file now and then, so a lost or reset phone doesn’t lose the streak.</div>'+
       '<div class="row"><button class="btn3d small ghost" onclick="exportData()">Save backup</button><label class="btn3d small ghost" style="cursor:pointer">Restore<input type="file" accept="application/json,.json" style="display:none" onchange="importFile(this)"></label></div>'+
       '<div class="bed-p" id="backupMsg" style="margin-top:8px"></div></div>'+

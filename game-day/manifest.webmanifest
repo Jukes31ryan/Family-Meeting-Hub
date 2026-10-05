@@ -1,4 +1,5 @@
 {
+  "id": "./?app=game-day",
   "name": "Game Day",
   "short_name": "Game Day",
   "description": "A game-day plan for a kid who loves sports: warm up, learn the food groups, train your sports brain and lead yourself in the morning; check in, recover and wind down at night.",
@@ -27,5 +28,10 @@
       "type": "image/png",
       "purpose": "maskable"
     }
+  ],
+  "categories": [
+    "kids",
+    "sports",
+    "education"
   ]
 }
