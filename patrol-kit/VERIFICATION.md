@@ -84,6 +84,121 @@ Verification method (Oct 2026): web search results quoting the primary source (o
 | `uf-sc-knife` | 8 C.F.R. § 287.8(a)(2); CBP Use of Force Policy (2021) | https://www.law.cornell.edu/cfr/text/8/287.8 |
 | `uf-sc-report` | Graham v. Connor, 490 U.S. 386 (1989); Barnes v. Felix, 605 U.S. 73 (2025) | https://www.govinfo.gov/content/pkg/USREPORTS-490/pdf/USREPORTS-490-386.pdf |
 
+## French
+
+| Card | Source | Checked against |
+|---|---|---|
+| `fr-q-repas` | OQLF, Vitrine linguistique: meal names (déjeuner, dîner, souper) | https://vitrinelinguistique.oqlf.gouv.qc.ca/redirection/ficheuid/8872574 |
+| `fr-q-cell` | OQLF, Grand dictionnaire terminologique: téléphone cellulaire | https://vitrinelinguistique.oqlf.gouv.qc.ca/fiche-gdt/fiche/8393991/telephone-cellulaire |
+| `fr-q-stationnement` | OQLF, Grand dictionnaire terminologique: parc de stationnement | https://vitrinelinguistique.oqlf.gouv.qc.ca/fiche-gdt/fiche/1298970/parc-de-stationnement |
+| `fr-q-bienvenue` | OQLF, Banque de dépannage linguistique: emploi déconseillé de l'emprunt « bienvenue » | https://vitrinelinguistique.oqlf.gouv.qc.ca/21469/les-emprunts-a-langlais/emprunts-semantiques/emploi-deconseille-de-lemprunt-bienvenue |
+| `fr-q-depanneur` | The Canadian Encyclopedia: Dépanneur | https://prod-front.thecanadianencyclopedia.ca/en/article/depanneur |
+| `fr-q-arret` | OQLF, Grand dictionnaire terminologique: panneau ARRÊT | https://vitrinelinguistique.oqlf.gouv.qc.ca/redirection/ficheuid/8366697 |
+| `fr-q-piastre` | OQLF, Banque de dépannage linguistique: différence entre dollar et piastre | https://vitrinelinguistique.oqlf.gouv.qc.ca/23978/le-vocabulaire/nuances-semantiques/difference-entre-dollar-et-piastre |
+| `fr-q-char` | Larousse French-English dictionary: char (Québec, familiar) | https://www.larousse.fr/dictionnaires/francais-anglais/char/14579 |
+| `fr-q-chum` | Québec City tourism glossary: 100 expressions québécoises | https://www.quebec-cite.com/fr/ville-quebec/expressions-quebecoises |
+| `fr-q-tu` | Université Laval, Life and culture in Québec: French | https://www.ulaval.ca/en/student-zone/international-student-community/life-and-culture-in-quebec/french |
+| `fr-q-ramq` | Immigrant Québec: carte d'assurance maladie (RAMQ) | https://immigrantquebec.com/fr/reussir-votre-installation/demarches-des-premiers-jours/ |
+| `fr-q-saaq` | Société de l'assurance automobile du Québec (SAAQ) | https://saaq.gouv.qc.ca/prendre-un-rendez-vous/details/2 |
+| `fr-q-mc-diner` | OQLF, Vitrine linguistique: meal names (déjeuner, dîner, souper) | https://vitrinelinguistique.oqlf.gouv.qc.ca/redirection/ficheuid/8872574 |
+
+## Land Nav
+
+| Card | Source | Checked against |
+|---|---|---|
+| `ln-mgrs-order` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Military_Grid_Reference_System |
+| `ln-right-up` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.honestmos.com/field-manual/land-navigation |
+| `ln-precision` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Military_Grid_Reference_System |
+| `ln-8digit` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Military_Grid_Reference_System |
+| `ln-utm-zones` | UTM / MGRS specification | https://bluemarblegeo.com/knowledgebase/calculator-2020sp2/Military_Grid_Reference_System_(MGRS).htm |
+| `ln-bands` | UTM / MGRS specification | https://bluemarblegeo.com/knowledgebase/calculator-2020sp2/Military_Grid_Reference_System_(MGRS).htm |
+| `ln-mgrs-truncate` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Military_Grid_Reference_System |
+| `ln-backaz` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Land_navigation |
+| `ln-backaz-calc` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Land_navigation |
+| `ln-backaz-calc2` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Land_navigation |
+| `ln-gm-diagram` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.honestmos.com/field-manual/land-navigation |
+| `ln-west` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.honestmos.com/field-manual/land-navigation |
+| `ln-east` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.honestmos.com/field-manual/land-navigation |
+| `ln-conv-w` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.honestmos.com/field-manual/land-navigation |
+| `ln-conv-w2` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.honestmos.com/field-manual/land-navigation |
+| `ln-interference` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.trngcmd.marines.mil/Portals/207/Docs/TBS/B170249Lensatic%20Compass.pdf |
+| `ln-vehicle` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.trngcmd.marines.mil/Portals/207/Docs/TBS/B170249Lensatic%20Compass.pdf |
+| `ln-pace-calc` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Land_navigation |
+| `ln-pace-dist` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Land_navigation |
+| `ln-pace-factors` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Land_navigation |
+| `ln-pace-snow` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Land_navigation |
+| `ln-t-hill` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.land-navigation.com/terrain-features.html |
+| `ln-t-saddle` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.land-navigation.com/terrain-features.html |
+| `ln-t-valley` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.land-navigation.com/terrain-features.html |
+| `ln-t-ridge` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.land-navigation.com/terrain-features.html |
+| `ln-t-depression` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.land-navigation.com/terrain-features.html |
+| `ln-t-draw` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.land-navigation.com/terrain-features.html |
+| `ln-t-spur` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.land-navigation.com/terrain-features.html |
+| `ln-t-cliff` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.land-navigation.com/terrain-features.html |
+| `ln-t-cut` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.land-navigation.com/terrain-features.html |
+| `ln-t-fill` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.land-navigation.com/terrain-features.html |
+| `ln-t-counts` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://brainscape.com/flashcards/land-nav-11330285/packs/20039434 |
+| `ln-colors` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.trngcmd.marines.mil/Portals/207/Docs/FMTBE/Student%20Materials/FMSO%20Manual/212.pdf |
+| `ln-color-mc` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.trngcmd.marines.mil/Portals/207/Docs/FMTBE/Student%20Materials/FMSO%20Manual/212.pdf |
+
+## Radio
+
+| Card | Source | Checked against |
+|---|---|---|
+| `rd-l-a` | ICAO spelling alphabet (ICAO Annex 10) | https://skybrary.aero/articles/icao-phonetic-alphabet |
+| `rd-l-b` | ICAO spelling alphabet (ICAO Annex 10) | https://skybrary.aero/articles/icao-phonetic-alphabet |
+| `rd-l-c` | ICAO spelling alphabet (ICAO Annex 10) | https://skybrary.aero/articles/icao-phonetic-alphabet |
+| `rd-l-d` | ICAO spelling alphabet (ICAO Annex 10) | https://skybrary.aero/articles/icao-phonetic-alphabet |
+| `rd-l-e` | ICAO spelling alphabet (ICAO Annex 10) | https://skybrary.aero/articles/icao-phonetic-alphabet |
+| `rd-l-f` | ICAO spelling alphabet (ICAO Annex 10) | https://skybrary.aero/articles/icao-phonetic-alphabet |
+| `rd-l-g` | ICAO spelling alphabet (ICAO Annex 10) | https://skybrary.aero/articles/icao-phonetic-alphabet |
+| `rd-l-h` | ICAO spelling alphabet (ICAO Annex 10) | https://skybrary.aero/articles/icao-phonetic-alphabet |
+| `rd-l-i` | ICAO spelling alphabet (ICAO Annex 10) | https://skybrary.aero/articles/icao-phonetic-alphabet |
+| `rd-l-j` | ICAO spelling alphabet (ICAO Annex 10) | https://skybrary.aero/articles/icao-phonetic-alphabet |
+| `rd-l-k` | ICAO spelling alphabet (ICAO Annex 10) | https://skybrary.aero/articles/icao-phonetic-alphabet |
+| `rd-l-l` | ICAO spelling alphabet (ICAO Annex 10) | https://skybrary.aero/articles/icao-phonetic-alphabet |
+| `rd-l-m` | ICAO spelling alphabet (ICAO Annex 10) | https://skybrary.aero/articles/icao-phonetic-alphabet |
+| `rd-l-n` | ICAO spelling alphabet (ICAO Annex 10) | https://skybrary.aero/articles/icao-phonetic-alphabet |
+| `rd-l-o` | ICAO spelling alphabet (ICAO Annex 10) | https://skybrary.aero/articles/icao-phonetic-alphabet |
+| `rd-l-p` | ICAO spelling alphabet (ICAO Annex 10) | https://skybrary.aero/articles/icao-phonetic-alphabet |
+| `rd-l-q` | ICAO spelling alphabet (ICAO Annex 10) | https://skybrary.aero/articles/icao-phonetic-alphabet |
+| `rd-l-r` | ICAO spelling alphabet (ICAO Annex 10) | https://skybrary.aero/articles/icao-phonetic-alphabet |
+| `rd-l-s` | ICAO spelling alphabet (ICAO Annex 10) | https://skybrary.aero/articles/icao-phonetic-alphabet |
+| `rd-l-t` | ICAO spelling alphabet (ICAO Annex 10) | https://skybrary.aero/articles/icao-phonetic-alphabet |
+| `rd-l-u` | ICAO spelling alphabet (ICAO Annex 10) | https://skybrary.aero/articles/icao-phonetic-alphabet |
+| `rd-l-v` | ICAO spelling alphabet (ICAO Annex 10) | https://skybrary.aero/articles/icao-phonetic-alphabet |
+| `rd-l-w` | ICAO spelling alphabet (ICAO Annex 10) | https://skybrary.aero/articles/icao-phonetic-alphabet |
+| `rd-l-x` | ICAO spelling alphabet (ICAO Annex 10) | https://skybrary.aero/articles/icao-phonetic-alphabet |
+| `rd-l-y` | ICAO spelling alphabet (ICAO Annex 10) | https://skybrary.aero/articles/icao-phonetic-alphabet |
+| `rd-l-z` | ICAO spelling alphabet (ICAO Annex 10) | https://skybrary.aero/articles/icao-phonetic-alphabet |
+| `rd-l-spelling` | ICAO spelling alphabet (ICAO Annex 10) | https://skybrary.aero/articles/icao-phonetic-alphabet |
+| `rd-l-plate` | ICAO spelling alphabet (ICAO Annex 10) | https://skybrary.aero/articles/icao-phonetic-alphabet |
+| `rd-n-0` | FAA Order JO 7110.10, Ch. 2 Sec. 3 (ICAO number pronunciation) | https://www.faa.gov/Air_traffic/Publications/atpubs/fs_html/chap2_section_3.html |
+| `rd-n-1` | FAA Order JO 7110.10, Ch. 2 Sec. 3 (ICAO number pronunciation) | https://www.faa.gov/Air_traffic/Publications/atpubs/fs_html/chap2_section_3.html |
+| `rd-n-2` | FAA Order JO 7110.10, Ch. 2 Sec. 3 (ICAO number pronunciation) | https://www.faa.gov/Air_traffic/Publications/atpubs/fs_html/chap2_section_3.html |
+| `rd-n-3` | FAA Order JO 7110.10, Ch. 2 Sec. 3 (ICAO number pronunciation) | https://www.faa.gov/Air_traffic/Publications/atpubs/fs_html/chap2_section_3.html |
+| `rd-n-4` | FAA Order JO 7110.10, Ch. 2 Sec. 3 (ICAO number pronunciation) | https://www.faa.gov/Air_traffic/Publications/atpubs/fs_html/chap2_section_3.html |
+| `rd-n-5` | FAA Order JO 7110.10, Ch. 2 Sec. 3 (ICAO number pronunciation) | https://www.faa.gov/Air_traffic/Publications/atpubs/fs_html/chap2_section_3.html |
+| `rd-n-6` | FAA Order JO 7110.10, Ch. 2 Sec. 3 (ICAO number pronunciation) | https://www.faa.gov/Air_traffic/Publications/atpubs/fs_html/chap2_section_3.html |
+| `rd-n-7` | FAA Order JO 7110.10, Ch. 2 Sec. 3 (ICAO number pronunciation) | https://www.faa.gov/Air_traffic/Publications/atpubs/fs_html/chap2_section_3.html |
+| `rd-n-8` | FAA Order JO 7110.10, Ch. 2 Sec. 3 (ICAO number pronunciation) | https://www.faa.gov/Air_traffic/Publications/atpubs/fs_html/chap2_section_3.html |
+| `rd-n-9` | FAA Order JO 7110.10, Ch. 2 Sec. 3 (ICAO number pronunciation) | https://www.faa.gov/Air_traffic/Publications/atpubs/fs_html/chap2_section_3.html |
+| `rd-n-mc` | FAA Order JO 7110.10, Ch. 2 Sec. 3 (ICAO number pronunciation) | https://www.faa.gov/Air_traffic/Publications/atpubs/fs_html/chap2_section_3.html |
+| `rd-p-roger` | ACP 125, Communications Instructions — Radiotelephone Procedures (prowords) | https://en.wikipedia.org/wiki/Procedure_word |
+| `rd-p-wilco` | ACP 125, Communications Instructions — Radiotelephone Procedures (prowords) | https://en.wikipedia.org/wiki/Procedure_word |
+| `rd-p-say-again` | ACP 125, Communications Instructions — Radiotelephone Procedures (prowords) | https://en.wikipedia.org/wiki/Procedure_word |
+| `rd-p-over` | ACP 125, Communications Instructions — Radiotelephone Procedures (prowords) | https://en.wikipedia.org/wiki/Procedure_word |
+| `rd-p-out` | ACP 125, Communications Instructions — Radiotelephone Procedures (prowords) | https://en.wikipedia.org/wiki/Procedure_word |
+| `rd-p-i-spell` | ACP 125, Communications Instructions — Radiotelephone Procedures (prowords) | https://en.wikipedia.org/wiki/Procedure_word |
+| `rd-p-correction` | ACP 125, Communications Instructions — Radiotelephone Procedures (prowords) | https://en.wikipedia.org/wiki/Procedure_word |
+| `rd-p-break` | ACP 125, Communications Instructions — Radiotelephone Procedures (prowords) | https://en.wikipedia.org/wiki/Procedure_word |
+| `rd-p-wait` | ACP 125, Communications Instructions — Radiotelephone Procedures (prowords) | https://en.wikipedia.org/wiki/Procedure_word |
+| `rd-p-overout` | ACP 125, Communications Instructions — Radiotelephone Procedures (prowords) | https://en.wikipedia.org/wiki/Procedure_word |
+| `rd-sc-wilco` | ACP 125, Communications Instructions — Radiotelephone Procedures (prowords) | https://en.wikipedia.org/wiki/Procedure_word |
+| `rd-sc-sayagain` | ACP 125, Communications Instructions — Radiotelephone Procedures (prowords) | https://en.wikipedia.org/wiki/Procedure_word |
+| `rd-pr-plain` | FEMA, NIMS Plain Language Guidance; IS-315 (ICS common terminology) | https://emilms.fema.gov/is_0315a/groups/143.html |
+| `rd-pr-why` | FEMA, NIMS Plain Language Guidance | https://www.alicetraining.com/wp-content/uploads/2016/03/FEMA-Plain-Language-Guide.pdf |
+
 ## Statutes & Authority
 
 | Card | Source | Checked against |

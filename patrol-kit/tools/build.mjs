@@ -36,6 +36,16 @@ for (const d of all.decks) {
 }
 fs.writeFileSync(path.join(ROOT, "VERIFICATION.md"), ver.join("\n"));
 
+// UNVERIFIED.md: cards whose only check was a secondary source (encyclopedia, brief sites, blogs).
+const PRIMARY = /(govinfo\.gov|law\.cornell\.edu|justia\.com|supremecourt\.gov|cbp\.gov|dhs\.gov|law\.resource\.org|chanrobles\.com|uscourts\.gov|faa\.gov|oqlf\.gouv\.qc\.ca|saaq\.gouv\.qc\.ca|fema\.gov|marines\.mil|larousse\.fr|ulaval\.ca|thecanadianencyclopedia\.ca|skybrary\.aero)/;
+const sec = ["| Card | Source | Checked via |", "|---|---|---|"];
+for (const d of all.decks) for (const c of d.cards) if (c.verified && !PRIMARY.test(c.verified))
+  sec.push(`| \`${c.id}\` | ${c.source.replace(/\|/g, "\\|")} | ${new URL(c.verified).hostname} |`);
+const uvPath = path.join(ROOT, "UNVERIFIED.md");
+const uv = fs.readFileSync(uvPath, "utf8").replace(/<!-- secondary:start[^>]*-->[\s\S]*?<!-- secondary:end -->/,
+  m => m.split("\n")[0] + "\n" + sec.join("\n") + "\n<!-- secondary:end -->");
+fs.writeFileSync(uvPath, uv);
+
 const hash = crypto.createHash("sha256").update(html).digest("hex").slice(0, 10);
 const sw = fs.readFileSync(path.join(ROOT, "src/sw.js"), "utf8").replace("@VERSION@", hash);
 fs.writeFileSync(path.join(ROOT, "sw.js"), sw);
