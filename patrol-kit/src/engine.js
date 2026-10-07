@@ -131,7 +131,7 @@ let view={name:"home"};
 function go(v){view=v;render();window.scrollTo(0,0)}
 function render(){
   const r={home:renderHome,deck:renderDeck,drill:renderDrill,browse:renderBrowseCats,browselist:renderBrowseList,
-    grammar:renderGrammarList,lesson:renderLesson,verbs:renderVerbSetup,verbdrill:renderVerbDrill,settings:renderSettings}[view.name]||renderHome;
+    grammar:renderGrammarList,lesson:renderLesson,verbs:renderVerbSetup,verbdrill:renderVerbDrill,settings:renderSettings,field:renderFieldList}[view.name]||renderHome;
   r();
 }
 function topbar(title,backTo){
@@ -164,6 +164,7 @@ function renderHome(){
       :`<p>A mixed set from your ${act.length} active deck${act.length===1?"":"s"}. Due cards first.</p><button class="btn" onclick="startDaily(false)">Start Muster</button>`}
   </div>
   <div class="shuffle"><button class="btn ghost" onclick="startDrill(null)">Shuffle All<span class="sub">${dueAll} due · ${pool.length} cards in active decks</span></button></div>
+  ${FIELD.length?`<div class="shuffle"><button class="btn ghost" onclick="go({name:'field'})">Field Problems<span class="sub">${Object.keys(LS.get("field",{})).length} / ${FIELD.length} run · chained scenarios across decks</span></button></div>`:""}
   <div class="sectionlabel">Decks</div>
   <div class="decklist">
     ${decks.map(d=>{const id=d.meta.id;const on=act.includes(id);const all=deckCards(id);
@@ -228,6 +229,15 @@ function startDrill(deckId){
   go({name:"drill"});
 }
 function newSession(ids,kind,deckId){return{ids,idx:0,results:[],kind,deckId:deckId||null,st:freshCardState(BYID[ids[0]])}}
+/* the card shown at step i: a deck card, or a Field Problem step (deck card by ref, or inline) */
+function sessionCard(S,i){
+  if(S.kind!=="field")return BYID[S.ids[i]];
+  const step=S.problem.steps[i];if(!step)return null;
+  if(step.ref)return BYID[step.ref];
+  const fed=(step.feeds||[]).map(id=>BYID[id]).filter(Boolean);
+  return{...step,id:S.ids[i],deck:step.deck||(fed[0]&&fed[0].deck),group:"",cat:"Field Problem",
+    why:step.why||(fed[0]&&fed[0].why)||"",source:step.source||(fed[0]&&fed[0].source)||""};
+}
 function freshCardState(c){
   if(!c)return{};
   if(c.type==="mc"||c.type==="scenario")return{answered:null,order:shuffle(c.choices.map((_,i)=>i))};
@@ -253,11 +263,13 @@ function renderDrill(){
   const S=SESSION;
   if(!S){go({name:"home"});return}
   if(S.idx>=S.ids.length){return renderDrillDone()}
-  const c=BYID[S.ids[S.idx]];
+  const c=sessionCard(S,S.idx);
   const dots=S.ids.map((_,i)=>`<div class="pdot ${i<S.idx?(S.results[i]?"done":"miss"):""} ${i===S.idx?"cur":""}"></div>`).join("");
-  const title=S.kind==="drill"?(S.deckId?DECK[S.deckId].meta.name.toUpperCase():"SHUFFLE ALL"):"MUSTER";
+  const title=S.kind==="field"?"FIELD PROBLEM":S.kind==="drill"?(S.deckId?DECK[S.deckId].meta.name.toUpperCase():"SHUFFLE ALL"):"MUSTER";
+  const step=S.kind==="field"?S.problem.steps[S.idx]:null;
+  const lead=S.kind!=="field"?"":`<div class="situation">${S.idx===0?`<h3>${esc(S.problem.title)}</h3><p>${esc(S.problem.situation)}</p>`:""}${step.narrative?`<p>${esc(step.narrative)}</p>`:""}</div>`;
   const body={flip:flipHTML,mc:choiceHTML,scenario:choiceHTML,order:orderHTML}[c.type](c,S.st);
-  app.innerHTML=`${topbar(title,{name:"home"})}<div class="progress">${dots}</div><div style="${deckVar(c.deck)}">${body}</div>`;
+  app.innerHTML=`${topbar(title,S.kind==="field"?{name:"field"}:{name:"home"})}<div class="progress">${dots}</div>${lead}<div style="${deckVar(c.deck)}">${body}</div>`;
 }
 
 /* flip */
@@ -316,11 +328,16 @@ function checkOrder(){SESSION.st.checked=true;render()}
 
 function gradeCard(ok){
   const S=SESSION;
-  gradeItem(S.ids[S.idx],ok);
-  S.results.push(ok);S.idx++;S.st=freshCardState(BYID[S.ids[S.idx]]);render();window.scrollTo(0,0);
+  if(S.kind==="field"){
+    // a deck card grades normally; an inline step's miss demotes the cards it tests in their own decks
+    const step=S.problem.steps[S.idx];
+    if(step.ref)gradeItem(step.ref,ok);else if(!ok)(step.feeds||[]).forEach(id=>gradeItem(id,false));
+  }else gradeItem(S.ids[S.idx],ok);
+  S.results.push(ok);S.idx++;S.st=freshCardState(sessionCard(S,S.idx));render();window.scrollTo(0,0);
 }
 function renderDrillDone(){
   const S=SESSION;
+  if(S.kind==="field")return renderFieldDone();
   const got=S.results.filter(Boolean).length;
   let extra="";
   if(S.kind==="daily"){
@@ -338,6 +355,41 @@ function renderDrillDone(){
   <div class="btnrow">
     <button class="btn ghost" onclick="go({name:'home'})">Home</button>
     <button class="btn" onclick="startDrill(${A(S.deckId)})">Drill 10 more</button>
+  </div>`;
+  SESSION=null;
+}
+
+/* ---------------- FIELD PROBLEMS ---------------- */
+function renderFieldList(){
+  const rec=LS.get("field",{});
+  app.innerHTML=topbar("FIELD PROBLEMS",{name:"home"})+`<p class="smallprint">Chained scenarios. Each step is graded, and a miss sends the related cards back into review in their own decks.</p>`+
+    FIELD.map(f=>{const r=rec[f.id];const decks=[...new Set(f.steps.map(st=>(st.ref?BYID[st.ref].deck:st.deck)))];
+      return `<button class="lesson-item" onclick="startField(${A(f.id)})">
+      <span class="t"><span class="name">${esc(f.title)}</span><br><span class="tag">${f.steps.length} steps · ${decks.map(d=>esc(DECK[d].meta.short||d)).join(" · ")}</span></span>
+      ${r?`<span class="check">${r.best}/${f.steps.length}</span>`:""}</button>`}).join("");
+}
+function startField(id){
+  const f=FIELD.find(x=>x.id===id);
+  SESSION={ids:f.steps.map((st,i)=>st.ref||`${f.id}-s${i+1}`),idx:0,results:[],kind:"field",problem:f,deckId:null};
+  SESSION.st=freshCardState(sessionCard(SESSION,0));
+  go({name:"drill"});
+}
+function renderFieldDone(){
+  const S=SESSION;const f=S.problem;const got=S.results.filter(Boolean).length;
+  const rec=LS.get("field",{});const prev=rec[f.id];
+  rec[f.id]={best:Math.max(got,prev?prev.best:0),last:got,on:todayStr()};LS.set("field",rec);
+  const missed=f.steps.map((st,i)=>({st,i})).filter(x=>!S.results[x.i]);
+  const fed=[...new Set(missed.flatMap(x=>x.st.ref?[x.st.ref]:(x.st.feeds||[])))].map(id=>BYID[id]).filter(Boolean);
+  app.innerHTML=`
+  ${topbar("DEBRIEF",{name:"field"})}
+  <div class="muster" style="text-align:center">
+    <div class="scoreline">${got} / ${f.steps.length} STEPS</div>
+    <p>${missed.length?"These cards are back in review in their decks:":"Clean run. Nothing fed back."}</p>
+  </div>
+  ${fed.length?`<div class="card-list">${fed.map(c=>{const sm=cardSummary(c);return `<div class="phrase" style="${deckVar(c.deck)}"><div class="es">${esc(DECK[c.deck].meta.name)} · ${esc(c.front||c.q)}</div><div class="en">${esc(sm.b)}</div></div>`}).join("")}</div>`:""}
+  <div class="btnrow" style="margin-top:12px">
+    <button class="btn ghost" onclick="go({name:'field'})">All problems</button>
+    <button class="btn" onclick="startField(${A(f.id)})">Run it again</button>
   </div>`;
   SESSION=null;
 }
@@ -521,7 +573,7 @@ function importProgress(){
 }
 function resetAll(){
   if(!confirm("Erase streak, card history, and lesson progress?"))return;
-  ["srs","streak","daily","lessons","vopt","active"].forEach(k=>localStorage.removeItem("pk_"+k));
+  ["srs","streak","daily","lessons","vopt","active","field"].forEach(k=>localStorage.removeItem("pk_"+k));
   VOPT={tenses:["pres","pret","cmd"]};
   go({name:"home"});toast("Progress reset");
 }

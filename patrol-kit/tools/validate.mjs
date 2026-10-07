@@ -75,6 +75,43 @@ export function validate({ decks, extra }) {
     }
     rows.push({ deck: m.id, file: W, total: (d.cards || []).length, ...count, sourceFromDefault: defaulted });
   }
+  // field problems: refs must exist; inline steps follow card rules and must feed real cards
+  const field = extra["field"]?.default || [];
+  const allCards = new Map(); decks.forEach(d => d.cards.forEach(c => allCards.set(c.id, { ...c, deck: d.meta.id, source: c.source || (d.categories || {})[c.cat]?.source || d.meta.source })));
+  const fpIds = new Set(); let fpSteps = 0, fpRefs = 0;
+  for (const f of field) {
+    const at = `field.js ${f.id || "(no id)"}`;
+    if (!isStr(f.id) || !/^fp-[a-z0-9-]+$/.test(f.id)) errors.push(`${at}: id must be "fp-slug"`);
+    if (fpIds.has(f.id)) errors.push(`${at}: duplicate problem id`); fpIds.add(f.id);
+    if (!isStr(f.title) || !isStr(f.situation)) errors.push(`${at}: needs title and situation`);
+    if (!Array.isArray(f.steps) || f.steps.length < 4) { errors.push(`${at}: needs at least 4 steps`); continue; }
+    scan(at, JSON.stringify(f));
+    const touched = new Set();
+    f.steps.forEach((st, i) => {
+      const sa = `${at} step ${i + 1}`; fpSteps++;
+      if (st.ref) {
+        fpRefs++;
+        const c = allCards.get(st.ref);
+        if (!c) return errors.push(`${sa}: ref "${st.ref}" is not a card`);
+        touched.add(c.deck); return;
+      }
+      if (!["mc", "scenario", "order"].includes(st.type)) return errors.push(`${sa}: inline step must be mc, scenario or order`);
+      if (!Array.isArray(st.feeds) || !st.feeds.length) errors.push(`${sa}: inline step needs feeds:[card ids] for SRS`);
+      else st.feeds.forEach(id => { if (!allCards.has(id)) errors.push(`${sa}: feeds "${id}" is not a card`); else touched.add(allCards.get(id).deck); });
+      if (st.deck && !decks.some(d => d.meta.id === st.deck)) errors.push(`${sa}: unknown deck ${st.deck}`);
+      const src = st.source || (st.feeds && allCards.get(st.feeds[0])?.source);
+      if (!isStr(src)) errors.push(`${sa}: no source (own or from first fed card)`);
+      if (!isStr(st.q)) errors.push(`${sa}: needs q`);
+      if (st.type === "order") { if (!Array.isArray(st.steps) || st.steps.length < 3 || new Set(st.steps).size !== st.steps.length) errors.push(`${sa}: order needs ≥3 unique steps`); }
+      else {
+        if (!Array.isArray(st.choices) || st.choices.length < 2 || new Set(st.choices).size !== st.choices.length) errors.push(`${sa}: needs 2+ unique choices`);
+        else if (!Number.isInteger(st.answer) || st.answer < 0 || st.answer >= st.choices.length) errors.push(`${sa}: answer index ${st.answer} out of range`);
+        if (st.type === "scenario" && !isStr(st.setup)) errors.push(`${sa}: scenario needs setup`);
+      }
+    });
+    if (touched.size < 3) warnings.push(`${at}: only touches ${touched.size} deck(s) — field problems should cross decks`);
+  }
+
   // sub-mode data
   const g = extra["spanish-grammar"]?.default;
   if (g) g.forEach(L => L.quiz.forEach((q, i) => {
@@ -83,7 +120,7 @@ export function validate({ decks, extra }) {
   const v = extra["spanish-verbs"]?.default;
   if (v) v.forEach(x => { if (x.pres.length !== 5 || x.pret.length !== 5 || !isStr(x.cmd)) errors.push(`spanish-verbs ${x.inf}: needs 5 pres, 5 pret, cmd`); });
   if (g) scan("spanish-grammar", JSON.stringify(g));
-  return { errors, warnings, rows, subModes: { grammarLessons: g?.length || 0, grammarQuizQs: g ? g.reduce((n, L) => n + L.quiz.length, 0) : 0, verbs: v?.length || 0 } };
+  return { errors, warnings, rows, subModes: { grammarLessons: g?.length || 0, grammarQuizQs: g ? g.reduce((n, L) => n + L.quiz.length, 0) : 0, verbs: v?.length || 0, fieldProblems: field.length, fieldSteps: fpSteps, fieldRefs: fpRefs } };
 }
 
 export function report(r) {
@@ -92,6 +129,7 @@ export function report(r) {
   for (const x of r.rows) console.log([x.deck, x.total, x.flip, x.mc, x.order, x.scenario, x.sourceFromDefault].map((h, i) => pad(h, i ? 8 : 14)).join(""));
   console.log(pad("ALL", 14) + pad(r.rows.reduce((n, x) => n + x.total, 0), 8));
   console.log(`sub-modes: ${r.subModes.grammarLessons} lessons / ${r.subModes.grammarQuizQs} quiz Qs, ${r.subModes.verbs} verbs`);
+  console.log(`field problems: ${r.subModes.fieldProblems} (${r.subModes.fieldSteps} steps, ${r.subModes.fieldRefs} reuse deck cards)`);
   if (r.warnings.length) { console.log(`\n${r.warnings.length} warning(s):`); r.warnings.forEach(w => console.log("  ! " + w)); }
   if (r.errors.length) { console.log(`\n${r.errors.length} ERROR(S):`); r.errors.forEach(e => console.log("  ✗ " + e)); }
   else console.log("\n✓ 0 errors");

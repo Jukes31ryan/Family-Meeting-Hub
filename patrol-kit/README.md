@@ -36,6 +36,15 @@ The build fails on any validation error: bad schema, duplicate IDs, an MC answer
 Deck files export `{ meta:{id,name,short,color,lang,order,blurb,source,subModes}, categories:{...}, cards:[...] }`.
 Files without `meta` (`spanish-grammar.js`, `spanish-verbs.js`) are sub-mode data.
 
+## Field Problems
+
+`decks/field.js` holds chained scenarios. They're kept out of Muster and Shuffle All and have their own home-screen tile. Each problem has an `id` (`fp-…`), `title`, `situation` and at least 4 `steps`. A step is either:
+
+- `{ narrative, ref:"card-id" }`: reuses a deck card, graded into that card's review schedule as usual, or
+- `{ narrative, type:"mc"|"scenario"|"order", deck, feeds:["card-id", …], q, … }`: an inline question. A miss sends every card in `feeds` back into review in its own deck. Its source comes from the first fed card unless it has its own.
+
+Inline steps should only restate what their fed cards teach. The build warns if a problem touches fewer than 3 decks.
+
 ## Legal decks
 
 Decks with `requireVerified:true` in `meta` (Case Law, Statutes, Use of Force) need, on every card, its own `source` and a `verified` URL for the page it was checked against. The build writes these to `VERIFICATION.md`. Anything that couldn't be verified goes in `UNVERIFIED.md` instead of on a card. Case cards also need `cite`, `year`, `binding`, `rule` and `field`.
