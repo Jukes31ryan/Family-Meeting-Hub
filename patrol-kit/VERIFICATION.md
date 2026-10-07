@@ -61,6 +61,24 @@ Verification method (Oct 2026): web search results quoting the primary source (o
 | `cl-sc-bus` | United States v. Drayton, 536 U.S. 194 (2002) | https://www.law.cornell.edu/supremecourt/text/536/194 |
 | `cl-mc-binding` | 28 U.S.C. § 41 (2d Cir. = Connecticut, New York, Vermont); United States v. Cotterman, 709 F.3d 952 (9th Cir. 2013) | https://www.law.cornell.edu/uscode/text/28/41 |
 | `cl-mc-removal` | INS v. Lopez-Mendoza, 468 U.S. 1032 (1984) | https://www.law.cornell.edu/wex/i.n.s._v._lopez-mendoza |
+| `cl-oliver` | Oliver v. United States, 466 U.S. 170 (1984) | https://chanrobles.com/usa/us_supremecourt/466/170/ |
+| `cl-dunn` | United States v. Dunn, 480 U.S. 294 (1987) | https://www.govinfo.gov/content/pkg/USREPORTS-480/pdf/USREPORTS-480-294.pdf |
+| `cl-berkemer` | Berkemer v. McCarty, 468 U.S. 420 (1984) | https://www.law.cornell.edu/supremecourt/text/468/420 |
+| `cl-schneckloth` | Schneckloth v. Bustamonte, 412 U.S. 218 (1973) | https://www.govinfo.gov/content/pkg/USREPORTS-412/pdf/USREPORTS-412-218.pdf |
+| `cl-jimeno` | Florida v. Jimeno, 500 U.S. 248 (1991) | https://www.law.cornell.edu/supct/html/90-622.ZO.html |
+| `cl-gant` | Arizona v. Gant, 556 U.S. 332 (2009) | https://case-law.vlex.com/vid/556-u-s-332-606040026 |
+| `cl-long` | Michigan v. Long, 463 U.S. 1032 (1983) | https://www.govinfo.gov/content/pkg/USREPORTS-463/pdf/USREPORTS-463-1032.pdf |
+| `cl-navarette` | Navarette v. California, 572 U.S. 393 (2014) | https://supreme.justia.com/cases/federal/us/572/12-9490 |
+| `cl-hiibel` | Hiibel v. Sixth Judicial Dist. Ct. of Nev., 542 U.S. 177 (2004) | https://www.chanrobles.com/usa/us_supremecourt/542/177/ |
+| `cl-riverside` | County of Riverside v. McLaughlin, 500 U.S. 44 (1991) | https://www.law.cornell.edu/supct/html/89-1817.ZS.html |
+| `cl-plumhoff` | Plumhoff v. Rickard, 572 U.S. 765 (2014) | https://www.law.cornell.edu/supremecourt/text/12-1117 |
+| `cl-mullenix` | Mullenix v. Luna, 577 U.S. 7 (2015) (per curiam) | https://law.cornell.edu/supremecourt/text/14-1143 |
+| `cl-sc-open-field` | Oliver v. United States, 466 U.S. 170 (1984) | https://chanrobles.com/usa/us_supremecourt/466/170/ |
+| `cl-sc-barn` | United States v. Dunn, 480 U.S. 294 (1987) | https://www.govinfo.gov/content/pkg/USREPORTS-480/pdf/USREPORTS-480-294.pdf |
+| `cl-sc-gant` | Arizona v. Gant, 556 U.S. 332 (2009) | https://case-law.vlex.com/vid/556-u-s-332-606040026 |
+| `cl-sc-consent-scope` | Florida v. Jimeno, 500 U.S. 248 (1991) | https://www.law.cornell.edu/supct/html/90-622.ZO.html |
+| `cl-sc-911` | Navarette v. California, 572 U.S. 393 (2014) | https://supreme.justia.com/cases/federal/us/572/12-9490 |
+| `cl-sc-custody` | Berkemer v. McCarty, 468 U.S. 420 (1984) | https://www.law.cornell.edu/supremecourt/text/468/420 |
 
 ## Use of Force
 
@@ -140,6 +158,21 @@ Verification method (Oct 2026): web search results quoting the primary source (o
 | `ln-t-counts` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://brainscape.com/flashcards/land-nav-11330285/packs/20039434 |
 | `ln-colors` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.trngcmd.marines.mil/Portals/207/Docs/FMTBE/Student%20Materials/FMSO%20Manual/212.pdf |
 | `ln-color-mc` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.trngcmd.marines.mil/Portals/207/Docs/FMTBE/Student%20Materials/FMSO%20Manual/212.pdf |
+| `ln-intersection` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Position_resection_and_intersection |
+| `ln-resection` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Position_resection_and_intersection |
+| `ln-mod-resection` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Position_resection_and_intersection |
+| `ln-intersect-mc` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Position_resection_and_intersection |
+| `ln-offset` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://cacadets.org/sites/default/files/DraftCurriculum/1MilSubjects/MapsAndNav/1%20TEXT%20B_Navigation%20Tools%20and%20Activities.pdf |
+| `ln-offset-calc` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://cacadets.org/sites/default/files/DraftCurriculum/1MilSubjects/MapsAndNav/1%20TEXT%20B_Navigation%20Tools%20and%20Activities.pdf |
+| `ln-bezel` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.trngcmd.marines.mil/Portals/207/Docs/TBS/B170249Lensatic%20Compass.pdf |
+| `ln-bezel-calc` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.trngcmd.marines.mil/Portals/207/Docs/TBS/B170249Lensatic%20Compass.pdf |
+| `ln-datum` | Datum guidance: USGS topographic map practice; maptools.com datum tutorial | https://maptools.com/tutorials/map_datum |
+| `ln-datum-sc` | Datum guidance: USGS topographic map practice; maptools.com datum tutorial | https://maptools.com/tutorials/map_datum |
+| `ln-contours` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://alanwood.co.uk/news/understanding-contour-lines-on-topographic-maps |
+| `ln-ci` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://alanwood.co.uk/news/understanding-contour-lines-on-topographic-maps |
+| `ln-slope-mc` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://alanwood.co.uk/news/understanding-contour-lines-on-topographic-maps |
+| `ln-scale-50k` | Representative-fraction map scale (arithmetic) | https://digfir-published.macmillanusa.com/shellito2e/shellito2e_ch7_2.html |
+| `ln-scale-24k` | Representative-fraction map scale (arithmetic) | https://digfir-published.macmillanusa.com/shellito2e/shellito2e_ch7_2.html |
 
 ## Radio
 
@@ -230,3 +263,16 @@ Verification method (Oct 2026): web search results quoting the primary source (o
 | `st-sc-found-in` | 8 U.S.C. § 1326(a) | https://www.law.cornell.edu/uscode/text/8/1326 |
 | `st-sc-driver` | 8 U.S.C. § 1324(a)(1)(A)(ii) | https://www.pbwt.com/second-circuit-blog/upon-further-review-second-circuit-holds-that-defendants-conduct-not-in-furtherance-of-aliens-unlawful-presence-in-united-states |
 | `st-sc-drugs` | 8 U.S.C. § 1357(a)(5) | https://lawofselfdefense.com/statute/8-usc-1357-powers-of-immigration-officers-and-employees/ |
+| `st-1357-e` | 8 U.S.C. § 1357(e) | https://uscode.house.gov/view.xhtml?req=%28title%3A8+section%3A1357+edition%3Aprelim%29 |
+| `st-1182-a6ai` | 8 U.S.C. § 1182(a)(6)(A)(i) | https://www.ca5.uscourts.gov/Opinions/pub/04/04-60234-CV0.wpd.pdf |
+| `st-1225-a` | 8 U.S.C. § 1225(a)(1), (a)(3) | https://www.govinfo.gov/content/pkg/USCODE-2017-title8/html/USCODE-2017-title8-chap12-subchapII-partIV-sec1225.htm |
+| `st-1225-b1` | 8 U.S.C. § 1225(b)(1)(A) | https://www.law.cornell.edu/uscode/text/8/lii:usc:t:8:s:1225:b |
+| `st-18-111` | 18 U.S.C. § 111 | https://www.govinfo.gov/content/pkg/USCODE-2023-title18/html/USCODE-2023-title18-partI-chap7-sec111.htm |
+| `st-18-111-mc` | 18 U.S.C. § 111(b) | https://www.govinfo.gov/content/pkg/USCODE-2023-title18/html/USCODE-2023-title18-partI-chap7-sec111.htm |
+| `st-18-1001` | 18 U.S.C. § 1001(a) | https://www.law.cornell.edu/uscode/text/18/1001 |
+| `st-18-1546` | 18 U.S.C. § 1546(a) | https://www.govinfo.gov/content/pkg/USCODE-2023-title18/html/USCODE-2023-title18-partI-chap75-sec1546.htm |
+| `st-18-922g5` | 18 U.S.C. §§ 922(g)(5)(A), 924(a)(8) | https://www.govinfo.gov/content/pkg/USCOURTS-ca2-19-00620/pdf/USCOURTS-ca2-19-00620-0.pdf |
+| `st-sc-farm-interior` | 8 U.S.C. § 1357(e) | https://uscode.house.gov/view.xhtml?req=%28title%3A8+section%3A1357+edition%3Aprelim%29 |
+| `st-sc-false-name` | 18 U.S.C. § 1001(a) | https://www.law.cornell.edu/uscode/text/18/1001 |
+| `st-sc-fake-card` | 18 U.S.C. § 1546(a) | https://www.govinfo.gov/content/pkg/USCODE-2023-title18/html/USCODE-2023-title18-partI-chap75-sec1546.htm |
+| `st-sc-fear` | 8 U.S.C. § 1225(b)(1)(A) | https://www.law.cornell.edu/uscode/text/8/lii:usc:t:8:s:1225:b |

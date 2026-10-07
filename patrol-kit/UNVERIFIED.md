@@ -16,7 +16,12 @@ Updated each batch. Nothing in this file is on a card unless listed under "Carde
 | Kansas v. Glover U.S. Reports page | Carded as 589 U.S. ___, 140 S. Ct. 1183. |
 | United States v. Alisigwe reporter cite | Too new; carded by docket no. 24-960 and date. |
 | Noem v. Vasquez Perdomo (2025) | Emergency-docket stay, not a merits decision. Not carded. |
-| Berkemer v. McCarty (roadside questioning and Miranda) | Not researched this batch. Candidate for a later add. |
+| Miranda warnings in Spanish / French | Needs an authoritative published translation (agency form text). Not carded. |
+| 18 U.S.C. § 911 (false claim to U.S. citizenship) | Not researched. Mentioned only generically on the § 1001 card. |
+| Vehicle inventory searches (Colorado v. Bertine, etc.) | Not researched. Removed from the Gant card. |
+| Payton v. New York (home entry) | Not researched. Not carded. |
+| Jimeno: locked containers inside a consented vehicle | The card says forcing a locked case is "likely" beyond general consent. The Court's language on this wasn't in the search excerpt. Re-check. |
+| Deliberate offset figure | One source says 17.8 m per degree per km. The card uses the geometric value (tan 1° × 1,000 m ≈ 17.5 m). |
 | Québec: « fin de semaine » vs « week-end », « courriel » | OQLF entries didn't surface in search. Not carded. |
 | Québec slang « le dep », « c'est correct », « pantoute », « icitte » | No citable source found. Not carded. |
 | Land nav: pace definition (which foot is counted), terrain association method | Not confirmed in TC 3-25.26 excerpts. Not carded. |
@@ -44,6 +49,8 @@ These were confirmed through secondary sources (encyclopedia, case-brief sites, 
 | `cl-sc-roving` | United States v. Brignoni-Ponce, 422 U.S. 873 (1975) | en.wikipedia.org |
 | `cl-sc-phone-arrest` | Riley v. California, 573 U.S. 373 (2014) | www.pastpaperhero.com |
 | `cl-sc-avoid` | United States v. Compton, 830 F.3d 55 (2d Cir. 2016) | case-law.vlex.com |
+| `cl-gant` | Arizona v. Gant, 556 U.S. 332 (2009) | case-law.vlex.com |
+| `cl-sc-gant` | Arizona v. Gant, 556 U.S. 332 (2009) | case-law.vlex.com |
 | `uf-barnes` | Barnes v. Felix, 605 U.S. 73 (2025) | en.wikipedia.org |
 | `uf-cbp-escape` | CBP Use of Force Policy, HB 4500-002A (Jan. 2021); DHS Policy Statement 044-05 | www.justsecurity.org |
 | `fr-q-chum` | Québec City tourism glossary: 100 expressions québécoises | www.quebec-cite.com |
@@ -78,6 +85,19 @@ These were confirmed through secondary sources (encyclopedia, case-brief sites, 
 | `ln-t-cut` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | www.land-navigation.com |
 | `ln-t-fill` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | www.land-navigation.com |
 | `ln-t-counts` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | brainscape.com |
+| `ln-intersection` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | en.wikipedia.org |
+| `ln-resection` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | en.wikipedia.org |
+| `ln-mod-resection` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | en.wikipedia.org |
+| `ln-intersect-mc` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | en.wikipedia.org |
+| `ln-offset` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | cacadets.org |
+| `ln-offset-calc` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | cacadets.org |
+| `ln-datum` | Datum guidance: USGS topographic map practice; maptools.com datum tutorial | maptools.com |
+| `ln-datum-sc` | Datum guidance: USGS topographic map practice; maptools.com datum tutorial | maptools.com |
+| `ln-contours` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | alanwood.co.uk |
+| `ln-ci` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | alanwood.co.uk |
+| `ln-slope-mc` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | alanwood.co.uk |
+| `ln-scale-50k` | Representative-fraction map scale (arithmetic) | digfir-published.macmillanusa.com |
+| `ln-scale-24k` | Representative-fraction map scale (arithmetic) | digfir-published.macmillanusa.com |
 | `rd-p-roger` | ACP 125, Communications Instructions — Radiotelephone Procedures (prowords) | en.wikipedia.org |
 | `rd-p-wilco` | ACP 125, Communications Instructions — Radiotelephone Procedures (prowords) | en.wikipedia.org |
 | `rd-p-say-again` | ACP 125, Communications Instructions — Radiotelephone Procedures (prowords) | en.wikipedia.org |
@@ -99,6 +119,8 @@ These were confirmed through secondary sources (encyclopedia, case-brief sites, 
 | `st-1324-mc` | 8 U.S.C. § 1324(a)(1)(A)(i)–(v) | law.counselstack.com |
 | `st-sc-driver` | 8 U.S.C. § 1324(a)(1)(A)(ii) | www.pbwt.com |
 | `st-sc-drugs` | 8 U.S.C. § 1357(a)(5) | lawofselfdefense.com |
+| `st-1357-e` | 8 U.S.C. § 1357(e) | uscode.house.gov |
+| `st-sc-farm-interior` | 8 U.S.C. § 1357(e) | uscode.house.gov |
 <!-- secondary:end -->
 
 ## Blocked — waiting on inputs
