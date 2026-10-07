@@ -1,0 +1,59 @@
+# Unverified / left out
+
+Updated each batch. Nothing in this file is on a card unless listed under "Carded, re-check".
+
+## Left out — could not verify
+
+| Item | Why it's out |
+|---|---|
+| CBP policy: warning shots | Sources disagreed on whether the wording is CBP's 2021 policy or DHS-wide. |
+| CBP policy: shooting at / from moving vehicles; standing in a vehicle's path | Search summaries mixed CBP text with other agencies' policies. Needs the primary PDF. |
+| CBP emergency driving / vehicle pursuit directive | Only a redacted copy surfaced. Not read. |
+| Post-force reporting steps and timelines | Agency directive, not public in verifiable form. |
+| Current status of DHS Policy 044-05 Rev. 01 (Feb. 2023) after 2025 | A 2026 bill asks DHS to "reinstate" it; no public rescission notice found. DHS cards carry a status flag. |
+| CBP officer designation of Border Patrol agents under 19 U.S.C. | Not confirmed. Removed from the § 1581 card. |
+| 8 U.S.C. § 1324(a)(1)(B) penalties | Text not confirmed. |
+| Kansas v. Glover U.S. Reports page | Carded as 589 U.S. ___, 140 S. Ct. 1183. |
+| United States v. Alisigwe reporter cite | Too new; carded by docket no. 24-960 and date. |
+| Noem v. Vasquez Perdomo (2025) | Emergency-docket stay, not a merits decision. Not carded. |
+| Berkemer v. McCarty (roadside questioning and Miranda) | Not researched this batch. Candidate for a later add. |
+
+## Carded, re-check against primary text
+
+These were confirmed through secondary sources (encyclopedia, case-brief sites, law-firm blogs) that agree with each other. Re-check against the opinion or Code text when direct access is available.
+
+| Card | Source | Checked via |
+|---|---|---|
+| `cl-terry` | Terry v. Ohio, 392 U.S. 1 (1968) | www.acluohio.org |
+| `cl-brignoni` | United States v. Brignoni-Ponce, 422 U.S. 873 (1975) | en.wikipedia.org |
+| `cl-almeida` | Almeida-Sanchez v. United States, 413 U.S. 266 (1973) | en.wikipedia.org |
+| `cl-cotterman` | United States v. Cotterman, 709 F.3d 952 (9th Cir. 2013) (en banc) | en.wikipedia.org |
+| `cl-tabbaa` | Tabbaa v. Chertoff, 509 F.3d 89 (2d Cir. 2007) | pnj.prisonlegalnews.org |
+| `cl-singh` | United States v. Singh, 415 F.3d 288 (2d Cir. 2005) | case-law.vlex.com |
+| `cl-compton` | United States v. Compton, 830 F.3d 55 (2d Cir. 2016) | case-law.vlex.com |
+| `cl-carroll` | Carroll v. United States, 267 U.S. 132 (1925) | www.pastpaperhero.com |
+| `cl-riley` | Riley v. California, 573 U.S. 373 (2014) | www.pastpaperhero.com |
+| `cl-mimms` | Pennsylvania v. Mimms, 434 U.S. 106 (1977) | en.wikipedia.org |
+| `cl-brendlin` | Brendlin v. California, 551 U.S. 249 (2007) | case-law.vlex.com |
+| `cl-barnes` | Barnes v. Felix, 605 U.S. 73 (2025) | en.wikipedia.org |
+| `cl-sc-roving` | United States v. Brignoni-Ponce, 422 U.S. 873 (1975) | en.wikipedia.org |
+| `cl-sc-phone-arrest` | Riley v. California, 573 U.S. 373 (2014) | www.pastpaperhero.com |
+| `cl-sc-avoid` | United States v. Compton, 830 F.3d 55 (2d Cir. 2016) | case-law.vlex.com |
+| `uf-barnes` | Barnes v. Felix, 605 U.S. 73 (2025) | en.wikipedia.org |
+| `uf-cbp-escape` | CBP Use of Force Policy, HB 4500-002A (Jan. 2021); DHS Policy Statement 044-05 | www.justsecurity.org |
+| `st-1357-a4` | 8 U.S.C. § 1357(a)(4) | lawofselfdefense.com |
+| `st-1357-a5` | 8 U.S.C. § 1357(a)(5) | lawofselfdefense.com |
+| `st-1324-i` | 8 U.S.C. § 1324(a)(1)(A)(i) | law.counselstack.com |
+| `st-1324-ii` | 8 U.S.C. § 1324(a)(1)(A)(ii) | www.pbwt.com |
+| `st-1324-iii` | 8 U.S.C. § 1324(a)(1)(A)(iii) | law.counselstack.com |
+| `st-1324-mc` | 8 U.S.C. § 1324(a)(1)(A)(i)–(v) | law.counselstack.com |
+| `st-sc-driver` | 8 U.S.C. § 1324(a)(1)(A)(ii) | www.pbwt.com |
+| `st-sc-drugs` | 8 U.S.C. § 1357(a)(5) | lawofselfdefense.com |
+
+## Blocked — waiting on inputs
+
+| Deck | Needs |
+|---|---|
+| First Aid: Basic, First Aid: Advanced, Cold Weather | Vermont Statewide EMS Protocols 2025 PDF (medical content comes only from it) |
+| Documents | Direct access to uscis.gov / travel.state.gov / canada.ca / cbp.gov for I-551, I-94, NEXUS, passport and eTA/ESTA details |
+| French (Québec usage notes) | A citable source for Québécois vs. standard French (e.g. OQLF), or your OK to label notes as unsourced usage |

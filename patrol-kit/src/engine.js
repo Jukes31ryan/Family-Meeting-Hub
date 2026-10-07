@@ -266,7 +266,7 @@ function flipHTML(c,st){
     <button class="fcard" onclick="flipCard()" aria-label="Tap to reveal answer">
       <span class="kind">${esc(kindLabel(c))}</span>
       <span class="big ${c.deck==="spanish"?"es":""}">${esc(c.front)}</span>
-      ${st.flipped?`<span class="trans">${esc(c.back)}</span>${c.note?`<span class="note">${esc(c.note)}</span>`:""}${metaBack(c)}`:`<span class="hint">Tap to reveal</span>`}
+      ${st.flipped?`<span class="trans">${esc(c.back)}</span>${c.rule?`<span class="rule"><b>Rule</b>${esc(c.rule)}</span>`:""}${c.field?`<span class="rule"><b>Field</b>${esc(c.field)}</span>`:""}${c.note?`<span class="note">${esc(c.note)}</span>`:""}${metaBack(c)}`:`<span class="hint">Tap to reveal</span>`}
     </button>
   </div>
   ${speakBtn(c)}
@@ -362,7 +362,7 @@ function renderBrowseList(){
   const lang=DECK[view.deck].meta.lang;
   app.innerHTML=topbar(view.cat.toUpperCase(),{name:"browse",deck:view.deck})+`<div class="card-list" style="${deckVar(view.deck)}">`+
     list.map(c=>{const s=cardSummary(c);return `<div class="phrase"><div class="row"><div style="flex:1">
-      <div class="es">${esc(s.a)}</div><div class="en">${esc(s.b)}</div>${c.note?`<div class="note">${esc(c.note)}</div>`:""}
+      <div class="es">${esc(s.a)}</div><div class="en">${esc(s.b)}</div>${c.rule?`<div class="en"><b>Rule:</b> ${esc(c.rule)}</div>`:""}${c.field?`<div class="en"><b>Field:</b> ${esc(c.field)}</div>`:""}${c.note?`<div class="note">${esc(c.note)}</div>`:""}
       ${view.deck==="spanish"?"":metaBack(c)}</div>
       ${lang&&c.type==="flip"?`<button class="sp" onclick="speak(${A(c.speak||c.front)},${A(lang)})" aria-label="Listen">🔊</button>`:""}</div></div>`}).join("")+`</div>`;
 }

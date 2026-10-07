@@ -36,6 +36,10 @@ The build fails on any validation error: bad schema, duplicate IDs, an MC answer
 Deck files export `{ meta:{id,name,short,color,lang,order,blurb,source,subModes}, categories:{...}, cards:[...] }`.
 Files without `meta` (`spanish-grammar.js`, `spanish-verbs.js`) are sub-mode data.
 
+## Legal decks
+
+Decks with `requireVerified:true` in `meta` (Case Law, Statutes, Use of Force) need, on every card, its own `source` and a `verified` URL for the page it was checked against. The build writes these to `VERIFICATION.md`. Anything that couldn't be verified goes in `UNVERIFIED.md` instead of on a card. Case cards also need `cite`, `year`, `binding`, `rule` and `field`.
+
 ## OPSEC
 
 The build scans every card. Generic patterns (named stations/sectors, AOR, sensors, call signs) produce warnings. Site-specific terms go in `tools/opsec-terms.local.txt`, one per line, and any match fails the build. That file is git-ignored so the list itself never becomes public.
