@@ -106,7 +106,7 @@ function renderHome(){
   const decks=DECKS.filter(d=>d.cards.length);
   app.innerHTML=`
   <div class="brand"><h1>PATROL <span>KIT</span></h1><div class="sub">Study Cards</div></div>
-  <div class="shuffle"><button class="btn" onclick="startDrill(null)">Shuffle All<span class="sub">${pool.length} cards in active decks, random order</span></button></div>
+  <div class="shuffle"><button class="btn" onclick="startDrill(null)">▶ Start<span class="sub">Shuffle all · ${pool.length} cards</span></button></div>
   ${FIELD.length?`<div class="shuffle"><button class="btn ghost" onclick="go({name:'field'})">Field Problems<span class="sub">${Object.keys(LS.get("field",{})).length} / ${FIELD.length} run · chained scenarios across decks</span></button></div>`:""}
   <div class="sectionlabel">Decks</div>
   <div class="decklist">
@@ -148,7 +148,7 @@ function renderDeck(){
   app.innerHTML=topbar(d.meta.name.toUpperCase(),{name:"home"})+`
   <div style="${deckVar(id)}">
   <div class="deckhead"><p>${esc(d.meta.blurb||"")}</p></div>
-  <div class="shuffle"><button class="btn" onclick="startDrill(${A(id)})">Shuffle this deck<span class="sub">${all.length} cards, random order</span></button></div>
+  <div class="shuffle"><button class="btn" onclick="startDrill(${A(id)})">▶ Start<span class="sub">Shuffle this deck · ${all.length} cards</span></button></div>
   <div class="modes">${sub.map(m=>tiles[m]||"").join("")}</div>
   <div class="footer"><div class="src">Source: ${esc(d.meta.source||"see each card")}</div></div>
   </div>`;
