@@ -61,21 +61,13 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offse
 .brand::before,.brand::after{content:"★";color:var(--gold);position:absolute;top:10px;font-size:.8rem}
 .brand::before{left:12px}.brand::after{right:12px}
 
-/* ---------- streak stripes ---------- */
-.streak{display:flex;align-items:center;gap:10px;margin:0 2px 14px}
-.stripes{display:flex;gap:5px;flex-wrap:wrap;flex:1}
-.stripe{width:14px;height:18px;background:var(--gold);clip-path:polygon(50% 0,100% 40%,100% 100%,50% 62%,0 100%,0 40%);opacity:.95}
-.stripe.ghost{background:var(--line)}
-.streak .count{font-family:var(--disp);font-size:1.5rem;color:var(--gold);letter-spacing:.05em;line-height:1}
-.streak .lbl{font-size:.62rem;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
-
-/* ---------- muster card ---------- */
-.muster{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px;margin-bottom:16px}
-.muster .head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
-.muster .head h3{font-family:var(--disp);font-weight:400;font-size:1.15rem;letter-spacing:.14em;color:var(--gold)}
-.muster .date{font-size:.7rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
-.muster p{font-size:.85rem;color:var(--muted);margin-bottom:12px}
-.muster .done-note{color:var(--ok);font-weight:600;font-size:.9rem}
+/* ---------- panel ---------- */
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px;margin-bottom:16px}
+.panel .head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.panel .head h3{font-family:var(--disp);font-weight:400;font-size:1.15rem;letter-spacing:.14em;color:var(--gold)}
+.panel .date{font-size:.7rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+.panel p{font-size:.85rem;color:var(--muted);margin-bottom:12px}
+.panel .done-note{color:var(--ok);font-weight:600;font-size:.9rem}
 
 /* ---------- buttons ---------- */
 .btn{display:block;width:100%;text-align:center;background:var(--gold);color:#181503;font-family:var(--disp);font-size:1.15rem;letter-spacing:.12em;padding:12px;border-radius:8px;text-transform:uppercase}

@@ -1,6 +1,6 @@
 /* ============================================================
    PATROL KIT — unified study-card engine
-   Built on Patrol Español v1 (same Leitner boxes, muster, streak).
+   Built on Patrol Español v1 (same Leitner boxes and intervals).
    Data is injected above by tools/build.mjs as:
      DECKS  [{meta, categories, cards}]   GRAMMAR  VERBS  PERSONS  FIELD
    ============================================================ */
@@ -18,7 +18,7 @@ DECKS.sort((a,b)=>a.meta.order-b.meta.order).forEach(d=>{
   DECK[d.meta.id]=d;
   d.cards.forEach(c=>{
     const cat=(d.categories||{})[c.cat]||{};
-    const card={...c,deck:d.meta.id,group:c.group||cat.group||"",why:c.why||cat.why||d.meta.why||"",source:c.source||cat.source||d.meta.source||""};
+    const card={...c,deck:d.meta.id,group:c.group||cat.group||"",why:c.why||cat.why||d.meta.why||"",source:c.source||cat.source||d.meta.source||"",flag:c.flag||cat.flag||""};
     CARDS.push(card);BYID[card.id]=card;
   });
 });
@@ -38,13 +38,8 @@ function migrateV1(force){
   if(old){const cur=LS.get("srs",{});
     for(const[k,r]of Object.entries(old)){const id="es-"+k;if(BYID[id]&&!cur[id]){cur[id]=r;n++}}
     LS.set("srs",cur)}
-  const st=readPe("streak");
-  if(st){const cur=LS.get("streak",null);if(!cur||!cur.last||(st.last&&st.last>cur.last))LS.set("streak",st)}
   const les=readPe("lessons");if(les)LS.set("lessons",{...les,...LS.get("lessons",{})});
   const vo=readPe("vopt");if(vo&&!LS.get("vopt",null))LS.set("vopt",vo);
-  const d=readPe("daily");
-  if(d&&d.date===todayStr()&&d.completed&&!LS.get("daily",{}).date)
-    LS.set("daily",{date:d.date,ids:d.ids.map(i=>"es-"+i).filter(i=>BYID[i]),completed:true});
   try{localStorage.setItem("pk_migrated",JSON.stringify({on:todayStr(),cards:n}))}catch(e){}
   return n;
 }
@@ -68,43 +63,7 @@ function activeCards(){const a=new Set(activeDecks());return CARDS.filter(c=>a.h
 function dueOf(list){const s=srs();const t=todayStr();return list.filter(i=>s[i.id]&&s[i.id].due<=t)}
 function newOf(list){const s=srs();return list.filter(i=>!s[i.id])}
 
-/* seeded shuffle for daily determinism */
-function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
-function seedFromDate(){const t=todayStr();let h=0;for(let i=0;i<t.length;i++){h=Math.imul(31,h)+t.charCodeAt(i)|0}return h}
-function seededShuffle(arr,rng){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
-
-/* streak — unchanged from v1 */
-function streak(){return LS.get("streak",{last:null,count:0})}
-function markToday(){
-  const st=streak();const t=todayStr();
-  if(st.last===t)return st;
-  if(st.last&&dayDiff(st.last,t)===1)st.count++;else st.count=1;
-  st.last=t;LS.set("streak",st);return st;
-}
-function currentStreak(){const st=streak();if(!st.last)return 0;const gap=dayDiff(st.last,todayStr());return gap<=1?st.count:0}
-
-/* ---------------- MUSTER: 5–7 cards across active decks ---------------- */
-function musterSize(nDecks){return Math.min(7,Math.max(5,4+nDecks))}
-function todaysMuster(){
-  const saved=LS.get("daily",{});
-  if(saved.date===todayStr()&&saved.ids&&saved.ids.length&&saved.ids.every(id=>BYID[id]))return saved;
-  const rng=mulberry32(seedFromDate());
-  const decks=activeDecks();
-  const size=musterSize(decks.length);
-  // per deck: due cards first, then new, then anything — each seeded-shuffled
-  const queues=seededShuffle(decks,rng).map(id=>{
-    const all=deckCards(id);const due=dueOf(all);const fresh=newOf(all);
-    const seen=new Set();const q=[];
-    [...seededShuffle(due,rng),...seededShuffle(fresh,rng),...seededShuffle(all,rng)].forEach(c=>{if(!seen.has(c.id)){seen.add(c.id);q.push(c.id)}});
-    return q;
-  });
-  const ids=[];
-  for(let round=0;ids.length<size&&queues.some(q=>q.length);round++)
-    for(const q of queues){if(ids.length>=size)break;const id=q.shift();if(id)ids.push(id)}
-  const daily={date:todayStr(),ids,completed:false};
-  LS.set("daily",daily);return daily;
-}
 
 /* ---------------- SPEECH (es-MX, fr-CA) ---------------- */
 const VOICE_PREFS={"es-MX":[/es[-_]MX/i,/es[-_]US/i,/^es/i],"fr-CA":[/fr[-_]CA/i,/^fr/i]};
@@ -141,36 +100,23 @@ const deckVar=id=>`--deck:${DECK[id].meta.color}`;
 
 /* ---------------- HOME ---------------- */
 function renderHome(){
-  const st=currentStreak();
-  const daily=todaysMuster();
   const s=srs();
   const act=activeDecks();
   const pool=activeCards();
   const seen=CARDS.filter(c=>s[c.id]).length;
   const mastered=CARDS.filter(c=>s[c.id]&&s[c.id].box>=4).length;
-  const stripes=Array.from({length:Math.min(Math.max(st,7),14)},(_,i)=>`<div class="stripe ${i<st?"":"ghost"}"></div>`).join("");
   const dueAll=dueOf(pool).length;
   const decks=DECKS.filter(d=>d.cards.length);
   app.innerHTML=`
-  <div class="brand"><h1>PATROL <span>KIT</span></h1><div class="sub">Study Cards · Daily Drill</div></div>
-  <div class="streak">
-    <div><div class="count">${st}</div><div class="lbl">day streak</div></div>
-    <div class="stripes">${stripes}</div>
-  </div>
-  <div class="muster">
-    <div class="head"><h3>★ Muster — Today's ${daily.ids.length}</h3><span class="date">${new Date().toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"})}</span></div>
-    ${daily.completed
-      ?`<p class="done-note">✓ Muster complete. Streak secured for today.</p><button class="btn ghost small" onclick="startDaily(true)">Run it again</button>`
-      :`<p>A mixed set from your ${act.length} active deck${act.length===1?"":"s"}. Due cards first.</p><button class="btn" onclick="startDaily(false)">Start Muster</button>`}
-  </div>
-  <div class="shuffle"><button class="btn ghost" onclick="startDrill(null)">Shuffle All<span class="sub">${dueAll} due · ${pool.length} cards in active decks</span></button></div>
+  <div class="brand"><h1>PATROL <span>KIT</span></h1><div class="sub">Study Cards</div></div>
+  <div class="shuffle"><button class="btn" onclick="startDrill(null)">Shuffle All<span class="sub">${dueAll} due · ${pool.length} cards in active decks</span></button></div>
   ${FIELD.length?`<div class="shuffle"><button class="btn ghost" onclick="go({name:'field'})">Field Problems<span class="sub">${Object.keys(LS.get("field",{})).length} / ${FIELD.length} run · chained scenarios across decks</span></button></div>`:""}
   <div class="sectionlabel">Decks</div>
   <div class="decklist">
     ${decks.map(d=>{const id=d.meta.id;const on=act.includes(id);const all=deckCards(id);
       return `<div class="deckrow ${on?"":"off"}" style="${deckVar(id)}">
         <button class="open" onclick="go(${A({name:"deck",id})})"><span class="t">${esc(d.meta.name)}</span><br><span class="c"><b>${dueOf(all).length} due</b> · ${all.length} cards</span></button>
-        <button class="toggle" role="switch" aria-checked="${on}" aria-label="Include ${esc(d.meta.name)} in Shuffle All and Muster" onclick="toggleDeck(${A(id)})"><span class="sw"></span></button>
+        <button class="toggle" role="switch" aria-checked="${on}" aria-label="Include ${esc(d.meta.name)} in Shuffle All" onclick="toggleDeck(${A(id)})"><span class="sw"></span></button>
       </div>`}).join("")}
   </div>
   <div class="stats">
@@ -211,13 +157,8 @@ function renderDeck(){
   </div>`;
 }
 
-/* ---------------- CARD SESSIONS (muster + drill) ---------------- */
+/* ---------------- CARD SESSIONS ---------------- */
 let SESSION=null;
-function startDaily(rerun){
-  const daily=todaysMuster();
-  SESSION=newSession([...daily.ids],rerun?"rerun":"daily");
-  go({name:"drill"});
-}
 function startDrill(deckId){
   const list=deckId?deckCards(deckId):activeCards();
   let pool=shuffle(dueOf(list));
@@ -265,7 +206,7 @@ function renderDrill(){
   if(S.idx>=S.ids.length){return renderDrillDone()}
   const c=sessionCard(S,S.idx);
   const dots=S.ids.map((_,i)=>`<div class="pdot ${i<S.idx?(S.results[i]?"done":"miss"):""} ${i===S.idx?"cur":""}"></div>`).join("");
-  const title=S.kind==="field"?"FIELD PROBLEM":S.kind==="drill"?(S.deckId?DECK[S.deckId].meta.name.toUpperCase():"SHUFFLE ALL"):"MUSTER";
+  const title=S.kind==="field"?"FIELD PROBLEM":S.deckId?DECK[S.deckId].meta.name.toUpperCase():"SHUFFLE ALL";
   const step=S.kind==="field"?S.problem.steps[S.idx]:null;
   const lead=S.kind!=="field"?"":`<div class="situation">${S.idx===0?`<h3>${esc(S.problem.title)}</h3><p>${esc(S.problem.situation)}</p>`:""}${step.narrative?`<p>${esc(step.narrative)}</p>`:""}</div>`;
   const body={flip:flipHTML,mc:choiceHTML,scenario:choiceHTML,order:orderHTML}[c.type](c,S.st);
@@ -339,17 +280,10 @@ function renderDrillDone(){
   const S=SESSION;
   if(S.kind==="field")return renderFieldDone();
   const got=S.results.filter(Boolean).length;
-  let extra="";
-  if(S.kind==="daily"){
-    const daily=todaysMuster();daily.completed=true;LS.set("daily",daily);
-    markToday();
-    extra=`<p style="text-align:center;color:var(--ok);font-weight:600;margin-bottom:12px">✓ Muster logged — streak: ${currentStreak()} day${currentStreak()===1?"":"s"}</p>`;
-  }
   app.innerHTML=`
   ${topbar("COMPLETE",{name:"home"})}
-  <div class="muster" style="text-align:center">
+  <div class="panel" style="text-align:center">
     <div class="scoreline">${got} / ${S.results.length} ON TARGET</div>
-    ${extra}
     <p>${got===S.results.length?"Clean sweep. Misses resurface automatically when due.":"Missed cards drop a box and come back sooner. That's the system working."}</p>
   </div>
   <div class="btnrow">
@@ -382,7 +316,7 @@ function renderFieldDone(){
   const fed=[...new Set(missed.flatMap(x=>x.st.ref?[x.st.ref]:(x.st.feeds||[])))].map(id=>BYID[id]).filter(Boolean);
   app.innerHTML=`
   ${topbar("DEBRIEF",{name:"field"})}
-  <div class="muster" style="text-align:center">
+  <div class="panel" style="text-align:center">
     <div class="scoreline">${got} / ${f.steps.length} STEPS</div>
     <p>${missed.length?"These cards are back in review in their decks:":"Clean run. Nothing fed back."}</p>
   </div>
@@ -473,7 +407,7 @@ function renderVerbSetup(){
   <div class="chiprow">
     ${["pres","pret","cmd"].map(t=>`<button class="chip ${VOPT.tenses.includes(t)?"on":""}" onclick="toggleTense('${t}')">${TENSE_LABEL[t]}</button>`).join("")}
   </div>
-  <div class="muster"><p>10 rounds. You'll see a verb, a person, and a tense — pick the right form. Distractors are real forms of the same verb, so it trains the endings, not luck.</p>
+  <div class="panel"><p>10 rounds. You'll see a verb, a person, and a tense — pick the right form. Distractors are real forms of the same verb, so it trains the endings, not luck.</p>
   <button class="btn" onclick="startVerbDrill()">Start 10-round drill</button></div>
   <div class="sectionlabel">The deck — ${VERBS.length} verbs</div>
   <div class="chiprow">${VERBS.map(v=>`<span class="chip">${esc(v.inf)}</span>`).join("")}</div>`;
@@ -502,14 +436,14 @@ function renderVerbDrill(){
   if(!D){go({name:"verbs"});return}
   if(D.round>=10){
     app.innerHTML=topbar("COMPLETE",{name:"verbs"})+
-    `<div class="muster" style="text-align:center"><div class="scoreline">${D.score} / 10</div>
+    `<div class="panel" style="text-align:center"><div class="scoreline">${D.score} / 10</div>
     <p>${D.score>=8?"Sharp. Add another tense to raise the difficulty.":"The endings come with reps. Run it again."}</p></div>
     <div class="btnrow"><button class="btn ghost" onclick="go({name:'verbs'})">Setup</button><button class="btn" onclick="startVerbDrill()">Again</button></div>`;
     return;
   }
   const q=D.q;
   app.innerHTML=topbar("VERB DRILL "+(D.round+1)+"/10",{name:"verbs"})+`
-  <div class="muster">
+  <div class="panel">
     <div class="vprompt">
       <div class="inf">${esc(q.v.inf)}</div>
       <div class="en">${esc(q.v.en)}</div>
@@ -534,21 +468,21 @@ function progressKeys(){const out={};for(let i=0;i<localStorage.length;i++){cons
 function renderSettings(){
   const m=LS.get("migrated",null);
   app.innerHTML=topbar("BACKUP & RESET",{name:"home"})+`
-  <div class="muster">
+  <div class="panel">
     <div class="head"><h3>Export progress</h3></div>
     <p class="smallprint">Copy this text somewhere safe (Notes, email to yourself). Paste it into Import on another device or install.</p>
     <textarea class="io" id="exp" readonly>${esc(JSON.stringify(progressKeys()))}</textarea>
     <button class="btn small" onclick="copyExport()">Copy</button>
   </div>
-  <div class="muster">
+  <div class="panel">
     <div class="head"><h3>Import progress</h3></div>
-    <p class="smallprint">Paste an export from Patrol Kit or Patrol Español v1. Card history is merged; your current streak is kept unless the import's is newer.</p>
+    <p class="smallprint">Paste an export from Patrol Kit or Patrol Español v1. Card history and lesson progress are merged.</p>
     <textarea class="io" id="imp" placeholder='{"pk_srs":"…"}'></textarea>
     <button class="btn small" onclick="importProgress()">Import</button>
   </div>
-  <div class="muster">
+  <div class="panel">
     <div class="head"><h3>Reset</h3></div>
-    <p class="smallprint">${m?`v1 progress imported on ${esc(m.on)} (${m.cards} cards). `:""}Reset erases Patrol Kit streak, card history and lesson progress on this device. Old Patrol Español data is not touched and will not be re-imported.</p>
+    <p class="smallprint">${m?`v1 progress imported on ${esc(m.on)} (${m.cards} cards). `:""}Reset erases Patrol Kit card history and lesson progress on this device. Old Patrol Español data is not touched and will not be re-imported.</p>
     <button class="btn ghost small" onclick="resetAll()">Reset all progress</button>
   </div>`;
 }
@@ -559,21 +493,20 @@ function importProgress(){
   if(!data||typeof data!=="object")return toast("Nothing to import");
   const get=k=>{try{return typeof data[k]==="string"?JSON.parse(data[k]):data[k]}catch(e){return null}};
   let n=0;
-  // v2 keys: merge SRS (keep the more-advanced record), take newer streak, union lessons
+  // v2 keys: merge SRS (keep the more-advanced record), union lessons
   const inSrs=get("pk_srs");
   if(inSrs){const cur=srs();for(const[id,r]of Object.entries(inSrs)){if(!BYID[id])continue;if(!cur[id]||(r.seen||0)>(cur[id].seen||0)){cur[id]=r;n++}}LS.set("srs",cur)}
-  const inSt=get("pk_streak");if(inSt&&inSt.last){const cur=streak();if(!cur.last||inSt.last>cur.last)LS.set("streak",inSt)}
   const inL=get("pk_lessons");if(inL)LS.set("lessons",{...inL,...LS.get("lessons",{})});
   // v1 keys: stage them as pe_* and run the migration again
-  if(["pe_srs","pe_streak","pe_lessons"].some(k=>data[k])){
-    ["pe_srs","pe_streak","pe_lessons","pe_vopt"].forEach(k=>{if(data[k])localStorage.setItem(k,typeof data[k]==="string"?data[k]:JSON.stringify(data[k]))});
+  if(["pe_srs","pe_lessons"].some(k=>data[k])){
+    ["pe_srs","pe_lessons","pe_vopt"].forEach(k=>{if(data[k])localStorage.setItem(k,typeof data[k]==="string"?data[k]:JSON.stringify(data[k]))});
     n+=migrateV1(true);
   }
   toast(`Imported — ${n} card record${n===1?"":"s"} updated`);go({name:"home"});
 }
 function resetAll(){
-  if(!confirm("Erase streak, card history, and lesson progress?"))return;
-  ["srs","streak","daily","lessons","vopt","active","field"].forEach(k=>localStorage.removeItem("pk_"+k));
+  if(!confirm("Erase card history and lesson progress?"))return;
+  ["srs","lessons","vopt","active","field"].forEach(k=>localStorage.removeItem("pk_"+k));
   VOPT={tenses:["pres","pret","cmd"]};
   go({name:"home"});toast("Progress reset");
 }
