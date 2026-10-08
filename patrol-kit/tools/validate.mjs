@@ -4,7 +4,7 @@ import { loadAll, ROOT } from "./load.mjs";
 
 const TYPES = ["flip", "mc", "order", "scenario"];
 const LANGS = [null, undefined, "es-MX", "fr-CA"];
-const CARD_KEYS = new Set(["id","type","cat","group","front","back","note","q","setup","choices","answer","explain","steps","why","source","flag","binding","speak","lang","case","cite","year","tags","rule","field","verified"]);
+const CARD_KEYS = new Set(["id","type","cat","group","front","back","note","q","setup","choices","answer","explain","steps","why","source","flag","binding","speak","lang","case","cite","year","tags","rule","field","verified","opsecReviewed"]);
 const isStr = v => typeof v === "string" && v.trim().length > 0;
 
 // Generic OPSEC patterns (warnings). Site-specific terms go in tools/opsec-terms.local.txt,
@@ -71,7 +71,7 @@ export function validate({ decks, extra }) {
       if (m.id === "caselaw" && c.type === "flip" && (!isStr(c.cite) || !Number.isInteger(c.year) || !isStr(c.binding) || !isStr(c.rule) || !isStr(c.field)))
         errors.push(`${at}: case card needs cite, year, binding, rule, field`);
       if (c.binding !== undefined && !/^(SCOTUS|2d Cir\.|persuasive \(.+\)|statute|regulation|policy)$/.test(c.binding)) errors.push(`${at}: binding "${c.binding}" not a recognised label`);
-      scan(at, JSON.stringify(c));
+      if (!c.opsecReviewed) scan(at, JSON.stringify(c)); // opsecReviewed: user-cleared public content
     }
     rows.push({ deck: m.id, file: W, total: (d.cards || []).length, ...count, sourceFromDefault: defaulted });
   }

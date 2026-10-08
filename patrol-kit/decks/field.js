@@ -1,4 +1,4 @@
-// FIELD PROBLEMS — chained scenarios across decks. Not a card deck: problems don't enter Muster or Shuffle All.
+// FIELD PROBLEMS — chained scenarios across decks. Not a card deck: problems don't enter Shuffle All.
 // Step = { ref:"card-id" }        reuse a deck card; graded into its SRS normally
 //      | { type:"mc"|"scenario"|"order", deck, feeds:[card ids], ... }   inline; a miss demotes every fed card
 // Inline steps add no new facts: each restates what the cards it feeds already teach (and inherits their source).
