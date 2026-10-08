@@ -55,13 +55,22 @@ These were confirmed through secondary sources (encyclopedia, case-brief sites, 
 | `uf-cbp-escape` | CBP Use of Force Policy, HB 4500-002A (Jan. 2021); DHS Policy Statement 044-05 | www.justsecurity.org |
 | `fr-q-chum` | Québec City tourism glossary: 100 expressions québécoises | www.quebec-cite.com |
 | `fr-q-ramq` | Immigrant Québec: carte d'assurance maladie (RAMQ) | immigrantquebec.com |
-| `ln-mgrs-order` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | en.wikipedia.org |
-| `ln-right-up` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | www.honestmos.com |
-| `ln-precision` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | en.wikipedia.org |
-| `ln-8digit` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | en.wikipedia.org |
-| `ln-utm-zones` | UTM / MGRS specification | bluemarblegeo.com |
-| `ln-bands` | UTM / MGRS specification | bluemarblegeo.com |
-| `ln-mgrs-truncate` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | en.wikipedia.org |
+| `ln-azimuth` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | en.wikipedia.org |
+| `ln-norths` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | maptools.com |
+| `ln-norths-mc` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | maptools.com |
+| `ln-orient` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | sofrep.com |
+| `ln-terrain-assoc` | TC 3-25.26, ch. 11 (terrain association navigation) | armyrotc.mst.edu |
+| `ln-dead-reckoning` | TC 3-25.26, ch. 11 (dead reckoning navigation) | armyrotc.mst.edu |
+| `ln-handrail` | Orienteering technique (common land-navigation usage; not TC 3-25.26 wording) | brainscape.com |
+| `ln-catching` | Orienteering technique (common land-navigation usage; not TC 3-25.26 wording) | www.theoutbound.com |
+| `ln-collecting` | Orienteering technique (common land-navigation usage; not TC 3-25.26 wording) | www.theoutbound.com |
+| `ln-attack` | Orienteering technique (common land-navigation usage; not TC 3-25.26 wording) | oq.orienteering.asn.au |
+| `ln-detour` | USMC detour method; TC 3-25.26 (bypassing obstacles) | snipercentral.com |
+| `ln-stop` | STOP mnemonic (common wilderness-navigation practice) | www.people.vcu.edu |
+| `ln-sc-handrail` | Orienteering technique (common land-navigation usage; not TC 3-25.26 wording) | brainscape.com |
+| `ln-sc-catching` | Orienteering technique (common land-navigation usage; not TC 3-25.26 wording) | www.theoutbound.com |
+| `ln-sc-attack` | Orienteering technique (common land-navigation usage; not TC 3-25.26 wording) | oq.orienteering.asn.au |
+| `ln-sc-fog` | TC 3-25.26, ch. 11 (dead reckoning navigation) | armyrotc.mst.edu |
 | `ln-backaz` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | en.wikipedia.org |
 | `ln-backaz-calc` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | en.wikipedia.org |
 | `ln-backaz-calc2` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | en.wikipedia.org |
