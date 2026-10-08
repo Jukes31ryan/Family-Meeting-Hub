@@ -36,7 +36,7 @@ export default [
   steps:[
   { narrative:"The sign runs along a stream for most of a kilometer before turning uphill.", ref:"ln-sc-handrail" },
   { narrative:"A road crosses about 300 m past where you expect to catch them.", ref:"ln-sc-catching" },
-  { narrative:"You plot the direction of travel on your map as a grid azimuth and need to follow it by compass.", ref:"ln-conv-w" },
+  { narrative:"The sign leaves the stream and heads for a small spot in thick woods, 200 m past an obvious stream junction.", ref:"ln-sc-attack" },
   { narrative:"Deep snow, uphill, light snowfall. You're keeping a pace count.", ref:"ln-pace-snow" },
   { narrative:"You close on the group. One runs, empty-handed, toward thicker cover.", ref:"uf-sc-runner" },
   { narrative:"The others stop. One is shivering, clothes soaked from a stream crossing, and speaks only French.",
@@ -136,7 +136,7 @@ export default [
   { narrative:"The tracks go under a No Trespassing gate into the field, half a mile from the house.", ref:"cl-sc-open-field" },
   { narrative:"They lead to a barn about 60 yards from the house, outside its fence.", ref:"cl-sc-barn" },
   { narrative:"Your supervisor asks whether the farm rule in § 1357(e) applies out here.", ref:"st-1357-e" },
-  { narrative:"You plot your GPS position on the paper map and it lands you in the farm pond.", ref:"ln-datum-sc" },
+  { narrative:"You step out of the truck to shoot an azimuth toward the barn.", ref:"ln-vehicle" },
   { narrative:"Behind the barn you find one subject shaking, boots soaked. He speaks Spanish.",
     type:"mc", deck:"spanish", feeds:["es-w1","es-w4"],
     q:"Which two questions come first?",
@@ -147,7 +147,7 @@ export default [
     q:"Which phrase?",
     choices:["Suba al vehículo; hay calefacción.","Espere aquí.","No se mueva.","Vacíe sus bolsillos."],
     answer:0, explain:"« Suba al vehículo; hay calefacción. » = Get in, the heat's on. Pair it with « Aquí tiene una manta. »" },
-  { narrative:"The second subject is still out. A second unit wants your night compass preset for 135°.", ref:"ln-bezel-calc" },
+  { narrative:"The second subject is still out. You follow into dark, flat woods with no landmarks in sight.", ref:"ln-sc-fog" },
   ]},
 
 // ---------------------------------------------------------------- 8

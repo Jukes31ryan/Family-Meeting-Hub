@@ -144,16 +144,9 @@ Verification method (Oct 2026): web search results quoting the primary source (o
 | `ln-sc-hold` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.trngcmd.marines.mil/Portals/207/Docs/TBS/B170249Lensatic%20Compass.pdf |
 | `ln-backaz` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Land_navigation |
 | `ln-backaz-calc` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Land_navigation |
-| `ln-backaz-calc2` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Land_navigation |
-| `ln-gm-diagram` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.honestmos.com/field-manual/land-navigation |
-| `ln-west` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.honestmos.com/field-manual/land-navigation |
-| `ln-east` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.honestmos.com/field-manual/land-navigation |
-| `ln-conv-w` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.honestmos.com/field-manual/land-navigation |
-| `ln-conv-w2` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.honestmos.com/field-manual/land-navigation |
-| `ln-interference` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.trngcmd.marines.mil/Portals/207/Docs/TBS/B170249Lensatic%20Compass.pdf |
+| `ln-declination` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://maptools.com/learn/north-references |
+| `ln-pace-count` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Land_navigation |
 | `ln-vehicle` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.trngcmd.marines.mil/Portals/207/Docs/TBS/B170249Lensatic%20Compass.pdf |
-| `ln-pace-calc` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Land_navigation |
-| `ln-pace-dist` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Land_navigation |
 | `ln-pace-factors` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Land_navigation |
 | `ln-pace-snow` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Land_navigation |
 | `ln-t-hill` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.land-navigation.com/terrain-features.html |
@@ -164,26 +157,8 @@ Verification method (Oct 2026): web search results quoting the primary source (o
 | `ln-t-draw` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.land-navigation.com/terrain-features.html |
 | `ln-t-spur` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.land-navigation.com/terrain-features.html |
 | `ln-t-cliff` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.land-navigation.com/terrain-features.html |
-| `ln-t-cut` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.land-navigation.com/terrain-features.html |
-| `ln-t-fill` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.land-navigation.com/terrain-features.html |
-| `ln-t-counts` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://brainscape.com/flashcards/land-nav-11330285/packs/20039434 |
-| `ln-colors` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.trngcmd.marines.mil/Portals/207/Docs/FMTBE/Student%20Materials/FMSO%20Manual/212.pdf |
 | `ln-color-mc` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.trngcmd.marines.mil/Portals/207/Docs/FMTBE/Student%20Materials/FMSO%20Manual/212.pdf |
-| `ln-intersection` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Position_resection_and_intersection |
-| `ln-resection` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Position_resection_and_intersection |
-| `ln-mod-resection` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Position_resection_and_intersection |
-| `ln-intersect-mc` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Position_resection_and_intersection |
-| `ln-offset` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://cacadets.org/sites/default/files/DraftCurriculum/1MilSubjects/MapsAndNav/1%20TEXT%20B_Navigation%20Tools%20and%20Activities.pdf |
-| `ln-offset-calc` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://cacadets.org/sites/default/files/DraftCurriculum/1MilSubjects/MapsAndNav/1%20TEXT%20B_Navigation%20Tools%20and%20Activities.pdf |
-| `ln-bezel` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.trngcmd.marines.mil/Portals/207/Docs/TBS/B170249Lensatic%20Compass.pdf |
-| `ln-bezel-calc` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.trngcmd.marines.mil/Portals/207/Docs/TBS/B170249Lensatic%20Compass.pdf |
-| `ln-datum` | Datum guidance: USGS topographic map practice; maptools.com datum tutorial | https://maptools.com/tutorials/map_datum |
-| `ln-datum-sc` | Datum guidance: USGS topographic map practice; maptools.com datum tutorial | https://maptools.com/tutorials/map_datum |
-| `ln-contours` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://alanwood.co.uk/news/understanding-contour-lines-on-topographic-maps |
-| `ln-ci` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://alanwood.co.uk/news/understanding-contour-lines-on-topographic-maps |
 | `ln-slope-mc` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://alanwood.co.uk/news/understanding-contour-lines-on-topographic-maps |
-| `ln-scale-50k` | Representative-fraction map scale (arithmetic) | https://digfir-published.macmillanusa.com/shellito2e/shellito2e_ch7_2.html |
-| `ln-scale-24k` | Representative-fraction map scale (arithmetic) | https://digfir-published.macmillanusa.com/shellito2e/shellito2e_ch7_2.html |
 
 ## Radio
 
