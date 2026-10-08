@@ -1,5 +1,5 @@
 // Offline cache for Patrol Kit. Built from src/sw.js — the version is stamped by tools/build.mjs.
-const CACHE = "pk-a3e080f65d";
+const CACHE = "pk-a3fe802c7a";
 const CORE = ["./", "./index.html", "./manifest.json", "./icon-180.png", "./icon-192.png", "./icon-512.png"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE)).then(() => self.skipWaiting())); });
 self.addEventListener("activate", e => {
@@ -9,9 +9,9 @@ self.addEventListener("fetch", e => {
   const req = e.request;
   if (req.method !== "GET") return;
   const url = new URL(req.url);
-  // App page: network first so updates land, cache when offline.
+  // App page: always ask the network for a fresh copy (bypassing the HTTP cache) so updates land on the first reload; use the saved copy offline.
   if (req.mode === "navigate") {
-    e.respondWith(fetch(req).then(r => { const copy = r.clone(); caches.open(CACHE).then(c => c.put("./index.html", copy)); return r; })
+    e.respondWith(fetch(req, { cache: "no-store" }).then(r => { const copy = r.clone(); caches.open(CACHE).then(c => c.put("./index.html", copy)); return r; })
       .catch(() => caches.match("./index.html")));
     return;
   }

@@ -107,7 +107,6 @@ function renderHome(){
   app.innerHTML=`
   <div class="brand"><h1>PATROL <span>KIT</span></h1><div class="sub">Study Cards</div></div>
   <div class="shuffle"><button class="btn" onclick="startDrill(null)">▶ Start<span class="sub">Shuffle all · ${pool.length} cards</span></button></div>
-  ${FIELD.length?`<div class="shuffle"><button class="btn ghost" onclick="go({name:'field'})">Field Problems<span class="sub">${Object.keys(LS.get("field",{})).length} / ${FIELD.length} run · chained scenarios across decks</span></button></div>`:""}
   <div class="sectionlabel">Decks</div>
   <div class="decklist">
     ${decks.map(d=>{const id=d.meta.id;const on=act.includes(id);const all=deckCards(id);
@@ -116,6 +115,7 @@ function renderHome(){
         <button class="toggle" role="switch" aria-checked="${on}" aria-label="Include ${esc(d.meta.name)} in Shuffle All" onclick="toggleDeck(${A(id)})"><span class="sw"></span></button>
       </div>`}).join("")}
   </div>
+  ${FIELD.length?`<div class="sectionlabel">Test yourself</div><div class="shuffle"><button class="btn ghost" onclick="go({name:'field'})">Field Problems<span class="sub">${Object.keys(LS.get("field",{})).length} / ${FIELD.length} run · one situation, questions from every deck</span></button></div>`:""}
   <div class="stats">
     <div class="stat"><div class="n">${seen}</div><div class="l">cards seen</div></div>
     <div class="stat"><div class="n">${mastered}</div><div class="l">mastered</div></div>
