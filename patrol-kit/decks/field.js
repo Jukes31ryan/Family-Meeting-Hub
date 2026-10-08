@@ -34,8 +34,8 @@ export default [
 { id:"fp-snow-sign", title:"Sign in Fresh Snow",
   situation:"Early morning after overnight snow. You cut fresh foot sign of a small group heading away from the line into hardwoods. Your GPS battery is failing in the cold.",
   steps:[
-  { narrative:"You need to pass your position for a second unit to block ahead.", ref:"ln-8digit" },
-  { narrative:"Your device shows a 10-digit grid; the other unit asks for 8.", ref:"ln-mgrs-truncate" },
+  { narrative:"The sign runs along a stream for most of a kilometer before turning uphill.", ref:"ln-sc-handrail" },
+  { narrative:"A road crosses about 300 m past where you expect to catch them.", ref:"ln-sc-catching" },
   { narrative:"You plot the direction of travel on your map as a grid azimuth and need to follow it by compass.", ref:"ln-conv-w" },
   { narrative:"Deep snow, uphill, light snowfall. You're keeping a pace count.", ref:"ln-pace-snow" },
   { narrative:"You close on the group. One runs, empty-handed, toward thicker cover.", ref:"uf-sc-runner" },

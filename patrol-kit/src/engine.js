@@ -60,8 +60,6 @@ function activeDecks(){
   return saved?all.filter(id=>saved.includes(id)):all;
 }
 function activeCards(){const a=new Set(activeDecks());return CARDS.filter(c=>a.has(c.deck))}
-function dueOf(list){const s=srs();const t=todayStr();return list.filter(i=>s[i.id]&&s[i.id].due<=t)}
-function newOf(list){const s=srs();return list.filter(i=>!s[i.id])}
 
 function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
 
@@ -105,17 +103,16 @@ function renderHome(){
   const pool=activeCards();
   const seen=CARDS.filter(c=>s[c.id]).length;
   const mastered=CARDS.filter(c=>s[c.id]&&s[c.id].box>=4).length;
-  const dueAll=dueOf(pool).length;
   const decks=DECKS.filter(d=>d.cards.length);
   app.innerHTML=`
   <div class="brand"><h1>PATROL <span>KIT</span></h1><div class="sub">Study Cards</div></div>
-  <div class="shuffle"><button class="btn" onclick="startDrill(null)">Shuffle All<span class="sub">${dueAll} due · ${pool.length} cards in active decks</span></button></div>
+  <div class="shuffle"><button class="btn" onclick="startDrill(null)">Shuffle All<span class="sub">${pool.length} cards in active decks, random order</span></button></div>
   ${FIELD.length?`<div class="shuffle"><button class="btn ghost" onclick="go({name:'field'})">Field Problems<span class="sub">${Object.keys(LS.get("field",{})).length} / ${FIELD.length} run · chained scenarios across decks</span></button></div>`:""}
   <div class="sectionlabel">Decks</div>
   <div class="decklist">
     ${decks.map(d=>{const id=d.meta.id;const on=act.includes(id);const all=deckCards(id);
       return `<div class="deckrow ${on?"":"off"}" style="${deckVar(id)}">
-        <button class="open" onclick="go(${A({name:"deck",id})})"><span class="t">${esc(d.meta.name)}</span><br><span class="c"><b>${dueOf(all).length} due</b> · ${all.length} cards</span></button>
+        <button class="open" onclick="go(${A({name:"deck",id})})"><span class="t">${esc(d.meta.name)}</span><br><span class="c">${all.length} cards</span></button>
         <button class="toggle" role="switch" aria-checked="${on}" aria-label="Include ${esc(d.meta.name)} in Shuffle All" onclick="toggleDeck(${A(id)})"><span class="sw"></span></button>
       </div>`}).join("")}
   </div>
@@ -151,7 +148,7 @@ function renderDeck(){
   app.innerHTML=topbar(d.meta.name.toUpperCase(),{name:"home"})+`
   <div style="${deckVar(id)}">
   <div class="deckhead"><p>${esc(d.meta.blurb||"")}</p></div>
-  <div class="shuffle"><button class="btn" onclick="startDrill(${A(id)})">Drill this deck<span class="sub">${dueOf(all).length} due · ${newOf(all).length} new · ${all.length} total</span></button></div>
+  <div class="shuffle"><button class="btn" onclick="startDrill(${A(id)})">Shuffle this deck<span class="sub">${all.length} cards, random order</span></button></div>
   <div class="modes">${sub.map(m=>tiles[m]||"").join("")}</div>
   <div class="footer"><div class="src">Source: ${esc(d.meta.source||"see each card")}</div></div>
   </div>`;
@@ -160,14 +157,9 @@ function renderDeck(){
 /* ---------------- CARD SESSIONS ---------------- */
 let SESSION=null;
 function startDrill(deckId){
-  const list=deckId?deckCards(deckId):activeCards();
-  let pool=shuffle(dueOf(list));
-  if(pool.length<10)pool=pool.concat(shuffle(newOf(list)).slice(0,10-pool.length));
-  if(pool.length<10)pool=pool.concat(shuffle(list));
-  const seen=new Set();const ids=[];
-  for(const it of pool){if(!seen.has(it.id)){seen.add(it.id);ids.push(it.id)}if(ids.length>=10)break}
-  // due cards still make the set, but the order is random, and never opens on last session's first card
-  const order=shuffle(ids);const last=LS.get("lastFirst",null);
+  // every card in the active decks (or one deck), in random order
+  const order=shuffle((deckId?deckCards(deckId):activeCards()).map(c=>c.id));
+  const last=LS.get("lastFirst",null);
   if(order.length>1&&order[0]===last)order.push(order.shift());
   LS.set("lastFirst",order[0]);
   SESSION=newSession(order,"drill",deckId);
@@ -209,7 +201,7 @@ function renderDrill(){
   if(!S){go({name:"home"});return}
   if(S.idx>=S.ids.length){return renderDrillDone()}
   const c=sessionCard(S,S.idx);
-  const dots=S.ids.map((_,i)=>`<div class="pdot ${i<S.idx?(S.results[i]?"done":"miss"):""} ${i===S.idx?"cur":""}"></div>`).join("");
+  const dots=S.ids.length>20?`<div class="counter">${S.idx+1} / ${S.ids.length}</div>`:S.ids.map((_,i)=>`<div class="pdot ${i<S.idx?(S.results[i]?"done":"miss"):""} ${i===S.idx?"cur":""}"></div>`).join("");
   const title=S.kind==="field"?"FIELD PROBLEM":S.deckId?DECK[S.deckId].meta.name.toUpperCase():"SHUFFLE ALL";
   const step=S.kind==="field"?S.problem.steps[S.idx]:null;
   const lead=S.kind!=="field"?"":`<div class="situation">${S.idx===0?`<h3>${esc(S.problem.title)}</h3><p>${esc(S.problem.situation)}</p>`:""}${step.narrative?`<p>${esc(step.narrative)}</p>`:""}</div>`;
@@ -288,11 +280,11 @@ function renderDrillDone(){
   ${topbar("COMPLETE",{name:"home"})}
   <div class="panel" style="text-align:center">
     <div class="scoreline">${got} / ${S.results.length} ON TARGET</div>
-    <p>${got===S.results.length?"Clean sweep. Misses resurface automatically when due.":"Missed cards drop a box and come back sooner. That's the system working."}</p>
+    <p>${got===S.results.length?"Clean sweep.":`${S.results.length-got} missed.`}</p>
   </div>
   <div class="btnrow">
     <button class="btn ghost" onclick="go({name:'home'})">Home</button>
-    <button class="btn" onclick="startDrill(${A(S.deckId)})">Drill 10 more</button>
+    <button class="btn" onclick="startDrill(${A(S.deckId)})">Shuffle again</button>
   </div>`;
   SESSION=null;
 }

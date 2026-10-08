@@ -124,13 +124,24 @@ Verification method (Oct 2026): web search results quoting the primary source (o
 
 | Card | Source | Checked against |
 |---|---|---|
-| `ln-mgrs-order` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Military_Grid_Reference_System |
-| `ln-right-up` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.honestmos.com/field-manual/land-navigation |
-| `ln-precision` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Military_Grid_Reference_System |
-| `ln-8digit` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Military_Grid_Reference_System |
-| `ln-utm-zones` | UTM / MGRS specification | https://bluemarblegeo.com/knowledgebase/calculator-2020sp2/Military_Grid_Reference_System_(MGRS).htm |
-| `ln-bands` | UTM / MGRS specification | https://bluemarblegeo.com/knowledgebase/calculator-2020sp2/Military_Grid_Reference_System_(MGRS).htm |
-| `ln-mgrs-truncate` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Military_Grid_Reference_System |
+| `ln-azimuth` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Azimuth |
+| `ln-norths` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://maptools.com/learn/north-references |
+| `ln-norths-mc` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://maptools.com/learn/north-references |
+| `ln-orient` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://sofrep.com/specialoperations/selection-land-nav-basics-pinpoint-location-orient-map/ |
+| `ln-terrain-assoc` | TC 3-25.26, ch. 11 (terrain association navigation) | https://armyrotc.mst.edu/media/academic/armyrotc/documents/manualsadpadrpfmetc/TC 3-25.26.pdf |
+| `ln-dead-reckoning` | TC 3-25.26, ch. 11 (dead reckoning navigation) | https://armyrotc.mst.edu/media/academic/armyrotc/documents/manualsadpadrpfmetc/TC 3-25.26.pdf |
+| `ln-handrail` | Orienteering technique (common land-navigation usage; not TC 3-25.26 wording) | https://brainscape.com/flashcards/navigation-definitions-8369224/packs/14191102 |
+| `ln-catching` | Orienteering technique (common land-navigation usage; not TC 3-25.26 wording) | https://www.theoutbound.com/sarah-seads/3-easy-steps-to-navigating-the-backcountry |
+| `ln-collecting` | Orienteering technique (common land-navigation usage; not TC 3-25.26 wording) | https://www.theoutbound.com/sarah-seads/3-easy-steps-to-navigating-the-backcountry |
+| `ln-attack` | Orienteering technique (common land-navigation usage; not TC 3-25.26 wording) | https://oq.orienteering.asn.au/forms-and-downloads/download/attack-points-pamphlet-2 |
+| `ln-holds` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.trngcmd.marines.mil/Portals/207/Docs/TBS/B170249Lensatic%20Compass.pdf |
+| `ln-detour` | USMC detour method; TC 3-25.26 (bypassing obstacles) | https://snipercentral.com/nav-bypass.htm |
+| `ln-stop` | STOP mnemonic (common wilderness-navigation practice) | https://www.people.vcu.edu/~albest/troop700/documents/StayingFoundWhatIfLost.pdf |
+| `ln-sc-handrail` | Orienteering technique (common land-navigation usage; not TC 3-25.26 wording) | https://brainscape.com/flashcards/navigation-definitions-8369224/packs/14191102 |
+| `ln-sc-catching` | Orienteering technique (common land-navigation usage; not TC 3-25.26 wording) | https://www.theoutbound.com/sarah-seads/3-easy-steps-to-navigating-the-backcountry |
+| `ln-sc-attack` | Orienteering technique (common land-navigation usage; not TC 3-25.26 wording) | https://oq.orienteering.asn.au/forms-and-downloads/download/attack-points-pamphlet-2 |
+| `ln-sc-fog` | TC 3-25.26, ch. 11 (dead reckoning navigation) | https://armyrotc.mst.edu/media/academic/armyrotc/documents/manualsadpadrpfmetc/TC 3-25.26.pdf |
+| `ln-sc-hold` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.trngcmd.marines.mil/Portals/207/Docs/TBS/B170249Lensatic%20Compass.pdf |
 | `ln-backaz` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Land_navigation |
 | `ln-backaz-calc` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Land_navigation |
 | `ln-backaz-calc2` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://en.wikipedia.org/wiki/Land_navigation |
