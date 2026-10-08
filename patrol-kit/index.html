@@ -398,7 +398,11 @@ function startDrill(deckId){
   if(pool.length<10)pool=pool.concat(shuffle(list));
   const seen=new Set();const ids=[];
   for(const it of pool){if(!seen.has(it.id)){seen.add(it.id);ids.push(it.id)}if(ids.length>=10)break}
-  SESSION=newSession(ids,"drill",deckId);
+  // due cards still make the set, but the order is random, and never opens on last session's first card
+  const order=shuffle(ids);const last=LS.get("lastFirst",null);
+  if(order.length>1&&order[0]===last)order.push(order.shift());
+  LS.set("lastFirst",order[0]);
+  SESSION=newSession(order,"drill",deckId);
   go({name:"drill"});
 }
 function newSession(ids,kind,deckId){return{ids,idx:0,results:[],kind,deckId:deckId||null,st:freshCardState(BYID[ids[0]])}}
@@ -738,7 +742,7 @@ function importProgress(){
 }
 function resetAll(){
   if(!confirm("Erase card history and lesson progress?"))return;
-  ["srs","lessons","vopt","active","field"].forEach(k=>localStorage.removeItem("pk_"+k));
+  ["srs","lessons","vopt","active","field","lastFirst"].forEach(k=>localStorage.removeItem("pk_"+k));
   VOPT={tenses:["pres","pret","cmd"]};
   go({name:"home"});toast("Progress reset");
 }
