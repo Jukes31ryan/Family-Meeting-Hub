@@ -73,14 +73,8 @@ These were confirmed through secondary sources (encyclopedia, case-brief sites, 
 | `ln-sc-fog` | TC 3-25.26, ch. 11 (dead reckoning navigation) | armyrotc.mst.edu |
 | `ln-backaz` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | en.wikipedia.org |
 | `ln-backaz-calc` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | en.wikipedia.org |
-| `ln-backaz-calc2` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | en.wikipedia.org |
-| `ln-gm-diagram` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | www.honestmos.com |
-| `ln-west` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | www.honestmos.com |
-| `ln-east` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | www.honestmos.com |
-| `ln-conv-w` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | www.honestmos.com |
-| `ln-conv-w2` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | www.honestmos.com |
-| `ln-pace-calc` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | en.wikipedia.org |
-| `ln-pace-dist` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | en.wikipedia.org |
+| `ln-declination` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | maptools.com |
+| `ln-pace-count` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | en.wikipedia.org |
 | `ln-pace-factors` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | en.wikipedia.org |
 | `ln-pace-snow` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | en.wikipedia.org |
 | `ln-t-hill` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | www.land-navigation.com |
@@ -91,22 +85,7 @@ These were confirmed through secondary sources (encyclopedia, case-brief sites, 
 | `ln-t-draw` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | www.land-navigation.com |
 | `ln-t-spur` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | www.land-navigation.com |
 | `ln-t-cliff` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | www.land-navigation.com |
-| `ln-t-cut` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | www.land-navigation.com |
-| `ln-t-fill` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | www.land-navigation.com |
-| `ln-t-counts` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | brainscape.com |
-| `ln-intersection` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | en.wikipedia.org |
-| `ln-resection` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | en.wikipedia.org |
-| `ln-mod-resection` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | en.wikipedia.org |
-| `ln-intersect-mc` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | en.wikipedia.org |
-| `ln-offset` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | cacadets.org |
-| `ln-offset-calc` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | cacadets.org |
-| `ln-datum` | Datum guidance: USGS topographic map practice; maptools.com datum tutorial | maptools.com |
-| `ln-datum-sc` | Datum guidance: USGS topographic map practice; maptools.com datum tutorial | maptools.com |
-| `ln-contours` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | alanwood.co.uk |
-| `ln-ci` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | alanwood.co.uk |
 | `ln-slope-mc` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | alanwood.co.uk |
-| `ln-scale-50k` | Representative-fraction map scale (arithmetic) | digfir-published.macmillanusa.com |
-| `ln-scale-24k` | Representative-fraction map scale (arithmetic) | digfir-published.macmillanusa.com |
 | `rd-p-roger` | ACP 125, Communications Instructions — Radiotelephone Procedures (prowords) | en.wikipedia.org |
 | `rd-p-wilco` | ACP 125, Communications Instructions — Radiotelephone Procedures (prowords) | en.wikipedia.org |
 | `rd-p-say-again` | ACP 125, Communications Instructions — Radiotelephone Procedures (prowords) | en.wikipedia.org |
