@@ -216,6 +216,11 @@ textarea.io{width:100%;min-height:140px;background:var(--bg);color:var(--ink);bo
 .fcard .trans{font-size:1.02rem;line-height:1.45}
 .progress .counter{font-family:var(--disp);letter-spacing:.12em;color:var(--muted);font-size:.95rem}
 .shuffle .btn:not(.ghost){font-size:1.6rem;padding:16px 12px}
+.linkbtn{display:block;margin:10px auto 0;background:none;border:0;color:var(--muted);font-family:var(--body);font-size:.85rem;text-decoration:underline;text-underline-offset:3px;padding:8px 12px;cursor:pointer}
+.shuffle .missedbtn{margin-top:10px}
+.skiprow{display:flex;justify-content:space-between;margin-top:14px}
+.skiprow .linkbtn{margin:0;font-size:.95rem}
+.skiprow .linkbtn:last-child{color:var(--ink);text-decoration:none;font-weight:600}
 .situation{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:var(--radius);padding:12px 14px;margin-bottom:12px;font-size:.88rem;line-height:1.5}
 .situation:empty{display:none}
 .situation h3{font-family:var(--disp);font-weight:400;letter-spacing:.1em;color:var(--gold);font-size:1.1rem;margin-bottom:6px;text-transform:uppercase}
@@ -284,6 +289,7 @@ function gradeItem(id,ok){
   const s=srs();const rec=s[id]||{box:0,seen:0};
   rec.seen++;
   rec.box=ok?Math.min(rec.box+1,5):Math.max(rec.box-1,0);
+  rec.miss=!ok;
   const d=new Date();d.setDate(d.getDate()+INTERVALS[rec.box]);
   rec.due=dstr(d);
   s[id]=rec;LS.set("srs",s);
@@ -294,6 +300,9 @@ function activeDecks(){
   return saved?all.filter(id=>saved.includes(id)):all;
 }
 function activeCards(){const a=new Set(activeDecks());return CARDS.filter(c=>a.has(c.deck))}
+/* cards whose most recent answer was a miss (older records: box 0 after being seen) */
+function isMissed(r){return !!r&&(r.miss!==undefined?r.miss:r.box===0&&r.seen>0)}
+function missedCards(deckId){const s=srs();return (deckId?deckCards(deckId):activeCards()).filter(c=>isMissed(s[c.id]))}
 
 function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
 
@@ -340,7 +349,7 @@ function renderHome(){
   const decks=DECKS.filter(d=>d.cards.length);
   app.innerHTML=`
   <div class="brand"><h1>PATROL <span>KIT</span></h1><div class="sub">Study Cards</div></div>
-  <div class="shuffle"><button class="btn" onclick="startDrill(null)">▶ Start<span class="sub">Shuffle all · ${pool.length} cards</span></button></div>
+  ${startBlock(null,`Shuffle all · ${pool.length} cards`)}
   <div class="sectionlabel">Decks</div>
   <div class="decklist">
     ${decks.map(d=>{const id=d.meta.id;const on=act.includes(id);const all=deckCards(id);
@@ -382,7 +391,7 @@ function renderDeck(){
   app.innerHTML=topbar(d.meta.name.toUpperCase(),{name:"home"})+`
   <div style="${deckVar(id)}">
   <div class="deckhead"><p>${esc(d.meta.blurb||"")}</p></div>
-  <div class="shuffle"><button class="btn" onclick="startDrill(${A(id)})">▶ Start<span class="sub">Shuffle this deck · ${all.length} cards</span></button></div>
+  ${startBlock(id,`Shuffle this deck · ${all.length} cards`)}
   <div class="modes">${sub.map(m=>tiles[m]||"").join("")}</div>
   <div class="footer"><div class="src">Source: ${esc(d.meta.source||"see each card")}</div></div>
   </div>`;
@@ -390,13 +399,44 @@ function renderDeck(){
 
 /* ---------------- CARD SESSIONS ---------------- */
 let SESSION=null;
+/* Start (or Resume) plus Review-missed buttons, for Home (deckId null) or one deck */
+function startBlock(deckId,sub){
+  const sv=savedSession(deckId);const nm=missedCards(deckId).length;
+  const main=sv
+    ?`<button class="btn" onclick="resumeDrill(${A(deckId)})">▶ Resume<span class="sub">Card ${sv.idx+1} of ${sv.ids.length}</span></button>
+      <button class="linkbtn" onclick="startDrill(${A(deckId)})">Start over with a fresh shuffle</button>`
+    :`<button class="btn" onclick="startDrill(${A(deckId)})">▶ Start<span class="sub">${sub}</span></button>`;
+  return `<div class="shuffle">${main}${nm?`<button class="btn ghost missedbtn" onclick="startMissed(${A(deckId)})">Review missed<span class="sub">${nm} card${nm===1?"":"s"} you got wrong last time</span></button>`:""}</div>`;
+}
+/* a shuffle in progress survives leaving the page; one saved run per scope (all, or a deck) */
+function savedSession(deckId){
+  const sv=LS.get("session",{})[deckId||"_all"];if(!sv)return null;
+  const ids=sv.ids.filter(id=>BYID[id]);if(!ids.length||sv.idx>=ids.length)return null;
+  return{...sv,ids};
+}
+function saveSession(){
+  const S=SESSION;if(!S||S.kind!=="drill")return;
+  const all=LS.get("session",{});const k=S.deckId||"_all";
+  if(S.idx>=S.ids.length||S.ended)delete all[k];else all[k]={ids:S.ids,idx:S.idx,results:S.results};
+  LS.set("session",all);
+}
+function resumeDrill(deckId){
+  const sv=savedSession(deckId);if(!sv)return startDrill(deckId);
+  SESSION={...newSession(sv.ids,"drill",deckId),idx:sv.idx,results:sv.results||[]};
+  SESSION.st=freshCardState(BYID[SESSION.ids[SESSION.idx]]);
+  go({name:"drill"});
+}
+function startMissed(deckId,ids){
+  ids=shuffle(ids||missedCards(deckId).map(c=>c.id));if(!ids.length)return toast("No missed cards");
+  SESSION=newSession(ids,"review",deckId);go({name:"drill"});
+}
 function startDrill(deckId){
   // every card in the active decks (or one deck), in random order
   const order=shuffle((deckId?deckCards(deckId):activeCards()).map(c=>c.id));
   const last=LS.get("lastFirst",null);
   if(order.length>1&&order[0]===last)order.push(order.shift());
   LS.set("lastFirst",order[0]);
-  SESSION=newSession(order,"drill",deckId);
+  SESSION=newSession(order,"drill",deckId);saveSession();
   go({name:"drill"});
 }
 function newSession(ids,kind,deckId){return{ids,idx:0,results:[],kind,deckId:deckId||null,st:freshCardState(BYID[ids[0]])}}
@@ -435,12 +475,14 @@ function renderDrill(){
   if(!S){go({name:"home"});return}
   if(S.idx>=S.ids.length){return renderDrillDone()}
   const c=sessionCard(S,S.idx);
-  const dots=S.ids.length>20?`<div class="counter">${S.idx+1} / ${S.ids.length}</div>`:S.ids.map((_,i)=>`<div class="pdot ${i<S.idx?(S.results[i]?"done":"miss"):""} ${i===S.idx?"cur":""}"></div>`).join("");
-  const title=S.kind==="field"?"FIELD PROBLEM":S.deckId?DECK[S.deckId].meta.name.toUpperCase():"SHUFFLE ALL";
+  const dots=S.ids.length>20?`<div class="counter">${S.idx+1} / ${S.ids.length}</div>`:S.ids.map((_,i)=>`<div class="pdot ${i<S.idx?(S.results[i]===true?"done":S.results[i]===false?"miss":""):""} ${i===S.idx?"cur":""}"></div>`).join("");
+  const title=S.kind==="field"?"FIELD PROBLEM":S.kind==="review"?"REVIEW MISSED":S.deckId?DECK[S.deckId].meta.name.toUpperCase():"SHUFFLE ALL";
   const step=S.kind==="field"?S.problem.steps[S.idx]:null;
   const lead=S.kind!=="field"?"":`<div class="situation">${S.idx===0?`<h3>${esc(S.problem.title)}</h3><p>${esc(S.problem.situation)}</p>`:""}${step.narrative?`<p>${esc(step.narrative)}</p>`:""}</div>`;
   const body={flip:flipHTML,mc:choiceHTML,scenario:choiceHTML,order:orderHTML}[c.type](c,S.st);
-  app.innerHTML=`${topbar(title,S.kind==="field"?{name:"field"}:{name:"home"})}<div class="progress">${dots}</div>${lead}<div style="${deckVar(c.deck)}">${body}</div>`;
+  const answered=S.st.answered!=null||S.st.checked;
+  const ctl=`<div class="skiprow"><button class="linkbtn" onclick="endSession()">Finish here</button>${answered?"":`<button class="linkbtn" onclick="skipCard()">Skip ›</button>`}</div>`;
+  app.innerHTML=`${topbar(title,sessionHome(S))}<div class="progress">${dots}</div>${lead}<div style="${deckVar(c.deck)}">${body}</div>${ctl}`;
 }
 
 /* flip */
@@ -504,21 +546,36 @@ function gradeCard(ok){
     const step=S.problem.steps[S.idx];
     if(step.ref)gradeItem(step.ref,ok);else if(!ok)(step.feeds||[]).forEach(id=>gradeItem(id,false));
   }else gradeItem(S.ids[S.idx],ok);
-  S.results.push(ok);S.idx++;S.st=freshCardState(sessionCard(S,S.idx));render();window.scrollTo(0,0);
+  advance(ok);
 }
+/* move on; ok is true / false, or null for a skip (nothing graded) */
+function advance(ok){
+  const S=SESSION;S.results.push(ok);S.idx++;S.st=freshCardState(sessionCard(S,S.idx));saveSession();render();window.scrollTo(0,0);
+}
+function skipCard(){advance(null)}
+const sessionHome=S=>S.kind==="field"?{name:"field"}:S.deckId?{name:"deck",id:S.deckId}:{name:"home"};
+function endSession(){
+  const S=SESSION;if(!S)return;
+  S.ended=true;saveSession();
+  if(!S.results.some(r=>r!==null)){SESSION=null;return go(sessionHome(S))}
+  renderDrillDone();window.scrollTo(0,0);
+}
+let LASTMISSED=[];
 function renderDrillDone(){
   const S=SESSION;
   if(S.kind==="field")return renderFieldDone();
-  const got=S.results.filter(Boolean).length;
+  const got=S.results.filter(r=>r===true).length,miss=S.results.filter(r=>r===false).length,skip=S.results.filter(r=>r===null).length;
+  LASTMISSED=S.ids.filter((_,i)=>S.results[i]===false);
   app.innerHTML=`
-  ${topbar("COMPLETE",{name:"home"})}
+  ${topbar("COMPLETE",sessionHome(S))}
   <div class="panel" style="text-align:center">
-    <div class="scoreline">${got} / ${S.results.length} ON TARGET</div>
-    <p>${got===S.results.length?"Clean sweep.":`${S.results.length-got} missed.`}</p>
+    <div class="scoreline">${got} / ${got+miss} ON TARGET</div>
+    <p>${miss?`${miss} missed.`:got?"Clean sweep.":"Nothing graded."}${skip?` ${skip} skipped.`:""}</p>
   </div>
+  ${miss?`<div class="shuffle"><button class="btn" onclick="startMissed(${A(S.deckId)},LASTMISSED)">Go over the ${miss} missed<span class="sub">Right now, while it's fresh</span></button></div>`:""}
   <div class="btnrow">
-    <button class="btn ghost" onclick="go({name:'home'})">Home</button>
-    <button class="btn" onclick="startDrill(${A(S.deckId)})">Shuffle again</button>
+    <button class="btn ghost" onclick="go(${A(sessionHome(S))})">${S.deckId?"Deck":"Home"}</button>
+    <button class="btn ${miss?"ghost":""}" onclick="startDrill(${A(S.deckId)})">New shuffle</button>
   </div>`;
   SESSION=null;
 }
@@ -539,10 +596,10 @@ function startField(id){
   go({name:"drill"});
 }
 function renderFieldDone(){
-  const S=SESSION;const f=S.problem;const got=S.results.filter(Boolean).length;
+  const S=SESSION;const f=S.problem;const got=S.results.filter(r=>r===true).length;
   const rec=LS.get("field",{});const prev=rec[f.id];
   rec[f.id]={best:Math.max(got,prev?prev.best:0),last:got,on:todayStr()};LS.set("field",rec);
-  const missed=f.steps.map((st,i)=>({st,i})).filter(x=>!S.results[x.i]);
+  const missed=f.steps.map((st,i)=>({st,i})).filter(x=>S.results[x.i]===false);
   const fed=[...new Set(missed.flatMap(x=>x.st.ref?[x.st.ref]:(x.st.feeds||[])))].map(id=>BYID[id]).filter(Boolean);
   app.innerHTML=`
   ${topbar("DEBRIEF",{name:"field"})}
@@ -736,7 +793,7 @@ function importProgress(){
 }
 function resetAll(){
   if(!confirm("Erase card history and lesson progress?"))return;
-  ["srs","lessons","vopt","active","field","lastFirst"].forEach(k=>localStorage.removeItem("pk_"+k));
+  ["srs","lessons","vopt","active","field","lastFirst","session"].forEach(k=>localStorage.removeItem("pk_"+k));
   VOPT={tenses:["pres","pret","cmd"]};
   go({name:"home"});toast("Progress reset");
 }
