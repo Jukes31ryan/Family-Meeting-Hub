@@ -18,7 +18,7 @@ DECKS.sort((a,b)=>a.meta.order-b.meta.order).forEach(d=>{
   DECK[d.meta.id]=d;
   d.cards.forEach(c=>{
     const cat=(d.categories||{})[c.cat]||{};
-    const card={...c,deck:d.meta.id,group:c.group||cat.group||"",why:c.why||cat.why||d.meta.why||"",source:c.source||cat.source||d.meta.source||"",flag:c.flag||cat.flag||""};
+    const card={...c,deck:d.meta.id,group:c.group||cat.group||"",why:c.why||cat.why||d.meta.why||"",source:c.source||cat.source||d.meta.source||"",flag:c.flag||cat.flag||"",ask:c.ask||cat.ask||""};
     CARDS.push(card);BYID[card.id]=card;
   });
 });
@@ -251,7 +251,7 @@ function flipHTML(c,st){
   return `<div class="cardwrap">
     <button class="fcard" onclick="flipCard()" aria-label="Tap to reveal answer">
       <span class="kind">${esc(kindLabel(c))}</span>
-      <span class="big ${c.deck==="spanish"?"es":""}">${esc(c.front)}</span>
+      ${c.ask?`<span class="ask">${esc(c.ask)}</span>`:""}<span class="big ${c.deck==="spanish"?"es":""}">${esc(c.front)}</span>
       ${st.flipped?`<span class="trans">${esc(c.back)}</span>${c.rule?`<span class="rule"><b>Rule</b>${esc(c.rule)}</span>`:""}${c.field?`<span class="rule"><b>Field</b>${esc(c.field)}</span>`:""}${c.note?`<span class="note">${esc(c.note)}</span>`:""}${metaBack(c)}`:`<span class="hint">Tap to reveal</span>`}
     </button>
   </div>

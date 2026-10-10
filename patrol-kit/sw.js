@@ -1,5 +1,5 @@
 // Offline cache for Patrol Kit. Built from src/sw.js — the version is stamped by tools/build.mjs.
-const CACHE = "pk-23729f4c12";
+const CACHE = "pk-612b148845";
 const CORE = ["./", "./index.html", "./manifest.json", "./icon-180.png", "./icon-192.png", "./icon-512.png"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE)).then(() => self.skipWaiting())); });
 self.addEventListener("activate", e => {
