@@ -5,12 +5,12 @@ export default {
     blurb:"ICAO alphabet, number pronunciation, prowords, and BP 10-codes and jargon.",
     subModes:["browse"] },
   categories: {
-    "Phonetic Alphabet": { why:"Plates, names and grid letters have to get through noise and bad signal on the first try." },
-    "Numbers": { why:"Clipped numbers like TREE, FIFE and NIN-ER keep 3/5 and 9/5 apart on a weak signal." },
-    "Prowords": { why:"Prowords say in one word what you need from the other station." },
+    "Phonetic Alphabet": { ask:"How do you say this letter on the radio?", why:"Plates and names have to get through noise and a bad signal on the first try." },
+    "Numbers": { ask:"How do you say this number on the radio?", why:"Radio numbers are said a set way so they aren't misheard on a weak signal. NIN-ER keeps 9 from sounding like 5 (FIFE), and TREE keeps 3 clear." },
+    "Prowords": { ask:"What does this proword mean?", why:"Prowords say in one word what you need from the other station." },
     "Procedure": { why:"Clear, standard traffic keeps the channel open for whoever needs it next." },
-    "BP 10-Codes": { why:"Know the codes you'll hear on BP traffic. On multi-agency incidents, use plain language (NIMS).", source:"HonorFirst.com, \"Border Patrol 10 Codes & Jargon\" (updated Mar. 2025)" },
-    "BP Jargon": { why:"The shorthand you'll hear in the field and in reports.", source:"HonorFirst.com, \"Border Patrol 10 Codes & Jargon\" (updated Mar. 2025)" },
+    "BP 10-Codes": { ask:"What does this code mean?", why:"Know the codes you'll hear on BP traffic. On multi-agency incidents, use plain language (NIMS).", source:"HonorFirst.com, \"Border Patrol 10 Codes & Jargon\" (updated Mar. 2025)" },
+    "BP Jargon": { ask:"What does this mean?", why:"The shorthand you'll hear in the field and in reports.", source:"HonorFirst.com, \"Border Patrol 10 Codes & Jargon\" (updated Mar. 2025)" },
   },
   cards: [
   { id:"rd-l-a", type:"flip", cat:"Phonetic Alphabet", front:"A", back:"ALFA", source:"ICAO spelling alphabet (ICAO Annex 10)", verified:"https://skybrary.aero/articles/icao-phonetic-alphabet" },
