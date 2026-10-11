@@ -189,7 +189,7 @@ export default [
   steps:[
   { narrative:"Before anyone heads in, you start the search estimate.", ref:"trk-first2" },
   { narrative:"She left about four hours ago, moving about 2.5 km/h. Nobody knows which way.", ref:"trk-area-mc" },
-  { narrative:"Her family says she's 15 and left upset.", ref:"trk-lpb-mc" },
+  { narrative:"Her family says she left about an hour ago.", ref:"trk-first2" },
   { narrative:"A tracker finds her prints leaving the trail, heading downhill.", ref:"trk-sector-mc" },
   { narrative:"You find her curled under a spruce, shivering. She mutters « Chu perdu… j'ai frette. »",
     type:"mc", deck:"french", feeds:["fr-h-chu","fr-h-frette"],
@@ -316,7 +316,6 @@ export default [
     choices:["(b): deadly or dangerous weapon or bodily injury, up to 20 years","Simple assault, up to 1 year","Physical contact, up to 8 years","None; § 111 covers only firearms"],
     answer:0, explain:"§ 111(b) covers a deadly or dangerous weapon, or bodily injury: up to 20 years." },
   { narrative:"Two throwers are caught. One has a cut hand from the arrest.", ref:"uf-cbp-medical" },
-  { narrative:"Days later you go back to the ditch at dusk to work the scene.", ref:"trk-timeofday" },
   ]},
 
 // ---------------------------------------------------------------- 17
@@ -365,7 +364,7 @@ export default [
   { narrative:"On the radio, another agent calls the occupants 'bailouts'.", ref:"rd-j-8" },
   { narrative:"Two agents start walking around the car looking for footprints.", ref:"trk-contam" },
   { narrative:"The K-9 handler arrives and wants to deploy right away.", ref:"trk-start" },
-  { narrative:"The dog team reaches a muddy ditch crossing the sign line.", ref:"trk-k9-tt" },
+  { narrative:"The sign line reaches a muddy ditch.", ref:"trk-tt-primary" },
   { narrative:"In the mud there's one clear print.", ref:"trk-draw" },
   { narrative:"The sign leads to a farmhouse. The owner has the group hidden in his garage.", ref:"st-1324-iii" },
   ]},
@@ -377,11 +376,8 @@ export default [
   { narrative:"Before anyone else shows up, think about what will ruin the sign.", ref:"trk-contam-who" },
   { narrative:"You need one way in and out. An obvious trail runs straight to the camp.", ref:"trk-entry-sc" },
   { narrative:"The camp itself is taped off.", ref:"trk-outside" },
-  { narrative:"The agent who searched and cuffed the suspect offers to help at the camp.", ref:"trk-cross-contam" },
-  { narrative:"The suspect's phone came in with him. A colleague starts poking through it.", ref:"trk-devices" },
   { narrative:"Legally, the phone's contents have to wait.", ref:"cl-riley" },
   { narrative:"Dispatch asks for the victim's injuries and the suspect's name on the open channel.", ref:"rd-e-sensitive" },
-  { narrative:"You find blood-soaked wet soil and have no evidence kit.", ref:"trk-evidence-bag" },
   ]},
 
 // ---------------------------------------------------------------- 21
@@ -411,7 +407,7 @@ export default [
   { narrative:"Before taking a bearing, you check what's around you.", ref:"ln-c-metal" },
   { narrative:"A wide beaver pond sits across your azimuth.", ref:"ln-detour" },
   { narrative:"The hunter said the camp is in a dip between two hills.", ref:"ln-t-saddle" },
-  { narrative:"You find it empty: three bed sites, no fire ring, waste carried out.", ref:"trk-camp" },
+  { narrative:"You find it empty, with grass pressed flat where people lay.", ref:"trk-nesting" },
   { narrative:"You radio the time you found it: 1:15 p.m.", ref:"rd-pr-time" },
   { narrative:"Sign leaving camp heads toward a road. Teams try to get ahead.", ref:"trk-leapfrog" },
   ]},
@@ -440,7 +436,7 @@ export default [
     q:"Which phrase?",
     choices:["« Montez dans le véhicule, il fait chaud. »","« Restez dans le véhicule. »","« Sortez du véhicule. »","« Attendez ici. »"],
     answer:0, explain:"Get in the vehicle, it's warm. « Restez » and « Sortez » are stay in and get out." },
-  { narrative:"The father says their 8-year-old wandered off an hour ago. A tracker finds small prints.", ref:"trk-lostkids" },
+  { narrative:"The father says their 8-year-old wandered off an hour ago. You find small prints, then lose them on hard ground.", ref:"trk-lost-stop" },
   { narrative:"None of them have documents. The father says they're afraid to go back.", ref:"st-sc-fear" },
   { narrative:"You start transporting the mother and the young child.",
     type:"mc", deck:"radio", feeds:["rd-10-97"],
