@@ -278,12 +278,12 @@ Verification method (Oct 2026): web search results quoting the primary source (o
 | Card | Source | Checked against |
 |---|---|---|
 | `trk-why` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
-| `trk-pls` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | https://bibsok.no/?tnr=387081 |
-| `trk-area` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | https://bibsok.no/?tnr=387081 |
-| `trk-area-mc` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | https://bibsok.no/?tnr=387081 |
-| `trk-sector-mc` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | https://bibsok.no/?tnr=387081 |
-| `trk-cordons` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | https://bibsok.no/?tnr=387081 |
-| `trk-random` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002); Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-pls` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | https://bibsok.no/?tnr=387081 |
+| `trk-area` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | https://bibsok.no/?tnr=387081 |
+| `trk-area-mc` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | https://bibsok.no/?tnr=387081 |
+| `trk-sector-mc` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | https://bibsok.no/?tnr=387081 |
+| `trk-cordons` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | https://bibsok.no/?tnr=387081 |
+| `trk-random` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002); Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
 | `trk-five` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
 | `trk-flat` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
 | `trk-reg` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
@@ -293,23 +293,53 @@ Verification method (Oct 2026): web search results quoting the primary source (o
 | `trk-five-mc` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
 | `trk-sc-transfer` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
 | `trk-dew` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
-| `trk-sun` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-sun` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002); Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 17–18 | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
 | `trk-sun-mc` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
-| `trk-levels` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | https://bibsok.no/?tnr=387081 |
-| `trk-aging` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | https://bibsok.no/?tnr=387081 |
-| `trk-step` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | https://bibsok.no/?tnr=387081 |
-| `trk-cutting` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | https://bibsok.no/?tnr=387081 |
-| `trk-perimeter` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | https://bibsok.no/?tnr=387081 |
-| `trk-tt` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011); Original Wisdom, "The Secrets of Success for Tracking: The Lost Trail Drill" | https://www.originalwisdom.com/the-secrets-of-success-for-tracking-the-lost-trail-drill/ |
+| `trk-levels` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 66, 80 | https://bibsok.no/?tnr=387081 |
+| `trk-aging` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | https://bibsok.no/?tnr=387081 |
+| `trk-step` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | https://bibsok.no/?tnr=387081 |
+| `trk-cutting` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | https://bibsok.no/?tnr=387081 |
+| `trk-perimeter` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | https://bibsok.no/?tnr=387081 |
+| `trk-tt` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 59; Original Wisdom, "The Secrets of Success for Tracking: The Lost Trail Drill" | https://www.originalwisdom.com/the-secrets-of-success-for-tracking-the-lost-trail-drill/ |
 | `trk-draw` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
 | `trk-stick` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
 | `trk-stick-use` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
 | `trk-mark` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
-| `trk-leapfrog` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | https://bibsok.no/?tnr=387081 |
-| `trk-lost` | Original Wisdom, "The Secrets of Success for Tracking: The Lost Trail Drill"; Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/the-secrets-of-success-for-tracking-the-lost-trail-drill/ |
-| `trk-sc-gravel` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011); Original Wisdom, "The Secrets of Success for Tracking: The Lost Trail Drill" | https://www.originalwisdom.com/the-secrets-of-success-for-tracking-the-lost-trail-drill/ |
-| `trk-overshoot` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | https://bibsok.no/?tnr=387081 |
+| `trk-leapfrog` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | https://bibsok.no/?tnr=387081 |
+| `trk-lost` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 31–32; Original Wisdom, "The Secrets of Success for Tracking: The Lost Trail Drill" | https://www.originalwisdom.com/the-secrets-of-success-for-tracking-the-lost-trail-drill/ |
+| `trk-sc-gravel` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing); Original Wisdom, "The Secrets of Success for Tracking: The Lost Trail Drill" | https://www.originalwisdom.com/the-secrets-of-success-for-tracking-the-lost-trail-drill/ |
+| `trk-overshoot` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | https://bibsok.no/?tnr=387081 |
 | `trk-team` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
-| `trk-beside` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002); Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
-| `trk-contam` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | https://bibsok.no/?tnr=387081 |
-| `trk-k9` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002); Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-beside` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002); Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-contam` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | https://bibsok.no/?tnr=387081 |
+| `trk-k9` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002); Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-sun-dir-mc` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 17–18 | https://bibsok.no/?tnr=387081 |
+| `trk-flagging` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 68 | https://bibsok.no/?tnr=387081 |
+| `trk-shine` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 68 | https://bibsok.no/?tnr=387081 |
+| `trk-nesting` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 66 | https://bibsok.no/?tnr=387081 |
+| `trk-crushed` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 70 | https://bibsok.no/?tnr=387081 |
+| `trk-ontop` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 74 | https://bibsok.no/?tnr=387081 |
+| `trk-head` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 74 | https://bibsok.no/?tnr=387081 |
+| `trk-snow` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 72–74 | https://bibsok.no/?tnr=387081 |
+| `trk-water` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 76–78 | https://bibsok.no/?tnr=387081 |
+| `trk-stride-terrain` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 22 | https://bibsok.no/?tnr=387081 |
+| `trk-measure-mc` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 22–24 | https://bibsok.no/?tnr=387081 |
+| `trk-leftright` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 22–23 | https://bibsok.no/?tnr=387081 |
+| `trk-partial` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 22–26 | https://bibsok.no/?tnr=387081 |
+| `trk-count-mc` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 27 | https://bibsok.no/?tnr=387081 |
+| `trk-cover` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 28 | https://bibsok.no/?tnr=387081 |
+| `trk-start` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 30 | https://bibsok.no/?tnr=387081 |
+| `trk-gate` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 30–31 | https://bibsok.no/?tnr=387081 |
+| `trk-deadzone` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 31 | https://bibsok.no/?tnr=387081 |
+| `trk-norun` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 31 | https://bibsok.no/?tnr=387081 |
+| `trk-backtrack` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 36, 42 | https://bibsok.no/?tnr=387081 |
+| `trk-tt-primary` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 60–62 | https://bibsok.no/?tnr=387081 |
+| `trk-tt-secondary` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 64 | https://bibsok.no/?tnr=387081 |
+| `trk-tt-keep` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 59 | https://bibsok.no/?tnr=387081 |
+| `trk-contam-who` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 34, 48 | https://bibsok.no/?tnr=387081 |
+| `trk-park` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 34, 48 | https://bibsok.no/?tnr=387081 |
+| `trk-entry-sc` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 34, 44 | https://bibsok.no/?tnr=387081 |
+| `trk-outside` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 34, 48 | https://bibsok.no/?tnr=387081 |
+| `trk-timeofday` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 34 | https://bibsok.no/?tnr=387081 |
+| `trk-locard` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 54 | https://bibsok.no/?tnr=387081 |
+| `trk-evidence-bag` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 56–58 | https://bibsok.no/?tnr=387081 |
