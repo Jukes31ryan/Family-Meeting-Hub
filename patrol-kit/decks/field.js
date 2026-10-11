@@ -38,6 +38,7 @@ export default [
   { narrative:"A road crosses about 300 m past where you expect to catch them.", ref:"ln-sc-catching" },
   { narrative:"The sign leaves the stream and heads for a small spot in thick woods, 200 m past an obvious stream junction.", ref:"ln-sc-attack" },
   { narrative:"Deep snow, uphill, light snowfall. You're keeping a pace count.", ref:"ln-pace-snow" },
+  { narrative:"The sign hits a plowed gravel road and disappears.", ref:"trk-sc-gravel" },
   { narrative:"You close on the group. One runs, empty-handed, toward thicker cover.", ref:"uf-sc-runner" },
   { narrative:"The others stop. One is shivering, clothes soaked from a stream crossing, and speaks only French.",
     type:"mc", deck:"french", feeds:["fr-m-froid","fr-m-mouille"],

@@ -79,6 +79,23 @@ Verification method (Oct 2026): web search results quoting the primary source (o
 | `cl-sc-consent-scope` | Florida v. Jimeno, 500 U.S. 248 (1991) | https://www.law.cornell.edu/supct/html/90-622.ZO.html |
 | `cl-sc-911` | Navarette v. California, 572 U.S. 393 (2014) | https://supreme.justia.com/cases/federal/us/572/12-9490 |
 | `cl-sc-custody` | Berkemer v. McCarty, 468 U.S. 420 (1984) | https://www.law.cornell.edu/supremecourt/text/468/420 |
+| `cl-innis` | Rhode Island v. Innis, 446 U.S. 291 (1980) | https://www.law.cornell.edu//supremecourt/text/446/291 |
+| `cl-edwards` | Edwards v. Arizona, 451 U.S. 477 (1981) | https://www.law.cornell.edu/supremecourt/text/451/477 |
+| `cl-davis` | Davis v. United States, 512 U.S. 452 (1994) | https://law.resource.org/pub/us/case/reporter/US/512/512.US.452.92-1949.html |
+| `cl-berghuis` | Berghuis v. Thompkins, 560 U.S. 370 (2010) | https://law.justia.com/cases/federal/us/560/370/ |
+| `cl-quarles` | New York v. Quarles, 467 U.S. 649 (1984) | https://openbooks.lib.msu.edu/cj275/chapter/new-york-v-quarles-1984/ |
+| `cl-seibert` | Missouri v. Seibert, 542 U.S. 600 (2004) (plurality) | https://www.law.cornell.edu/supremecourt/text/542/600 |
+| `cl-fnu-lnu` | United States v. FNU LNU, 653 F.3d 144 (2d Cir. 2011) | https://caselaw.findlaw.com/us-2nd-circuit/1576880.html |
+| `cl-bivens` | Bivens v. Six Unknown Named Agents of Fed. Bureau of Narcotics, 403 U.S. 388 (1971) | https://www.law.cornell.edu/supremecourt/text/403/388 |
+| `cl-ziglar` | Ziglar v. Abbasi, 582 U.S. 120 (2017) | https://www.govinfo.gov/content/pkg/USREPORTS-582/pdf/USREPORTS-582-120.pdf |
+| `cl-harlow` | Harlow v. Fitzgerald, 457 U.S. 800 (1982) | https://www.govinfo.gov/content/pkg/USREPORTS-457/pdf/USREPORTS-457-800.pdf |
+| `cl-pearson` | Pearson v. Callahan, 555 U.S. 223 (2009) | https://law.cornell.edu/supct/pdf/07-751P.ZS |
+| `cl-vega` | Vega v. Tekoh, 597 U.S. 134 (2022) | https://law.justia.com/cases/federal/us/597/21-499/ |
+| `cl-sc-lawyer-maybe` | Davis v. United States, 512 U.S. 452 (1994) | https://law.resource.org/pub/us/case/reporter/US/512/512.US.452.92-1949.html |
+| `cl-sc-gun-where` | New York v. Quarles, 467 U.S. 649 (1984) | https://openbooks.lib.msu.edu/cj275/chapter/new-york-v-quarles-1984/ |
+| `cl-sc-secondary` | United States v. FNU LNU, 653 F.3d 144 (2d Cir. 2011) | https://caselaw.findlaw.com/us-2nd-circuit/1576880.html |
+| `cl-sc-reapproach` | Edwards v. Arizona, 451 U.S. 477 (1981) | https://www.law.cornell.edu/supremecourt/text/451/477 |
+| `cl-sc-bivens` | Egbert v. Boule, 596 U.S. 482 (2022) | https://law.justia.com/cases/federal/us/596/21-147/ |
 
 ## Use of Force
 
@@ -90,6 +107,18 @@ Verification method (Oct 2026): web search results quoting the primary source (o
 | `uf-barnes` | Barnes v. Felix, 605 U.S. 73 (2025) | https://en.wikipedia.org/wiki/Barnes_v._Felix |
 | `uf-scott` | Scott v. Harris, 550 U.S. 372 (2007) | https://law.justia.com/cases/federal/us/550/372/ |
 | `uf-287-nondeadly` | 8 C.F.R. § 287.8(a)(1) | https://chanrobles.com/usa/uslaws/cfr/title08/8-1.0.1.2.57.0.1.8.php |
+| `uf-287-deadly-def` | 8 C.F.R. § 287.8(a)(1)(i), (a)(2)(i) | https://www.govinfo.gov/content/pkg/CFR-2025-title8-vol1/pdf/CFR-2025-title8-vol1-sec287-8.pdf |
+| `uf-287-grounds` | 8 C.F.R. § 287.8(a)(1)(ii) | https://www.govinfo.gov/content/pkg/CFR-2025-title8-vol1/pdf/CFR-2025-title8-vol1-sec287-8.pdf |
+| `uf-torres` | Torres v. Madrid, 592 U.S. 306 (2021) | https://law.cornell.edu/supremecourt/text/19-292 |
+| `uf-mendez` | County of Los Angeles v. Mendez, 581 U.S. 420 (2017) | https://en.wikipedia.org/wiki/Los_Angeles_County_v._Mendez |
+| `uf-kingsley` | Kingsley v. Hendrickson, 576 U.S. 389 (2015) | https://law.justia.com/cases/federal/us/576/389/ |
+| `uf-lombardo` | Lombardo v. St. Louis, 594 U.S. 464 (2021) | https://www.supremecourt.gov/opinions/20pdf/594us2r60_2c83.pdf |
+| `uf-kisela` | Kisela v. Hughes, 584 U.S. 100 (2018) | https://www.supremecourt.gov/opinions/17pdf/17-467_bqm1.pdf |
+| `uf-pearson` | Pearson v. Callahan, 555 U.S. 223 (2009); Saucier v. Katz, 533 U.S. 194 (2001) | https://www.law.cornell.edu/supremecourt/text/07-751 |
+| `uf-zorn` | Zorn v. Linton, 607 U.S. ___ (2026) (per curiam), No. 25-297 | https://www.law.cornell.edu/supremecourt/text/25-297 |
+| `uf-tracy` | Tracy v. Freshwater, 623 F.3d 90 (2d Cir. 2010) | https://caselaw.findlaw.com/us-2nd-circuit/1541031.html |
+| `uf-lennox` | Lennox v. Miller, 968 F.3d 150 (2d Cir. 2020) | https://us2ndcircuitcourtofappealsopinions.justia.com/category/civil-rights/page/25 |
+| `uf-anderson` | Anderson v. Branen, 17 F.3d 552 (2d Cir. 1994) | https://law.resource.org/pub/us/case/reporter/F3/017/17.F3d.552.93-6179.719.html |
 | `uf-cbp-standard` | CBP Use of Force Policy, HB 4500-002A (Jan. 2021) | https://www.cbp.gov/sites/default/files/assets/documents/2021-Jul/cbp-use-of-force-policy_4500-002A.pdf |
 | `uf-cbp-deadly` | CBP Use of Force Policy, HB 4500-002A (Jan. 2021) | https://www.cbp.gov/sites/default/files/assets/documents/2021-Jul/cbp-use-of-force-policy_4500-002A.pdf |
 | `uf-cbp-escape` | CBP Use of Force Policy, HB 4500-002A (Jan. 2021); DHS Policy Statement 044-05 | https://www.justsecurity.org/128498/dhs-doj-cbp-policy-force-vehicles/ |
@@ -98,14 +127,46 @@ Verification method (Oct 2026): web search results quoting the primary source (o
 | `uf-dhs-choke` | DHS Policy Statement 044-05 Rev. 01 (Feb. 6, 2023) | https://www.dhs.gov/news/2023/02/07/dhs-updates-department-wide-use-force-policy-advance-effective-accountable-law |
 | `uf-dhs-aid` | DHS Policy Statement 044-05 Rev. 01 (Feb. 6, 2023) | https://www.dhs.gov/news/2023/02/07/dhs-updates-department-wide-use-force-policy-advance-effective-accountable-law |
 | `uf-dhs-self` | DHS Policy Statement 044-05 Rev. 01 (Feb. 6, 2023) | https://www.dhs.gov/news/2023/02/07/dhs-updates-department-wide-use-force-policy-advance-effective-accountable-law |
+| `uf-cbp-necessary` | CBP Use of Force Policy, HB 4500-002A (Jan. 2021) | https://www.cbp.gov/sites/default/files/assets/documents/2021-Jul/cbp-use-of-force-policy_4500-002A.pdf |
+| `uf-cbp-deadly-def` | CBP Use of Force Policy, HB 4500-002A (Jan. 2021) | https://www.cbp.gov/sites/default/files/assets/documents/2021-Jul/cbp-use-of-force-policy_4500-002A.pdf |
+| `uf-cbp-thrown` | CBP Use of Force Policy, HB 4500-002A (Jan. 2021) | https://www.cbp.gov/sites/default/files/assets/documents/2021-Jul/cbp-use-of-force-policy_4500-002A.pdf |
+| `uf-cbp-warning-shots` | CBP Use of Force Policy, HB 4500-002A (Jan. 2021) | https://www.cbp.gov/sites/default/files/assets/documents/2021-Jul/cbp-use-of-force-policy_4500-002A.pdf |
+| `uf-cbp-medical` | CBP Use of Force Policy, HB 4500-002A (Jan. 2021) | https://www.cbp.gov/sites/default/files/assets/documents/2021-Jul/cbp-use-of-force-policy_4500-002A.pdf |
+| `uf-cbp-report-improper` | CBP Use of Force Policy, HB 4500-002A (Jan. 2021); CBP Use of Force Administrative Guidelines and Procedures Handbook, HB 4500-002B (2021) | https://www.cbp.gov/sites/default/files/assets/documents/2021-Jul/cbp-use-of-force-admin-guide-procedure-handbook_4500-002B.pdf |
+| `uf-dhs-warning` | DHS Policy Statement 044-05 Rev. 01 (Feb. 6, 2023) | https://www.dhs.gov/sites/default/files/2023-02/23_0206_s1_use-of-force-policy-update.pdf |
+| `uf-veh-brosseau` | Brosseau v. Haugen, 543 U.S. 194 (2004) (per curiam) | https://www.law.cornell.edu/supremecourt/text/543/194 |
+| `uf-veh-brower` | Brower v. County of Inyo, 489 U.S. 593 (1989) | https://www.govinfo.gov/content/pkg/USREPORTS-489/pdf/USREPORTS-489-593.pdf |
+| `uf-veh-disable` | CBP Use of Force Policy, HB 4500-002A (Jan. 2021); DHS Policy Statement 044-05 Rev. 01 (2023) | https://www.cbp.gov/sites/default/files/assets/documents/2021-Jul/cbp-use-of-force-policy_4500-002A.pdf |
+| `uf-veh-path` | CBP Use of Force Policy, HB 4500-002A (Jan. 2021) | https://www.cbp.gov/sites/default/files/assets/documents/2021-Jul/cbp-use-of-force-policy_4500-002A.pdf |
+| `uf-veh-operator` | DHS Policy Statement 044-05 (2018) and Rev. 01 (Feb. 6, 2023) | https://www.dhs.gov/sites/default/files/publications/mgmt/law-enforcement/mgmt-dir_044-05-department-policy-on-the-use-of-force.pdf |
+| `uf-veh-warning` | DHS Policy Statement 044-05 Rev. 01 (Feb. 6, 2023) | https://www.dhs.gov/sites/default/files/2023-02/23_0206_s1_use-of-force-policy-update.pdf |
+| `uf-veh-pursuit` | CBP Directive No. 4510-026B, Emergency Driving Including Vehicular Pursuits (Dec. 2, 2025) | https://www.cbp.gov/sites/default/files/2025-12/intc-44545_-_cbp_directive_no._4510-026b_usbp_redacted.pdf |
 | `uf-sc-runner` | Tennessee v. Garner, 471 U.S. 1 (1985); 8 C.F.R. § 287.8(a) | https://law.justia.com/cases/federal/us/471/1/ |
 | `uf-sc-knife` | 8 C.F.R. § 287.8(a)(2); CBP Use of Force Policy (2021) | https://www.law.cornell.edu/cfr/text/8/287.8 |
 | `uf-sc-report` | Graham v. Connor, 490 U.S. 386 (1989); Barnes v. Felix, 605 U.S. 73 (2025) | https://www.govinfo.gov/content/pkg/USREPORTS-490/pdf/USREPORTS-490-386.pdf |
+| `uf-sc-rocks` | CBP Use of Force Policy, HB 4500-002A (Jan. 2021) | https://www.cbp.gov/sites/default/files/assets/documents/2021-Jul/cbp-use-of-force-policy_4500-002A.pdf |
+| `uf-sc-veh-flee` | Tennessee v. Garner, 471 U.S. 1 (1985); CBP Use of Force Policy, HB 4500-002A (Jan. 2021) | https://www.cbp.gov/sites/default/files/assets/documents/2021-Jul/cbp-use-of-force-policy_4500-002A.pdf |
+| `uf-sc-veh-path` | CBP Use of Force Policy, HB 4500-002A (Jan. 2021); Barnes v. Felix, 605 U.S. 73 (2025) | https://www.cbp.gov/sites/default/files/assets/documents/2021-Jul/cbp-use-of-force-policy_4500-002A.pdf |
+| `uf-sc-cuffed` | Lennox v. Miller, 968 F.3d 150 (2d Cir. 2020); Tracy v. Freshwater, 623 F.3d 90 (2d Cir. 2010) | https://us2ndcircuitcourtofappealsopinions.justia.com/category/civil-rights/page/25 |
+| `uf-sc-passive` | DHS Policy Statement 044-05 Rev. 01 (2023); 8 C.F.R. § 287.8(a)(1)(iii); Zorn v. Linton, 607 U.S. ___ (2026) | https://www.dhs.gov/sites/default/files/2023-02/23_0206_s1_use-of-force-policy-update.pdf |
+| `uf-sc-intervene` | Anderson v. Branen, 17 F.3d 552 (2d Cir. 1994); CBP Use of Force Policy, HB 4500-002A (Jan. 2021) | https://law.resource.org/pub/us/case/reporter/F3/017/17.F3d.552.93-6179.719.html |
+| `uf-sc-aid` | CBP Use of Force Policy, HB 4500-002A (Jan. 2021) | https://www.cbp.gov/sites/default/files/assets/documents/2021-Jul/cbp-use-of-force-policy_4500-002A.pdf |
+| `uf-sc-prone` | Lombardo v. St. Louis, 594 U.S. 464 (2021) | https://www.supremecourt.gov/opinions/20pdf/594us2r60_2c83.pdf |
+| `uf-sc-seizure` | Torres v. Madrid, 592 U.S. 306 (2021) | https://law.cornell.edu/supremecourt/text/19-292 |
+| `uf-sc-self` | DHS Policy Statement 044-05 Rev. 01 (Feb. 6, 2023) | https://www.dhs.gov/news/2023/02/07/dhs-updates-department-wide-use-force-policy-advance-effective-accountable-law |
+| `uf-sc-warning-shot` | CBP Use of Force Policy, HB 4500-002A (Jan. 2021) | https://www.cbp.gov/sites/default/files/assets/documents/2021-Jul/cbp-use-of-force-policy_4500-002A.pdf |
+| `uf-sc-pursuit` | CBP Directive No. 4510-026B (Dec. 2, 2025) | https://www.cbp.gov/sites/default/files/2025-12/intc-44545_-_cbp_directive_no._4510-026b_usbp_redacted.pdf |
 
 ## French
 
 | Card | Source | Checked against |
 |---|---|---|
+| `fr-h-frette` | Usito (Université de Sherbrooke): frette (avoir frette, il fait frette) | https://usito.usherbrooke.ca/lexies/mots/frette |
+| `fr-h-pantoute` | Le Robert: pantoute (Canada, familier) | https://dictionnaire.lerobert.com/en/definition/pantoute |
+| `fr-h-tantot` | Usito (Université de Sherbrooke): tantôt [Québec] | https://usito.usherbrooke.ca/d%C3%A9finitions/tant%C3%B4t |
+| `fr-h-pis-ben` | Usito (Université de Sherbrooke): G. Dostie, « Les marqueurs discursifs » | https://usito.usherbrooke.ca/articles/th%C3%A9matiques/dostie_1 |
+| `fr-h-magasiner` | OQLF, Banque de dépannage linguistique: MAGASINER et MAGASINAGE | https://vitrinelinguistique.oqlf.gouv.qc.ca/23637/le-vocabulaire/tours-dhorizon-et-autres-explications/tours-dhorizon/emploi-et-sens-de-magasiner-et-de-magasinage |
+| `fr-h-chu` | Wiktionnaire: chu (Canada, familier) | https://fr.wiktionary.org/wiki/chu |
 | `fr-q-repas` | OQLF, Vitrine linguistique: meal names (déjeuner, dîner, souper) | https://vitrinelinguistique.oqlf.gouv.qc.ca/redirection/ficheuid/8872574 |
 | `fr-q-cell` | OQLF, Grand dictionnaire terminologique: téléphone cellulaire | https://vitrinelinguistique.oqlf.gouv.qc.ca/fiche-gdt/fiche/8393991/telephone-cellulaire |
 | `fr-q-stationnement` | OQLF, Grand dictionnaire terminologique: parc de stationnement | https://vitrinelinguistique.oqlf.gouv.qc.ca/fiche-gdt/fiche/1298970/parc-de-stationnement |
@@ -119,6 +180,9 @@ Verification method (Oct 2026): web search results quoting the primary source (o
 | `fr-q-ramq` | Immigrant Québec: carte d'assurance maladie (RAMQ) | https://immigrantquebec.com/fr/reussir-votre-installation/demarches-des-premiers-jours/ |
 | `fr-q-saaq` | Société de l'assurance automobile du Québec (SAAQ) | https://saaq.gouv.qc.ca/prendre-un-rendez-vous/details/2 |
 | `fr-q-mc-diner` | OQLF, Vitrine linguistique: meal names (déjeuner, dîner, souper) | https://vitrinelinguistique.oqlf.gouv.qc.ca/redirection/ficheuid/8872574 |
+| `fr-w8` | CDC, Preventing Hypothermia (first aid) | https://www.cdc.gov/winter-weather/prevention/index.html |
+| `fr-w12` | CDC, Preventing Hypothermia (warning signs) | https://www.cdc.gov/winter-weather/prevention/index.html |
+| `fr-w13` | OQLF, Grand dictionnaire terminologique: tuque (fiche 8356212); mitaine (fiche 8364867) | https://vitrinelinguistique.oqlf.gouv.qc.ca/fiche-gdt/fiche/8356212/tuque |
 
 ## Land Nav
 
@@ -159,6 +223,21 @@ Verification method (Oct 2026): web search results quoting the primary source (o
 | `ln-t-cliff` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.land-navigation.com/terrain-features.html |
 | `ln-color-mc` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.trngcmd.marines.mil/Portals/207/Docs/FMTBE/Student%20Materials/FMSO%20Manual/212.pdf |
 | `ln-slope-mc` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://alanwood.co.uk/news/understanding-contour-lines-on-topographic-maps |
+| `ln-m-margin` | TC 3-25.26, ch. 3 (marginal information and symbols) | https://www.uakron.edu/armyrotc/MS1/8.pdf |
+| `ln-m-legend` | TC 3-25.26, ch. 3 (marginal information and symbols) | https://www.uakron.edu/armyrotc/MS1/krause-msl1-mapreading.pdf |
+| `ln-m-colors` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.uakron.edu/armyrotc/MS1/krause-msl1-mapreading.pdf |
+| `ln-m-bar-scale` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.trngcmd.marines.mil/Portals/207/Docs/FMTBE/Student%20Materials/FMSO%20Manual/212.pdf |
+| `ln-m-contour` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://alanwood.co.uk/news/understanding-contour-lines-on-topographic-maps |
+| `ln-m-interval` | TC 3-25.26, ch. 3 (marginal information and symbols) | https://www.scribd.com/doc/131278528/ch3 |
+| `ln-p-pace` | Orienteering technique (common land-navigation usage; not TC 3-25.26 wording) | https://www.baoc.org/wiki/Training/Pace_Counting |
+| `ln-p-course` | Orienteering technique (common land-navigation usage; not TC 3-25.26 wording) | https://sofrep.com/specialoperations/passing-sfas-know-pace-count/ |
+| `ln-p-beads` | Pace count beads (common military land-navigation practice) | https://en.wikipedia.org/wiki/Pace_count_beads |
+| `ln-p-eye` | Unit-of-measure range estimation (military training) | https://digital.jmpublishing.ie/i/426395/28 |
+| `ln-p-eye-mc` | Unit-of-measure range estimation (military training) | https://digital.jmpublishing.ie/i/426395/28 |
+| `ln-c-parts` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://www.scribd.com/doc/131270589/ch9 |
+| `ln-c-level` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://fieldandstream.com/stories/survival-stories/wilderness-survival/how-to-read-compass |
+| `ln-c-steer` | Orienteering technique (common land-navigation usage; not TC 3-25.26 wording) | https://strands.cacadets.org/strands/Strand_008/Strand_008_Handouts/TA_8-H-8_Basic_Compass_Topo_Map.pdf |
+| `ln-c-metal` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://strands.cacadets.org/strands/Strand_051/Strand_051_Posters_Letter/TA_51-P-2_Map_Reading_Lensatic_Compass.pdf |
 
 ## Radio
 
@@ -217,6 +296,30 @@ Verification method (Oct 2026): web search results quoting the primary source (o
 | `rd-sc-sayagain` | ACP 125, Communications Instructions — Radiotelephone Procedures (prowords) | https://en.wikipedia.org/wiki/Procedure_word |
 | `rd-pr-plain` | FEMA, NIMS Plain Language Guidance; IS-315 (ICS common terminology) | https://emilms.fema.gov/is_0315a/groups/143.html |
 | `rd-pr-why` | FEMA, NIMS Plain Language Guidance | https://www.alicetraining.com/wp-content/uploads/2016/03/FEMA-Plain-Language-Guide.pdf |
+| `rd-pr-radiocheck` | ACP 125, Communications Instructions — Radiotelephone Procedures (signal strength and readability) | https://en.wikipedia.org/wiki/Signal_strength_and_readability_report |
+| `rd-pr-report` | ACP 125, Communications Instructions — Radiotelephone Procedures (signal strength and readability) | https://en.wikipedia.org/wiki/Signal_strength_and_readability_report |
+| `rd-pr-digits` | FAA Order JO 7110.10, para. 2-3-4 (numbers usage) | https://www.faa.gov/air_traffic/publications/atpubs/fs_html/chap2_section_3.html |
+| `rd-pr-digits-mc` | FAA Order JO 7110.10, para. 2-3-4 (numbers usage) | https://www.faa.gov/air_traffic/publications/atpubs/fs_html/chap2_section_3.html |
+| `rd-pr-time` | FAA Order JO 7110.10, para. 2-3-4 (numbers usage: time) | https://www.faa.gov/air_traffic/publications/atpubs/fs_html/chap2_section_3.html |
+| `rd-pr-spell` | U.S. Coast Guard Radiotelephone Handbook (I SPELL), via San Francisco ACS phonetics guide | https://sf.gov/sites/default/files/2022-07/Phonetics%20%26%20Associated%20Prowords.pdf |
+| `rd-e-listen` | NIFC, "Tune In to Radio Discipline" (wildland fire radio guidance) | https://www.nifc.gov/sites/default/files/pio/documents/TuneIntoRadioDiscipline.doc |
+| `rd-e-think` | NIFC, "Tune In to Radio Discipline" (wildland fire radio guidance) | https://www.nifc.gov/sites/default/files/pio/documents/TuneIntoRadioDiscipline.doc |
+| `rd-e-brief` | NIFC, "Tune In to Radio Discipline" (wildland fire radio guidance) | https://www.nifc.gov/sites/default/files/pio/documents/TuneIntoRadioDiscipline.doc |
+| `rd-e-pause` | Two-way radio training guides (common practice) | https://open-exam-prep.com/study-guides/dc-security-guard/communications-customer-service/radio-procedures-report-writing |
+| `rd-e-voice` | Two-way radio training guides (common practice) | https://open-exam-prep.com/study-guides/dc-security-guard/communications-customer-service/radio-procedures-report-writing |
+| `rd-e-call` | Two-way radio training guides (common practice) | https://open-exam-prep.com/study-guides/dc-security-guard/communications-customer-service/radio-procedures-report-writing |
+| `rd-e-sensitive` | Two-way radio training guides (common practice) | https://open-exam-prep.com/study-guides/dc-security-guard/communications-customer-service/radio-procedures-report-writing |
+| `rd-e-emergency` | NIFC, "Tune In to Radio Discipline" (wildland fire radio guidance) | https://www.nifc.gov/sites/default/files/pio/documents/TuneIntoRadioDiscipline.doc |
+| `rd-e-sc-double` | NIFC, "Tune In to Radio Discipline" (wildland fire radio guidance) | https://www.nifc.gov/sites/default/files/pio/documents/TuneIntoRadioDiscipline.doc |
+| `rd-e-order` | Two-way radio training guides (common practice) | https://open-exam-prep.com/study-guides/dc-security-guard/communications-customer-service/radio-procedures-report-writing |
+
+## Spanish
+
+| Card | Source | Checked against |
+|---|---|---|
+| `es-w9` | CDC, Preventing Hypothermia (first aid) | https://www.cdc.gov/winter-weather/prevention/index.html |
+| `es-w13` | CDC, Preventing Hypothermia (warning signs) | https://www.cdc.gov/winter-weather/prevention/index.html |
+| `es-w14` | CDC, Preventing Frostbite (first aid) | https://www.cdc.gov/winter-weather/prevention/preventing-frostbite.html |
 
 ## Statutes & Authority
 
@@ -262,3 +365,136 @@ Verification method (Oct 2026): web search results quoting the primary source (o
 | `st-sc-false-name` | 18 U.S.C. § 1001(a) | https://www.law.cornell.edu/uscode/text/18/1001 |
 | `st-sc-fake-card` | 18 U.S.C. § 1546(a) | https://www.govinfo.gov/content/pkg/USCODE-2023-title18/html/USCODE-2023-title18-partI-chap75-sec1546.htm |
 | `st-sc-fear` | 8 U.S.C. § 1225(b)(1)(A) | https://www.law.cornell.edu/uscode/text/8/lii:usc:t:8:s:1225:b |
+| `st-1401i` | 19 U.S.C. § 1401(i) | https://definitions.uslegal.com/c/customs-officer/ |
+| `st-1581e` | 19 U.S.C. § 1581(e), (f) | https://www.law.cornell.edu/uscode/text/19/1581 |
+| `st-1582` | 19 U.S.C. § 1582 | https://www.law.cornell.edu/uscode/text/19/1582 |
+| `st-482` | 19 U.S.C. § 482 | https://www.govinfo.gov/content/pkg/USCODE-2018-title19/html/USCODE-2018-title19-chap3-subtitleIV-other-part5.htm |
+| `st-1589a` | 19 U.S.C. § 1589a | https://www.law.cornell.edu/uscode/text/19/1589a |
+| `st-1595a` | 19 U.S.C. § 1595a(a)–(c) | https://law.counselstack.com/usc/19/1595a |
+| `st-2871-a1` | 8 C.F.R. § 287.1(a)(1), (c) | https://www.law.cornell.edu/cfr/text/8/287.1 |
+| `st-2873-a` | 8 C.F.R. § 287.3(a) | https://www.law.cornell.edu/cfr/text/8/287.3 |
+| `st-2873-d` | 8 C.F.R. § 287.3(d) | https://syfert.com/cfr/sections/8-287.3.html |
+| `st-2877-d` | 8 C.F.R. § 287.7(d) | https://www.law.cornell.edu/cfr/text/8/287.7 |
+| `st-2878-c2ii` | 8 C.F.R. § 287.8(c)(2)(ii) | https://www.aclu-co.org/app/uploads/2025/10/112-Order-on-Mot-to-Enforce.pdf |
+| `st-2878-c2vii` | 8 C.F.R. § 287.8(c)(2)(vii) | https://www.ecfr.gov/current/title-8/chapter-I/subchapter-B/part-287/section-287.8 |
+| `st-2878-f2` | 8 C.F.R. § 287.8(f)(2), (f)(4) | https://agworkforce.cals.cornell.edu/?p=4841 |
+| `st-1324-a2` | 8 U.S.C. § 1324(a)(2) | https://www.justice.gov/archives/jm/criminal-resource-manual-1907-title-8-usc-1324a-offenses |
+| `st-1327` | 8 U.S.C. § 1327 | https://www.law.cornell.edu/uscode/text/8/1327 |
+| `st-18-911` | 18 U.S.C. § 911 | https://law.justia.com/codes/us/title-18/part-i/chapter-43/sec-911 |
+| `st-18-758` | 18 U.S.C. § 758 | https://www.law.cornell.edu/uscode/text/18/758 |
+| `st-18-545` | 18 U.S.C. § 545 | https://www.casemine.com/act/us/591974dbadd7b05bd4d9af07 |
+| `st-sc-checkpoint-run` | 18 U.S.C. § 758 | https://www.law.cornell.edu/uscode/text/18/758 |
+| `st-sc-citizen-claim` | 18 U.S.C. § 911 | https://law.justia.com/codes/us/title-18/part-i/chapter-43/sec-911 |
+| `st-sc-goods-vehicle` | 19 U.S.C. § 1595a(a) | https://law.counselstack.com/usc/19/1595a |
+
+## Tracking
+
+| Card | Source | Checked against |
+|---|---|---|
+| `trk-why` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-pls` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | https://bibsok.no/?tnr=387081 |
+| `trk-area` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | https://bibsok.no/?tnr=387081 |
+| `trk-area-mc` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | https://bibsok.no/?tnr=387081 |
+| `trk-sector-mc` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | https://bibsok.no/?tnr=387081 |
+| `trk-cordons` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | https://bibsok.no/?tnr=387081 |
+| `trk-random` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002); Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-five` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-flat` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-reg` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-color` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-dist` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-transfer` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-five-mc` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-sc-transfer` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-dew` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-sun` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002); Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 17–18 | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-sun-mc` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-levels` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 66, 80 | https://bibsok.no/?tnr=387081 |
+| `trk-aging` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | https://bibsok.no/?tnr=387081 |
+| `trk-step` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | https://bibsok.no/?tnr=387081 |
+| `trk-cutting` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | https://bibsok.no/?tnr=387081 |
+| `trk-perimeter` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | https://bibsok.no/?tnr=387081 |
+| `trk-tt` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 59; Original Wisdom, "The Secrets of Success for Tracking: The Lost Trail Drill" | https://www.originalwisdom.com/the-secrets-of-success-for-tracking-the-lost-trail-drill/ |
+| `trk-draw` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-stick` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-stick-use` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-mark` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-leapfrog` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | https://bibsok.no/?tnr=387081 |
+| `trk-lost` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 31–32; Original Wisdom, "The Secrets of Success for Tracking: The Lost Trail Drill" | https://www.originalwisdom.com/the-secrets-of-success-for-tracking-the-lost-trail-drill/ |
+| `trk-sc-gravel` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing); Original Wisdom, "The Secrets of Success for Tracking: The Lost Trail Drill" | https://www.originalwisdom.com/the-secrets-of-success-for-tracking-the-lost-trail-drill/ |
+| `trk-overshoot` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | https://bibsok.no/?tnr=387081 |
+| `trk-team` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-beside` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002); Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-contam` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | https://bibsok.no/?tnr=387081 |
+| `trk-k9` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002); Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-sun-dir-mc` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 17–18 | https://bibsok.no/?tnr=387081 |
+| `trk-flagging` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 68 | https://bibsok.no/?tnr=387081 |
+| `trk-shine` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 68 | https://bibsok.no/?tnr=387081 |
+| `trk-nesting` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 66 | https://bibsok.no/?tnr=387081 |
+| `trk-crushed` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 70 | https://bibsok.no/?tnr=387081 |
+| `trk-ontop` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 74 | https://bibsok.no/?tnr=387081 |
+| `trk-head` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 74 | https://bibsok.no/?tnr=387081 |
+| `trk-snow` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 72–74 | https://bibsok.no/?tnr=387081 |
+| `trk-water` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 76–78 | https://bibsok.no/?tnr=387081 |
+| `trk-stride-terrain` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 22 | https://bibsok.no/?tnr=387081 |
+| `trk-measure-mc` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 22–24 | https://bibsok.no/?tnr=387081 |
+| `trk-leftright` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 22–23 | https://bibsok.no/?tnr=387081 |
+| `trk-partial` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 22–26 | https://bibsok.no/?tnr=387081 |
+| `trk-count-mc` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 27 | https://bibsok.no/?tnr=387081 |
+| `trk-cover` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 28 | https://bibsok.no/?tnr=387081 |
+| `trk-start` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 30 | https://bibsok.no/?tnr=387081 |
+| `trk-gate` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 30–31 | https://bibsok.no/?tnr=387081 |
+| `trk-deadzone` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 31 | https://bibsok.no/?tnr=387081 |
+| `trk-norun` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 31 | https://bibsok.no/?tnr=387081 |
+| `trk-backtrack` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 36, 42 | https://bibsok.no/?tnr=387081 |
+| `trk-tt-primary` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 60–62 | https://bibsok.no/?tnr=387081 |
+| `trk-tt-secondary` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 64 | https://bibsok.no/?tnr=387081 |
+| `trk-tt-keep` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 59 | https://bibsok.no/?tnr=387081 |
+| `trk-contam-who` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 34, 48 | https://bibsok.no/?tnr=387081 |
+| `trk-park` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 34, 48 | https://bibsok.no/?tnr=387081 |
+| `trk-entry-sc` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 34, 44 | https://bibsok.no/?tnr=387081 |
+| `trk-outside` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 34, 48 | https://bibsok.no/?tnr=387081 |
+| `trk-timeofday` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 34 | https://bibsok.no/?tnr=387081 |
+| `trk-locard` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 54 | https://bibsok.no/?tnr=387081 |
+| `trk-evidence-bag` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 56–58 | https://bibsok.no/?tnr=387081 |
+| `trk-first2` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 14 | https://bibsok.no/?tnr=387081 |
+| `trk-double` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 15 | https://bibsok.no/?tnr=387081 |
+| `trk-sector4` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 15 | https://bibsok.no/?tnr=387081 |
+| `trk-cordon-mc` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 16 | https://bibsok.no/?tnr=387081 |
+| `trk-speed-light` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 15 | https://bibsok.no/?tnr=387081 |
+| `trk-speed-bush` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 15 | https://bibsok.no/?tnr=387081 |
+| `trk-speed-veh` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 15 | https://bibsok.no/?tnr=387081 |
+| `trk-speed-sign` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 15 | https://bibsok.no/?tnr=387081 |
+| `trk-lpb-mc` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 16 | https://bibsok.no/?tnr=387081 |
+| `trk-profile` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 16 | https://bibsok.no/?tnr=387081 |
+| `trk-tech` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 7 | https://bibsok.no/?tnr=387081 |
+| `trk-senses` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 6 | https://bibsok.no/?tnr=387081 |
+| `trk-aging-train` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 12 | https://bibsok.no/?tnr=387081 |
+| `trk-scat` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 38 | https://bibsok.no/?tnr=387081 |
+| `trk-hardground` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 9, 32 | https://bibsok.no/?tnr=387081 |
+| `trk-stick-any` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 22 | https://bibsok.no/?tnr=387081 |
+| `trk-nextsign` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 22 | https://bibsok.no/?tnr=387081 |
+| `trk-protect-print` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 22–23 | https://bibsok.no/?tnr=387081 |
+| `trk-angle` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 22–23 | https://bibsok.no/?tnr=387081 |
+| `trk-first3` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 32 | https://bibsok.no/?tnr=387081 |
+| `trk-interview` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 30 | https://bibsok.no/?tnr=387081 |
+| `trk-oldscene` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 31 | https://bibsok.no/?tnr=387081 |
+| `trk-k9-tt` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 31 | https://bibsok.no/?tnr=387081 |
+| `trk-perp` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 32 | https://bibsok.no/?tnr=387081 |
+| `trk-lostkids` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 30 | https://bibsok.no/?tnr=387081 |
+| `trk-initiative` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 32 | https://bibsok.no/?tnr=387081 |
+| `trk-y` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 32 | https://bibsok.no/?tnr=387081 |
+| `trk-routes` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 32 | https://bibsok.no/?tnr=387081 |
+| `trk-scene-detail` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 36 | https://bibsok.no/?tnr=387081 |
+| `trk-scene-check` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 50 | https://bibsok.no/?tnr=387081 |
+| `trk-scene-keep` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 34 | https://bibsok.no/?tnr=387081 |
+| `trk-camp` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 36–38 | https://bibsok.no/?tnr=387081 |
+| `trk-cut-where` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 51 | https://bibsok.no/?tnr=387081 |
+| `trk-cross-contam` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 55 | https://bibsok.no/?tnr=387081 |
+| `trk-devices` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 54 | https://bibsok.no/?tnr=387081 |
+| `trk-lost-stop` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 31 | https://bibsok.no/?tnr=387081 |
+| `trk-lost-back-mc` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 31 | https://bibsok.no/?tnr=387081 |
+| `trk-lost-confirm` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 30, 32 | https://bibsok.no/?tnr=387081 |
+| `trk-lost-retry` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 32 | https://bibsok.no/?tnr=387081 |
+| `trk-lost-why` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 11, 30 | https://bibsok.no/?tnr=387081 |
+| `trk-lost-dog` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 32 | https://bibsok.no/?tnr=387081 |

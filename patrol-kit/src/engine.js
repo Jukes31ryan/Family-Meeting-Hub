@@ -18,7 +18,7 @@ DECKS.sort((a,b)=>a.meta.order-b.meta.order).forEach(d=>{
   DECK[d.meta.id]=d;
   d.cards.forEach(c=>{
     const cat=(d.categories||{})[c.cat]||{};
-    const card={...c,deck:d.meta.id,group:c.group||cat.group||"",why:c.why||cat.why||d.meta.why||"",source:c.source||cat.source||d.meta.source||"",flag:c.flag||cat.flag||""};
+    const card={...c,deck:d.meta.id,group:c.group||cat.group||"",why:c.why||cat.why||d.meta.why||"",source:c.source||cat.source||d.meta.source||"",flag:c.flag||cat.flag||"",ask:c.ask||cat.ask||""};
     CARDS.push(card);BYID[card.id]=card;
   });
 });
@@ -92,7 +92,7 @@ let view={name:"home"};
 function go(v){view=v;render();window.scrollTo(0,0)}
 function render(){
   const r={home:renderHome,deck:renderDeck,drill:renderDrill,browse:renderBrowseCats,browselist:renderBrowseList,
-    grammar:renderGrammarList,lesson:renderLesson,verbs:renderVerbSetup,verbdrill:renderVerbDrill,settings:renderSettings,field:renderFieldList}[view.name]||renderHome;
+    grammar:renderGrammarList,lesson:renderLesson,verbs:renderVerbSetup,verbdrill:renderVerbDrill,settings:renderSettings,field:renderFieldList,spin:renderSpin}[view.name]||renderHome;
   r();
 }
 function topbar(title,backTo){
@@ -119,7 +119,9 @@ function renderHome(){
         <button class="toggle" role="switch" aria-checked="${on}" aria-label="Include ${esc(d.meta.name)} in Shuffle All" onclick="toggleDeck(${A(id)})"><span class="sw"></span></button>
       </div>`}).join("")}
   </div>
-  ${FIELD.length?`<div class="sectionlabel">Test yourself</div><div class="shuffle"><button class="btn ghost" onclick="go({name:'field'})">Field Problems<span class="sub">${Object.keys(LS.get("field",{})).length} / ${FIELD.length} run · one situation, questions from every deck</span></button></div>`:""}
+  <div class="sectionlabel">Test yourself</div>
+  <div class="shuffle"><button class="btn ghost spinbtn" onclick="go({name:'spin'})">◎ Spin<span class="sub">Flick the spinner · one card from whatever deck it lands on</span></button></div>
+  ${FIELD.length?`<div class="shuffle"><button class="btn ghost" onclick="go({name:'field'})">Field Problems<span class="sub">${Object.keys(LS.get("field",{})).length} / ${FIELD.length} run · one situation, questions from every deck</span></button></div>`:""}
   <div class="stats">
     <div class="stat"><div class="n">${seen}</div><div class="l">cards seen</div></div>
     <div class="stat"><div class="n">${mastered}</div><div class="l">mastered</div></div>
@@ -251,7 +253,7 @@ function flipHTML(c,st){
   return `<div class="cardwrap">
     <button class="fcard" onclick="flipCard()" aria-label="Tap to reveal answer">
       <span class="kind">${esc(kindLabel(c))}</span>
-      <span class="big ${c.deck==="spanish"?"es":""}">${esc(c.front)}</span>
+      ${c.ask?`<span class="ask">${esc(c.ask)}</span>`:""}<span class="big ${c.deck==="spanish"?"es":""}">${esc(c.front)}</span>
       ${st.flipped?`<span class="trans">${esc(c.back)}</span>${c.rule?`<span class="rule"><b>Rule</b>${esc(c.rule)}</span>`:""}${c.field?`<span class="rule"><b>Field</b>${esc(c.field)}</span>`:""}${c.note?`<span class="note">${esc(c.note)}</span>`:""}${metaBack(c)}`:`<span class="hint">Tap to reveal</span>`}
     </button>
   </div>
@@ -509,6 +511,187 @@ function renderVerbDrill(){
 function answerVerb(i){const D=VDRILL;D.answered=i;if(D.q.opts[i]===D.q.correct)D.score++;render()}
 function nextVerb(){const D=VDRILL;D.round++;D.answered=null;D.q=makeVerbQ();render()}
 
+/* ---------------- SPIN ----------------
+   Fidget-spinner card picker, after the "Didja Spin" concept: flick the spinner, it lands on a
+   deck on the ring, and the tray hands you one card from that deck. Tap a deck on the ring to
+   stick with it. Grades feed the same card history as every other mode. */
+let SPIN=null;
+const SPIN_NS="http://www.w3.org/2000/svg";
+const spinRad=d=>d*Math.PI/180;
+const spinPt=(r,d)=>(r*Math.cos(spinRad(d))).toFixed(2)+" "+(r*Math.sin(spinRad(d))).toFixed(2);
+function spinSvg(name,attrs,parent){const e=document.createElementNS(SPIN_NS,name);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e}
+function spinDecks(){const a=activeDecks();return DECKS.filter(d=>d.cards.length&&a.includes(d.meta.id)).slice(0,8)}
+const spinLabel=d=>d.meta.spin||d.meta.name.split(" & ")[0];
+/* weighted pick: last-answer-wrong cards come back most, unseen next, mastered rarely */
+function spinPick(deckId){
+  const s=srs();const pool=deckCards(deckId).filter(c=>c.type!=="order");
+  let total=0;const w=pool.map(c=>{if(SPIN&&c.id===SPIN.lastId&&pool.length>1)return 0;const r=s[c.id];
+    const x=!r?6:isMissed(r)?9:r.box>=4?0.5:2;total+=x;return x});
+  let r=Math.random()*total;for(let i=0;i<pool.length;i++){r-=w[i];if(r<=0&&w[i]>0)return pool[i]}
+  return pool[pool.length-1];
+}
+function spinCount(add){const k=todayStr();const all=LS.get("spins",{});if(add){all[k]=(all[k]||0)+1;
+  const ks=Object.keys(all).sort();while(ks.length>60)delete all[ks.shift()];LS.set("spins",all)}return all[k]||0}
+
+function renderSpin(){
+  const decks=spinDecks();
+  if(decks.length<2){app.innerHTML=topbar("SPIN",{name:"home"})+`<div class="panel"><p>Turn on at least two decks on Home to spin.</p></div>`;return}
+  app.innerHTML=topbar("SPIN",{name:"home"})+`
+  <div class="spinstage"><div id="wheelBox" class="wheel-box">
+    <svg id="wheel" class="wheel" viewBox="-205 -205 410 410" aria-label="Spinner with a ring of decks">
+      <defs id="wheelDefs"></defs><g id="ring"></g>
+      <g class="shadow-wrap"><g id="shadowRot"></g></g>
+      <g class="press-wrap"><g id="spinner"><g id="spinBody"></g></g></g>
+    </svg>
+    <button id="hub" class="hub" type="button">Spin</button>
+  </div></div>
+  <section id="tray" class="tray" aria-live="polite"></section>`;
+  spinInit(decks);
+}
+
+function spinInit(decks){
+  const prev=SPIN;
+  const S=SPIN={decks,angle:prev?prev.angle:0,vel:0,mode:"idle",notchAt:0,deal:false,raf:0,last:0,drag:null,tickSlot:0,
+    lastId:prev?prev.lastId:null,lock:LS.get("spinlock",null),sound:LS.get("spinsound",true),card:null,st:null,spun:false,ac:null,lastTick:0};
+  if(S.lock&&!decks.some(d=>d.meta.id===S.lock))S.lock=null;
+  const $=id=>document.getElementById(id);
+  const box=$("wheelBox"),wheel=$("wheel"),ring=$("ring"),defs=$("wheelDefs"),spinnerG=$("spinner"),body=$("spinBody"),shadowRot=$("shadowRot");
+  const n=decks.length,step=360/n,R_OUT=200,R_IN=152,GAP=1.3;
+  let wedges=[],labels=[];
+  const colorOf=id=>DECK[id].meta.color;
+
+  function buildRing(){
+    ring.textContent="";defs.textContent="";wedges=[];labels=[];
+    decks.forEach((d,i)=>{
+      const shown=S.lock?DECK[S.lock]:d,mid=-90+step*i,a0=mid-step/2+GAP,a1=mid+step/2-GAP;
+      const w=spinSvg("path",{class:"wedge",d:"M"+spinPt(R_OUT,a0)+" A"+R_OUT+" "+R_OUT+" 0 0 1 "+spinPt(R_OUT,a1)+" L"+spinPt(R_IN,a1)+" A"+R_IN+" "+R_IN+" 0 0 0 "+spinPt(R_IN,a0)+" Z",
+        role:"button",tabindex:"0","data-deck":d.meta.id,"aria-label":S.lock?"Bring the other decks back":"Only "+spinLabel(d),"aria-pressed":S.lock?"true":"false"},ring);
+      w.style.fill=colorOf(shown.meta.id);wedges.push(w);
+      const upper=Math.sin(spinRad(mid))<=0.01,r=upper?169:183,half=Math.min(step/2-3,80);
+      spinSvg("path",{id:"spinArc"+i,d:"M"+spinPt(r,upper?mid-half:mid+half)+" A"+r+" "+r+" 0 0 "+(upper?1:0)+" "+spinPt(r,upper?mid+half:mid-half)},defs);
+      const label=spinLabel(shown),room=spinRad(half*2)*169;
+      const t=spinSvg("text",{class:"wedge-label"+(label.length*11.5>room*0.94?" small":""),"aria-hidden":"true"},ring);
+      const tp=spinSvg("textPath",{href:"#spinArc"+i,startOffset:"50%","text-anchor":"middle"},t);tp.textContent=label;labels.push(t);
+    });
+  }
+  /* three lobes on a hub; the lobe under the pointer is the one that counts */
+  const LOBES=[-90,30,150],LOBE_D=92,LOBE_R=44,ARM_W=60,HUB_R=50;
+  function bodyLayer(cls,grow,parent){const g=spinSvg("g",{class:cls},parent);
+    LOBES.forEach(a=>{const x=LOBE_D*Math.cos(spinRad(a)),y=LOBE_D*Math.sin(spinRad(a));
+      spinSvg("line",{x1:0,y1:0,x2:x.toFixed(2),y2:y.toFixed(2),"stroke-width":ARM_W+grow*2,"stroke-linecap":"round"},g);
+      spinSvg("circle",{cx:x.toFixed(2),cy:y.toFixed(2),r:LOBE_R+grow},g)});
+    spinSvg("circle",{cx:0,cy:0,r:HUB_R+grow},g)}
+  bodyLayer("body-shadow",3,shadowRot);bodyLayer("body-edge",3,body);bodyLayer("body-fill",0,body);
+  spinSvg("polygon",{class:"pointer",points:"0,-150 -11,-131 11,-131"},body);
+  LOBES.forEach((a,i)=>{const cx=LOBE_D*Math.cos(spinRad(a)),cy=LOBE_D*Math.sin(spinRad(a)),m=i===0?" marked":"";
+    spinSvg("circle",{class:"race"+m,cx:cx.toFixed(2),cy:cy.toFixed(2),r:25},body);
+    spinSvg("circle",{class:"ball"+m,cx:cx.toFixed(2),cy:cy.toFixed(2),r:9},body)});
+
+  /* sound and buzz */
+  function audio(){if(!S.sound)return null;try{const C=window.AudioContext||window.webkitAudioContext;if(!C)return null;S.ac=S.ac||new C();if(S.ac.state==="suspended")S.ac.resume();return S.ac}catch(e){return null}}
+  function blip(f,at,len,peak,type){const ac=S.ac,o=ac.createOscillator(),g=ac.createGain();o.type=type;o.frequency.value=f;
+    g.gain.setValueAtTime(0.0001,at);g.gain.exponentialRampToValueAtTime(peak,at+0.004);g.gain.exponentialRampToValueAtTime(0.0001,at+len);
+    o.connect(g);g.connect(ac.destination);o.start(at);o.stop(at+len+0.02)}
+  function tick(speed){const now=performance.now();if(now-S.lastTick<30)return;S.lastTick=now;if(!audio()||S.ac.state!=="running")return;
+    const k=Math.min(1,speed/2400);blip(950+800*k+Math.random()*120,S.ac.currentTime,0.04-0.012*k,0.1-0.03*k,"triangle")}
+  function chime(){if(audio()&&S.ac.state==="running"){blip(660,S.ac.currentTime,0.22,0.12,"sine");blip(990,S.ac.currentTime+0.09,0.3,0.1,"sine")}
+    try{if(navigator.vibrate)navigator.vibrate(12)}catch(e){}}
+
+  /* physics: coast with drag and friction, then drop into the nearest wedge with a small bounce */
+  const DRAG=1.0,RUB=90,NOTCH=140,SPRING=220,DAMP=16.3;
+  function paint(){const rot="rotate("+S.angle.toFixed(2)+")";spinnerG.setAttribute("transform",rot);shadowRot.setAttribute("transform",rot);
+    const slot=Math.floor((S.angle+step/2)/step);if(slot!==S.tickSlot){S.tickSlot=slot;tick(Math.abs(S.vel))}}
+  function frame(now){
+    if(view.name!=="spin"||SPIN!==S){S.raf=0;return}
+    const dt=Math.min(Math.max((now-S.last)/1000,0),0.05);S.last=now;
+    const parts=Math.max(1,Math.ceil(dt/0.006)),h=dt/parts;
+    for(let i=0;i<parts&&S.mode!=="idle";i++){
+      if(S.mode==="free"){const sg=S.vel<0?-1:1;S.vel-=(DRAG*S.vel+RUB*sg)*h;if((S.vel<0?-1:1)!==sg)S.vel=0;S.angle+=S.vel*h;
+        if(Math.abs(S.vel)<NOTCH){S.notchAt=Math.round((S.angle+S.vel*0.22)/step)*step;S.mode="notch"}}
+      else if(S.mode==="notch"){S.vel+=(-SPRING*(S.angle-S.notchAt)-DAMP*S.vel)*h;S.angle+=S.vel*h;
+        if(Math.abs(S.vel)<4&&Math.abs(S.angle-S.notchAt)<0.3){S.angle=S.notchAt;S.vel=0;S.mode="idle"}}
+    }
+    paint();
+    if(S.mode==="idle"){S.raf=0;if(S.deal){S.deal=false;land()}}else S.raf=requestAnimationFrame(frame);
+  }
+  function run(){if(S.raf)return;S.last=performance.now();S.raf=requestAnimationFrame(frame)}
+  function clearLanding(){wheel.classList.remove("landed");wedges.forEach(w=>w.classList.remove("lit"));labels.forEach(l=>l.classList.remove("lit"))}
+  function launch(v){clearLanding();S.card=null;trayRest();S.deal=true;const dir=v<0?-1:1;
+    if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){S.angle=(Math.round(S.angle/step)+dir*(1+Math.floor(Math.random()*n)))*step;S.vel=0;S.mode="idle";paint();S.deal=false;land();return}
+    S.vel=dir*Math.min(2800,Math.max(380,Math.abs(v)*(0.86+Math.random()*0.28)));S.mode="free";run()}
+  const spinDefault=()=>launch(1450+Math.random()*750);
+  function land(){
+    const idx=((Math.round(S.angle/step)%n)+n)%n,deckId=S.lock||decks[idx].meta.id;
+    wheel.classList.add("landed");wedges[idx].classList.add("lit");labels[idx].classList.add("lit");
+    const c=spinPick(deckId);S.lastId=c.id;S.card=c;S.st=freshCardState(c);S.spun=true;spinCount(true);trayCard();chime();
+  }
+  /* flick: the spinner follows the finger, then keeps going */
+  function pAngle(e){const r=box.getBoundingClientRect();return Math.atan2(e.clientY-(r.top+r.height/2),e.clientX-(r.left+r.width/2))*180/Math.PI}
+  box.addEventListener("pointerdown",e=>{
+    if(e.button||e.target.closest("#hub"))return;
+    const wedge=e.target.closest?e.target.closest("[data-deck]"):null,was=S.mode!=="idle";
+    if(S.raf){cancelAnimationFrame(S.raf);S.raf=0}
+    S.mode="drag";S.vel=0;S.deal=false;paint();
+    S.drag={id:e.pointerId,wedge:wedge?wedge.getAttribute("data-deck"):null,caught:was,x:e.clientX,y:e.clientY,last:pAngle(e),live:false,samples:[{t:performance.now(),a:S.angle}]};
+    if(!wedge)box.classList.add("pressed");try{box.setPointerCapture(e.pointerId)}catch(err){}
+  });
+  box.addEventListener("pointermove",e=>{const d=S.drag;if(!d||e.pointerId!==d.id)return;
+    const a=pAngle(e);let dd=a-d.last;if(dd>180)dd-=360;if(dd<-180)dd+=360;d.last=a;
+    if(!d.live){if(Math.hypot(e.clientX-d.x,e.clientY-d.y)<8)return;d.live=true;box.classList.add("pressed");clearLanding();dd=0}
+    S.angle+=dd;paint();d.samples.push({t:performance.now(),a:S.angle});if(d.samples.length>12)d.samples.shift()});
+  function endDrag(e,cancelled){const d=S.drag;if(!d||e.pointerId!==d.id)return;S.drag=null;S.mode="idle";box.classList.remove("pressed");audio();
+    if(!d.live){if(d.wedge&&!d.caught&&!cancelled)toggleLock(d.wedge);else spinDefault();return}
+    const now=performance.now(),ref=d.samples.find(s=>now-s.t<=110)||d.samples[d.samples.length-1],dt=(now-ref.t)/1000;
+    let v=dt>0.012?(S.angle-ref.a)/dt:0;if(Math.abs(v)<60)v=(S.angle-d.samples[0].a)>=0?450:-450;launch(v)}
+  box.addEventListener("pointerup",e=>endDrag(e,false));
+  box.addEventListener("pointercancel",e=>endDrag(e,true));
+  $("hub").addEventListener("click",()=>{audio();spinDefault()});
+  ring.addEventListener("keydown",e=>{if(e.key!=="Enter"&&e.key!==" ")return;const id=e.target.getAttribute&&e.target.getAttribute("data-deck");if(!id)return;e.preventDefault();toggleLock(id)});
+  function toggleLock(id){if(S.raf){cancelAnimationFrame(S.raf);S.raf=0}S.angle=Math.round(S.angle/step)*step;S.vel=0;S.mode="idle";S.deal=false;paint();
+    S.lock=S.lock?null:id;LS.set("spinlock",S.lock);buildRing();clearLanding();S.card=null;trayRest()}
+
+  /* tray */
+  const tray=$("tray");
+  function trayRest(){
+    const t=spinCount(false);
+    tray.innerHTML=`<div class="rest">
+      <h2 class="rest-title">${S.spun?"Flick again.":"Flick the spinner."}</h2>
+      <p class="rest-text">${S.lock?`Only ${esc(spinLabel(DECK[S.lock]))} for now. Tap the ring to bring the other decks back.`:S.spun?"Tap a deck on the ring to stick with it.":"It stops on a deck and hands you one card. Tap a deck on the ring to stick with it."}</p>
+      <div class="spinfoot"><span>${t} spin${t===1?"":"s"} today</span><button class="linkbtn" id="spinSound" type="button">Sound: ${S.sound?"on":"off"}</button></div>
+    </div>`;
+    $("spinSound").onclick=()=>{S.sound=!S.sound;LS.set("spinsound",S.sound);trayRest()};
+  }
+  function trayCard(){
+    const c=S.card,st=S.st,d=DECK[c.deck].meta,lang=c.lang||d.lang;
+    const chip=`<div class="nugget-top"><span class="chip" style="--chip:${d.color}">${esc(spinLabel(DECK[c.deck]))}${c.cat?" · "+esc(c.cat):""}</span>${lang&&(c.speak||c.front)?`<button class="speak" id="spinSpeak" type="button">🔊</button>`:""}</div>`;
+    let inner="";
+    if(c.type==="flip"){
+      inner=`${c.ask?`<p class="rest-text">${esc(c.ask)}</p>`:""}<h2 class="nugget-title ${String(c.front).length>28?"long":""}">${esc(c.front)}</h2>`+
+        (st.flipped?`<p class="nugget-meaning">${esc(c.back)}</p>${c.rule?`<p class="nugget-extra"><b>Rule:</b> ${esc(c.rule)}</p>`:""}${c.field?`<p class="nugget-extra"><b>Field:</b> ${esc(c.field)}</p>`:""}${c.note?`<p class="nugget-extra">${esc(c.note)}</p>`:""}
+          <div class="nugget-actions"><button class="act" id="spinMiss" type="button">Missed it</button><button class="act primary" id="spinGot" type="button">Got it</button></div>`
+        :`<div class="nugget-actions one"><button class="act primary" id="spinFlip" type="button">Show answer</button></div>`);
+    }else{
+      const done=st.answered!==null;
+      inner=`${c.setup?`<p class="nugget-extra">${esc(c.setup)}</p>`:""}<h2 class="nugget-q">${esc(c.q)}</h2>`+
+        st.order.map(i=>{let cls="opt";if(done){if(i===c.answer)cls+=" correct";else if(i===st.answered)cls+=" wrong"}
+          return `<button class="${cls}" ${done?"disabled":""} data-i="${i}" type="button">${esc(c.choices[i])}</button>`}).join("")+
+        (done?`<p class="nugget-extra"><b>${st.answered===c.answer?"Correct.":"Not quite."}</b> ${esc(c.explain||"")}</p><div class="nugget-actions one"><button class="act primary" id="spinNext" type="button">Spin again</button></div>`:"");
+    }
+    tray.innerHTML=`<div class="nugget">${chip}${inner}<p class="nugget-src">${esc(c.source||"")}</p></div>`;
+    tray.scrollTop=0;
+    const sp=$("spinSpeak");if(sp)sp.onclick=()=>speak(c.speak||c.front,lang);
+    const fl=$("spinFlip");if(fl)fl.onclick=()=>{st.flipped=true;trayCard()};
+    const gm=(ok)=>{gradeItem(c.id,ok);S.card=null;clearLanding();trayRest()};
+    const mi=$("spinMiss");if(mi)mi.onclick=()=>gm(false);
+    const go_=$("spinGot");if(go_)go_.onclick=()=>gm(true);
+    tray.querySelectorAll(".opt[data-i]").forEach(b=>b.onclick=()=>{st.answered=+b.dataset.i;gradeItem(c.id,st.answered===c.answer);trayCard()});
+    const nx=$("spinNext");if(nx)nx.onclick=()=>{audio();spinDefault()};
+  }
+
+  buildRing();paint();
+  if(prev&&prev.card&&prev.card.deck&&decks.some(d=>d.meta.id===prev.card.deck)){S.card=prev.card;S.st=prev.st;S.spun=true;trayCard()}else trayRest();
+}
+
 /* ---------------- BACKUP, RESTORE, RESET ---------------- */
 /* iOS gives each home-screen app its own storage, so progress can't always be read across installs.
    Export/import moves it by hand. Accepts pk_* (v2) or pe_* (v1) keys. */
@@ -554,7 +737,7 @@ function importProgress(){
 }
 function resetAll(){
   if(!confirm("Erase card history and lesson progress?"))return;
-  ["srs","lessons","vopt","active","field","lastFirst","session"].forEach(k=>localStorage.removeItem("pk_"+k));
+  ["srs","lessons","vopt","active","field","lastFirst","session","spins","spinlock","spinsound"].forEach(k=>localStorage.removeItem("pk_"+k));
   VOPT={tenses:["pres","pret","cmd"]};
   go({name:"home"});toast("Progress reset");
 }
