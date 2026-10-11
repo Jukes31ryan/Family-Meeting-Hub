@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <!-- BUILT FILE — do not edit. Source: patrol-kit/src + patrol-kit/decks; run `node tools/build.mjs`. -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
-<title>Patrol Kit</title>
-<meta name="description" content="Border Patrol study cards — Spanish, French, case law, statutes, first aid and more. Spaced repetition, offline, no account.">
+<title>Keepers</title>
+<meta name="description" content="Keepers: little things that matter. Border Patrol study cards — Spanish, French, case law, statutes, first aid and more. Spaced repetition, offline, no account.">
 <meta name="theme-color" content="#131C15">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Patrol Kit">
+<meta name="apple-mobile-web-app-title" content="Keepers">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
@@ -276,6 +276,19 @@ textarea.io{width:100%;min-height:140px;background:var(--bg);color:var(--ink);bo
 .act{min-height:46px;border-radius:var(--radius);border:1px solid var(--line);background:transparent;color:var(--ink);font-family:var(--disp);font-size:1.05rem;letter-spacing:.08em}
 .act.primary{background:var(--gold);border-color:var(--gold);color:#141A10}
 .tray .opt{margin:0}
+/* Home spin icon, beside Start */
+.startrow{display:flex;gap:10px;align-items:flex-start}
+.startrow .shuffle{flex:1;min-width:0}
+.spinicon{flex:none;width:80px;height:78px;border:1px solid var(--gold-deep,var(--gold));border-radius:var(--radius);background:var(--panel);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--gold);font-family:var(--disp);letter-spacing:.12em;font-size:.8rem}
+.spinicon svg{width:52px;height:52px}
+.spinicon line{stroke:var(--gold-deep);stroke-width:26;stroke-linecap:round}
+.spinicon .si-lobe{fill:var(--panel-hi);stroke:var(--gold);stroke-width:6}
+.spinicon .si-ball{fill:var(--gold)}
+.spinicon .si-hub{fill:var(--gold)}
+.si-rot{transform-origin:0 0;animation:si-turn 9s linear infinite}
+.spinicon:active .si-rot{animation-duration:.6s}
+@keyframes si-turn{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.si-rot{animation:none}}
 </style>
 </head>
 <body>

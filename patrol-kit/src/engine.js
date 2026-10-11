@@ -1,5 +1,5 @@
 /* ============================================================
-   PATROL KIT — unified study-card engine
+   KEEPERS — unified study-card engine (formerly Patrol Kit)
    Built on Patrol Español v1 (same Leitner boxes and intervals).
    Data is injected above by tools/build.mjs as:
      DECKS  [{meta, categories, cards}]   GRAMMAR  VERBS  PERSONS  FIELD
@@ -109,8 +109,8 @@ function renderHome(){
   const mastered=CARDS.filter(c=>s[c.id]&&s[c.id].box>=4).length;
   const decks=DECKS.filter(d=>d.cards.length);
   app.innerHTML=`
-  <div class="brand"><h1>PATROL <span>KIT</span></h1><div class="sub">Study Cards</div></div>
-  ${startBlock(null,`Shuffle all · ${pool.length} cards`)}
+  <div class="brand"><h1>KEEP<span>ERS</span></h1><div class="sub">Little things that matter</div></div>
+  <div class="startrow">${startBlock(null,`Shuffle all · ${pool.length} cards`)}<button class="spinicon" onclick="go({name:'spin'})" aria-label="Spin: flick the spinner for one card">${SPIN_ICON}<span>Spin</span></button></div>
   <div class="sectionlabel">Decks</div>
   <div class="decklist">
     ${decks.map(d=>{const id=d.meta.id;const on=act.includes(id);const all=deckCards(id);
@@ -119,9 +119,7 @@ function renderHome(){
         <button class="toggle" role="switch" aria-checked="${on}" aria-label="Include ${esc(d.meta.name)} in Shuffle All" onclick="toggleDeck(${A(id)})"><span class="sw"></span></button>
       </div>`}).join("")}
   </div>
-  <div class="sectionlabel">Test yourself</div>
-  <div class="shuffle"><button class="btn ghost spinbtn" onclick="go({name:'spin'})">◎ Spin<span class="sub">Flick the spinner · one card from whatever deck it lands on</span></button></div>
-  ${FIELD.length?`<div class="shuffle"><button class="btn ghost" onclick="go({name:'field'})">Field Problems<span class="sub">${Object.keys(LS.get("field",{})).length} / ${FIELD.length} run · one situation, questions from every deck</span></button></div>`:""}
+  ${FIELD.length?`<div class="sectionlabel">Test yourself</div><div class="shuffle"><button class="btn ghost" onclick="go({name:'field'})">Field Problems<span class="sub">${Object.keys(LS.get("field",{})).length} / ${FIELD.length} run · one situation, questions from every deck</span></button></div>`:""}
   <div class="stats">
     <div class="stat"><div class="n">${seen}</div><div class="l">cards seen</div></div>
     <div class="stat"><div class="n">${mastered}</div><div class="l">mastered</div></div>
@@ -516,6 +514,8 @@ function nextVerb(){const D=VDRILL;D.round++;D.answered=null;D.q=makeVerbQ();ren
    deck on the ring, and the tray hands you one card from that deck. Tap a deck on the ring to
    stick with it. Grades feed the same card history as every other mode. */
 let SPIN=null;
+/* small three-lobe spinner for the Home button */
+const SPIN_ICON=`<svg viewBox="-100 -100 200 200" aria-hidden="true"><g class="si-rot">${[-90,30,150].map(a=>{const x=(52*Math.cos(a*Math.PI/180)).toFixed(1),y=(52*Math.sin(a*Math.PI/180)).toFixed(1);return `<line x1="0" y1="0" x2="${x}" y2="${y}"/><circle class="si-lobe" cx="${x}" cy="${y}" r="26"/><circle class="si-ball" cx="${x}" cy="${y}" r="9"/>`}).join("")}<circle class="si-hub" r="20"/></g></svg>`;
 const SPIN_NS="http://www.w3.org/2000/svg";
 const spinRad=d=>d*Math.PI/180;
 const spinPt=(r,d)=>(r*Math.cos(spinRad(d))).toFixed(2)+" "+(r*Math.sin(spinRad(d))).toFixed(2);
@@ -707,13 +707,13 @@ function renderSettings(){
   </div>
   <div class="panel">
     <div class="head"><h3>Import progress</h3></div>
-    <p class="smallprint">Paste an export from Patrol Kit or Patrol Español v1. Card history and lesson progress are merged.</p>
+    <p class="smallprint">Paste an export from Keepers (Patrol Kit) or Patrol Español v1. Card history and lesson progress are merged.</p>
     <textarea class="io" id="imp" placeholder='{"pk_srs":"…"}'></textarea>
     <button class="btn small" onclick="importProgress()">Import</button>
   </div>
   <div class="panel">
     <div class="head"><h3>Reset</h3></div>
-    <p class="smallprint">${m?`v1 progress imported on ${esc(m.on)} (${m.cards} cards). `:""}Reset erases Patrol Kit card history and lesson progress on this device. Old Patrol Español data is not touched and will not be re-imported.</p>
+    <p class="smallprint">${m?`v1 progress imported on ${esc(m.on)} (${m.cards} cards). `:""}Reset erases Keepers card history and lesson progress on this device. Old Patrol Español data is not touched and will not be re-imported.</p>
     <button class="btn ghost small" onclick="resetAll()">Reset all progress</button>
   </div>`;
 }

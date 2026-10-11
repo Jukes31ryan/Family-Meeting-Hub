@@ -1,7 +1,7 @@
 {
-  "name": "Patrol Kit",
-  "short_name": "Patrol Kit",
-  "description": "Border Patrol study cards — spaced repetition, offline.",
+  "name": "Keepers",
+  "short_name": "Keepers",
+  "description": "Little things that matter. Border Patrol study cards — spaced repetition, offline.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
