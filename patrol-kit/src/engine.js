@@ -344,12 +344,19 @@ function renderDrillDone(){
 /* ---------------- FIELD PROBLEMS ---------------- */
 function renderFieldList(){
   const rec=LS.get("field",{});
-  app.innerHTML=topbar("FIELD PROBLEMS",{name:"home"})+`<p class="smallprint">Chained scenarios. Each step is graded, and a miss sends the related cards back into review in their own decks.</p>`+
+  const fresh=FIELD.filter(f=>!rec[f.id]).length;
+  app.innerHTML=topbar("FIELD PROBLEMS",{name:"home"})+`<p class="smallprint">Real situations, step by step. Each step pulls from a different deck, and a miss sends those cards back into review.</p>
+  <div class="shuffle"><button class="btn" onclick="startField(randomField())">▶ Random problem<span class="sub">${fresh?`${fresh} you haven't run yet`:`All ${FIELD.length} run · picks your weakest`}</span></button></div>`+
     FIELD.map(f=>{const r=rec[f.id];const decks=[...new Set(f.steps.map(st=>(st.ref?BYID[st.ref].deck:st.deck)))];
       return `<button class="lesson-item" onclick="startField(${A(f.id)})">
       <span class="t"><span class="name">${esc(f.title)}</span><br><span class="tag">${f.steps.length} steps · ${decks.map(d=>esc(DECK[d].meta.short||d)).join(" · ")}</span></span>
       ${r?`<span class="check">${r.best}/${f.steps.length}</span>`:""}</button>`}).join("");
 }
+/* unrun problems first; once all are run, the lowest best score */
+function randomField(){const rec=LS.get("field",{});const unrun=FIELD.filter(f=>!rec[f.id]);
+  if(unrun.length)return unrun[Math.floor(Math.random()*unrun.length)].id;
+  const ratio=f=>rec[f.id].best/f.steps.length;const low=Math.min(...FIELD.map(ratio));
+  const weak=FIELD.filter(f=>ratio(f)===low);return weak[Math.floor(Math.random()*weak.length)].id}
 function startField(id){
   const f=FIELD.find(x=>x.id===id);
   SESSION={ids:f.steps.map((st,i)=>st.ref||`${f.id}-s${i+1}`),idx:0,results:[],kind:"field",problem:f,deckId:null};
