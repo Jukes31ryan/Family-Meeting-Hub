@@ -119,7 +119,7 @@ function renderHome(){
         <button class="toggle" role="switch" aria-checked="${on}" aria-label="Include ${esc(d.meta.name)} in Shuffle All" onclick="toggleDeck(${A(id)})"><span class="sw"></span></button>
       </div>`}).join("")}
   </div>
-  ${FIELD.length?`<div class="sectionlabel">Test yourself</div><div class="shuffle"><button class="btn ghost" onclick="go({name:'field'})">Field Problems<span class="sub">${Object.keys(LS.get("field",{})).length} / ${FIELD.length} run · one situation, questions from every deck</span></button></div>`:""}
+  ${FIELD.length?`<div class="sectionlabel">Test yourself</div><div class="shuffle"><button class="btn ghost" onclick="go({name:'field'})">Field Scenarios<span class="sub">${Object.keys(LS.get("field",{})).length} / ${FIELD.length} run · one situation, questions from every deck</span></button></div>`:""}
   <div class="stats">
     <div class="stat"><div class="n">${seen}</div><div class="l">cards seen</div></div>
     <div class="stat"><div class="n">${mastered}</div><div class="l">mastered</div></div>
@@ -207,7 +207,7 @@ function sessionCard(S,i){
   const step=S.problem.steps[i];if(!step)return null;
   if(step.ref)return BYID[step.ref];
   const fed=(step.feeds||[]).map(id=>BYID[id]).filter(Boolean);
-  return{...step,id:S.ids[i],deck:step.deck||(fed[0]&&fed[0].deck),group:"",cat:"Field Problem",
+  return{...step,id:S.ids[i],deck:step.deck||(fed[0]&&fed[0].deck),group:"",cat:"Field Scenario",
     why:step.why||(fed[0]&&fed[0].why)||"",source:step.source||(fed[0]&&fed[0].source)||""};
 }
 function freshCardState(c){
@@ -237,7 +237,7 @@ function renderDrill(){
   if(S.idx>=S.ids.length){return renderDrillDone()}
   const c=sessionCard(S,S.idx);
   const dots=S.ids.length>20?`<div class="counter">${S.idx+1} / ${S.ids.length}</div>`:S.ids.map((_,i)=>`<div class="pdot ${i<S.idx?(S.results[i]===true?"done":S.results[i]===false?"miss":""):""} ${i===S.idx?"cur":""}"></div>`).join("");
-  const title=S.kind==="field"?"FIELD PROBLEM":S.kind==="review"?"REVIEW MISSED":S.deckId?DECK[S.deckId].meta.name.toUpperCase():"SHUFFLE ALL";
+  const title=S.kind==="field"?"FIELD SCENARIO":S.kind==="review"?"REVIEW MISSED":S.deckId?DECK[S.deckId].meta.name.toUpperCase():"SHUFFLE ALL";
   const step=S.kind==="field"?S.problem.steps[S.idx]:null;
   const lead=S.kind!=="field"?"":`<div class="situation">${S.idx===0?`<h3>${esc(S.problem.title)}</h3><p>${esc(S.problem.situation)}</p>`:""}${step.narrative?`<p>${esc(step.narrative)}</p>`:""}</div>`;
   const body={flip:flipHTML,mc:choiceHTML,scenario:choiceHTML,order:orderHTML}[c.type](c,S.st);
@@ -341,12 +341,12 @@ function renderDrillDone(){
   SESSION=null;
 }
 
-/* ---------------- FIELD PROBLEMS ---------------- */
+/* ---------------- FIELD SCENARIOS (data file: decks/field.js) ---------------- */
 function renderFieldList(){
   const rec=LS.get("field",{});
   const fresh=FIELD.filter(f=>!rec[f.id]).length;
-  app.innerHTML=topbar("FIELD PROBLEMS",{name:"home"})+`<p class="smallprint">Real situations, step by step. Each step pulls from a different deck, and a miss sends those cards back into review.</p>
-  <div class="shuffle"><button class="btn" onclick="startField(randomField())">▶ Random problem<span class="sub">${fresh?`${fresh} you haven't run yet`:`All ${FIELD.length} run · picks your weakest`}</span></button></div>`+
+  app.innerHTML=topbar("FIELD SCENARIOS",{name:"home"})+`<p class="smallprint">Real situations, step by step. Each step pulls from a different deck, and a miss sends those cards back into review.</p>
+  <div class="shuffle"><button class="btn" onclick="startField(randomField())">▶ Random scenario<span class="sub">${fresh?`${fresh} you haven't run yet`:`All ${FIELD.length} run · picks your weakest`}</span></button></div>`+
     FIELD.map(f=>{const r=rec[f.id];const decks=[...new Set(f.steps.map(st=>(st.ref?BYID[st.ref].deck:st.deck)))];
       return `<button class="lesson-item" onclick="startField(${A(f.id)})">
       <span class="t"><span class="name">${esc(f.title)}</span><br><span class="tag">${f.steps.length} steps · ${decks.map(d=>esc(DECK[d].meta.short||d)).join(" · ")}</span></span>
@@ -377,7 +377,7 @@ function renderFieldDone(){
   </div>
   ${fed.length?`<div class="card-list">${fed.map(c=>{const sm=cardSummary(c);return `<div class="phrase" style="${deckVar(c.deck)}"><div class="es">${esc(DECK[c.deck].meta.name)} · ${esc(c.front||c.q)}</div><div class="en">${esc(sm.b)}</div></div>`}).join("")}</div>`:""}
   <div class="btnrow" style="margin-top:12px">
-    <button class="btn ghost" onclick="go({name:'field'})">All problems</button>
+    <button class="btn ghost" onclick="go({name:'field'})">All scenarios</button>
     <button class="btn" onclick="startField(${A(f.id)})">Run it again</button>
   </div>`;
   SESSION=null;
