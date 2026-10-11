@@ -99,6 +99,16 @@ These were confirmed through secondary sources (encyclopedia, case-brief sites, 
 | `rd-sc-wilco` | ACP 125, Communications Instructions — Radiotelephone Procedures (prowords) | en.wikipedia.org |
 | `rd-sc-sayagain` | ACP 125, Communications Instructions — Radiotelephone Procedures (prowords) | en.wikipedia.org |
 | `rd-pr-why` | FEMA, NIMS Plain Language Guidance | www.alicetraining.com |
+| `rd-e-listen` | NIFC, "Tune In to Radio Discipline" (wildland fire radio guidance) | www.nifc.gov |
+| `rd-e-think` | NIFC, "Tune In to Radio Discipline" (wildland fire radio guidance) | www.nifc.gov |
+| `rd-e-brief` | NIFC, "Tune In to Radio Discipline" (wildland fire radio guidance) | www.nifc.gov |
+| `rd-e-pause` | Two-way radio training guides (common practice) | open-exam-prep.com |
+| `rd-e-voice` | Two-way radio training guides (common practice) | open-exam-prep.com |
+| `rd-e-call` | Two-way radio training guides (common practice) | open-exam-prep.com |
+| `rd-e-sensitive` | Two-way radio training guides (common practice) | open-exam-prep.com |
+| `rd-e-emergency` | NIFC, "Tune In to Radio Discipline" (wildland fire radio guidance) | www.nifc.gov |
+| `rd-e-sc-double` | NIFC, "Tune In to Radio Discipline" (wildland fire radio guidance) | www.nifc.gov |
+| `rd-e-order` | Two-way radio training guides (common practice) | open-exam-prep.com |
 | `st-1357-a4` | 8 U.S.C. § 1357(a)(4) | lawofselfdefense.com |
 | `st-1357-a5` | 8 U.S.C. § 1357(a)(5) | lawofselfdefense.com |
 | `st-1324-i` | 8 U.S.C. § 1324(a)(1)(A)(i) | law.counselstack.com |
@@ -109,6 +119,42 @@ These were confirmed through secondary sources (encyclopedia, case-brief sites, 
 | `st-sc-drugs` | 8 U.S.C. § 1357(a)(5) | lawofselfdefense.com |
 | `st-1357-e` | 8 U.S.C. § 1357(e) | uscode.house.gov |
 | `st-sc-farm-interior` | 8 U.S.C. § 1357(e) | uscode.house.gov |
+| `trk-why` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | www.originalwisdom.com |
+| `trk-pls` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | bibsok.no |
+| `trk-area` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | bibsok.no |
+| `trk-area-mc` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | bibsok.no |
+| `trk-sector-mc` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | bibsok.no |
+| `trk-cordons` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | bibsok.no |
+| `trk-random` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002); Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | www.originalwisdom.com |
+| `trk-five` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | www.originalwisdom.com |
+| `trk-flat` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | www.originalwisdom.com |
+| `trk-reg` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | www.originalwisdom.com |
+| `trk-color` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | www.originalwisdom.com |
+| `trk-dist` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | www.originalwisdom.com |
+| `trk-transfer` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | www.originalwisdom.com |
+| `trk-five-mc` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | www.originalwisdom.com |
+| `trk-sc-transfer` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | www.originalwisdom.com |
+| `trk-dew` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | www.originalwisdom.com |
+| `trk-sun` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | www.originalwisdom.com |
+| `trk-sun-mc` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | www.originalwisdom.com |
+| `trk-levels` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | bibsok.no |
+| `trk-aging` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | bibsok.no |
+| `trk-step` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | bibsok.no |
+| `trk-cutting` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | bibsok.no |
+| `trk-perimeter` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | bibsok.no |
+| `trk-tt` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011); Original Wisdom, "The Secrets of Success for Tracking: The Lost Trail Drill" | www.originalwisdom.com |
+| `trk-draw` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | www.originalwisdom.com |
+| `trk-stick` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | www.originalwisdom.com |
+| `trk-stick-use` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | www.originalwisdom.com |
+| `trk-mark` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | www.originalwisdom.com |
+| `trk-leapfrog` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | bibsok.no |
+| `trk-lost` | Original Wisdom, "The Secrets of Success for Tracking: The Lost Trail Drill"; Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | www.originalwisdom.com |
+| `trk-sc-gravel` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011); Original Wisdom, "The Secrets of Success for Tracking: The Lost Trail Drill" | www.originalwisdom.com |
+| `trk-overshoot` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | bibsok.no |
+| `trk-team` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | www.originalwisdom.com |
+| `trk-beside` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002); Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | www.originalwisdom.com |
+| `trk-contam` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | bibsok.no |
+| `trk-k9` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002); Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | www.originalwisdom.com |
 <!-- secondary:end -->
 
 ## Blocked — waiting on inputs

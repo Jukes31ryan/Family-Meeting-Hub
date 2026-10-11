@@ -217,6 +217,16 @@ Verification method (Oct 2026): web search results quoting the primary source (o
 | `rd-sc-sayagain` | ACP 125, Communications Instructions — Radiotelephone Procedures (prowords) | https://en.wikipedia.org/wiki/Procedure_word |
 | `rd-pr-plain` | FEMA, NIMS Plain Language Guidance; IS-315 (ICS common terminology) | https://emilms.fema.gov/is_0315a/groups/143.html |
 | `rd-pr-why` | FEMA, NIMS Plain Language Guidance | https://www.alicetraining.com/wp-content/uploads/2016/03/FEMA-Plain-Language-Guide.pdf |
+| `rd-e-listen` | NIFC, "Tune In to Radio Discipline" (wildland fire radio guidance) | https://www.nifc.gov/sites/default/files/pio/documents/TuneIntoRadioDiscipline.doc |
+| `rd-e-think` | NIFC, "Tune In to Radio Discipline" (wildland fire radio guidance) | https://www.nifc.gov/sites/default/files/pio/documents/TuneIntoRadioDiscipline.doc |
+| `rd-e-brief` | NIFC, "Tune In to Radio Discipline" (wildland fire radio guidance) | https://www.nifc.gov/sites/default/files/pio/documents/TuneIntoRadioDiscipline.doc |
+| `rd-e-pause` | Two-way radio training guides (common practice) | https://open-exam-prep.com/study-guides/dc-security-guard/communications-customer-service/radio-procedures-report-writing |
+| `rd-e-voice` | Two-way radio training guides (common practice) | https://open-exam-prep.com/study-guides/dc-security-guard/communications-customer-service/radio-procedures-report-writing |
+| `rd-e-call` | Two-way radio training guides (common practice) | https://open-exam-prep.com/study-guides/dc-security-guard/communications-customer-service/radio-procedures-report-writing |
+| `rd-e-sensitive` | Two-way radio training guides (common practice) | https://open-exam-prep.com/study-guides/dc-security-guard/communications-customer-service/radio-procedures-report-writing |
+| `rd-e-emergency` | NIFC, "Tune In to Radio Discipline" (wildland fire radio guidance) | https://www.nifc.gov/sites/default/files/pio/documents/TuneIntoRadioDiscipline.doc |
+| `rd-e-sc-double` | NIFC, "Tune In to Radio Discipline" (wildland fire radio guidance) | https://www.nifc.gov/sites/default/files/pio/documents/TuneIntoRadioDiscipline.doc |
+| `rd-e-order` | Two-way radio training guides (common practice) | https://open-exam-prep.com/study-guides/dc-security-guard/communications-customer-service/radio-procedures-report-writing |
 
 ## Statutes & Authority
 
@@ -262,3 +272,44 @@ Verification method (Oct 2026): web search results quoting the primary source (o
 | `st-sc-false-name` | 18 U.S.C. § 1001(a) | https://www.law.cornell.edu/uscode/text/18/1001 |
 | `st-sc-fake-card` | 18 U.S.C. § 1546(a) | https://www.govinfo.gov/content/pkg/USCODE-2023-title18/html/USCODE-2023-title18-partI-chap75-sec1546.htm |
 | `st-sc-fear` | 8 U.S.C. § 1225(b)(1)(A) | https://www.law.cornell.edu/uscode/text/8/lii:usc:t:8:s:1225:b |
+
+## Tracking
+
+| Card | Source | Checked against |
+|---|---|---|
+| `trk-why` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-pls` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | https://bibsok.no/?tnr=387081 |
+| `trk-area` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | https://bibsok.no/?tnr=387081 |
+| `trk-area-mc` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | https://bibsok.no/?tnr=387081 |
+| `trk-sector-mc` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | https://bibsok.no/?tnr=387081 |
+| `trk-cordons` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | https://bibsok.no/?tnr=387081 |
+| `trk-random` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002); Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-five` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-flat` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-reg` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-color` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-dist` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-transfer` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-five-mc` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-sc-transfer` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-dew` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-sun` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-sun-mc` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-levels` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | https://bibsok.no/?tnr=387081 |
+| `trk-aging` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | https://bibsok.no/?tnr=387081 |
+| `trk-step` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | https://bibsok.no/?tnr=387081 |
+| `trk-cutting` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | https://bibsok.no/?tnr=387081 |
+| `trk-perimeter` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | https://bibsok.no/?tnr=387081 |
+| `trk-tt` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011); Original Wisdom, "The Secrets of Success for Tracking: The Lost Trail Drill" | https://www.originalwisdom.com/the-secrets-of-success-for-tracking-the-lost-trail-drill/ |
+| `trk-draw` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-stick` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-stick-use` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-mark` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-leapfrog` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | https://bibsok.no/?tnr=387081 |
+| `trk-lost` | Original Wisdom, "The Secrets of Success for Tracking: The Lost Trail Drill"; Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/the-secrets-of-success-for-tracking-the-lost-trail-drill/ |
+| `trk-sc-gravel` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011); Original Wisdom, "The Secrets of Success for Tracking: The Lost Trail Drill" | https://www.originalwisdom.com/the-secrets-of-success-for-tracking-the-lost-trail-drill/ |
+| `trk-overshoot` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | https://bibsok.no/?tnr=387081 |
+| `trk-team` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-beside` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002); Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
+| `trk-contam` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | https://bibsok.no/?tnr=387081 |
+| `trk-k9` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002); Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2011) | https://www.originalwisdom.com/wp-content/uploads/bsk-pdf-manager/2019/03/Dubay-and-Batchelder_US-border-patrol-workshop.pdf |
