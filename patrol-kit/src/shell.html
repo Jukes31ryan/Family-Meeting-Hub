@@ -227,6 +227,55 @@ textarea.io{width:100%;min-height:140px;background:var(--bg);color:var(--ink);bo
 .situation h3{font-family:var(--disp);font-weight:400;letter-spacing:.1em;color:var(--gold);font-size:1.1rem;margin-bottom:6px;text-transform:uppercase}
 .situation p+p{margin-top:6px}
 .smallprint{font-size:.78rem;color:var(--muted);line-height:1.5;margin-bottom:12px}
+/* ---- Spin (fidget-spinner picker) ---- */
+.spinstage{display:grid;place-items:center;margin:4px 0 12px}
+.wheel-box{position:relative;width:min(100%,46vh,420px);aspect-ratio:1;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab}
+.wheel-box.pressed{cursor:grabbing}
+.wheel{display:block;width:100%;height:100%;overflow:visible}
+.wedge{cursor:pointer;outline:none;transition:opacity .25s,transform .3s cubic-bezier(.3,1.7,.5,1)}
+.wedge:focus-visible{stroke:var(--ink);stroke-width:5}
+.landed .wedge{opacity:.35}
+.landed .wedge.lit{opacity:1;transform:scale(1.035)}
+.wedge-label{font-family:var(--disp);font-size:19px;letter-spacing:.06em;fill:#10160F;pointer-events:none;transition:opacity .25s,transform .3s cubic-bezier(.3,1.7,.5,1)}
+.wedge-label.small{font-size:15px;letter-spacing:.02em}
+.landed .wedge-label{opacity:.45}
+.landed .wedge-label.lit{opacity:1;transform:scale(1.035)}
+.shadow-wrap{transform:translate(0,9px);opacity:.4;transition:transform .16s ease-out}
+.body-shadow line{stroke:#000}.body-shadow circle{fill:#000}
+.press-wrap{transition:transform .2s cubic-bezier(.3,1.8,.5,1)}
+.pressed .shadow-wrap{transform:translate(0,3px)}
+.pressed .press-wrap{transform:scale(.965)}
+.body-edge line{stroke:var(--line)}.body-edge circle{fill:var(--line)}
+.body-fill line{stroke:var(--panel-hi)}.body-fill circle{fill:var(--panel-hi)}
+.race{fill:var(--bg);stroke:var(--muted);stroke-width:5}
+.ball{fill:var(--muted)}
+.race.marked{stroke:var(--gold)}.ball.marked{fill:var(--gold)}
+.pointer{fill:var(--gold)}
+.hub{position:absolute;left:50%;top:50%;width:20%;aspect-ratio:1;transform:translate(-50%,-50%);padding:0;border:0;border-radius:50%;background:var(--gold);color:#141A10;font-family:var(--disp);font-size:clamp(.9rem,4.5vw,1.25rem);letter-spacing:.08em;transition:transform .2s cubic-bezier(.3,1.8,.5,1)}
+.hub:active,.pressed .hub{transform:translate(-50%,-50%) scale(.94)}
+.tray{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px;min-height:12rem;margin-bottom:16px}
+.tray .rest,.tray .nugget{display:flex;flex-direction:column;gap:8px}
+.tray .nugget{animation:arrive .28s cubic-bezier(.2,.8,.2,1)}
+@keyframes arrive{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.rest-title{font-family:var(--disp);font-weight:400;letter-spacing:.06em;font-size:1.6rem;line-height:1.1}
+.rest-text{color:var(--muted);font-size:.92rem;margin:0}
+.spinfoot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:8px;margin-top:6px;font-size:.85rem;color:var(--muted)}
+.spinfoot .linkbtn{margin:0;padding:4px 0}
+.nugget-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.chip{padding:3px 10px;border-radius:999px;background:var(--chip);color:#10160F;font-family:var(--disp);font-size:.8rem;letter-spacing:.08em}
+.nugget-top .speak{margin:0}
+.nugget-title{font-size:1.6rem;font-weight:700;line-height:1.15;overflow-wrap:anywhere}
+.nugget-title.long{font-size:1.2rem}
+.nugget-q{font-size:1.05rem;font-weight:600;line-height:1.35}
+.nugget-meaning{font-size:1.02rem;line-height:1.45;margin:0}
+.nugget-extra{color:var(--muted);font-size:.88rem;line-height:1.45;margin:0}
+.nugget-extra b{color:var(--ink)}
+.nugget-src{color:var(--muted);font-size:.72rem;margin:4px 0 0;opacity:.8}
+.nugget-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+.nugget-actions.one{grid-template-columns:1fr}
+.act{min-height:46px;border-radius:var(--radius);border:1px solid var(--line);background:transparent;color:var(--ink);font-family:var(--disp);font-size:1.05rem;letter-spacing:.08em}
+.act.primary{background:var(--gold);border-color:var(--gold);color:#141A10}
+.tray .opt{margin:0}
 </style>
 </head>
 <body>
