@@ -1,4 +1,6 @@
-# Patrol Kit
+# Keepers
+
+Little things that matter.
 
 Border Patrol study cards: one spaced-repetition engine, many decks. Mobile-first PWA, works offline, progress stays in the browser (localStorage). Public-source material only.
 

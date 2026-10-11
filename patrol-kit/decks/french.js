@@ -4,7 +4,7 @@
 export default {
   meta: { id:"french", name:"French", short:"FR", color:"#5B8FC9", lang:"fr-CA", order:2,
     blurb:"Field French for the Québec line: commands, status questions, medical, and Québécois usage.",
-    source:"Patrol Kit French deck: standard French field phrases written for this app",
+    source:"Keepers French deck: standard French field phrases written for this app",
     subModes:["browse"] },
   categories: {
     "Greetings & Courtesy":   { why:"A polite Bonjour sets the tone, and in Québec it's expected." },
