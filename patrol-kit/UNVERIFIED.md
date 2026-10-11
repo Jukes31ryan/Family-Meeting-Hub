@@ -6,9 +6,9 @@ Updated each batch. Nothing in this file is on a card unless listed under "Carde
 
 | Item | Why it's out |
 |---|---|
-| CBP policy: warning shots | Sources disagreed on whether the wording is CBP's 2021 policy or DHS-wide. |
-| CBP policy: shooting at / from moving vehicles; standing in a vehicle's path | Search summaries mixed CBP text with other agencies' policies. Needs the primary PDF. |
-| CBP emergency driving / vehicle pursuit directive | Only a redacted copy surfaced. Not read. |
+| CBP policy: warning-shot exception details | General warning-shot cards are now carded from search excerpts of the policy PDF; the exception wording itself wasn't confirmed. |
+| CBP 2021 policy: exact moving-vehicle rule | Vehicle cards now use the DHS directive and the Dec. 2025 CBP pursuit directive; CBP's own 2021 wording wasn't confirmed. |
+| 2023 CBP pursuit directive details | Rescinded Jan. 2025; only the Dec. 2025 directive (4510-026B) is carded. |
 | Post-force reporting steps and timelines | Agency directive, not public in verifiable form. |
 | Current status of DHS Policy 044-05 Rev. 01 (Feb. 2023) after 2025 | A 2026 bill asks DHS to "reinstate" it; no public rescission notice found. DHS cards carry a status flag. |
 | CBP officer designation of Border Patrol agents under 19 U.S.C. | Not confirmed. Removed from the § 1581 card. |
@@ -17,17 +17,25 @@ Updated each batch. Nothing in this file is on a card unless listed under "Carde
 | United States v. Alisigwe reporter cite | Too new; carded by docket no. 24-960 and date. |
 | Noem v. Vasquez Perdomo (2025) | Emergency-docket stay, not a merits decision. Not carded. |
 | Miranda warnings in Spanish / French | Needs an authoritative published translation (agency form text). Not carded. |
-| 18 U.S.C. § 911 (false claim to U.S. citizenship) | Not researched. Mentioned only generically on the § 1001 card. |
 | Vehicle inventory searches (Colorado v. Bertine, etc.) | Not researched. Removed from the Gant card. |
 | Payton v. New York (home entry) | Not researched. Not carded. |
 | Jimeno: locked containers inside a consented vehicle | The card says forcing a locked case is "likely" beyond general consent. The Court's language on this wasn't in the search excerpt. Re-check. |
 | Deliberate offset figure | One source says 17.8 m per degree per km. The card uses the geometric value (tan 1° × 1,000 m ≈ 17.5 m). |
 | Québec: « fin de semaine » vs « week-end », « courriel » | OQLF entries didn't surface in search. Not carded. |
-| Québec slang « le dep », « c'est correct », « pantoute », « icitte » | No citable source found. Not carded. |
+| Québec slang « le dep », « c'est correct », « icitte », « jaser », « niaiser » | No OQLF or dictionary entry found (icitte: English Wiktionary only). Not carded. « pantoute » is now carded with a source. |
+| Québec « bas » for socks | No OQLF entry; one source suggests stockings. Cards use « chaussettes ». |
+| Mexican « calcetas » for socks | Forum posts only. Cards use « calcetines ». |
 | Land nav: pace definition (which foot is counted), terrain association method | Not confirmed in TC 3-25.26 excerpts. Not carded. |
-| Radio: transmission technique (key, pause, speak), radio checks | No verified public source this batch. Not carded. |
+| Radio: READ BACK proword | Only an uncited Wikipedia line. Not carded. |
+| Taser / OC limits (water, height, restrained or vulnerable people); passive vs active resistance definitions; CBP one-hour deadly-force reporting | CBP policy text not confirmed. Not carded. |
+| 8 C.F.R. 287.8(a) warning before deadly force | Not in the regulation (that language is DOJ/Treasury policy). Not carded. |
+| City of Tahlequah v. Bond; Rivas-Villegas v. Cortesluna | Not verified this batch. Not carded. |
+| Oregon v. Elstad, J.D.B., Howes v. Fields, FTCA § 2680(h), Westfall Act | Not researched this batch. |
+| 8 U.S.C. § 1324(a)(2)(B) penalty ranges | Not confirmed. Card gives (A) and says (B) raises it. |
 
 ## Carded, re-check against primary text
+
+French « chu » is carded with a secondary-source flag (Wiktionnaire only). *United States v. FNU LNU* (2d Cir. 2011) and *Zorn v. Linton* (2026) were confirmed through secondary coverage; read the opinions.
 
 These were confirmed through secondary sources (encyclopedia, case-brief sites, law-firm blogs) that agree with each other. Re-check against the opinion or Code text when direct access is available.
 
@@ -51,10 +59,23 @@ These were confirmed through secondary sources (encyclopedia, case-brief sites, 
 | `cl-sc-avoid` | United States v. Compton, 830 F.3d 55 (2d Cir. 2016) | case-law.vlex.com |
 | `cl-gant` | Arizona v. Gant, 556 U.S. 332 (2009) | case-law.vlex.com |
 | `cl-sc-gant` | Arizona v. Gant, 556 U.S. 332 (2009) | case-law.vlex.com |
+| `cl-quarles` | New York v. Quarles, 467 U.S. 649 (1984) | openbooks.lib.msu.edu |
+| `cl-fnu-lnu` | United States v. FNU LNU, 653 F.3d 144 (2d Cir. 2011) | caselaw.findlaw.com |
+| `cl-sc-gun-where` | New York v. Quarles, 467 U.S. 649 (1984) | openbooks.lib.msu.edu |
+| `cl-sc-secondary` | United States v. FNU LNU, 653 F.3d 144 (2d Cir. 2011) | caselaw.findlaw.com |
 | `uf-barnes` | Barnes v. Felix, 605 U.S. 73 (2025) | en.wikipedia.org |
+| `uf-mendez` | County of Los Angeles v. Mendez, 581 U.S. 420 (2017) | en.wikipedia.org |
+| `uf-tracy` | Tracy v. Freshwater, 623 F.3d 90 (2d Cir. 2010) | caselaw.findlaw.com |
 | `uf-cbp-escape` | CBP Use of Force Policy, HB 4500-002A (Jan. 2021); DHS Policy Statement 044-05 | www.justsecurity.org |
+| `fr-h-frette` | Usito (Université de Sherbrooke): frette (avoir frette, il fait frette) | usito.usherbrooke.ca |
+| `fr-h-pantoute` | Le Robert: pantoute (Canada, familier) | dictionnaire.lerobert.com |
+| `fr-h-tantot` | Usito (Université de Sherbrooke): tantôt [Québec] | usito.usherbrooke.ca |
+| `fr-h-pis-ben` | Usito (Université de Sherbrooke): G. Dostie, « Les marqueurs discursifs » | usito.usherbrooke.ca |
+| `fr-h-chu` | Wiktionnaire: chu (Canada, familier) | fr.wiktionary.org |
 | `fr-q-chum` | Québec City tourism glossary: 100 expressions québécoises | www.quebec-cite.com |
 | `fr-q-ramq` | Immigrant Québec: carte d'assurance maladie (RAMQ) | immigrantquebec.com |
+| `fr-w8` | CDC, Preventing Hypothermia (first aid) | www.cdc.gov |
+| `fr-w12` | CDC, Preventing Hypothermia (warning signs) | www.cdc.gov |
 | `ln-azimuth` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | en.wikipedia.org |
 | `ln-norths` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | maptools.com |
 | `ln-norths-mc` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | maptools.com |
@@ -86,6 +107,20 @@ These were confirmed through secondary sources (encyclopedia, case-brief sites, 
 | `ln-t-spur` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | www.land-navigation.com |
 | `ln-t-cliff` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | www.land-navigation.com |
 | `ln-slope-mc` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | alanwood.co.uk |
+| `ln-m-margin` | TC 3-25.26, ch. 3 (marginal information and symbols) | www.uakron.edu |
+| `ln-m-legend` | TC 3-25.26, ch. 3 (marginal information and symbols) | www.uakron.edu |
+| `ln-m-colors` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | www.uakron.edu |
+| `ln-m-contour` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | alanwood.co.uk |
+| `ln-m-interval` | TC 3-25.26, ch. 3 (marginal information and symbols) | www.scribd.com |
+| `ln-p-pace` | Orienteering technique (common land-navigation usage; not TC 3-25.26 wording) | www.baoc.org |
+| `ln-p-course` | Orienteering technique (common land-navigation usage; not TC 3-25.26 wording) | sofrep.com |
+| `ln-p-beads` | Pace count beads (common military land-navigation practice) | en.wikipedia.org |
+| `ln-p-eye` | Unit-of-measure range estimation (military training) | digital.jmpublishing.ie |
+| `ln-p-eye-mc` | Unit-of-measure range estimation (military training) | digital.jmpublishing.ie |
+| `ln-c-parts` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | www.scribd.com |
+| `ln-c-level` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | fieldandstream.com |
+| `ln-c-steer` | Orienteering technique (common land-navigation usage; not TC 3-25.26 wording) | strands.cacadets.org |
+| `ln-c-metal` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | strands.cacadets.org |
 | `rd-p-roger` | ACP 125, Communications Instructions — Radiotelephone Procedures (prowords) | en.wikipedia.org |
 | `rd-p-wilco` | ACP 125, Communications Instructions — Radiotelephone Procedures (prowords) | en.wikipedia.org |
 | `rd-p-say-again` | ACP 125, Communications Instructions — Radiotelephone Procedures (prowords) | en.wikipedia.org |
@@ -99,6 +134,9 @@ These were confirmed through secondary sources (encyclopedia, case-brief sites, 
 | `rd-sc-wilco` | ACP 125, Communications Instructions — Radiotelephone Procedures (prowords) | en.wikipedia.org |
 | `rd-sc-sayagain` | ACP 125, Communications Instructions — Radiotelephone Procedures (prowords) | en.wikipedia.org |
 | `rd-pr-why` | FEMA, NIMS Plain Language Guidance | www.alicetraining.com |
+| `rd-pr-radiocheck` | ACP 125, Communications Instructions — Radiotelephone Procedures (signal strength and readability) | en.wikipedia.org |
+| `rd-pr-report` | ACP 125, Communications Instructions — Radiotelephone Procedures (signal strength and readability) | en.wikipedia.org |
+| `rd-pr-spell` | U.S. Coast Guard Radiotelephone Handbook (I SPELL), via San Francisco ACS phonetics guide | sf.gov |
 | `rd-e-listen` | NIFC, "Tune In to Radio Discipline" (wildland fire radio guidance) | www.nifc.gov |
 | `rd-e-think` | NIFC, "Tune In to Radio Discipline" (wildland fire radio guidance) | www.nifc.gov |
 | `rd-e-brief` | NIFC, "Tune In to Radio Discipline" (wildland fire radio guidance) | www.nifc.gov |
@@ -109,6 +147,9 @@ These were confirmed through secondary sources (encyclopedia, case-brief sites, 
 | `rd-e-emergency` | NIFC, "Tune In to Radio Discipline" (wildland fire radio guidance) | www.nifc.gov |
 | `rd-e-sc-double` | NIFC, "Tune In to Radio Discipline" (wildland fire radio guidance) | www.nifc.gov |
 | `rd-e-order` | Two-way radio training guides (common practice) | open-exam-prep.com |
+| `es-w9` | CDC, Preventing Hypothermia (first aid) | www.cdc.gov |
+| `es-w13` | CDC, Preventing Hypothermia (warning signs) | www.cdc.gov |
+| `es-w14` | CDC, Preventing Frostbite (first aid) | www.cdc.gov |
 | `st-1357-a4` | 8 U.S.C. § 1357(a)(4) | lawofselfdefense.com |
 | `st-1357-a5` | 8 U.S.C. § 1357(a)(5) | lawofselfdefense.com |
 | `st-1324-i` | 8 U.S.C. § 1324(a)(1)(A)(i) | law.counselstack.com |
@@ -119,6 +160,15 @@ These were confirmed through secondary sources (encyclopedia, case-brief sites, 
 | `st-sc-drugs` | 8 U.S.C. § 1357(a)(5) | lawofselfdefense.com |
 | `st-1357-e` | 8 U.S.C. § 1357(e) | uscode.house.gov |
 | `st-sc-farm-interior` | 8 U.S.C. § 1357(e) | uscode.house.gov |
+| `st-1401i` | 19 U.S.C. § 1401(i) | definitions.uslegal.com |
+| `st-1595a` | 19 U.S.C. § 1595a(a)–(c) | law.counselstack.com |
+| `st-2873-d` | 8 C.F.R. § 287.3(d) | syfert.com |
+| `st-2878-c2ii` | 8 C.F.R. § 287.8(c)(2)(ii) | www.aclu-co.org |
+| `st-2878-c2vii` | 8 C.F.R. § 287.8(c)(2)(vii) | www.ecfr.gov |
+| `st-2878-f2` | 8 C.F.R. § 287.8(f)(2), (f)(4) | agworkforce.cals.cornell.edu |
+| `st-1324-a2` | 8 U.S.C. § 1324(a)(2) | www.justice.gov |
+| `st-18-545` | 18 U.S.C. § 545 | www.casemine.com |
+| `st-sc-goods-vehicle` | 19 U.S.C. § 1595a(a) | law.counselstack.com |
 | `trk-why` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | www.originalwisdom.com |
 | `trk-pls` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | bibsok.no |
 | `trk-area` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | bibsok.no |
@@ -220,6 +270,12 @@ These were confirmed through secondary sources (encyclopedia, case-brief sites, 
 | `trk-cut-where` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 51 | bibsok.no |
 | `trk-cross-contam` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 55 | bibsok.no |
 | `trk-devices` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 54 | bibsok.no |
+| `trk-lost-stop` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 31 | bibsok.no |
+| `trk-lost-back-mc` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 31 | bibsok.no |
+| `trk-lost-confirm` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 30, 32 | bibsok.no |
+| `trk-lost-retry` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 32 | bibsok.no |
+| `trk-lost-why` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 11, 30 | bibsok.no |
+| `trk-lost-dog` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 32 | bibsok.no |
 <!-- secondary:end -->
 
 ## Blocked — waiting on inputs
