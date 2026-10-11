@@ -204,7 +204,6 @@ These were confirmed through secondary sources (encyclopedia, case-brief sites, 
 | `trk-team` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002) | www.originalwisdom.com |
 | `trk-beside` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002); Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | www.originalwisdom.com |
 | `trk-contam` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | bibsok.no |
-| `trk-k9` | Mantracking workshop notes, U.S. Border Patrol tracking workshop (N.E. K-9 SAR, 2002); Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing) | www.originalwisdom.com |
 | `trk-sun-dir-mc` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 17–18 | bibsok.no |
 | `trk-flagging` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 68 | bibsok.no |
 | `trk-shine` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 68 | bibsok.no |
@@ -219,7 +218,6 @@ These were confirmed through secondary sources (encyclopedia, case-brief sites, 
 | `trk-leftright` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 22–23 | bibsok.no |
 | `trk-partial` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 22–26 | bibsok.no |
 | `trk-count-mc` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 27 | bibsok.no |
-| `trk-cover` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 28 | bibsok.no |
 | `trk-start` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 30 | bibsok.no |
 | `trk-gate` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 30–31 | bibsok.no |
 | `trk-deadzone` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 31 | bibsok.no |
@@ -232,20 +230,13 @@ These were confirmed through secondary sources (encyclopedia, case-brief sites, 
 | `trk-park` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 34, 48 | bibsok.no |
 | `trk-entry-sc` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 34, 44 | bibsok.no |
 | `trk-outside` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 34, 48 | bibsok.no |
-| `trk-timeofday` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 34 | bibsok.no |
-| `trk-locard` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 54 | bibsok.no |
-| `trk-evidence-bag` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 56–58 | bibsok.no |
 | `trk-first2` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 14 | bibsok.no |
 | `trk-double` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 15 | bibsok.no |
 | `trk-sector4` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 15 | bibsok.no |
 | `trk-cordon-mc` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 16 | bibsok.no |
 | `trk-speed-light` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 15 | bibsok.no |
 | `trk-speed-bush` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 15 | bibsok.no |
-| `trk-speed-veh` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 15 | bibsok.no |
 | `trk-speed-sign` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 15 | bibsok.no |
-| `trk-lpb-mc` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 16 | bibsok.no |
-| `trk-profile` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 16 | bibsok.no |
-| `trk-tech` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 7 | bibsok.no |
 | `trk-senses` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 6 | bibsok.no |
 | `trk-aging-train` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 12 | bibsok.no |
 | `trk-scat` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 38 | bibsok.no |
@@ -255,27 +246,18 @@ These were confirmed through secondary sources (encyclopedia, case-brief sites, 
 | `trk-protect-print` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 22–23 | bibsok.no |
 | `trk-angle` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 22–23 | bibsok.no |
 | `trk-first3` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 32 | bibsok.no |
-| `trk-interview` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 30 | bibsok.no |
 | `trk-oldscene` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 31 | bibsok.no |
-| `trk-k9-tt` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 31 | bibsok.no |
 | `trk-perp` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 32 | bibsok.no |
-| `trk-lostkids` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 30 | bibsok.no |
-| `trk-initiative` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 32 | bibsok.no |
-| `trk-y` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 32 | bibsok.no |
 | `trk-routes` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 32 | bibsok.no |
 | `trk-scene-detail` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 36 | bibsok.no |
 | `trk-scene-check` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 50 | bibsok.no |
 | `trk-scene-keep` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 34 | bibsok.no |
-| `trk-camp` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 36–38 | bibsok.no |
 | `trk-cut-where` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 51 | bibsok.no |
-| `trk-cross-contam` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 55 | bibsok.no |
-| `trk-devices` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 54 | bibsok.no |
 | `trk-lost-stop` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 31 | bibsok.no |
 | `trk-lost-back-mc` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 31 | bibsok.no |
 | `trk-lost-confirm` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 30, 32 | bibsok.no |
 | `trk-lost-retry` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 32 | bibsok.no |
 | `trk-lost-why` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 11, 30 | bibsok.no |
-| `trk-lost-dog` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 32 | bibsok.no |
 <!-- secondary:end -->
 
 ## Blocked — waiting on inputs
