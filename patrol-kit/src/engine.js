@@ -112,7 +112,7 @@ function renderHome(){
   const decks=DECKS.filter(d=>d.cards.length);
   app.innerHTML=`
   <div class="brand"><h1>KEEP<span>ERS</span></h1><div class="sub">Little things that matter</div></div>
-  <div class="startrow">${startBlock(null,`Shuffle all · ${pool.length} cards`)}<button class="spinicon" onclick="go({name:'spin'})" aria-label="Spin: flick the spinner for one card">${SPIN_ICON}<span>Spin</span></button></div>
+  <div class="startrow">${startBlock(null,`Shuffle all · ${pool.length} cards`)}<button class="spinicon" onclick="go({name:'spin'})" aria-label="Spin for one card">${SPIN_ICON}<span>Spin</span></button></div>
   <div class="sectionlabel">Decks</div>
   <div class="decklist">
     ${decks.map(d=>{const id=d.meta.id;const on=act.includes(id);const all=deckCards(id);
@@ -664,7 +664,7 @@ function spinInit(decks){
   function trayRest(){
     const t=spinCount(false);
     tray.innerHTML=`<div class="rest">
-      <h2 class="rest-title">${S.spun?"Spin again.":"Flick the spinner."}</h2>
+      <h2 class="rest-title">${S.spun?"Spin again.":"Spin."}</h2>
       <p class="rest-text">${S.lock?`Only ${esc(spinLabel(DECK[S.lock]))} for now. Tap the ring to bring the other decks back.`:S.spun?"Tap a deck on the ring to stick with it.":"It stops on a deck and hands you one card. Tap a deck on the ring to stick with it."}</p>
       <div class="spinfoot"><span>${t} spin${t===1?"":"s"} today</span><button class="linkbtn" id="spinSound" type="button">Sound: ${S.sound?"on":"off"}</button></div>
     </div>`;

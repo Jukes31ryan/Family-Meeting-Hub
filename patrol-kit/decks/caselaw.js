@@ -3,7 +3,7 @@
 // binding: "SCOTUS" and "2d Cir." bind in Vermont; anything else is "persuasive (Nth Cir.)".
 // Field lines restate the holding as it applies on the road — they add no rules of their own.
 export default {
-  meta: { id:"caselaw", name:"Case Law", short:"LAW", color:"#7FA3C8", order:3, requireVerified:true,
+  meta: { id:"caselaw", name:"Case Law", short:"LAW", color:"#9DB39A", order:3, requireVerified:true,
     blurb:"Core Supreme Court and Second Circuit cases. Vermont sits in the 2d Circuit.",
     subModes:["browse"] },
   categories: {

@@ -2,7 +2,7 @@
 // Text checked against the URL in `verified` (see VERIFICATION.md). Quotes are verbatim; paraphrase is marked.
 // Penalties are carded only where the statute's text was confirmed.
 export default {
-  meta: { id:"statutes", reverseFlip:true, reverseAsk:"Which statute or regulation is this?", name:"Statutes & Authority", short:"USC", color:"#6FB3A8", order:4, requireVerified:true,
+  meta: { id:"statutes", reverseFlip:true, reverseAsk:"Which statute or regulation is this?", name:"Statutes & Authority", short:"USC", color:"#C79E7A", order:4, requireVerified:true,
     blurb:"Where your authority comes from: 8 U.S.C. § 1357, 8 C.F.R. 287, and the crimes you charge.",
     subModes:["browse"] },
   categories: {
@@ -83,8 +83,8 @@ export default {
     why:"The reentry felony. Prior removal is the key fact to confirm.",
     source:"8 U.S.C. § 1326(a)", verified:"https://www.law.cornell.edu/uscode/text/8/1326" },
   { id:"st-1326b", type:"mc", cat:"Offenses", binding:"statute",
-    q:"Under § 1326(b), what is the maximum sentence for reentry after removal that followed an aggravated-felony conviction?",
-    choices:["2 years","10 years","20 years","Life"],
+    q:"Reentry after removal that followed an aggravated-felony conviction: up to 20 years. Which provision?",
+    choices:["8 U.S.C. § 1325(a)","8 U.S.C. § 1326(a)","8 U.S.C. § 1326(b)(2)","8 U.S.C. § 1324(a)(2)"],
     answer:2, explain:"(b)(2): aggravated felony = up to 20 years. (b)(1): three or more drug or person misdemeanors, or a non-aggravated felony = up to 10 years. Base (a) = 2 years.",
     why:"Criminal history drives the charge. Run it every time.",
     source:"8 U.S.C. § 1326(b)", verified:"https://www.law.cornell.edu/uscode/text/8/1326" },
@@ -122,9 +122,9 @@ export default {
   // ---------------- Which Authority? ----------------
   { id:"st-sc-land", type:"scenario", cat:"Which Authority?",
     setup:"Following foot sign across a farm field 10 miles from the boundary. There's a house and a barn on the property. The owner isn't around.",
-    q:"What does § 1357(a)(3) allow?",
-    choices:["Enter the fields and the house","Enter the private land to patrol, but not the dwelling","Nothing without the owner's consent","Only with a warrant"],
-    answer:1, explain:"Within 25 miles: access to private lands, but not dwellings, to patrol the border.",
+    q:"Which authority lets you enter that private land to patrol the border, but not the dwelling?",
+    choices:["8 U.S.C. § 1357(e)","8 U.S.C. § 1357(a)(3)","8 U.S.C. § 1357(c)","19 U.S.C. § 1581(a)"],
+    answer:1, explain:"§ 1357(a)(3). Within 25 miles: access to private lands, but not dwellings, to patrol the border.",
     source:"8 U.S.C. § 1357(a)(3)", verified:"https://www.govinfo.gov/link/statute/66/26" },
   { id:"st-sc-distance", type:"scenario", cat:"Which Authority?",
     setup:"You're 60 air miles from the boundary and want to stop a vehicle on roving patrol.",
@@ -219,9 +219,9 @@ export default {
     source:"18 U.S.C. § 1546(a)", verified:"https://www.govinfo.gov/content/pkg/USCODE-2023-title18/html/USCODE-2023-title18-partI-chap75-sec1546.htm" },
   { id:"st-sc-fear", type:"scenario", cat:"Which Authority?",
     setup:"An arriving subject with no valid documents tells you they're afraid to go back to their country.",
-    q:"Under § 1225(b)(1), what follows if expedited removal is in play?",
-    choices:["Removal without further review","Referral for an asylum-officer interview","Release","Prosecution under § 1326"],
-    answer:1, explain:"An expressed fear or asylum intent means referral to an asylum officer, not summary removal.",
+    q:"In expedited removal, which statute requires referring them to an asylum officer instead of removing them?",
+    choices:["8 U.S.C. § 1326(a)","8 U.S.C. § 1357(a)(2)","8 U.S.C. § 1225(b)(1)(A)","8 U.S.C. § 1182(a)(6)(A)(i)"],
+    answer:2, explain:"§ 1225(b)(1)(A). An expressed fear or asylum intent means referral to an asylum officer, not summary removal.",
     source:"8 U.S.C. § 1225(b)(1)(A)", verified:"https://www.law.cornell.edu/uscode/text/8/lii:usc:t:8:s:1225:b" },
   // ---------------- batch 4 ----------------
   // Customs
@@ -266,9 +266,9 @@ export default {
     why:"Processing has its own rules. Know who may do the examination.",
     source:"8 C.F.R. § 287.3(a)", verified:"https://www.law.cornell.edu/cfr/text/8/287.3" },
   { id:"st-2873-d", type:"mc", cat:"Regulations — 8 CFR 287", binding:"regulation",
-    q:"After a warrantless arrest, how soon does 8 C.F.R. 287.3(d) require a custody determination (absent voluntary departure)?",
-    choices:["24 hours","48 hours, or an additional reasonable period in an emergency or other extraordinary circumstance","72 hours","Before the next court day"],
-    answer:1, explain:"48 hours from the arrest. An emergency or other extraordinary circumstance allows an additional reasonable period. The rule was 24 hours before 2001.",
+    q:"After a warrantless arrest, a custody determination is due within 48 hours (more in an emergency or extraordinary circumstance). Which regulation?",
+    choices:["8 C.F.R. 287.7(d)","8 C.F.R. 287.3(d)","8 C.F.R. 287.8(c)","8 C.F.R. 287.1(a)"],
+    answer:1, explain:"8 C.F.R. 287.3(d): 48 hours from the arrest. An emergency or other extraordinary circumstance allows an additional reasonable period. The rule was 24 hours before 2001.",
     why:"Delays in processing have a regulatory clock.",
     source:"8 C.F.R. § 287.3(d)", verified:"https://syfert.com/cfr/sections/8-287.3.html" },
   { id:"st-2877-d", type:"flip", cat:"Regulations — 8 CFR 287", binding:"regulation",

@@ -2,7 +2,7 @@
 // IDs: es-v* = vocabulary, es-p* = field phrases (v1 ids prefixed with "es-"; never reuse).
 // Card-level "why"/"source" override the category defaults below.
 export default {
-  meta: { id:"spanish", name:"Spanish", short:"ES", color:"#C9A227", lang:"es-MX", order:1,
+  meta: { id:"spanish", name:"Spanish", short:"ES", color:"#D8B76A", lang:"es-MX", order:1,
     blurb:"Field phrases and vocabulary, spaced repetition.",
     source:"Patrol Español v1 · adapted from Friar & Kelly, Practical Spanish Grammar for Border Patrol Officers (INS, 1943), modernized",
     subModes:["browse","grammar","verbs"] },
