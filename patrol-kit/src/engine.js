@@ -18,6 +18,8 @@ DECKS.sort((a,b)=>a.meta.order-b.meta.order).forEach(d=>{
   DECK[d.meta.id]=d;
   d.cards.forEach(c=>{
     const cat=(d.categories||{})[c.cat]||{};
+    /* reverseFlip decks (Statutes): show what the law says, ask which statute it is */
+    if(d.meta.reverseFlip&&c.type==="flip")c={...c,rev:true,front:c.back,back:c.front,ask:c.ask||d.meta.reverseAsk||"Which statute is this?"};
     const card={...c,deck:d.meta.id,group:c.group||cat.group||"",why:c.why||cat.why||d.meta.why||"",source:c.source||cat.source||d.meta.source||"",flag:c.flag||cat.flag||"",ask:c.ask||cat.ask||""};
     CARDS.push(card);BYID[card.id]=card;
   });
@@ -251,8 +253,8 @@ function flipHTML(c,st){
   return `<div class="cardwrap">
     <button class="fcard" onclick="flipCard()" aria-label="Tap to reveal answer">
       <span class="kind">${esc(kindLabel(c))}</span>
-      ${c.ask?`<span class="ask">${esc(c.ask)}</span>`:""}<span class="big ${c.deck==="spanish"?"es":""}">${esc(c.front)}</span>
-      ${st.flipped?`<span class="trans">${esc(c.back)}</span>${c.rule?`<span class="rule"><b>Rule</b>${esc(c.rule)}</span>`:""}${c.field?`<span class="rule"><b>Field</b>${esc(c.field)}</span>`:""}${c.note?`<span class="note">${esc(c.note)}</span>`:""}${metaBack(c)}`:`<span class="hint">Tap to reveal</span>`}
+      ${c.ask?`<span class="ask">${esc(c.ask)}</span>`:""}<span class="big ${c.deck==="spanish"?"es":""} ${String(c.front).length>70?"long":""}">${esc(c.front)}</span>
+      ${st.flipped?`<span class="trans ${c.rev?"cite":""}">${esc(c.back)}</span>${c.rule?`<span class="rule"><b>Rule</b>${esc(c.rule)}</span>`:""}${c.field?`<span class="rule"><b>Field</b>${esc(c.field)}</span>`:""}${c.note?`<span class="note">${esc(c.note)}</span>`:""}${metaBack(c)}`:`<span class="hint">Tap to reveal</span>`}
     </button>
   </div>
   ${speakBtn(c)}
@@ -662,7 +664,7 @@ function spinInit(decks){
   function trayRest(){
     const t=spinCount(false);
     tray.innerHTML=`<div class="rest">
-      <h2 class="rest-title">${S.spun?"Flick again.":"Flick the spinner."}</h2>
+      <h2 class="rest-title">${S.spun?"Spin again.":"Flick the spinner."}</h2>
       <p class="rest-text">${S.lock?`Only ${esc(spinLabel(DECK[S.lock]))} for now. Tap the ring to bring the other decks back.`:S.spun?"Tap a deck on the ring to stick with it.":"It stops on a deck and hands you one card. Tap a deck on the ring to stick with it."}</p>
       <div class="spinfoot"><span>${t} spin${t===1?"":"s"} today</span><button class="linkbtn" id="spinSound" type="button">Sound: ${S.sound?"on":"off"}</button></div>
     </div>`;
