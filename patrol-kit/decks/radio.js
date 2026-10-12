@@ -1,7 +1,7 @@
 // RADIO — phonetic alphabet, number pronunciation, prowords, generic procedure only.
 // BP 10-codes and jargon come from a public list (HonorFirst.com), added at the user's direction.
 export default {
-  meta: { id:"radio", name:"Radio", short:"RAD", color:"#8DB37A", order:11,
+  meta: { id:"radio", name:"Radio", short:"RAD", color:"#97B08A", order:11,
     blurb:"ICAO alphabet, number pronunciation, prowords, and BP 10-codes and jargon.",
     subModes:["browse"] },
   categories: {

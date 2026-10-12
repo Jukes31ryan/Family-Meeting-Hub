@@ -2,7 +2,7 @@
 // Text checked against the URL in `verified` (see VERIFICATION.md). Quotes are verbatim; paraphrase is marked.
 // Penalties are carded only where the statute's text was confirmed.
 export default {
-  meta: { id:"statutes", reverseFlip:true, reverseAsk:"Which statute or regulation is this?", name:"Statutes & Authority", short:"USC", color:"#6FB3A8", order:4, requireVerified:true,
+  meta: { id:"statutes", reverseFlip:true, reverseAsk:"Which statute or regulation is this?", name:"Statutes & Authority", short:"USC", color:"#C79E7A", order:4, requireVerified:true,
     blurb:"Where your authority comes from: 8 U.S.C. § 1357, 8 C.F.R. 287, and the crimes you charge.",
     subModes:["browse"] },
   categories: {

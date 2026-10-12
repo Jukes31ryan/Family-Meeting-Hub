@@ -4,7 +4,7 @@
 const TC = "TC 3-25.26, Map Reading and Land Navigation (U.S. Army)";
 const ORI = "Orienteering technique (common land-navigation usage; not TC 3-25.26 wording)";
 export default {
-  meta: { id:"landnav", name:"Land Nav", short:"NAV", color:"#A3B86C", order:10,
+  meta: { id:"landnav", name:"Land Nav", short:"NAV", color:"#A79BB8", order:10,
     blurb:"Basic navigation terms, compass use, pace count and terrain features.",
     source: TC,
     subModes:["browse"] },
