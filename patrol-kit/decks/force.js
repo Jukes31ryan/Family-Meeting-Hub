@@ -2,7 +2,7 @@
 // (Feb. 2023), 8 C.F.R. 287.8(a), Graham v. Connor, Tennessee v. Garner, Scott v. Harris, Barnes v. Felix.
 // Policy cards carry only provisions confirmed in public sources; status flags note what to confirm locally.
 export default {
-  meta: { id:"force", name:"Use of Force", short:"UOF", color:"#B98C8C", order:5, requireVerified:true,
+  meta: { id:"force", name:"Use of Force", short:"UOF", color:"#B07A9E", order:5, requireVerified:true,
     blurb:"Graham factors, Garner, the regulation, and published CBP/DHS policy.",
     subModes:["browse"] },
   categories: {

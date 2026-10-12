@@ -2,7 +2,7 @@
 // Phrases are standard French written for this app (deck-level source). Every Québec-usage card
 // carries its own source + `verified` URL; usage that couldn't be sourced is in UNVERIFIED.md, not here.
 export default {
-  meta: { id:"french", name:"French", short:"FR", color:"#8FA9B8", lang:"fr-CA", order:2,
+  meta: { id:"french", name:"French", short:"FR", color:"#5B8FC9", lang:"fr-CA", order:2,
     blurb:"Field French for the Québec line: commands, status questions, medical, and Québécois usage.",
     source:"Keepers French deck: standard French field phrases written for this app",
     subModes:["browse"] },

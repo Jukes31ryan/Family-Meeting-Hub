@@ -12,7 +12,7 @@ const UN_URL = "https://bibsok.no/?tnr=387081";
 const OW = "Original Wisdom, \"The Secrets of Success for Tracking: The Lost Trail Drill\"";
 const OW_URL = "https://www.originalwisdom.com/the-secrets-of-success-for-tracking-the-lost-trail-drill/";
 export default {
-  meta: { id:"tracking", name:"Tracking", short:"TRK", color:"#B3B77A", order:9,
+  meta: { id:"tracking", name:"Tracking", short:"TRK", color:"#B8925A", order:9,
     blurb:"Sign cutting basics: what sign looks like, following it, losing it and getting it back.",
     source: WS,
     subModes:["browse"] },
