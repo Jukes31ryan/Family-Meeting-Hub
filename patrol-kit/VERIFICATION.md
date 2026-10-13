@@ -157,33 +157,6 @@ Verification method (Oct 2026): web search results quoting the primary source (o
 | `uf-sc-warning-shot` | CBP Use of Force Policy, HB 4500-002A (Jan. 2021) | https://www.cbp.gov/sites/default/files/assets/documents/2021-Jul/cbp-use-of-force-policy_4500-002A.pdf |
 | `uf-sc-pursuit` | CBP Directive No. 4510-026B (Dec. 2, 2025) | https://www.cbp.gov/sites/default/files/2025-12/intc-44545_-_cbp_directive_no._4510-026b_usbp_redacted.pdf |
 
-## French
-
-| Card | Source | Checked against |
-|---|---|---|
-| `fr-h-frette` | Usito (Université de Sherbrooke): frette (avoir frette, il fait frette) | https://usito.usherbrooke.ca/lexies/mots/frette |
-| `fr-h-pantoute` | Le Robert: pantoute (Canada, familier) | https://dictionnaire.lerobert.com/en/definition/pantoute |
-| `fr-h-tantot` | Usito (Université de Sherbrooke): tantôt [Québec] | https://usito.usherbrooke.ca/d%C3%A9finitions/tant%C3%B4t |
-| `fr-h-pis-ben` | Usito (Université de Sherbrooke): G. Dostie, « Les marqueurs discursifs » | https://usito.usherbrooke.ca/articles/th%C3%A9matiques/dostie_1 |
-| `fr-h-magasiner` | OQLF, Banque de dépannage linguistique: MAGASINER et MAGASINAGE | https://vitrinelinguistique.oqlf.gouv.qc.ca/23637/le-vocabulaire/tours-dhorizon-et-autres-explications/tours-dhorizon/emploi-et-sens-de-magasiner-et-de-magasinage |
-| `fr-h-chu` | Wiktionnaire: chu (Canada, familier) | https://fr.wiktionary.org/wiki/chu |
-| `fr-q-repas` | OQLF, Vitrine linguistique: meal names (déjeuner, dîner, souper) | https://vitrinelinguistique.oqlf.gouv.qc.ca/redirection/ficheuid/8872574 |
-| `fr-q-cell` | OQLF, Grand dictionnaire terminologique: téléphone cellulaire | https://vitrinelinguistique.oqlf.gouv.qc.ca/fiche-gdt/fiche/8393991/telephone-cellulaire |
-| `fr-q-stationnement` | OQLF, Grand dictionnaire terminologique: parc de stationnement | https://vitrinelinguistique.oqlf.gouv.qc.ca/fiche-gdt/fiche/1298970/parc-de-stationnement |
-| `fr-q-bienvenue` | OQLF, Banque de dépannage linguistique: emploi déconseillé de l'emprunt « bienvenue » | https://vitrinelinguistique.oqlf.gouv.qc.ca/21469/les-emprunts-a-langlais/emprunts-semantiques/emploi-deconseille-de-lemprunt-bienvenue |
-| `fr-q-depanneur` | The Canadian Encyclopedia: Dépanneur | https://prod-front.thecanadianencyclopedia.ca/en/article/depanneur |
-| `fr-q-arret` | OQLF, Grand dictionnaire terminologique: panneau ARRÊT | https://vitrinelinguistique.oqlf.gouv.qc.ca/redirection/ficheuid/8366697 |
-| `fr-q-piastre` | OQLF, Banque de dépannage linguistique: différence entre dollar et piastre | https://vitrinelinguistique.oqlf.gouv.qc.ca/23978/le-vocabulaire/nuances-semantiques/difference-entre-dollar-et-piastre |
-| `fr-q-char` | Larousse French-English dictionary: char (Québec, familiar) | https://www.larousse.fr/dictionnaires/francais-anglais/char/14579 |
-| `fr-q-chum` | Québec City tourism glossary: 100 expressions québécoises | https://www.quebec-cite.com/fr/ville-quebec/expressions-quebecoises |
-| `fr-q-tu` | Université Laval, Life and culture in Québec: French | https://www.ulaval.ca/en/student-zone/international-student-community/life-and-culture-in-quebec/french |
-| `fr-q-ramq` | Immigrant Québec: carte d'assurance maladie (RAMQ) | https://immigrantquebec.com/fr/reussir-votre-installation/demarches-des-premiers-jours/ |
-| `fr-q-saaq` | Société de l'assurance automobile du Québec (SAAQ) | https://saaq.gouv.qc.ca/prendre-un-rendez-vous/details/2 |
-| `fr-q-mc-diner` | OQLF, Vitrine linguistique: meal names (déjeuner, dîner, souper) | https://vitrinelinguistique.oqlf.gouv.qc.ca/redirection/ficheuid/8872574 |
-| `fr-w8` | CDC, Preventing Hypothermia (first aid) | https://www.cdc.gov/winter-weather/prevention/index.html |
-| `fr-w12` | CDC, Preventing Hypothermia (warning signs) | https://www.cdc.gov/winter-weather/prevention/index.html |
-| `fr-w13` | OQLF, Grand dictionnaire terminologique: tuque (fiche 8356212); mitaine (fiche 8364867) | https://vitrinelinguistique.oqlf.gouv.qc.ca/fiche-gdt/fiche/8356212/tuque |
-
 ## Land Nav
 
 | Card | Source | Checked against |

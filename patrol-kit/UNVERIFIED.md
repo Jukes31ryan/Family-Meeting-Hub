@@ -67,15 +67,6 @@ These were confirmed through secondary sources (encyclopedia, case-brief sites, 
 | `uf-mendez` | County of Los Angeles v. Mendez, 581 U.S. 420 (2017) | en.wikipedia.org |
 | `uf-tracy` | Tracy v. Freshwater, 623 F.3d 90 (2d Cir. 2010) | caselaw.findlaw.com |
 | `uf-cbp-escape` | CBP Use of Force Policy, HB 4500-002A (Jan. 2021); DHS Policy Statement 044-05 | www.justsecurity.org |
-| `fr-h-frette` | Usito (Université de Sherbrooke): frette (avoir frette, il fait frette) | usito.usherbrooke.ca |
-| `fr-h-pantoute` | Le Robert: pantoute (Canada, familier) | dictionnaire.lerobert.com |
-| `fr-h-tantot` | Usito (Université de Sherbrooke): tantôt [Québec] | usito.usherbrooke.ca |
-| `fr-h-pis-ben` | Usito (Université de Sherbrooke): G. Dostie, « Les marqueurs discursifs » | usito.usherbrooke.ca |
-| `fr-h-chu` | Wiktionnaire: chu (Canada, familier) | fr.wiktionary.org |
-| `fr-q-chum` | Québec City tourism glossary: 100 expressions québécoises | www.quebec-cite.com |
-| `fr-q-ramq` | Immigrant Québec: carte d'assurance maladie (RAMQ) | immigrantquebec.com |
-| `fr-w8` | CDC, Preventing Hypothermia (first aid) | www.cdc.gov |
-| `fr-w12` | CDC, Preventing Hypothermia (warning signs) | www.cdc.gov |
 | `ln-azimuth` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | en.wikipedia.org |
 | `ln-norths` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | maptools.com |
 | `ln-norths-mc` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | maptools.com |
