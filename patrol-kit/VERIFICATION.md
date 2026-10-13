@@ -157,6 +157,60 @@ Verification method (Oct 2026): web search results quoting the primary source (o
 | `uf-sc-warning-shot` | CBP Use of Force Policy, HB 4500-002A (Jan. 2021) | https://www.cbp.gov/sites/default/files/assets/documents/2021-Jul/cbp-use-of-force-policy_4500-002A.pdf |
 | `uf-sc-pursuit` | CBP Directive No. 4510-026B (Dec. 2, 2025) | https://www.cbp.gov/sites/default/files/2025-12/intc-44545_-_cbp_directive_no._4510-026b_usbp_redacted.pdf |
 
+## BP History
+
+| Card | Source | Checked against |
+|---|---|---|
+| `hi-watchmen` | Congressional Record, H. Con. Res. 122 (1999); Wikipedia, "United States Border Patrol" | https://www.govinfo.gov/content/pkg/CRECB-1999-pt20/html/CRECB-1999-pt20-Pg29561.htm |
+| `hi-chinese-exclusion` | CBP, history pages and timeline (cbp.gov) (Jeff Milton timeline entry) | https://cbp.gov/about/history/timeline/timeline-date/jefferson-davis-milton-aka-jeff-milton-1861-1947 |
+| `hi-milton` | CBP, history pages and timeline (cbp.gov); HonorFirst.com (retired-agent history site; secondary) | https://cbp.gov/about/history/timeline/timeline-date/jefferson-davis-milton-aka-jeff-milton-1861-1947 |
+| `hi-1915` | Wikipedia, "United States Border Patrol" (secondary) | https://en.wikipedia.org/wiki/United_States_Border_Patrol |
+| `hi-1924-act` | CBP, history pages and timeline (cbp.gov), "1924: Border Patrol Established" | https://www.cbp.gov/about/history/1924-border-patrol-established |
+| `hi-1924-mc` | CBP, history pages and timeline (cbp.gov), "1924: Border Patrol Established" | https://www.cbp.gov/about/history/1924-border-patrol-established |
+| `hi-first-force` | National Border Patrol Museum, "History" (borderpatrolmuseum.com) | https://borderpatrolmuseum.com/history/ |
+| `hi-pay` | National Border Patrol Museum, "History" (borderpatrolmuseum.com) | https://borderpatrolmuseum.com/history/ |
+| `hi-equip` | National Border Patrol Museum, "History" (borderpatrolmuseum.com) | https://borderpatrolmuseum.com/history/ |
+| `hi-recruits` | National Border Patrol Museum, "History" (borderpatrolmuseum.com) | https://borderpatrolmuseum.com/history/ |
+| `hi-uniform` | National Border Patrol Museum, "History" (borderpatrolmuseum.com); HonorFirst.com (retired-agent history site; secondary), "How has the USBP uniform evolved?" | https://www.honorfirst.com/how-has-the-usbp-uniform-evolved.html |
+| `hi-1925-seacoast` | CBP, history pages and timeline (cbp.gov), "1924: Border Patrol Established" | https://www.cbp.gov/about/history/1924-border-patrol-established |
+| `hi-1940-doj` | National Border Patrol Museum, "History" (borderpatrolmuseum.com); SAGE Encyclopedia of Economics and Society, "Border Patrol" | https://borderpatrolmuseum.com/history/ |
+| `hi-wwii` | National Border Patrol Museum, "History" (borderpatrolmuseum.com) | https://borderpatrolmuseum.com/history/ |
+| `hi-1946` | Washington University Law Review article on Border Patrol search authority (secondary); 8 U.S.C. § 1357(a)(3) | https://journals.library.wustl.edu/lawreview/article/3012/galley/19845/view |
+| `hi-1970-title` | HonorFirst.com (retired-agent history site; secondary), "This Week in USBP History" | https://honorfirst.com/this-week-in-usbp-history-blog/this-week-in-usbp-histroy-vol-147 |
+| `hi-cpa` | HonorFirst.com (retired-agent history site; secondary), "This Week in USBP History" | https://www.honorfirst.com/this-week-in-usbp-history-blog/archives/05-2023 |
+| `hi-hold-line` | DOJ Office of Inspector General, Special Report on Operation Gatekeeper (1998) | https://oig.justice.gov/sites/default/files/archive/special/9807/exec.htm |
+| `hi-2003-cbp` | CBP, history pages and timeline (cbp.gov), timeline: March 1, 2003 | https://www.cbp.gov/about/history/timeline/timeline-date/march-1-2003 |
+| `hi-2003-mc` | CBP, history pages and timeline (cbp.gov), timeline: March 1, 2003 | https://www.cbp.gov/about/history/timeline/timeline-date/march-1-2003 |
+| `hi-centennial` | U.S. Sen. Susan Collins press release (May 28, 2024) | https://www.collins.senate.gov/newsroom/collins-king-celebrate-todays-100th-anniversary-of-the-us-border-patrol |
+| `hi-order-early` | CBP, history pages and timeline (cbp.gov); National Border Patrol Museum, "History" (borderpatrolmuseum.com) | https://borderpatrolmuseum.com/history/ |
+| `hi-order-modern` | CBP, history pages and timeline (cbp.gov); HonorFirst.com (retired-agent history site; secondary) | https://www.cbp.gov/about/history/timeline/timeline-date/march-1-2003 |
+| `hi-chigas` | CBP, history pages and timeline (cbp.gov), timeline: December 3, 1934 | https://www.cbp.gov/about/history/timeline/timeline-date/december-3-1934 |
+| `hi-chigas-subjects` | CBP, history pages and timeline (cbp.gov), "Border Patrol Academy Unified in Artesia" | https://www.cbp.gov/about/history/cbp-20-20-establishment/border-patrol-academy-unified-in-artesia |
+| `hi-academy-1936` | CBP, history pages and timeline (cbp.gov), "Border Patrol Academy Unified in Artesia" | https://www.cbp.gov/about/history/cbp-20-20-establishment/border-patrol-academy-unified-in-artesia |
+| `hi-glynco` | CBP, history pages and timeline (cbp.gov), "Border Patrol Academy Unified in Artesia"; FLETC history | https://www.cbp.gov/about/history/cbp-20-20-establishment/border-patrol-academy-unified-in-artesia |
+| `hi-artesia` | CBP, history pages and timeline (cbp.gov), "Border Patrol Academy Unified in Artesia" | https://www.cbp.gov/about/history/cbp-20-20-establishment/border-patrol-academy-unified-in-artesia |
+| `hi-academy-order` | CBP, history pages and timeline (cbp.gov), "Border Patrol Academy Unified in Artesia" | https://www.cbp.gov/about/history/cbp-20-20-establishment/border-patrol-academy-unified-in-artesia |
+| `hi-autogiro` | National Border Patrol Museum, "History" (borderpatrolmuseum.com) | https://borderpatrolmuseum.com/history/ |
+| `hi-bortac` | Wikipedia, "BORTAC" (secondary); Grey Dynamics (secondary) | https://en.wikipedia.org/wiki/BORTAC |
+| `hi-borstar` | Archived Border Patrol BORSTAR history (govdocs); DHS, "CBP Search and Rescue Efforts for FY 2015" | https://corpora.tika.apache.org/base/docs/govdocs1/613/613211.html |
+| `hi-borstar-why` | DHS, "Customs and Border Protection Search and Rescue Efforts for FY 2015" | https://dhs.gov/sites/default/files/publications/Customs%20and%20Border%20Protection%20-%20Search%20and%20Rescue%20Efforts%20for%20FY%202015.pdf |
+| `hi-sog` | Wikipedia, "BORTAC" and "Border Patrol Search, Trauma, and Rescue" (secondary) | https://en.wikipedia.org/wiki/Border_Patrol_Search,_Trauma,_and_Rescue |
+| `hi-units-mc` | Wikipedia, "BORTAC" (secondary); CBP, history pages and timeline (cbp.gov) | https://en.wikipedia.org/wiki/BORTAC |
+| `hi-nb-districts` | HonorFirst.com (retired-agent history site; secondary), "Which was the first sector?" | https://www.honorfirst.com/which-was-the-first-sector.html |
+| `hi-nb-prohibition` | CBP, history pages and timeline (cbp.gov), Detroit station history; SAGE Encyclopedia of Economics and Society, "Border Patrol" | https://www.cbp.gov/border-security/along-us-borders/border-patrol-sectors/detroit-sector-selfridge-angb-michigan/detroit-station |
+| `hi-nb-prohibition-mc` | CBP, history pages and timeline (cbp.gov), Detroit sector history | https://cbp.gov/border-security/along-us-borders/border-patrol-sectors/detroit-sector |
+| `hi-nb-detroit-growth` | CBP, history pages and timeline (cbp.gov), Detroit sector history | https://cbp.gov/border-security/along-us-borders/border-patrol-sectors/detroit-sector |
+| `hi-nb-davenport` | CBP, history pages and timeline (cbp.gov), Detroit sector history | https://cbp.gov/border-security/along-us-borders/border-patrol-sectors/detroit-sector |
+| `hi-nb-patriot` | Britannica, "USA PATRIOT Act"; Sen. Patrick Leahy floor statement (2001) | https://avalon.law.yale.edu/sept11/leahy_003.asp |
+| `hi-nb-sectors` | CBP, USBP sector profile FY2018 | https://www.CBP.gov/sites/default/files/assets/documents/2019-May/Sector%20Profile%20FY18.pdf |
+| `hi-honor-first` | HonorFirst.com (retired-agent history site; secondary), "When and where did Honor First originate?" | https://www.honorfirst.com/when-and-where-did-honor-first-originate.html |
+| `hi-honor-meaning` | HonorFirst.com (retired-agent history site; secondary), "Honor First and esprit de corps" | https://honorfirst.com/honor-first-and-esprit-de-corps.html |
+| `hi-motto-mc` | HonorFirst.com (retired-agent history site; secondary) | https://www.honorfirst.com/when-and-where-did-honor-first-originate.html |
+| `hi-badge-finish` | CBP, Border Patrol General Order 42, First Amendment, Sixth Supplement (Apr. 4, 1928) | https://WWW.CBP.GOV/sites/default/files/assets/documents/2018-Oct/usbp-first-amendment-sixth-supplement-19280404.pdf |
+| `hi-badge-cloth` | HonorFirst.com (retired-agent history site; secondary), "How has the USBP uniform evolved?" | https://www.honorfirst.com/how-has-the-usbp-uniform-evolved.html |
+| `hi-museum` | National Border Patrol Museum, "About Us" | https://borderpatrolmuseum.com/about-us/ |
+| `hi-memorial` | Homeland Security Today, "U.S. Border Patrol Honors Fallen Heroes"; CBP media release | https://www.hstoday.us/subject-matter-areas/border-security/u-s-border-patrol-honors-fallen-heroes/ |
+
 ## Land Nav
 
 | Card | Source | Checked against |
@@ -211,6 +265,63 @@ Verification method (Oct 2026): web search results quoting the primary source (o
 | `ln-c-level` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://fieldandstream.com/stories/survival-stories/wilderness-survival/how-to-read-compass |
 | `ln-c-steer` | Orienteering technique (common land-navigation usage; not TC 3-25.26 wording) | https://strands.cacadets.org/strands/Strand_008/Strand_008_Handouts/TA_8-H-8_Basic_Compass_Topo_Map.pdf |
 | `ln-c-metal` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | https://strands.cacadets.org/strands/Strand_051/Strand_051_Posters_Letter/TA_51-P-2_Map_Reading_Lensatic_Compass.pdf |
+
+## Processing
+
+| Card | Source | Checked against |
+|---|---|---|
+| `pr-er-i860` | 8 C.F.R. § 235.3(b)(2)(i) | https://syfert.com/cfr/sections/8-235.3.html |
+| `pr-er-i867` | 8 C.F.R. § 235.3(b)(2)(i) | https://syfert.com/cfr/sections/8-235.3.html |
+| `pr-er-sequence` | 8 C.F.R. § 235.3(b)(2)(i) | https://syfert.com/cfr/sections/8-235.3.html |
+| `pr-er-charges` | 8 C.F.R. § 235.3(b)(3) | https://www.govinfo.gov/content/pkg/CFR-2021-title8-vol1/xml/CFR-2021-title8-vol1-sec235-3.xml |
+| `pr-er-supervisor` | 8 C.F.R. § 235.3(b)(7) | https://www.aila.org/library/ins-memo-on-expedited-removal |
+| `pr-er-m444` | 8 C.F.R. § 235.3(b)(4)(i) | https://www.govinfo.gov/content/pkg/CFR-2021-title8-vol1/xml/CFR-2021-title8-vol1-sec235-3.xml |
+| `pr-er-fear` | 8 C.F.R. § 235.3(b)(4) | https://www.govinfo.gov/content/pkg/CFR-2021-title8-vol1/xml/CFR-2021-title8-vol1-sec235-3.xml |
+| `pr-er-status-claim` | 8 C.F.R. §§ 235.3(b)(5), 235.6(a) | https://www.ecfr.gov/current/title-8/chapter-I/subchapter-B/part-235/section-235.6 |
+| `pr-er-i869-i863` | 8 C.F.R. § 1003.42 | https://www.law.cornell.edu/cfr/text/8/1003.42 |
+| `pr-ri-i871` | 8 C.F.R. § 241.8(b) | https://www.ca5.uscourts.gov/Opinions/unpub/04/04-60756.0.wpd.pdf |
+| `pr-ri-sequence` | 8 C.F.R. § 241.8(a)–(c) | https://syfert.com/cfr/sections/8-241.8.html |
+| `pr-ri-identity` | 8 C.F.R. § 241.8(a)(2) | https://syfert.com/cfr/sections/8-241.8.html |
+| `pr-ri-reentry` | 8 C.F.R. § 241.8(a)(3) | https://syfert.com/cfr/sections/8-241.8.html |
+| `pr-ri-statement` | 8 C.F.R. § 241.8(a)–(b) | https://syfert.com/cfr/sections/8-241.8.html |
+| `pr-ri-statute` | 8 U.S.C. § 1231(a)(5) | https://www.justice.gov/osg/media/227851/dl |
+| `pr-ri-fear` | 8 C.F.R. §§ 241.8(e), 208.31 | https://www.law.cornell.edu/cfr/text/8/208.31 |
+| `pr-ri-cf-vs-rf` | 8 C.F.R. § 208.31(a) | https://www.law.cornell.edu/cfr/text/8/208.31 |
+| `pr-nta-i862` | 8 C.F.R. §§ 239.1, 1003.13, 1003.14(a) | https://www.law.cornell.edu/cfr/text/8/part-1003/subpart-C |
+| `pr-nta-issuers` | 8 C.F.R. § 239.1(a) | https://www.law.cornell.edu/cfr/text/8/239.1 |
+| `pr-nta-2873c` | 8 C.F.R. § 287.3(c) | https://syfert.com/cfr/sections/8-287.3.html |
+| `pr-nta-i200` | 8 C.F.R. § 236.1(b) | https://www.law.cornell.edu/cfr/text/8/236.1 |
+| `pr-nta-i286` | 8 C.F.R. § 236.1; ILRC bond-hearing practice advisory (2018) | https://store.ilrc.org/sites/default/files/resources/represent_detain_clients_bond_hearings-20180629v2.pdf |
+| `pr-nta-i863` | 8 C.F.R. § 235.6(a) | https://www.ecfr.gov/current/title-8/chapter-I/subchapter-B/part-235/section-235.6 |
+| `pr-nta-stipulated` | 8 C.F.R. § 1003.25(b) | https://www.law.cornell.edu/cfr/text/8/1003.25 |
+| `pr-vr-i826` | Rosario-Mijangos v. Holder, 717 F.3d 269 (2d Cir. 2013) | https://ww3.ca2.uscourts.gov/decisions/OPN/11-1607_opn.pdf |
+| `pr-vr-consequence` | Rosario-Mijangos v. Holder, 717 F.3d 269 (2d Cir. 2013) | https://ww3.ca2.uscourts.gov/decisions/OPN/11-1607_opn.pdf |
+| `pr-vr-24025` | 8 C.F.R. § 240.25 | https://www.ecfr.gov/current/title-8/chapter-I/subchapter-B/part-240/subpart-C/section-240.25 |
+| `pr-vr-i210` | 8 C.F.R. § 240.25 | https://www.ecfr.gov/current/title-8/chapter-I/subchapter-B/part-240/subpart-C/section-240.25 |
+| `pr-vr-120` | 8 C.F.R. § 240.25 | https://www.ecfr.gov/current/title-8/chapter-I/subchapter-B/part-240/subpart-C/section-240.25 |
+| `pr-vr-i770` | 8 C.F.R. § 236.3; 84 Fed. Reg. 44392 (Aug. 23, 2019) | https://www.govinfo.gov/content/pkg/FR-2019-08-23/pdf/2019-17927.pdf |
+| `pr-ar-who` | 8 U.S.C. § 1228(b) | https://m.openjurist.org/8/usc/1228 |
+| `pr-ar-i851` | 8 C.F.R. § 238.1(b) | https://www.govinfo.gov/content/pkg/CFR-2023-title8-vol1/pdf/CFR-2023-title8-vol1-part238.pdf |
+| `pr-ar-i851a` | 8 C.F.R. § 238.1(a), (d) | https://www.justice.gov/sites/default/files/eoir/legacy/2014/08/15/8CFR12381.pdf |
+| `pr-ar-advisals` | 8 C.F.R. § 238.1(b)(2) | https://www.govinfo.gov/content/pkg/CFR-2023-title8-vol1/pdf/CFR-2023-title8-vol1-part238.pdf |
+| `pr-ar-14day` | 8 U.S.C. § 1228(b)(3) | https://www.justice.gov/osg/media/199621/dl |
+| `pr-ar-sequence` | 8 C.F.R. § 238.1; 8 U.S.C. § 1228(b)(3) | https://www.govinfo.gov/content/pkg/CFR-2023-title8-vol1/pdf/CFR-2023-title8-vol1-part238.pdf |
+| `pr-cf-i213` | Matter of Mejia, 16 I&N Dec. 6 (BIA 1976) | https://www.justice.gov/eoir/vll/intdec/vol16/2527.pdf |
+| `pr-cf-i247a` | ICE Form I-247A guidance (2017); ICE Policy 10074.2 | https://ice.gov/sites/default/files/documents/Document/2017/I-247A-Guidance.PDF |
+| `pr-cf-i205` | 8 C.F.R. § 241.2 | https://www.law.cornell.edu/cfr/text/8/241.2 |
+| `pr-cf-i200-vs-i205` | 8 C.F.R. §§ 236.1(b), 241.2(a) | https://www.law.cornell.edu/cfr/text/8/236.1 |
+| `pr-cf-i296` | United States v. Lopez, No. 12-50464 (9th Cir. 2014) | https://cdn.ca9.uscourts.gov/datastore/opinions/2014/08/07/12-50464.pdf |
+| `pr-cf-i294` | USCIS FOIA release (Form I-294); INA § 212(a)(9) | https://uscis.gov/sites/default/files/document/foia/PRD2014000534-John_Demjanjuk.pdf |
+| `pr-cf-bars` | INA § 212(a)(9)(A); USCIS Form I-212 instructions | https://www.uscis.gov/sites/default/files/document/forms/i-212instr.pdf |
+| `pr-sc-er` | 8 C.F.R. § 235.3(b)(2)(i) | https://syfert.com/cfr/sections/8-235.3.html |
+| `pr-sc-er-fear` | 8 C.F.R. § 235.3(b)(4) | https://www.govinfo.gov/content/pkg/CFR-2021-title8-vol1/xml/CFR-2021-title8-vol1-sec235-3.xml |
+| `pr-sc-reinstate` | 8 C.F.R. § 241.8 | https://syfert.com/cfr/sections/8-241.8.html |
+| `pr-sc-reinstate-fear` | 8 C.F.R. § 241.8(e) | https://www.law.cornell.edu/cfr/text/8/208.31 |
+| `pr-sc-aggfel` | 8 C.F.R. § 238.1(b) | https://www.govinfo.gov/content/pkg/CFR-2023-title8-vol1/pdf/CFR-2023-title8-vol1-part238.pdf |
+| `pr-sc-status-verified` | 8 C.F.R. § 235.6(a)(1) | https://www.ecfr.gov/current/title-8/chapter-I/subchapter-B/part-235/section-235.6 |
+| `pr-sc-vr` | Rosario-Mijangos v. Holder, 717 F.3d 269 (2d Cir. 2013) | https://ww3.ca2.uscourts.gov/decisions/OPN/11-1607_opn.pdf |
+| `pr-sc-minor` | 8 C.F.R. § 236.3 | https://www.ecfr.gov/current/title-8/chapter-I/subchapter-B/part-236/subpart-A/section-236.3 |
+| `pr-sc-claimed-unverified` | 8 C.F.R. §§ 235.3(b)(5), 235.6(a)(2) | https://www.ecfr.gov/current/title-8/chapter-I/subchapter-B/part-235/section-235.6 |
 
 ## Radio
 

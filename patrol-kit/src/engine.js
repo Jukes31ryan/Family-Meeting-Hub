@@ -19,7 +19,7 @@ DECKS.sort((a,b)=>a.meta.order-b.meta.order).forEach(d=>{
   d.cards.forEach(c=>{
     const cat=(d.categories||{})[c.cat]||{};
     /* reverseFlip decks (Statutes): show what the law says, ask which statute it is */
-    if(d.meta.reverseFlip&&c.type==="flip")c={...c,rev:true,front:c.back,back:c.front,ask:c.ask||d.meta.reverseAsk||"Which statute is this?"};
+    if(d.meta.reverseFlip&&c.type==="flip"&&(!d.meta.reverseMatch||new RegExp(d.meta.reverseMatch).test(c.front)))c={...c,rev:true,front:c.back,back:c.front,ask:c.ask||d.meta.reverseAsk||"Which statute is this?"};
     const card={...c,deck:d.meta.id,group:c.group||cat.group||"",why:c.why||cat.why||d.meta.why||"",source:c.source||cat.source||d.meta.source||"",flag:c.flag||cat.flag||"",ask:c.ask||cat.ask||""};
     CARDS.push(card);BYID[card.id]=card;
   });
