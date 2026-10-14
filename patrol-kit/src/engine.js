@@ -529,7 +529,7 @@ const SPIN_NS="http://www.w3.org/2000/svg";
 const spinRad=d=>d*Math.PI/180;
 const spinPt=(r,d)=>(r*Math.cos(spinRad(d))).toFixed(2)+" "+(r*Math.sin(spinRad(d))).toFixed(2);
 function spinSvg(name,attrs,parent){const e=document.createElementNS(SPIN_NS,name);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e}
-function spinDecks(){const a=activeDecks();return DECKS.filter(d=>d.cards.length&&a.includes(d.meta.id)).slice(0,8)}
+function spinDecks(){const a=activeDecks();return DECKS.filter(d=>d.cards.length&&a.includes(d.meta.id)).slice(0,12)}
 const spinLabel=d=>d.meta.spin||d.meta.name.split(" & ")[0];
 /* weighted pick: last-answer-wrong cards come back most, unseen next, mastered rarely */
 function spinPick(deckId){

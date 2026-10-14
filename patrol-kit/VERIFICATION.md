@@ -564,3 +564,79 @@ Verification method (Oct 2026): web search results quoting the primary source (o
 | `trk-lost-confirm` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 30, 32 | https://bibsok.no/?tnr=387081 |
 | `trk-lost-retry` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 32 | https://bibsok.no/?tnr=387081 |
 | `trk-lost-why` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 11, 30 | https://bibsok.no/?tnr=387081 |
+
+## Visas & Entry Docs
+
+| Card | Source | Checked against |
+|---|---|---|
+| `vi-b1` | 8 U.S.C. § 1101(a)(15)(B); USCIS B-1 page | https://www.uscis.gov/working-in-the-united-states/temporary-visitors-for-business/b-1-temporary-business-visitor |
+| `vi-b2` | 8 U.S.C. § 1101(a)(15)(B); travel.state.gov Visitor Visa | https://travel.state.gov/content/travel/en/us-visas/tourism-visit/visitor.html |
+| `vi-b1b2` | 8 C.F.R. § 214.2(b)(1) | https://aila.org/aila-files/28B9ACD5-8EC9-4671-B1B8-969F80899FDE/18120735.pdf |
+| `vi-bcc` | 8 C.F.R. § 235.1(h); 78 Fed. Reg. 35103 (2013) | https://www.cbp.gov/newsroom/national-media-release/border-crossers-new-mexico-can-now-travel-further-without-i-94 |
+| `vi-vwp` | 8 U.S.C. § 1187; CBP VWP/ESTA FAQ | https://www.cbp.gov/travel/international-visitors/esta/frequently-asked-questions-about-visa-waiver-program-vwp-and-electronic-system-travel |
+| `vi-c1d` | 8 U.S.C. § 1101(a)(15)(C), (D); travel.state.gov Crewmember Visa | https://travel.state.gov/content/travel/en/us-visas/other-visa-categories/crewmember-visa.html |
+| `vi-vwp-mc` | 8 U.S.C. § 1187(b) | https://www2.ca3.uscourts.gov/opinarch/084184p.pdf |
+| `vi-ca-rule` | 8 C.F.R. § 212.1(a)(1) | https://www.law.cornell.edu/cfr/text/8/212.1 |
+| `vi-ca-visitor` | travel.state.gov Visitor Visa; CBP I-94 page | https://travel.state.gov/content/travel/en/us-visas/tourism-visit/visitor.html |
+| `vi-tn` | 8 C.F.R. § 214.6; USCIS TN page | https://www.uscis.gov/working-in-the-united-states/temporary-workers/tn-usmca-professionals |
+| `vi-td` | USCIS Policy Manual, Vol. 2, Part P, Ch. 5 | https://www.uscis.gov/policy-manual/volume-2-part-p-chapter-5 |
+| `vi-edl` | CBP WHTI FAQ | https://www.cbp.gov/travel/us-citizens/western-hemisphere-travel-initiative/faqs |
+| `vi-nexus` | CBP Trusted Traveler Programs | https://www.cbp.gov/travel/trusted-traveler-programs |
+| `vi-whti` | 73 Fed. Reg. 18384 (Apr. 3, 2008); CBP WHTI FAQ | https://www.cbp.gov/travel/us-citizens/western-hemisphere-travel-initiative/faqs |
+| `vi-register` | USCIS Alien Registration Requirement; 91 Fed. Reg. 39248 (June 29, 2026) | https://www.uscis.gov/alienregistration |
+| `vi-ca-mc` | 8 C.F.R. § 212.1(a)(1) | https://www.law.cornell.edu/cfr/text/8/212.1 |
+| `vi-h1b` | 8 U.S.C. §§ 1101(a)(15)(H)(i)(b), 1184(g)(4); USCIS H-1B page | https://www.uscis.gov/working-in-the-united-states/h-1b-specialty-occupations |
+| `vi-h2a` | 8 U.S.C. § 1101(a)(15)(H)(ii)(a); 8 C.F.R. § 214.2(h)(5) | https://www.uscis.gov/working-in-the-united-states/temporary-workers/h-2a-temporary-agricultural-workers |
+| `vi-h2b` | 8 U.S.C. § 1101(a)(15)(H)(ii)(b); 8 C.F.R. § 214.2(h)(6) | https://www.uscis.gov/working-in-the-united-states/temporary-workers/h-2b-non-agricultural-workers/guidance-on-temporary-need-in-h-2b-petitions |
+| `vi-l1a` | 8 C.F.R. § 214.2(l); USCIS L-1A page | https://www.uscis.gov/working-in-the-united-states/temporary-workers/l-1a-intracompany-transferee-executive-or-manager |
+| `vi-l1b` | 8 C.F.R. § 214.2(l); USCIS L-1B page | https://www.uscis.gov/working-in-the-united-states/temporary-workers/l-1b-intracompany-transferee-specialized-knowledge |
+| `vi-o1` | 8 U.S.C. § 1101(a)(15)(O); USCIS O-1 page | https://www.uscis.gov/working-in-the-united-states/temporary-workers/o-1-visa-individuals-with-extraordinary-ability-or-achievement |
+| `vi-p` | 8 U.S.C. § 1101(a)(15)(P); USCIS Policy Manual, Vol. 2, Part N | https://www.uscis.gov/policy-manual/volume-2-part-n-chapter-4 |
+| `vi-r1` | 8 C.F.R. § 214.2(r); USCIS R-1 page | https://www.uscis.gov/working-in-the-united-states/temporary-workers/r-1-nonimmigrant-religious-workers |
+| `vi-e1` | 8 U.S.C. § 1101(a)(15)(E)(i); USCIS E-1 page | https://www.uscis.gov/working-in-the-united-states/temporary-workers/e-1-treaty-traders |
+| `vi-e2` | 8 U.S.C. § 1101(a)(15)(E)(ii); USCIS E-2 page | https://www.uscis.gov/working-in-the-united-states/temporary-workers/e-2-treaty-investors |
+| `vi-e3` | 8 U.S.C. § 1101(a)(15)(E)(iii); USCIS E-3 page | https://www.uscis.gov/working-in-the-united-states/temporary-workers/e-3-specialty-occupation-workers-from-australia |
+| `vi-q1` | 8 U.S.C. § 1101(a)(15)(Q); 8 C.F.R. § 214.2(q) | https://www.uscis.gov/working-in-the-united-states/temporary-workers/q-cultural-exchange |
+| `vi-work-mc` | 8 U.S.C. § 1101(a)(15)(H)(ii)(a)–(b) | https://www.uscis.gov/working-in-the-united-states/temporary-workers/h-2a-temporary-agricultural-workers |
+| `vi-f1` | 8 U.S.C. § 1101(a)(15)(F); 8 C.F.R. § 214.2(f); DHS final rule (July 17, 2026) | https://studyinthestates.dhs.gov/final-rule-establishing-a-fixed-time-period-of-admission-and-an-extension-of-stay-procedure-quick |
+| `vi-m1` | 8 U.S.C. § 1101(a)(15)(M); USCIS Policy Manual, Vol. 2, Part F, Ch. 8 | https://www.uscis.gov/policy-manual/volume-2-part-f-chapter-8 |
+| `vi-j1` | 8 U.S.C. § 1101(a)(15)(J); USCIS Policy Manual, Vol. 2, Part D, Ch. 3 | https://www.uscis.gov/policy-manual/volume-2-part-d-chapter-3 |
+| `vi-f2m2` | 8 C.F.R. § 214.2(f)(15), (m)(17); SEVP (2015) | https://studyinthestates.dhs.gov/2015/06/dependents-offered-part-time-study-opportunities |
+| `vi-j2` | USCIS Policy Manual, Vol. 2, Part D, Ch. 6 | https://www.uscis.gov/policy-manual/volume-2-part-d-chapter-6 |
+| `vi-212e` | INA § 212(e); travel.state.gov waiver page | https://travel.state.gov/content/travel/en/us-visas/study/exchange/waiver-of-the-exchange-visitor.html |
+| `vi-fm-mc` | USCIS Policy Manual, Vol. 2, Part F | https://www.uscis.gov/policy-manual/volume-2-part-f-chapter-8 |
+| `vi-k1` | 8 U.S.C. § 1101(a)(15)(K)(i); USCIS fiancé(e) page | https://www.uscis.gov/family/family-of-us-citizens/visas-for-fiancees-of-us-citizens |
+| `vi-k2` | 8 U.S.C. § 1101(a)(15)(K)(iii); USCIS fiancé(e) page | https://www.uscis.gov/family/family-of-us-citizens/visas-for-fiancees-of-us-citizens |
+| `vi-k3` | 8 U.S.C. § 1101(a)(15)(K)(ii); USCIS K-3/K-4 page | https://www.uscis.gov/family/family-of-us-citizens/k-3k-4-nonimmigrant-visas |
+| `vi-v` | 8 U.S.C. § 1101(a)(15)(V); USCIS V page | https://www.uscis.gov/family/family-of-green-card-holders-permanent-residents/v-nonimmigrant-visas |
+| `vi-k1-mc` | USCIS fiancé(e) page | https://www.uscis.gov/family/family-of-us-citizens/visas-for-fiancees-of-us-citizens |
+| `vi-u` | 8 U.S.C. § 1101(a)(15)(U); 8 C.F.R. § 214.14 | https://www.uscis.gov/humanitarian/victims-of-criminal-activity-u-nonimmigrant-status |
+| `vi-t` | 8 U.S.C. § 1101(a)(15)(T); USCIS T page | https://www.uscis.gov/humanitarian/victims-of-human-trafficking-t-nonimmigrant-status |
+| `vi-s` | 8 U.S.C. § 1101(a)(15)(S); 8 C.F.R. § 214.2(t); 60 Fed. Reg. (Aug. 25, 1995) | https://www.govinfo.gov/content/pkg/FR-1995-08-25/pdf/95-21115.pdf |
+| `vi-parole` | 8 U.S.C. § 1182(d)(5)(A); USCIS humanitarian parole page | https://www.uscis.gov/humanitarian/humanitarian_parole |
+| `vi-ref-asy` | INA §§ 207, 208; USCIS Refugees and Asylum | https://www.uscis.gov/humanitarian/refugees-asylum |
+| `vi-ag` | 8 U.S.C. § 1101(a)(15)(A), (G); 9 FAM 402.3 | https://fam.state.gov/fam/09FAM/09FAM040203.html |
+| `vi-parole-mc` | 8 U.S.C. § 1182(d)(5)(A); USCIS glossary | https://www.uscis.gov/glossary-term/51412 |
+| `vi-ut-mc` | 8 U.S.C. § 1101(a)(15)(T); USCIS T page | https://www.uscis.gov/humanitarian/victims-of-human-trafficking-t-nonimmigrant-status |
+| `vi-i551` | USCIS international travel as a permanent resident | https://www.uscis.gov/green-card/after-we-grant-your-green-card/international-travel-as-a-permanent-resident |
+| `vi-i327` | USCIS international travel as a permanent resident | https://www.uscis.gov/green-card/after-we-grant-your-green-card/international-travel-as-a-permanent-resident |
+| `vi-sb1` | travel.state.gov Returning Resident Visas | https://travel.state.gov/content/travel/en/us-visas/immigrate/returning-resident.html |
+| `vi-i94` | CBP I-94 page | https://www.cbp.gov/travel/international-visitors/i-94 |
+| `vi-i766` | USCIS Employment Authorization Document page | https://www.uscis.gov/green-card/green-card-processes-and-procedures/employment-authorization-document |
+| `vi-i512` | USCIS Travel Documents page | https://www.uscis.gov/green-card/green-card-processes-and-procedures/travel-documents |
+| `vi-i571` | USCIS Form I-131 instructions | https://www.uscis.gov/sites/default/files/document/forms/i-131instr.pdf |
+| `vi-ppcard` | travel.state.gov passport card page | https://travel.state.gov/content/travel/en/passports/need-passport/card.html |
+| `vi-natcert` | USCIS Policy Manual, Vol. 12, Part K | https://www.uscis.gov/policy-manual/volume-12-part-k-chapter-2 |
+| `vi-anumber` | USCIS glossary | https://www.uscis.gov/glossary-term/50684 |
+| `vi-lpr-rule` | INA § 101(a)(13)(C)(ii); USCIS international travel page | https://www.uscis.gov/green-card/after-we-grant-your-green-card/international-travel-as-a-permanent-resident |
+| `vi-222g` | INA § 222(g); 9 FAM 302.1 | https://fam.state.gov/fam/09FAM/09FAM030201.html |
+| `vi-sc-canadian-overstay` | CBP I-94 page; 8 U.S.C. § 1227(a)(1)(B) | https://www.cbp.gov/travel/international-visitors/i-94 |
+| `vi-sc-b2-work` | 8 C.F.R. § 214.1(e); travel.state.gov Visitor Visa | https://travel.state.gov/content/travel/en/us-visas/tourism-visit/visitor.html |
+| `vi-sc-f1-ds` | USCIS Policy Manual, Vol. 2, Part F, Ch. 8; DHS final rule (2026) | https://studyinthestates.dhs.gov/final-rule-establishing-a-fixed-time-period-of-admission-and-an-extension-of-stay-procedure-quick |
+| `vi-sc-tn-employer` | USCIS Policy Manual, Vol. 2, Part P, Ch. 5 | https://www.uscis.gov/policy-manual/volume-2-part-p-chapter-5 |
+| `vi-sc-lpr-14mo` | INA § 101(a)(13)(C)(ii); USCIS international travel page | https://www.uscis.gov/green-card/after-we-grant-your-green-card/international-travel-as-a-permanent-resident |
+| `vi-sc-bcc-zone` | 8 C.F.R. § 235.1(h); travel.state.gov Border Crossing Card | https://travel.state.gov/content/travel/en/us-visas/tourism-visit/border-crossing-card.html |
+| `vi-sc-vwp-overstay` | 8 U.S.C. § 1187(b); CBP VWP/ESTA FAQ | https://www2.ca3.uscourts.gov/opinarch/084184p.pdf |
+| `vi-sc-h2a-left` | 8 C.F.R. § 214.2(h)(5)(vi); H-2 modernization rule (eff. Jan. 17, 2025) | https://www.federalregister.gov/documents/2008/12/18/E8-29888/changes-to-requirements-affecting-h-2a-nonimmigrants |
+| `vi-sc-k1-ca` | 8 C.F.R. § 212.1(a)(1); 8 U.S.C. § 1101(a)(15)(B) | https://www.law.cornell.edu/cfr/text/8/212.1 |
+| `vi-sc-h1b-port` | INA § 214(n); USCIS H-1B page | https://www.uscis.gov/working-in-the-united-states/h-1b-specialty-occupations |
