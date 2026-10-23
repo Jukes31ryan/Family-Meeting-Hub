@@ -19,7 +19,7 @@ DECKS.sort((a,b)=>a.meta.order-b.meta.order).forEach(d=>{
   d.cards.forEach(c=>{
     const cat=(d.categories||{})[c.cat]||{};
     /* reverseFlip decks (Statutes): show what the law says, ask which statute it is */
-    if(d.meta.reverseFlip&&c.type==="flip")c={...c,rev:true,front:c.back,back:c.front,ask:c.ask||d.meta.reverseAsk||"Which statute is this?"};
+    if(d.meta.reverseFlip&&c.type==="flip"&&(!d.meta.reverseMatch||new RegExp(d.meta.reverseMatch).test(c.front)))c={...c,rev:true,front:c.back,back:c.front,ask:c.ask||d.meta.reverseAsk||"Which statute is this?"};
     const card={...c,deck:d.meta.id,group:c.group||cat.group||"",why:c.why||cat.why||d.meta.why||"",source:c.source||cat.source||d.meta.source||"",flag:c.flag||cat.flag||"",ask:c.ask||cat.ask||""};
     CARDS.push(card);BYID[card.id]=card;
   });
@@ -529,7 +529,7 @@ const SPIN_NS="http://www.w3.org/2000/svg";
 const spinRad=d=>d*Math.PI/180;
 const spinPt=(r,d)=>(r*Math.cos(spinRad(d))).toFixed(2)+" "+(r*Math.sin(spinRad(d))).toFixed(2);
 function spinSvg(name,attrs,parent){const e=document.createElementNS(SPIN_NS,name);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e}
-function spinDecks(){const a=activeDecks();return DECKS.filter(d=>d.cards.length&&a.includes(d.meta.id)).slice(0,8)}
+function spinDecks(){const a=activeDecks();return DECKS.filter(d=>d.cards.length&&a.includes(d.meta.id)).slice(0,12)}
 const spinLabel=d=>d.meta.spin||d.meta.name.split(" & ")[0];
 /* weighted pick: last-answer-wrong cards come back most, unseen next, mastered rarely */
 function spinPick(deckId){

@@ -67,15 +67,35 @@ These were confirmed through secondary sources (encyclopedia, case-brief sites, 
 | `uf-mendez` | County of Los Angeles v. Mendez, 581 U.S. 420 (2017) | en.wikipedia.org |
 | `uf-tracy` | Tracy v. Freshwater, 623 F.3d 90 (2d Cir. 2010) | caselaw.findlaw.com |
 | `uf-cbp-escape` | CBP Use of Force Policy, HB 4500-002A (Jan. 2021); DHS Policy Statement 044-05 | www.justsecurity.org |
-| `fr-h-frette` | Usito (Université de Sherbrooke): frette (avoir frette, il fait frette) | usito.usherbrooke.ca |
-| `fr-h-pantoute` | Le Robert: pantoute (Canada, familier) | dictionnaire.lerobert.com |
-| `fr-h-tantot` | Usito (Université de Sherbrooke): tantôt [Québec] | usito.usherbrooke.ca |
-| `fr-h-pis-ben` | Usito (Université de Sherbrooke): G. Dostie, « Les marqueurs discursifs » | usito.usherbrooke.ca |
-| `fr-h-chu` | Wiktionnaire: chu (Canada, familier) | fr.wiktionary.org |
-| `fr-q-chum` | Québec City tourism glossary: 100 expressions québécoises | www.quebec-cite.com |
-| `fr-q-ramq` | Immigrant Québec: carte d'assurance maladie (RAMQ) | immigrantquebec.com |
-| `fr-w8` | CDC, Preventing Hypothermia (first aid) | www.cdc.gov |
-| `fr-w12` | CDC, Preventing Hypothermia (warning signs) | www.cdc.gov |
+| `hi-1915` | Wikipedia, "United States Border Patrol" (secondary) | en.wikipedia.org |
+| `hi-first-force` | National Border Patrol Museum, "History" (borderpatrolmuseum.com) | borderpatrolmuseum.com |
+| `hi-pay` | National Border Patrol Museum, "History" (borderpatrolmuseum.com) | borderpatrolmuseum.com |
+| `hi-equip` | National Border Patrol Museum, "History" (borderpatrolmuseum.com) | borderpatrolmuseum.com |
+| `hi-recruits` | National Border Patrol Museum, "History" (borderpatrolmuseum.com) | borderpatrolmuseum.com |
+| `hi-uniform` | National Border Patrol Museum, "History" (borderpatrolmuseum.com); HonorFirst.com (retired-agent history site; secondary), "How has the USBP uniform evolved?" | www.honorfirst.com |
+| `hi-1940-doj` | National Border Patrol Museum, "History" (borderpatrolmuseum.com); SAGE Encyclopedia of Economics and Society, "Border Patrol" | borderpatrolmuseum.com |
+| `hi-wwii` | National Border Patrol Museum, "History" (borderpatrolmuseum.com) | borderpatrolmuseum.com |
+| `hi-1946` | Washington University Law Review article on Border Patrol search authority (secondary); 8 U.S.C. § 1357(a)(3) | journals.library.wustl.edu |
+| `hi-1970-title` | HonorFirst.com (retired-agent history site; secondary), "This Week in USBP History" | honorfirst.com |
+| `hi-cpa` | HonorFirst.com (retired-agent history site; secondary), "This Week in USBP History" | www.honorfirst.com |
+| `hi-hold-line` | DOJ Office of Inspector General, Special Report on Operation Gatekeeper (1998) | oig.justice.gov |
+| `hi-centennial` | U.S. Sen. Susan Collins press release (May 28, 2024) | www.collins.senate.gov |
+| `hi-order-early` | CBP, history pages and timeline (cbp.gov); National Border Patrol Museum, "History" (borderpatrolmuseum.com) | borderpatrolmuseum.com |
+| `hi-autogiro` | National Border Patrol Museum, "History" (borderpatrolmuseum.com) | borderpatrolmuseum.com |
+| `hi-bortac` | Wikipedia, "BORTAC" (secondary); Grey Dynamics (secondary) | en.wikipedia.org |
+| `hi-borstar` | Archived Border Patrol BORSTAR history (govdocs); DHS, "CBP Search and Rescue Efforts for FY 2015" | corpora.tika.apache.org |
+| `hi-sog` | Wikipedia, "BORTAC" and "Border Patrol Search, Trauma, and Rescue" (secondary) | en.wikipedia.org |
+| `hi-units-mc` | Wikipedia, "BORTAC" (secondary); CBP, history pages and timeline (cbp.gov) | en.wikipedia.org |
+| `hi-nb-districts` | HonorFirst.com (retired-agent history site; secondary), "Which was the first sector?" | www.honorfirst.com |
+| `hi-nb-patriot` | Britannica, "USA PATRIOT Act"; Sen. Patrick Leahy floor statement (2001) | avalon.law.yale.edu |
+| `hi-nb-sectors` | CBP, USBP sector profile FY2018 | www.cbp.gov |
+| `hi-honor-first` | HonorFirst.com (retired-agent history site; secondary), "When and where did Honor First originate?" | www.honorfirst.com |
+| `hi-honor-meaning` | HonorFirst.com (retired-agent history site; secondary), "Honor First and esprit de corps" | honorfirst.com |
+| `hi-motto-mc` | HonorFirst.com (retired-agent history site; secondary) | www.honorfirst.com |
+| `hi-badge-finish` | CBP, Border Patrol General Order 42, First Amendment, Sixth Supplement (Apr. 4, 1928) | www.cbp.gov |
+| `hi-badge-cloth` | HonorFirst.com (retired-agent history site; secondary), "How has the USBP uniform evolved?" | www.honorfirst.com |
+| `hi-museum` | National Border Patrol Museum, "About Us" | borderpatrolmuseum.com |
+| `hi-memorial` | Homeland Security Today, "U.S. Border Patrol Honors Fallen Heroes"; CBP media release | www.hstoday.us |
 | `ln-azimuth` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | en.wikipedia.org |
 | `ln-norths` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | maptools.com |
 | `ln-norths-mc` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | maptools.com |
@@ -121,6 +141,34 @@ These were confirmed through secondary sources (encyclopedia, case-brief sites, 
 | `ln-c-level` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | fieldandstream.com |
 | `ln-c-steer` | Orienteering technique (common land-navigation usage; not TC 3-25.26 wording) | strands.cacadets.org |
 | `ln-c-metal` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | strands.cacadets.org |
+| `pr-er-i860` | 8 C.F.R. § 235.3(b)(2)(i) | syfert.com |
+| `pr-er-i867` | 8 C.F.R. § 235.3(b)(2)(i) | syfert.com |
+| `pr-er-sequence` | 8 C.F.R. § 235.3(b)(2)(i) | syfert.com |
+| `pr-er-supervisor` | 8 C.F.R. § 235.3(b)(7) | www.aila.org |
+| `pr-er-status-claim` | 8 C.F.R. §§ 235.3(b)(5), 235.6(a) | www.ecfr.gov |
+| `pr-ri-sequence` | 8 C.F.R. § 241.8(a)–(c) | syfert.com |
+| `pr-ri-identity` | 8 C.F.R. § 241.8(a)(2) | syfert.com |
+| `pr-ri-reentry` | 8 C.F.R. § 241.8(a)(3) | syfert.com |
+| `pr-ri-statement` | 8 C.F.R. § 241.8(a)–(b) | syfert.com |
+| `pr-ri-statute` | 8 U.S.C. § 1231(a)(5) | www.justice.gov |
+| `pr-nta-2873c` | 8 C.F.R. § 287.3(c) | syfert.com |
+| `pr-nta-i286` | 8 C.F.R. § 236.1; ILRC bond-hearing practice advisory (2018) | store.ilrc.org |
+| `pr-nta-i863` | 8 C.F.R. § 235.6(a) | www.ecfr.gov |
+| `pr-vr-24025` | 8 C.F.R. § 240.25 | www.ecfr.gov |
+| `pr-vr-i210` | 8 C.F.R. § 240.25 | www.ecfr.gov |
+| `pr-vr-120` | 8 C.F.R. § 240.25 | www.ecfr.gov |
+| `pr-ar-who` | 8 U.S.C. § 1228(b) | m.openjurist.org |
+| `pr-ar-i851a` | 8 C.F.R. § 238.1(a), (d) | www.justice.gov |
+| `pr-ar-14day` | 8 U.S.C. § 1228(b)(3) | www.justice.gov |
+| `pr-cf-i213` | Matter of Mejia, 16 I&N Dec. 6 (BIA 1976) | www.justice.gov |
+| `pr-cf-i247a` | ICE Form I-247A guidance (2017); ICE Policy 10074.2 | ice.gov |
+| `pr-cf-i294` | USCIS FOIA release (Form I-294); INA § 212(a)(9) | uscis.gov |
+| `pr-cf-bars` | INA § 212(a)(9)(A); USCIS Form I-212 instructions | www.uscis.gov |
+| `pr-sc-er` | 8 C.F.R. § 235.3(b)(2)(i) | syfert.com |
+| `pr-sc-reinstate` | 8 C.F.R. § 241.8 | syfert.com |
+| `pr-sc-status-verified` | 8 C.F.R. § 235.6(a)(1) | www.ecfr.gov |
+| `pr-sc-minor` | 8 C.F.R. § 236.3 | www.ecfr.gov |
+| `pr-sc-claimed-unverified` | 8 C.F.R. §§ 235.3(b)(5), 235.6(a)(2) | www.ecfr.gov |
 | `rd-p-roger` | ACP 125, Communications Instructions — Radiotelephone Procedures (prowords) | en.wikipedia.org |
 | `rd-p-wilco` | ACP 125, Communications Instructions — Radiotelephone Procedures (prowords) | en.wikipedia.org |
 | `rd-p-say-again` | ACP 125, Communications Instructions — Radiotelephone Procedures (prowords) | en.wikipedia.org |
@@ -258,6 +306,61 @@ These were confirmed through secondary sources (encyclopedia, case-brief sites, 
 | `trk-lost-confirm` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 30, 32 | bibsok.no |
 | `trk-lost-retry` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 32 | bibsok.no |
 | `trk-lost-why` | Nellemann, Kearney & Nårstad, Sign and the Art of Tracking (INTERPOL / UNEP GRID-Arendal, 2013, 2nd printing), p. 11, 30 | bibsok.no |
+| `vi-b1` | 8 U.S.C. § 1101(a)(15)(B); USCIS B-1 page | www.uscis.gov |
+| `vi-b2` | 8 U.S.C. § 1101(a)(15)(B); travel.state.gov Visitor Visa | travel.state.gov |
+| `vi-b1b2` | 8 C.F.R. § 214.2(b)(1) | aila.org |
+| `vi-c1d` | 8 U.S.C. § 1101(a)(15)(C), (D); travel.state.gov Crewmember Visa | travel.state.gov |
+| `vi-ca-visitor` | travel.state.gov Visitor Visa; CBP I-94 page | travel.state.gov |
+| `vi-tn` | 8 C.F.R. § 214.6; USCIS TN page | www.uscis.gov |
+| `vi-td` | USCIS Policy Manual, Vol. 2, Part P, Ch. 5 | www.uscis.gov |
+| `vi-register` | USCIS Alien Registration Requirement; 91 Fed. Reg. 39248 (June 29, 2026) | www.uscis.gov |
+| `vi-h1b` | 8 U.S.C. §§ 1101(a)(15)(H)(i)(b), 1184(g)(4); USCIS H-1B page | www.uscis.gov |
+| `vi-h2a` | 8 U.S.C. § 1101(a)(15)(H)(ii)(a); 8 C.F.R. § 214.2(h)(5) | www.uscis.gov |
+| `vi-h2b` | 8 U.S.C. § 1101(a)(15)(H)(ii)(b); 8 C.F.R. § 214.2(h)(6) | www.uscis.gov |
+| `vi-l1a` | 8 C.F.R. § 214.2(l); USCIS L-1A page | www.uscis.gov |
+| `vi-l1b` | 8 C.F.R. § 214.2(l); USCIS L-1B page | www.uscis.gov |
+| `vi-o1` | 8 U.S.C. § 1101(a)(15)(O); USCIS O-1 page | www.uscis.gov |
+| `vi-p` | 8 U.S.C. § 1101(a)(15)(P); USCIS Policy Manual, Vol. 2, Part N | www.uscis.gov |
+| `vi-r1` | 8 C.F.R. § 214.2(r); USCIS R-1 page | www.uscis.gov |
+| `vi-e1` | 8 U.S.C. § 1101(a)(15)(E)(i); USCIS E-1 page | www.uscis.gov |
+| `vi-e2` | 8 U.S.C. § 1101(a)(15)(E)(ii); USCIS E-2 page | www.uscis.gov |
+| `vi-e3` | 8 U.S.C. § 1101(a)(15)(E)(iii); USCIS E-3 page | www.uscis.gov |
+| `vi-q1` | 8 U.S.C. § 1101(a)(15)(Q); 8 C.F.R. § 214.2(q) | www.uscis.gov |
+| `vi-work-mc` | 8 U.S.C. § 1101(a)(15)(H)(ii)(a)–(b) | www.uscis.gov |
+| `vi-m1` | 8 U.S.C. § 1101(a)(15)(M); USCIS Policy Manual, Vol. 2, Part F, Ch. 8 | www.uscis.gov |
+| `vi-j1` | 8 U.S.C. § 1101(a)(15)(J); USCIS Policy Manual, Vol. 2, Part D, Ch. 3 | www.uscis.gov |
+| `vi-j2` | USCIS Policy Manual, Vol. 2, Part D, Ch. 6 | www.uscis.gov |
+| `vi-212e` | INA § 212(e); travel.state.gov waiver page | travel.state.gov |
+| `vi-fm-mc` | USCIS Policy Manual, Vol. 2, Part F | www.uscis.gov |
+| `vi-k1` | 8 U.S.C. § 1101(a)(15)(K)(i); USCIS fiancé(e) page | www.uscis.gov |
+| `vi-k2` | 8 U.S.C. § 1101(a)(15)(K)(iii); USCIS fiancé(e) page | www.uscis.gov |
+| `vi-k3` | 8 U.S.C. § 1101(a)(15)(K)(ii); USCIS K-3/K-4 page | www.uscis.gov |
+| `vi-v` | 8 U.S.C. § 1101(a)(15)(V); USCIS V page | www.uscis.gov |
+| `vi-k1-mc` | USCIS fiancé(e) page | www.uscis.gov |
+| `vi-u` | 8 U.S.C. § 1101(a)(15)(U); 8 C.F.R. § 214.14 | www.uscis.gov |
+| `vi-t` | 8 U.S.C. § 1101(a)(15)(T); USCIS T page | www.uscis.gov |
+| `vi-parole` | 8 U.S.C. § 1182(d)(5)(A); USCIS humanitarian parole page | www.uscis.gov |
+| `vi-ref-asy` | INA §§ 207, 208; USCIS Refugees and Asylum | www.uscis.gov |
+| `vi-ag` | 8 U.S.C. § 1101(a)(15)(A), (G); 9 FAM 402.3 | fam.state.gov |
+| `vi-parole-mc` | 8 U.S.C. § 1182(d)(5)(A); USCIS glossary | www.uscis.gov |
+| `vi-ut-mc` | 8 U.S.C. § 1101(a)(15)(T); USCIS T page | www.uscis.gov |
+| `vi-i551` | USCIS international travel as a permanent resident | www.uscis.gov |
+| `vi-i327` | USCIS international travel as a permanent resident | www.uscis.gov |
+| `vi-sb1` | travel.state.gov Returning Resident Visas | travel.state.gov |
+| `vi-i766` | USCIS Employment Authorization Document page | www.uscis.gov |
+| `vi-i512` | USCIS Travel Documents page | www.uscis.gov |
+| `vi-i571` | USCIS Form I-131 instructions | www.uscis.gov |
+| `vi-ppcard` | travel.state.gov passport card page | travel.state.gov |
+| `vi-natcert` | USCIS Policy Manual, Vol. 12, Part K | www.uscis.gov |
+| `vi-anumber` | USCIS glossary | www.uscis.gov |
+| `vi-lpr-rule` | INA § 101(a)(13)(C)(ii); USCIS international travel page | www.uscis.gov |
+| `vi-222g` | INA § 222(g); 9 FAM 302.1 | fam.state.gov |
+| `vi-sc-b2-work` | 8 C.F.R. § 214.1(e); travel.state.gov Visitor Visa | travel.state.gov |
+| `vi-sc-tn-employer` | USCIS Policy Manual, Vol. 2, Part P, Ch. 5 | www.uscis.gov |
+| `vi-sc-lpr-14mo` | INA § 101(a)(13)(C)(ii); USCIS international travel page | www.uscis.gov |
+| `vi-sc-bcc-zone` | 8 C.F.R. § 235.1(h); travel.state.gov Border Crossing Card | travel.state.gov |
+| `vi-sc-h2a-left` | 8 C.F.R. § 214.2(h)(5)(vi); H-2 modernization rule (eff. Jan. 17, 2025) | www.federalregister.gov |
+| `vi-sc-h1b-port` | INA § 214(n); USCIS H-1B page | www.uscis.gov |
 <!-- secondary:end -->
 
 ## Blocked — waiting on inputs
