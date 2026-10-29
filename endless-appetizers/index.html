@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>Endless Appetizers</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Appetizers">
 <meta name="description" content="You are sixteen. You are in an Applebee's. You cannot leave. A small adventure game.">
 <meta name="theme-color" content="#12100d">
 <style>
@@ -1889,5 +1894,6 @@ $('#againbtn').onclick = ()=>location.reload();
 buildSolids(); drawInv(); refreshHud(); fade=1;
 requestAnimationFrame(loop);
 </script>
+<script>if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});</script>
 </body>
 </html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Shelf</title>
+<meta name="description" content="Every app on one shelf. Tap to open, then add it to your home screen.">
+<meta name="theme-color" content="#0F1412">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="The Shelf">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<style>
+:root{
+  --bg:#0F1412; --shelf:#1A221E; --shelf-hi:#222C27; --edge:#2E3A34;
+  --ink:#EEF1EC; --soft:#9BA79F; --dim:#68746C;
+  --live:#8BC455; --build:#E3B341; --park:#7F8C86;
+  --r:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  min-height:100dvh; background:var(--bg); color:var(--ink);
+  font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  padding:calc(env(safe-area-inset-top,0px) + 18px) 16px calc(env(safe-area-inset-bottom,0px) + 28px);
+  -webkit-tap-highlight-color:transparent;
+}
+.wrap{max-width:34rem;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+header h1{font-size:2rem;font-weight:800;letter-spacing:-.02em;line-height:1.05}
+header p{color:var(--soft);margin-top:6px}
+h2{font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:10px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.app{
+  display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:var(--r);
+  background:var(--shelf);border:1px solid var(--edge);color:inherit;text-decoration:none;
+  transition:transform .15s,background .15s;min-height:150px;
+}
+.app:active{transform:scale(.97);background:var(--shelf-hi)}
+.ico{width:52px;height:52px;border-radius:13px;object-fit:cover;background:var(--edge);display:grid;place-items:center;font-weight:800;font-size:1.3rem}
+.app b{font-size:1.05rem;line-height:1.15}
+.app span{color:var(--soft);font-size:.85rem;line-height:1.3}
+.tag{margin-top:auto;align-self:flex-start;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:999px;color:#111;background:var(--live)}
+.tag.build{background:var(--build)}
+.list{display:flex;flex-direction:column;gap:8px}
+.row{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:14px;background:var(--shelf);border:1px dashed var(--edge)}
+.row .dot{width:10px;height:10px;border-radius:50%;background:var(--park);margin-top:7px;flex:none}
+.row b{display:block}
+.row span{color:var(--soft);font-size:.88rem}
+details{background:var(--shelf);border:1px solid var(--edge);border-radius:var(--r);padding:14px 16px}
+summary{font-weight:700;cursor:pointer}
+details ol{margin:10px 0 0 1.1rem;color:var(--soft);display:flex;flex-direction:column;gap:6px}
+details strong{color:var(--ink)}
+footer{color:var(--dim);font-size:.8rem;text-align:center}
+@media (max-width:330px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>The Shelf</h1>
+    <p>Everything you've built, in one place. Tap one to open it.</p>
+  </header>
+
+  <section>
+    <h2>Live</h2>
+    <div class="grid" id="live"></div>
+  </section>
+
+  <section>
+    <h2>Not on your phone yet</h2>
+    <div class="list" id="parked"></div>
+  </section>
+
+  <details>
+    <summary>Put an app on your home screen</summary>
+    <ol>
+      <li>Tap the app above to open it.</li>
+      <li><strong>iPhone:</strong> Share button, then <strong>Add to Home Screen</strong>.</li>
+      <li><strong>Android:</strong> the ⋮ menu, then <strong>Install app</strong>.</li>
+      <li>Each app works offline after the first open.</li>
+    </ol>
+  </details>
+
+  <footer>Add The Shelf itself to your home screen and you'll never lose an app again.</footer>
+</div>
+<script>
+// One list to update. status: live | build
+const APPS = [
+  { name:"Calibrate", what:"Two-minute boot-up for the start of your day.", url:"https://jukes31ryan.github.io/first-light/", icon:"icons/calibrate.png", status:"live" },
+  { name:"Didja Spin", what:"Flick the spinner, learn one thing.", url:"../didja-spin/", icon:"icons/didja.png", status:"live" },
+  { name:"Keepers", what:"Study cards: Spanish, case law, land nav, more.", url:"../patrol-kit/", icon:"icons/keepers.png", status:"live" },
+  { name:"Already Paying", what:"Hero discounts on bills you already pay.", url:"https://jukes31ryan.github.io/already-paying/", icon:"", letter:"$", status:"build" },
+  { name:"Game Day", what:"A kid's game-day plan, morning and night.", url:"../game-day/", icon:"icons/gameday.png", status:"live" },
+  { name:"Family Meeting", what:"Guided 15-minute family meeting.", url:"../", icon:"icons/family.png", status:"live" },
+  { name:"Endless Appetizers", what:"Tiny adventure game. You cannot leave.", url:"../endless-appetizers/", icon:"icons/appetizers.png", status:"live" }
+];
+const PARKED = [
+  { name:"Playbook app", what:"Lives in a Claude Project, not an app yet." }
+];
+const live = document.getElementById('live');
+APPS.forEach(a => {
+  const el = document.createElement('a');
+  el.className = 'app'; el.href = a.url;
+  const ico = a.icon ? Object.assign(document.createElement('img'), { className:'ico', src:a.icon, alt:'' }) : Object.assign(document.createElement('div'), { className:'ico', textContent:a.letter || a.name[0] });
+  const b = document.createElement('b'); b.textContent = a.name;
+  const s = document.createElement('span'); s.textContent = a.what;
+  const t = document.createElement('em'); t.className = 'tag' + (a.status === 'build' ? ' build' : ''); t.textContent = a.status === 'build' ? 'Building' : 'Live'; t.style.fontStyle = 'normal';
+  el.append(ico, b, s, t); live.appendChild(el);
+});
+const parked = document.getElementById('parked');
+PARKED.forEach(p => {
+  const r = document.createElement('div'); r.className = 'row';
+  r.innerHTML = '<i class="dot"></i><div><b></b><span></span></div>';
+  r.querySelector('b').textContent = p.name; r.querySelector('span').textContent = p.what;
+  parked.appendChild(r);
+});
+if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});
+</script>
+</body>
+</html>
