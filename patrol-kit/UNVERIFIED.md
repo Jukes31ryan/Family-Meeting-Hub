@@ -141,15 +141,11 @@ These were confirmed through secondary sources (encyclopedia, case-brief sites, 
 | `ln-c-level` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | fieldandstream.com |
 | `ln-c-steer` | Orienteering technique (common land-navigation usage; not TC 3-25.26 wording) | strands.cacadets.org |
 | `ln-c-metal` | TC 3-25.26, Map Reading and Land Navigation (U.S. Army) | strands.cacadets.org |
-| `pr-er-i860` | 8 C.F.R. § 235.3(b)(2)(i) | syfert.com |
-| `pr-er-i867` | 8 C.F.R. § 235.3(b)(2)(i) | syfert.com |
-| `pr-er-sequence` | 8 C.F.R. § 235.3(b)(2)(i) | syfert.com |
-| `pr-er-supervisor` | 8 C.F.R. § 235.3(b)(7) | www.aila.org |
+| `pr-er-i860` | 8 C.F.R. § 235.3(b)(2)(i) | ecfr.io |
+| `pr-er-i867` | 8 C.F.R. § 235.3(b)(2)(i) | ecfr.io |
+| `pr-er-sequence` | 8 C.F.R. § 235.3(b)(2)(i) | ecfr.io |
+| `pr-er-supervisor` | 8 C.F.R. § 235.3(b)(7) | ecfr.io |
 | `pr-er-status-claim` | 8 C.F.R. §§ 235.3(b)(5), 235.6(a) | www.ecfr.gov |
-| `pr-ri-sequence` | 8 C.F.R. § 241.8(a)–(c) | syfert.com |
-| `pr-ri-identity` | 8 C.F.R. § 241.8(a)(2) | syfert.com |
-| `pr-ri-reentry` | 8 C.F.R. § 241.8(a)(3) | syfert.com |
-| `pr-ri-statement` | 8 C.F.R. § 241.8(a)–(b) | syfert.com |
 | `pr-ri-statute` | 8 U.S.C. § 1231(a)(5) | www.justice.gov |
 | `pr-nta-2873c` | 8 C.F.R. § 287.3(c) | syfert.com |
 | `pr-nta-i286` | 8 C.F.R. § 236.1; ILRC bond-hearing practice advisory (2018) | store.ilrc.org |
@@ -164,8 +160,7 @@ These were confirmed through secondary sources (encyclopedia, case-brief sites, 
 | `pr-cf-i247a` | ICE Form I-247A guidance (2017); ICE Policy 10074.2 | ice.gov |
 | `pr-cf-i294` | USCIS FOIA release (Form I-294); INA § 212(a)(9) | uscis.gov |
 | `pr-cf-bars` | INA § 212(a)(9)(A); USCIS Form I-212 instructions | www.uscis.gov |
-| `pr-sc-er` | 8 C.F.R. § 235.3(b)(2)(i) | syfert.com |
-| `pr-sc-reinstate` | 8 C.F.R. § 241.8 | syfert.com |
+| `pr-sc-er` | 8 C.F.R. § 235.3(b)(2)(i) | ecfr.io |
 | `pr-sc-status-verified` | 8 C.F.R. § 235.6(a)(1) | www.ecfr.gov |
 | `pr-sc-minor` | 8 C.F.R. § 236.3 | www.ecfr.gov |
 | `pr-sc-claimed-unverified` | 8 C.F.R. §§ 235.3(b)(5), 235.6(a)(2) | www.ecfr.gov |

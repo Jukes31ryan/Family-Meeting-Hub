@@ -270,20 +270,20 @@ Verification method (Oct 2026): web search results quoting the primary source (o
 
 | Card | Source | Checked against |
 |---|---|---|
-| `pr-er-i860` | 8 C.F.R. § 235.3(b)(2)(i) | https://syfert.com/cfr/sections/8-235.3.html |
-| `pr-er-i867` | 8 C.F.R. § 235.3(b)(2)(i) | https://syfert.com/cfr/sections/8-235.3.html |
-| `pr-er-sequence` | 8 C.F.R. § 235.3(b)(2)(i) | https://syfert.com/cfr/sections/8-235.3.html |
+| `pr-er-i860` | 8 C.F.R. § 235.3(b)(2)(i) | https://ecfr.io/Title-8/Section-235.3 |
+| `pr-er-i867` | 8 C.F.R. § 235.3(b)(2)(i) | https://ecfr.io/Title-8/Section-235.3 |
+| `pr-er-sequence` | 8 C.F.R. § 235.3(b)(2)(i) | https://ecfr.io/Title-8/Section-235.3 |
 | `pr-er-charges` | 8 C.F.R. § 235.3(b)(3) | https://www.govinfo.gov/content/pkg/CFR-2021-title8-vol1/xml/CFR-2021-title8-vol1-sec235-3.xml |
-| `pr-er-supervisor` | 8 C.F.R. § 235.3(b)(7) | https://www.aila.org/library/ins-memo-on-expedited-removal |
+| `pr-er-supervisor` | 8 C.F.R. § 235.3(b)(7) | https://ecfr.io/Title-8/Section-235.3 |
 | `pr-er-m444` | 8 C.F.R. § 235.3(b)(4)(i) | https://www.govinfo.gov/content/pkg/CFR-2021-title8-vol1/xml/CFR-2021-title8-vol1-sec235-3.xml |
 | `pr-er-fear` | 8 C.F.R. § 235.3(b)(4) | https://www.govinfo.gov/content/pkg/CFR-2021-title8-vol1/xml/CFR-2021-title8-vol1-sec235-3.xml |
 | `pr-er-status-claim` | 8 C.F.R. §§ 235.3(b)(5), 235.6(a) | https://www.ecfr.gov/current/title-8/chapter-I/subchapter-B/part-235/section-235.6 |
-| `pr-er-i869-i863` | 8 C.F.R. § 1003.42 | https://www.law.cornell.edu/cfr/text/8/1003.42 |
-| `pr-ri-i871` | 8 C.F.R. § 241.8(b) | https://www.ca5.uscourts.gov/Opinions/unpub/04/04-60756.0.wpd.pdf |
-| `pr-ri-sequence` | 8 C.F.R. § 241.8(a)–(c) | https://syfert.com/cfr/sections/8-241.8.html |
-| `pr-ri-identity` | 8 C.F.R. § 241.8(a)(2) | https://syfert.com/cfr/sections/8-241.8.html |
-| `pr-ri-reentry` | 8 C.F.R. § 241.8(a)(3) | https://syfert.com/cfr/sections/8-241.8.html |
-| `pr-ri-statement` | 8 C.F.R. § 241.8(a)–(b) | https://syfert.com/cfr/sections/8-241.8.html |
+| `pr-er-i869-i863` | 8 C.F.R. §§ 208.30(g)(1), 1003.42 | https://www.law.cornell.edu/cfr/text/8/208.30 |
+| `pr-ri-i871` | 8 C.F.R. § 241.8(b); Ponta-Garca v. Ashcroft, No. 04-1968 (1st Cir. 2004) | https://www.ca1.uscourts.gov/sites/ca1/files/opnfiles/04-1968-01A.pdf |
+| `pr-ri-sequence` | 8 C.F.R. § 241.8(a)–(c) | https://chanrobles.com/usa/uslaws/cfr/title08/8-1.0.1.2.34.1.1.8.php |
+| `pr-ri-identity` | 8 C.F.R. § 241.8(a)(2) | https://chanrobles.com/usa/uslaws/cfr/title08/8-1.0.1.2.34.1.1.8.php |
+| `pr-ri-reentry` | 8 C.F.R. § 241.8(a)(3) | https://chanrobles.com/usa/uslaws/cfr/title08/8-1.0.1.2.34.1.1.8.php |
+| `pr-ri-statement` | 8 C.F.R. § 241.8(a)–(b) | https://chanrobles.com/usa/uslaws/cfr/title08/8-1.0.1.2.34.1.1.8.php |
 | `pr-ri-statute` | 8 U.S.C. § 1231(a)(5) | https://www.justice.gov/osg/media/227851/dl |
 | `pr-ri-fear` | 8 C.F.R. §§ 241.8(e), 208.31 | https://www.law.cornell.edu/cfr/text/8/208.31 |
 | `pr-ri-cf-vs-rf` | 8 C.F.R. § 208.31(a) | https://www.law.cornell.edu/cfr/text/8/208.31 |
@@ -313,9 +313,9 @@ Verification method (Oct 2026): web search results quoting the primary source (o
 | `pr-cf-i296` | United States v. Lopez, No. 12-50464 (9th Cir. 2014) | https://cdn.ca9.uscourts.gov/datastore/opinions/2014/08/07/12-50464.pdf |
 | `pr-cf-i294` | USCIS FOIA release (Form I-294); INA § 212(a)(9) | https://uscis.gov/sites/default/files/document/foia/PRD2014000534-John_Demjanjuk.pdf |
 | `pr-cf-bars` | INA § 212(a)(9)(A); USCIS Form I-212 instructions | https://www.uscis.gov/sites/default/files/document/forms/i-212instr.pdf |
-| `pr-sc-er` | 8 C.F.R. § 235.3(b)(2)(i) | https://syfert.com/cfr/sections/8-235.3.html |
+| `pr-sc-er` | 8 C.F.R. § 235.3(b)(2)(i) | https://ecfr.io/Title-8/Section-235.3 |
 | `pr-sc-er-fear` | 8 C.F.R. § 235.3(b)(4) | https://www.govinfo.gov/content/pkg/CFR-2021-title8-vol1/xml/CFR-2021-title8-vol1-sec235-3.xml |
-| `pr-sc-reinstate` | 8 C.F.R. § 241.8 | https://syfert.com/cfr/sections/8-241.8.html |
+| `pr-sc-reinstate` | 8 C.F.R. § 241.8 | https://chanrobles.com/usa/uslaws/cfr/title08/8-1.0.1.2.34.1.1.8.php |
 | `pr-sc-reinstate-fear` | 8 C.F.R. § 241.8(e) | https://www.law.cornell.edu/cfr/text/8/208.31 |
 | `pr-sc-aggfel` | 8 C.F.R. § 238.1(b) | https://www.govinfo.gov/content/pkg/CFR-2023-title8-vol1/pdf/CFR-2023-title8-vol1-part238.pdf |
 | `pr-sc-status-verified` | 8 C.F.R. § 235.6(a)(1) | https://www.ecfr.gov/current/title-8/chapter-I/subchapter-B/part-235/section-235.6 |

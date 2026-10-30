@@ -582,4 +582,53 @@ export default [
   { narrative:"Another rider admits crossing illegally and holds a ticket out of state tonight.", ref:"st-1357-a2" },
   { narrative:"A record check on one rider comes back with a hit.", ref:"rd-10-mc5" },
   ]},
+
+// ---------------------------------------------------------------- 31
+{ id:"fp-old-order", title:"The Old Order",
+  situation:"An adult is apprehended shortly after crossing between ports. He answers only in Spanish. Nothing about him stands out until the prints come back.",
+  steps:[
+  { narrative:"Before anything else, you want to know when he crossed.",
+    type:"mc", deck:"spanish", feeds:["es-p41"],
+    q:"Ask when he crossed the border.",
+    choices:["¿Cuándo cruzó la frontera?","¿Dónde cruzó?","¿Quién lo ayudó a cruzar?","¿Adónde va?"],
+    answer:0, explain:"« ¿Cuándo cruzó la frontera? » is when. Where and who helped are different questions." },
+  { narrative:"Prints match a man removed under a final order three years ago. He admits crossing last week and says nothing about fear.", ref:"pr-sc-reinstate" },
+  { narrative:"He insists the old record is someone else's.", ref:"pr-ri-identity" },
+  { narrative:"The case may also go for prosecution. What crime fits a removed alien found here again?", ref:"st-1326a" },
+  { narrative:"Put the reinstatement steps in order before you start the paperwork.", ref:"pr-ri-sequence" },
+  { narrative:"After the I-871 is served, he says he's afraid to go back.", ref:"pr-sc-reinstate-fear" },
+  { narrative:"Your trainee asks if that means a credible fear referral.", ref:"pr-ri-cf-vs-rf" },
+  ]},
+
+// ---------------------------------------------------------------- 32
+{ id:"fp-no-papers", title:"No Papers",
+  situation:"An adult with no documents is encountered and is amenable to expedited removal. No prior orders come back.",
+  steps:[
+  { narrative:"Start with citizenship.",
+    type:"mc", deck:"spanish", feeds:["es-p20"],
+    q:"Ask what country she is a citizen of.",
+    choices:["¿De qué país es usted ciudadana?","¿Dónde vive usted?","¿Cómo se llama usted?","¿Adónde va?"],
+    answer:0, explain:"Citizenship uses ser: « ¿De qué país es usted ciudadano/a? »." },
+  { narrative:"Which statute authorizes removal without a hearing here?", ref:"st-1225-b1" },
+  { narrative:"Your trainee wants to add a criminal-grounds charge to the I-860.", ref:"pr-er-charges" },
+  { narrative:"Lay out the record in order.", ref:"pr-er-sequence" },
+  { narrative:"Halfway through the I-867B she says she's afraid of being harmed if sent back.", ref:"pr-sc-er-fear" },
+  { narrative:"She's referred. What written disclosure goes with the referral?", ref:"pr-er-m444" },
+  { narrative:"Weeks later the asylum officer finds no credible fear, and she won't mark a box on the I-869.", ref:"pr-er-i869-i863" },
+  ]},
+
+// ---------------------------------------------------------------- 33
+{ id:"fp-claims", title:"Claims of Status",
+  situation:"Two adults in the same group are being processed for expedited removal. Each makes a claim that could change the paperwork.",
+  steps:[
+  { narrative:"First, get the man's full name for the record.",
+    type:"mc", deck:"spanish", feeds:["es-p24"],
+    q:"Ask his full name.",
+    choices:["¿Cuál es su nombre completo?","¿Cuál es su apellido?","¿De qué país es usted ciudadano?","¿Cuándo cruzó la frontera?"],
+    answer:0, explain:"« ¿Cuál es su nombre completo? » is full name. Apellido is only the last name." },
+  { narrative:"He says he's a lawful permanent resident. You verify it, and DHS will pursue removal.", ref:"pr-sc-status-verified" },
+  { narrative:"The woman swears she's a U.S. citizen. You can't verify it, and an ER order is entered.", ref:"pr-sc-claimed-unverified" },
+  { narrative:"Records later show she never naturalized.", ref:"st-sc-citizen-claim" },
+  { narrative:"Your narrative of both encounters goes on one form that will follow each case.", ref:"pr-cf-i213" },
+  ]},
 ];
